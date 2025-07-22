@@ -34,13 +34,10 @@ export class DragDropManager {
     const task = event.item.data as Task;
     const newStatus = this.getDropTargetStatus(event.container.id);
     if (!newStatus) return;
-
     this.reorderTasks(event);
-
     if (task.id && task.status !== newStatus) {
       this.updateTaskStatus(task, newStatus);
     }
-
     updateCallback();
   }
 
@@ -107,11 +104,9 @@ export class DragDropManager {
     const mouseY = event.pointerPosition.y;
     const section = scrollSection?.nativeElement;
     if (!section) return;
-
     const { top, bottom } = section.getBoundingClientRect();
     const threshold = 100;
     const scrollStep = 30;
-
     if (mouseY < top + threshold) {
       section.scrollBy({ top: -scrollStep, behavior: 'auto' });
     } else if (bottom - mouseY < threshold) {
@@ -135,7 +130,6 @@ export class DragDropManager {
   ): void {
     const task = taskList.find((t) => t.id === taskId);
     if (!task || task.status === status) return;
-
     const updatedTask = { ...task, status };
     this.taskService.updateTask(taskId, updatedTask).then(reloadCallback);
   }

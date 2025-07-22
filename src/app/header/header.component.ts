@@ -127,16 +127,21 @@ export class HeaderComponent {
    */
   getCurrentUserInitials(): string {
     const user = this.authService.getCurrentUser();
-    const name = user?.displayName || '';
-    if (name) {
-      const parts = name.trim().split(' ');
+    const email = user?.email?.toLowerCase() || '';
+    const name = user?.displayName?.toLowerCase() || '';
+
+    if (email === 'guest@join.com' || name === 'guest user') {
+      return 'G';
+    }
+
+    if (user?.displayName) {
+      const parts = user.displayName.trim().split(' ');
       if (parts.length >= 2) {
         return (parts[0][0] + parts[1][0]).toUpperCase();
       }
       return parts[0][0].toUpperCase();
     }
-    const email = user?.email || '';
-    return email ? email[0].toUpperCase() : 'U';
+    return user?.email ? user.email[0].toUpperCase() : 'U';
   }
 
   /**
