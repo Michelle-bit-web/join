@@ -50,7 +50,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
    */
   private handleContactsLoaded(contacts: Contact[]): void {
     this.groupedContacts = this.groupByInitial(contacts);
-
     if (this.currentUserEmail) {
       const matchedContact = contacts.find(c => c.email === this.currentUserEmail);
       if (matchedContact) {
@@ -75,7 +74,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
     const user = this.authService.getCurrentUser();
     this.currentUser = user?.displayName || null;
     this.currentUserEmail = user?.email || null;
-
     this.selectionSubscription = this.contactService.selectedContact$.subscribe(
       contact => this.selectedContact = contact
     );

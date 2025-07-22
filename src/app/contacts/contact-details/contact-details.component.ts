@@ -196,7 +196,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     this.isDeleting = false;
     this.isEditing = false;
     this.contactVisible = false;
-
     setTimeout(() => {
       this.noContactVisible.emit();
     }, 100);
@@ -209,10 +208,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    */
   private prepareContactTransition(wasEmpty: boolean): void {
     this.isEditing = false;
-
     if (!this.isDeleting && (this.firstLoad || wasEmpty)) {
       this.contactVisible = false;
-
       setTimeout(() => {
         this.contactVisible = true;
         this.animationState++;

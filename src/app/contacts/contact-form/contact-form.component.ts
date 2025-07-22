@@ -113,15 +113,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
-
     const contact = this.buildContactFromForm();
-
     if (this.isEditMode()) {
       this.updateContact(contact);
     } else {
       await this.addNewContact(contact);
     }
-
     this.finalizeSubmission();
   }
 
