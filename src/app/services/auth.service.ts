@@ -126,14 +126,12 @@ export class AuthService {
         const userCredential = await createUserWithEmailAndPassword(this.auth, 'guest@join.com', 'Guest123!');
         const user = userCredential.user;
         await updateProfile(user, { displayName: 'Guest User' });
-
         const userData: UserData = {
           uid: user.uid,
           email: user.email!,
           displayName: 'Guest User',
           createdAt: new Date()
         };
-
         await setDoc(doc(this.firestore, 'users', user.uid), userData);
         return { success: true };
       } catch (createError: any) {
@@ -157,7 +155,6 @@ export class AuthService {
   async getCurrentUserData(): Promise<UserData | null> {
     const currentUser = this.auth.currentUser;
     if (!currentUser) return null;
-
     const userDoc = await getDoc(doc(this.firestore, 'users', currentUser.uid));
     return userDoc.exists() ? userDoc.data() as UserData : null;
   }

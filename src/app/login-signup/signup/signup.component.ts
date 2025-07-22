@@ -211,10 +211,8 @@ export class SignupComponent implements OnInit {
     const confirmControl = this.signupform.get('confirmPassword');
     const passwordControl = this.signupform.get('password');
     const mismatch = this.signupform.errors?.['passwordsDontMatch'];
-
     const touched = confirmControl?.touched || passwordControl?.touched;
     const dirty = confirmControl?.dirty || passwordControl?.dirty;
-
     if (mismatch && (touched || dirty)) {
       return 'Passwords do not match';
     }

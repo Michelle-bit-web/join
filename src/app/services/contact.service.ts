@@ -55,17 +55,14 @@ export class ContactService {
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
   /** Observable for the selected contact */
   public selectedContact$ = this.selectedContactSubject.asObservable();
-
   /** Whether the contact form should be displayed */
   private showFormSubject = new BehaviorSubject<boolean>(false);
   /** Observable for contact form visibility */
   public showForm$ = this.showFormSubject.asObservable();
-
   /** Currently selected contact to be edited */
   private editContactSubject = new BehaviorSubject<Contact | null>(null);
   /** Observable for the contact being edited */
   public editContact$ = this.editContactSubject.asObservable();
-
   /** Preset avatar colors for visual identification */
   private avatarColors = [
     '#9C27B0', '#2196F3', '#FF9800', '#4CAF50', '#F44336', '#00BCD4',
