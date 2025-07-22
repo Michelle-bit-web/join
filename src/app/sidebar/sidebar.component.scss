@@ -205,9 +205,11 @@
       width: 100px;
       padding-right: 0;
       border-radius: 10px;
+
       &:hover {
         background-color: #2a3d59;
       }
+
       a {
         display: flex;
         align-items: center;
@@ -226,26 +228,30 @@
     gap: 8px;
     padding: 0 16px 0 0 ;
     display: flex;
+
     a {
       width: fit-content;
       color: #a8a8a8;
       cursor: pointer;
       padding: 2px 0;
       font-size: 15px;
+
       &:hover {
           color: #29abe2;
           font-weight: 700;
           transform: scale(1.05);
         }
     }
+
     @media(min-width: 1000px) {
       display: none;
     }
+
     @media(max-width: 330px) {
       flex-direction: column;
       align-items: flex-end;
     }
-}
+  }
 }
 
 @media (max-width: 1170px){
@@ -270,23 +276,6 @@
     z-index: 1000;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0;
-
-    // .navigation ul li:nth-child(3) {
-    //   // "Board"
-    //   order: 2;
-    // }
-    // .navigation ul li:nth-child(2) {
-    //   // "Add Task"
-    //   order: 3;
-    // }
-    // .navigation ul li:nth-child(1) {
-    //   // "Summary"
-    //   order: 1;
-    // }
-    // .navigation ul li:nth-child(4) {
-    //   // "Contacts"
-    //   order: 4;
-    // }
 
     .logo-section {
       display: none;

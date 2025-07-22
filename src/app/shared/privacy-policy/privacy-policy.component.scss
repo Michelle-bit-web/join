@@ -34,6 +34,7 @@
     @include inter400-fs20;
     margin: 0.5em 0;
   }
+
   @media (max-width: 1000px) {
     height: calc(100dvh - 180px);
   }
@@ -41,9 +42,11 @@
   dl {
     @include inter400-fs20;
     margin: 0.5em 0;
+
     dt {
       font-weight: bold;
     }
+
     dd {
       margin-bottom: 8px;
     }
@@ -52,6 +55,7 @@
   .list {
     @include inter400-fs20;
     margin: 0.5em 0;
+    
     li {
       margin-left: 16px;
     }
