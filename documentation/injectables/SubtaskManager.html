@@ -1224,8 +1224,8 @@ This includes adding, editing, deleting, and managing subtask state.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="313"
-                                    class="link-to-prism">src/app/add-task/subtask-manager.ts:313</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="312"
+                                    class="link-to-prism">src/app/add-task/subtask-manager.ts:312</a></div>
                         </td>
                     </tr>
 
@@ -2589,7 +2589,6 @@ export class SubtaskManager {
         title: subtask.text,
         isCompleted: subtask.completed
       };
-
       if (typeof subtask.id &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; subtask.id.length &gt; 0) {
         await this.taskService.updateSubtask(taskId, subtask.id, subtaskData);
       } else {

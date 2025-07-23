@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >DragDropManager</li>
+  <li class="breadcrumb-item" >TaskDataService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,18 +115,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/board/drag-drop-manager.ts</code>
+            <code>src/app/add-task/task-data.service.ts</code>
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>DragDropManager handles all drag-and-drop operations for the BoardComponent.
-This includes drag delays, drop handling, auto-scrolling, and task status updates.</p>
-
-            </p>
 
 
 
@@ -144,28 +136,27 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#changeTaskStatus" >changeTaskStatus</a>
-                            </li>
-                            <li>
-                                <a href="#getDragDelay" >getDragDelay</a>
+                                <a href="#buildTask" >buildTask</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#getDropTargetStatus" >getDropTargetStatus</a>
+                                <a href="#getUniqueAssignedContactIds" >getUniqueAssignedContactIds</a>
                             </li>
                             <li>
-                                <a href="#handleDragMove" >handleDragMove</a>
-                            </li>
-                            <li>
-                                <a href="#handleDrop" >handleDrop</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#reorderTasks" >reorderTasks</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#populateFromTask" >populateFromTask</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#updateTaskStatus" >updateTaskStatus</a>
+                                <a href="#setAssignedContacts" >setAssignedContacts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setBasicFormData" >setBasicFormData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setDueDate" >setDueDate</a>
                             </li>
                         </ul>
                     </td>
@@ -179,54 +170,6 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/board/drag-drop-manager.ts:13</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>taskService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section data-compodoc="block-methods">
     
@@ -237,31 +180,31 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="changeTaskStatus"></a>
+                    <a name="buildTask"></a>
                     <span class="name">
-                        <span ><b>changeTaskStatus</b></span>
-                        <a href="#changeTaskStatus"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>buildTask</b></span>
+                        <a href="#buildTask"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>changeTaskStatus(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="../interfaces/Task.html" target="_self">Task</a>, taskList: <a href="../interfaces/Task.html" target="_self">Task[]</a>, reloadCallback: () => void)</code>
+<code>buildTask(formData: <a href="../interfaces/FormData.html" target="_self">FormData</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, priorityManager: <a href="../injectables/PriorityManager.html" target="_self">PriorityManager</a>, contactManager: <a href="../injectables/ContactManager.html" target="_self">ContactManager</a>, categoryManager: <a href="../injectables/CategoryManager.html" target="_self">CategoryManager</a>, id?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates the status of a task and persists the change via the task service.</p>
+                        <div class="io-description"><p>Builds a task object from current form and manager states.</p>
 </div>
 
                             <div class="io-description">
@@ -273,14 +216,13 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskId</td>
+                                                <td>formData</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="../interfaces/FormData.html" target="_self" >FormData</a></code>
                                             </td>
 
                                             <td>
@@ -288,174 +230,10 @@ This includes drag delays, drop handling, auto-scrolling, and task status update
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The ID of the task to update.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>status</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The new status for the task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>taskList</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task[]</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The current task list to find the task in.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>reloadCallback</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Callback function to reload tasks after update.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getDragDelay"></a>
-                    <span class="name">
-                        <span ><b>getDragDelay</b></span>
-                        <a href="#getDragDelay"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getDragDelay()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:22</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the delay for starting a drag action based on screen width.
-Prevents accidental drags on small screens.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Drag delay in milliseconds.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getDropTargetStatus"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>getDropTargetStatus</b></span>
-                        <a href="#getDropTargetStatus"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getDropTargetStatus(containerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:50</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Determines the new task status based on the drop container ID.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>containerId</td>
-                                            <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
@@ -464,77 +242,11 @@ Prevents accidental drags on small screens.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The ID of the container where the task was dropped.</li>
-</ul>
-
-                                            </td>
                                         </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code> | undefined</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The corresponding task status, or undefined if not found.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="handleDragMove"></a>
-                    <span class="name">
-                        <span ><b>handleDragMove</b></span>
-                        <a href="#handleDragMove"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>handleDragMove(event: CdkDragMove, scrollSection: ElementRef<HTMLElement>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:103</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Handles automatic scrolling while dragging near the top or bottom edge
-of the scrollable task section.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
                                         <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
+                                                <td>priorityManager</td>
                                             <td>
-                                                        <code>CdkDragMove</code>
+                                                            <code><a href="../injectables/PriorityManager.html" target="_self" >PriorityManager</a></code>
                                             </td>
 
                                             <td>
@@ -542,17 +254,11 @@ of the scrollable task section.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The CdkDragMove event containing the pointer position.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                                <td>scrollSection</td>
+                                                <td>contactManager</td>
                                             <td>
-                                                        <code>ElementRef&lt;HTMLElement&gt;</code>
+                                                            <code><a href="../injectables/ContactManager.html" target="_self" >ContactManager</a></code>
                                             </td>
 
                                             <td>
@@ -560,18 +266,36 @@ of the scrollable task section.</p>
                                             </td>
 
 
+                                        </tr>
+                                        <tr>
+                                                <td>categoryManager</td>
                                             <td>
-                                                    <ul>
-<li>The scrollable section element reference.</li>
-</ul>
-
+                                                            <code><a href="../injectables/CategoryManager.html" target="_self" >CategoryManager</a></code>
                                             </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
 
                         </div>
                             <div class="io-description">
@@ -585,129 +309,32 @@ of the scrollable task section.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleDrop"></a>
-                    <span class="name">
-                        <span ><b>handleDrop</b></span>
-                        <a href="#handleDrop"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>handleDrop(event: <a href="../interfaces/Task.html" target="_self">CdkDragDrop&lt;Task[]&gt;</a>, updateCallback: () => void)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:33</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Handles drag-and-drop actions for tasks using the Angular CDK.
-Updates the task&#39;s status and reorders task lists accordingly.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >CdkDragDrop&lt;Task[]&gt;</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The CdkDragDrop event containing task data and drop context.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>updateCallback</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Callback function to update task lists after drop.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reorderTasks"></a>
+                    <a name="getUniqueAssignedContactIds"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>reorderTasks</b></span>
-                        <a href="#reorderTasks"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getUniqueAssignedContactIds</b></span>
+                        <a href="#getUniqueAssignedContactIds"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reorderTasks(event: <a href="../interfaces/Task.html" target="_self">CdkDragDrop&lt;Task[]&gt;</a>)</code>
+                    <code>getUniqueAssignedContactIds(contactManager: <a href="../injectables/ContactManager.html" target="_self">ContactManager</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:96</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Reorders tasks in the same or across different containers.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -718,14 +345,13 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>event</td>
+                                                <td>contactManager</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >CdkDragDrop&lt;Task[]&gt;</a></code>
+                                                            <code><a href="../injectables/ContactManager.html" target="_self" >ContactManager</a></code>
                                             </td>
 
                                             <td>
@@ -733,18 +359,12 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The CdkDragDrop event object.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>string[]</code>
 
                         </div>
                             <div class="io-description">
@@ -758,33 +378,34 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateTaskStatus"></a>
+                    <a name="populateFromTask"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateTaskStatus</b></span>
-                        <a href="#updateTaskStatus"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Async</span>
+                        <span ><b>populateFromTask</b></span>
+                        <a href="#populateFromTask"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTaskStatus(task: <a href="../interfaces/Task.html" target="_self">Task</a>, newStatus: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                    <code>populateFromTask(task: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, formData: <a href="../interfaces/FormData.html" target="_self">FormData</a>, priorityManager: <a href="../injectables/PriorityManager.html" target="_self">PriorityManager</a>, contactManager: <a href="../injectables/ContactManager.html" target="_self">ContactManager</a>, subtaskManager: <a href="../injectables/SubtaskManager.html" target="_self">SubtaskManager</a>, contacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/board/drag-drop-manager.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:25</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates the status of a given task and persists the change.</p>
+                        <div class="io-description"><p>Populates form and managers with data from an existing task.
+Returns the original task status.</p>
 </div>
 
                             <div class="io-description">
@@ -796,14 +417,13 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                                 <td>task</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -811,17 +431,11 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The task object to update.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                                <td>newStatus</td>
+                                                <td>formData</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                                            <code><a href="../interfaces/FormData.html" target="_self" >FormData</a></code>
                                             </td>
 
                                             <td>
@@ -829,12 +443,309 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
                                             </td>
 
 
+                                        </tr>
+                                        <tr>
+                                                <td>priorityManager</td>
                                             <td>
-                                                    <ul>
-<li>The new status to assign.</li>
-</ul>
-
+                                                            <code><a href="../injectables/PriorityManager.html" target="_self" >PriorityManager</a></code>
                                             </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>contactManager</td>
+                                            <td>
+                                                            <code><a href="../injectables/ContactManager.html" target="_self" >ContactManager</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>subtaskManager</td>
+                                            <td>
+                                                            <code><a href="../injectables/SubtaskManager.html" target="_self" >SubtaskManager</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>contacts</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAssignedContacts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setAssignedContacts</b></span>
+                        <a href="#setAssignedContacts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setAssignedContacts(assignedToIds: string[], contactManager: <a href="../injectables/ContactManager.html" target="_self">ContactManager</a>, contacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>assignedToIds</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>contactManager</td>
+                                            <td>
+                                                            <code><a href="../injectables/ContactManager.html" target="_self" >ContactManager</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>contacts</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setBasicFormData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setBasicFormData</b></span>
+                        <a href="#setBasicFormData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setBasicFormData(task: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, formData: <a href="../interfaces/FormData.html" target="_self">FormData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>formData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/FormData.html" target="_self" >FormData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDueDate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setDueDate</b></span>
+                        <a href="#setDueDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDueDate(date: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, formData: <a href="../interfaces/FormData.html" target="_self">FormData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>formData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/FormData.html" target="_self" >FormData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -856,140 +767,104 @@ Updates the task&#39;s status and reorders task lists accordingly.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, ElementRef } from &#x27;@angular/core&#x27;;
-import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragMove } from &#x27;@angular/cdk/drag-drop&#x27;;
-import { Task, TaskService } from &#x27;../services/task.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Contact } from &#x27;../services/contact.service&#x27;;
+import { Task } from &#x27;../services/task.service&#x27;;
+import { ContactManager } from &#x27;./contact-manager&#x27;;
+import { CategoryManager } from &#x27;./category-manager&#x27;;
+import { PriorityManager } from &#x27;./priority-manager&#x27;;
+import { SubtaskManager } from &#x27;./subtask-manager&#x27;;
 
-/**
- * DragDropManager handles all drag-and-drop operations for the BoardComponent.
- * This includes drag delays, drop handling, auto-scrolling, and task status updates.
- */
+export interface FormData {
+  title: string;
+  description: string;
+  dueDate: string;
+}
+
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
-export class DragDropManager {
-  constructor(private taskService: TaskService) { }
+export class TaskDataService {
 
   /**
-   * Returns the delay for starting a drag action based on screen width.
-   * Prevents accidental drags on small screens.
-   *
-   * @returns Drag delay in milliseconds.
+   * Populates form and managers with data from an existing task.
+   * Returns the original task status.
    */
-  getDragDelay(): number {
-    return window.innerWidth &lt; 1000 ? 250 : 0;
-  }
-
-  /**
-   * Handles drag-and-drop actions for tasks using the Angular CDK.
-   * Updates the task&#x27;s status and reorders task lists accordingly.
-   *
-   * @param event - The CdkDragDrop event containing task data and drop context.
-   * @param updateCallback - Callback function to update task lists after drop.
-   */
-  handleDrop(event: CdkDragDrop&lt;Task[]&gt;, updateCallback: () &#x3D;&gt; void): void {
-    const task &#x3D; event.item.data as Task;
-    const newStatus &#x3D; this.getDropTargetStatus(event.container.id);
-    if (!newStatus) return;
-    this.reorderTasks(event);
-    if (task.id &amp;&amp; task.status !&#x3D;&#x3D; newStatus) {
-      this.updateTaskStatus(task, newStatus);
+  async populateFromTask(
+    task: any,
+    formData: FormData,
+    priorityManager: PriorityManager,
+    contactManager: ContactManager,
+    subtaskManager: SubtaskManager,
+    contacts: Contact[]
+  ): Promise&lt;string&gt; {
+    this.setBasicFormData(task, formData);
+    this.setDueDate(task.date, formData);
+    priorityManager.setPriorityAndCategory(task);
+    this.setAssignedContacts(task.assignedTo, contactManager, contacts);
+    if (task.id) {
+      subtaskManager.loadAndSetSubtasks(task.id);
     }
-    updateCallback();
+    return task.status || &#x27;to-do&#x27;;
   }
 
   /**
-   * Determines the new task status based on the drop container ID.
-   *
-   * @param containerId - The ID of the container where the task was dropped.
-   * @returns The corresponding task status, or undefined if not found.
+   * Builds a task object from current form and manager states.
    */
-  private getDropTargetStatus(containerId: string): Task[&#x27;status&#x27;] | undefined {
-    const statusMap: Record&lt;string, Task[&#x27;status&#x27;]&gt; &#x3D; {
-      todoList: &#x27;to-do&#x27;,
-      inprogressList: &#x27;in-progress&#x27;,
-      awaitfeedbackList: &#x27;await-feedback&#x27;,
-      doneList: &#x27;done&#x27;,
+  buildTask(
+    formData: FormData,
+    status: string,
+    priorityManager: PriorityManager,
+    contactManager: ContactManager,
+    categoryManager: CategoryManager,
+    id?: string
+  ): Task {
+    const uniqueContactIds &#x3D; this.getUniqueAssignedContactIds(contactManager);
+    const task: any &#x3D; {
+      title: formData.title.trim(),
+      description: formData.description?.trim() || &#x27;&#x27;,
+      date: new Date(formData.dueDate),
+      priority: priorityManager.selectedPriority as &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;,
+      status,
+      assignedTo: uniqueContactIds,
+      category: categoryManager.getSelectedCategory() as &#x27;technical&#x27; | &#x27;user story&#x27;
     };
-    return statusMap[containerId];
+    if (id) {
+      task.id &#x3D; id;
+    }
+    return task as Task;
   }
 
-  /**
-   * Reorders tasks in the same or across different containers.
-   *
-   * @param event - The CdkDragDrop event object.
-   */
-  private reorderTasks(event: CdkDragDrop&lt;Task[]&gt;): void {
-    const sameContainer &#x3D; event.previousContainer &#x3D;&#x3D;&#x3D; event.container;
-    if (sameContainer) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+  private setBasicFormData(task: any, formData: FormData): void {
+    formData.title &#x3D; task.title || &#x27;&#x27;;
+    formData.description &#x3D; task.description || &#x27;&#x27;;
+  }
+
+  private setDueDate(date: any, formData: FormData): void {
+    if (!date) return;
+    let dateValue: Date;
+    if (date.toDate) {
+      dateValue &#x3D; date.toDate();
+    } else if (date instanceof Date) {
+      dateValue &#x3D; date;
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      dateValue &#x3D; new Date(date);
     }
+    formData.dueDate &#x3D; dateValue.toISOString().split(&#x27;T&#x27;)[0];
   }
 
-  /**
-   * Updates the status of a given task and persists the change.
-   *
-   * @param task - The task object to update.
-   * @param newStatus - The new status to assign.
-   */
-  private updateTaskStatus(task: Task, newStatus: Task[&#x27;status&#x27;]): void {
-    const updatedTask: Task &#x3D; { ...task, status: newStatus };
-    this.taskService.updateTask(task.id!, updatedTask).catch((error) &#x3D;&gt; {
-      console.error(&#x27;Error updating task status:&#x27;, error);
-    });
+  private setAssignedContacts(assignedToIds: string[], contactManager: ContactManager, contacts: Contact[]): void {
+    if (!assignedToIds || assignedToIds.length &#x3D;&#x3D;&#x3D; 0) return;
+    const selectedContacts &#x3D; contacts
+      .filter(contact &#x3D;&gt; contact.id !&#x3D;&#x3D; undefined)
+      .filter(contact &#x3D;&gt; assignedToIds.includes(contact.id as string));
+    contactManager.setSelectedContacts(selectedContacts);
   }
-
-  /**
-   * Handles automatic scrolling while dragging near the top or bottom edge
-   * of the scrollable task section.
-   *
-   * @param event - The CdkDragMove event containing the pointer position.
-   * @param scrollSection - The scrollable section element reference.
-   */
-  handleDragMove(event: CdkDragMove, scrollSection: ElementRef&lt;HTMLElement&gt;): void {
-    const mouseY &#x3D; event.pointerPosition.y;
-    const section &#x3D; scrollSection?.nativeElement;
-    if (!section) return;
-    const { top, bottom } &#x3D; section.getBoundingClientRect();
-    const threshold &#x3D; 100;
-    const scrollStep &#x3D; 30;
-    if (mouseY &lt; top + threshold) {
-      section.scrollBy({ top: -scrollStep, behavior: &#x27;auto&#x27; });
-    } else if (bottom - mouseY &lt; threshold) {
-      section.scrollBy({ top: scrollStep, behavior: &#x27;auto&#x27; });
-    }
-  }
-
-  /**
-   * Updates the status of a task and persists the change via the task service.
-   *
-   * @param taskId - The ID of the task to update.
-   * @param status - The new status for the task.
-   * @param taskList - The current task list to find the task in.
-   * @param reloadCallback - Callback function to reload tasks after update.
-   */
-  changeTaskStatus(
-    taskId: string,
-    status: Task[&#x27;status&#x27;],
-    taskList: Task[],
-    reloadCallback: () &#x3D;&gt; void
-  ): void {
-    const task &#x3D; taskList.find((t) &#x3D;&gt; t.id &#x3D;&#x3D;&#x3D; taskId);
-    if (!task || task.status &#x3D;&#x3D;&#x3D; status) return;
-    const updatedTask &#x3D; { ...task, status };
-    this.taskService.updateTask(taskId, updatedTask).then(reloadCallback);
+  
+  private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
+    const contacts &#x3D; contactManager.getSelectedContacts();
+    return [...new Set(contacts.map(c &#x3D;&gt; c.id).filter(id &#x3D;&gt; id !&#x3D;&#x3D; undefined))] as string[];
   }
 }
 </code></pre>
@@ -1035,7 +910,7 @@ export class DragDropManager {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'DragDropManager.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'TaskDataService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -634,8 +634,8 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="281"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:281</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:278</a></div>
                         </td>
                     </tr>
 
@@ -673,8 +673,8 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="273"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:273</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:270</a></div>
                         </td>
                     </tr>
 
@@ -750,8 +750,8 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="263"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:263</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="260"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:260</a></div>
                         </td>
                     </tr>
 
@@ -905,8 +905,8 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:228</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="225"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:225</a></div>
                         </td>
                     </tr>
 
@@ -985,8 +985,8 @@ and handles visibility and animation transitions.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="288"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:288</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="285"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:285</a></div>
                         </td>
                     </tr>
 
@@ -1024,8 +1024,8 @@ and handles visibility and animation transitions.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="248"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:248</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:245</a></div>
                         </td>
                     </tr>
 
@@ -1149,8 +1149,8 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="237"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:237</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:234</a></div>
                         </td>
                     </tr>
 
@@ -1276,8 +1276,8 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="209"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:209</a></div>
                         </td>
                     </tr>
 
@@ -2039,7 +2039,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     this.isDeleting &#x3D; false;
     this.isEditing &#x3D; false;
     this.contactVisible &#x3D; false;
-
     setTimeout(() &#x3D;&gt; {
       this.noContactVisible.emit();
     }, 100);
@@ -2052,10 +2051,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    */
   private prepareContactTransition(wasEmpty: boolean): void {
     this.isEditing &#x3D; false;
-
     if (!this.isDeleting &amp;&amp; (this.firstLoad || wasEmpty)) {
       this.contactVisible &#x3D; false;
-
       setTimeout(() &#x3D;&gt; {
         this.contactVisible &#x3D; true;
         this.animationState++;

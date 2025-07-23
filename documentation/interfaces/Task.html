@@ -743,7 +743,7 @@ export class TaskService {
       const docRef &#x3D; await addDoc(tasksRef, newTask);
       return { id: docRef.id, ...newTask };
     } catch (err) {
-      console.error(err);
+      console.error(&#x27;Error adding task:&#x27;, err);
       return null;
     }
   }

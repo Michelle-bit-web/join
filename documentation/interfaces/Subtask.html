@@ -571,7 +571,6 @@ export class SubtaskManager {
         title: subtask.text,
         isCompleted: subtask.completed
       };
-
       if (typeof subtask.id &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; subtask.id.length &gt; 0) {
         await this.taskService.updateSubtask(taskId, subtask.id, subtaskData);
       } else {

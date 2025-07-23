@@ -414,15 +414,14 @@ export class AppComponent {
    */
   constructor(
     private navigationService: NavigationHistoryService,
-    private router: Router
-  ) {
+    private router: Router) {
     this.router.events
-      .pipe(filter((event) &#x3D;&gt; event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) &#x3D;&gt; {
-        this.showHeaderAndSidebar &#x3D; ![&#x27;/login&#x27;, &#x27;/&#x27;, &#x27;/signup&#x27;].includes(
-          event.urlAfterRedirects
-        );
-      });
+    .pipe(filter((event) &#x3D;&gt; event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) &#x3D;&gt; {
+      this.showHeaderAndSidebar &#x3D; ![&#x27;/login&#x27;, &#x27;/&#x27;, &#x27;/signup&#x27;].includes(
+        event.urlAfterRedirects
+      );
+    });
   }
 }
 

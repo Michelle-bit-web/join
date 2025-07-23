@@ -136,6 +136,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/DragDropManager.html" data-type="entity-link" >DragDropManager</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/FormValidatorService.html" data-type="entity-link" >FormValidatorService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/NavigationHistoryService.html" data-type="entity-link" >NavigationHistoryService</a>
                                 </li>
                                 <li class="link">
@@ -146,6 +149,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/SubtaskManager.html" data-type="entity-link" >SubtaskManager</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TaskDataService.html" data-type="entity-link" >TaskDataService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/TaskListManager.html" data-type="entity-link" >TaskListManager</a>
@@ -186,6 +192,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/FirestoreTimestamp.html" data-type="entity-link" >FirestoreTimestamp</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/FormData.html" data-type="entity-link" >FormData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FormData-1.html" data-type="entity-link" >FormData</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Subtask.html" data-type="entity-link" >Subtask</a>
                             </li>
                             <li class="link">
@@ -196,6 +208,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/UserData.html" data-type="entity-link" >UserData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ValidationErrors.html" data-type="entity-link" >ValidationErrors</a>
                             </li>
                         </ul>
                     </li>

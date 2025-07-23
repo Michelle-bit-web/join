@@ -412,17 +412,14 @@ export class ContactService {
   private selectedContactSubject &#x3D; new BehaviorSubject&lt;Contact | null&gt;(null);
   /** Observable for the selected contact */
   public selectedContact$ &#x3D; this.selectedContactSubject.asObservable();
-
   /** Whether the contact form should be displayed */
   private showFormSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
   /** Observable for contact form visibility */
   public showForm$ &#x3D; this.showFormSubject.asObservable();
-
   /** Currently selected contact to be edited */
   private editContactSubject &#x3D; new BehaviorSubject&lt;Contact | null&gt;(null);
   /** Observable for the contact being edited */
   public editContact$ &#x3D; this.editContactSubject.asObservable();
-
   /** Preset avatar colors for visual identification */
   private avatarColors &#x3D; [
     &#x27;#9C27B0&#x27;, &#x27;#2196F3&#x27;, &#x27;#FF9800&#x27;, &#x27;#4CAF50&#x27;, &#x27;#F44336&#x27;, &#x27;#00BCD4&#x27;,

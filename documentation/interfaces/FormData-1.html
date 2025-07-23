@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  Subtask</li>
+  FormData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,17 +122,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/task.service.ts</code>
+            <code>src/app/add-task/task-data.service.ts</code>
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Represents a subtask belonging to a task.</p>
-
-            </p>
 
 
         <section data-compodoc="block-index">
@@ -148,16 +141,15 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#id" 
+                                        <a href="#description" 
 >
-                                            id
+                                            description
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#isCompleted" 
+                                        <a href="#dueDate" 
 >
-                                            isCompleted
+                                            dueDate
                                         </a>
                                 </li>
                                 <li>
@@ -181,9 +173,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="id"></a>
-                                        <span class="name "><b>id</b>
-                                            <a href="#id">
+                                        <a name="description"></a>
+                                        <span class="name "><b>description</b>
+                                            <a href="#description">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -191,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -204,30 +196,19 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
 
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Firestore-generated ID (optional when creating)</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="isCompleted"></a>
-                                        <span class="name "><b>isCompleted</b>
-                                            <a href="#isCompleted">
+                                        <a name="dueDate"></a>
+                                        <span class="name "><b>dueDate</b>
+                                            <a href="#dueDate">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -235,7 +216,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>isCompleted:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>dueDate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -243,7 +224,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -252,12 +233,6 @@
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Completion status</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -291,12 +266,6 @@
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Title or label of the subtask</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -305,305 +274,103 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import {
-  Firestore,
-  collection,
-  onSnapshot,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-  Timestamp
-} from &#x27;@angular/fire/firestore&#x27;;
-import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { Contact } from &#x27;../services/contact.service&#x27;;
+import { Task } from &#x27;../services/task.service&#x27;;
+import { ContactManager } from &#x27;./contact-manager&#x27;;
+import { CategoryManager } from &#x27;./category-manager&#x27;;
+import { PriorityManager } from &#x27;./priority-manager&#x27;;
+import { SubtaskManager } from &#x27;./subtask-manager&#x27;;
 
-/**
- * Represents a task in the system.
- */
-export interface Task {
-  /** Firestore-generated ID (optional when creating a task) */
-  id?: string;
-
-  /** Title of the task */
+export interface FormData {
   title: string;
-
-  /** Optional description */
-  description?: string;
-
-  /**
-   * Date of the task; may be a native Date object or Firestore Timestamp.
-   * Firestore stores it as a Timestamp and it needs conversion after reading.
-   */
-  date: Date | Timestamp;
-
-  /** Priority level of the task */
-  priority: &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;;
-
-  /** Current status of the task */
-  status: string;
-
-  /** Optional list of user IDs assigned to the task */
-  assignedTo?: string[];
-
-  /** Task category */
-  category: &#x27;technical&#x27; | &#x27;user story&#x27;;
-
-  /** Optional array of subtasks (retrieved separately as subcollection) */
-  subtask?: Subtask[];
+  description: string;
+  dueDate: string;
 }
 
-/**
- * Represents a subtask belonging to a task.
- */
-export interface Subtask {
-  /** Firestore-generated ID (optional when creating) */
-  id?: string;
-
-  /** Title or label of the subtask */
-  title: string;
-
-  /** Completion status */
-  isCompleted: boolean;
-}
-
-/**
- * Service responsible for managing tasks and subtasks
- * stored in Firestore.
- */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
-export class TaskService {
-  private editingTask: Task | null &#x3D; null;
-
-  constructor(private firestore: Firestore) {}
+export class TaskDataService {
 
   /**
-   * Returns a reference to the &#x27;tasks&#x27; Firestore collection.
+   * Populates form and managers with data from an existing task.
+   * Returns the original task status.
    */
-  getTasksRef() {
-    return collection(this.firestore, &#x27;tasks&#x27;);
-  }
-
-  /**
-   * Returns a reference to the &#x27;subtasks&#x27; subcollection for a given task.
-   * 
-   * @param subColId - The document ID of the parent task.
-   */
-  getSubtasksRef(subColId: string) {
-    return collection(this.getTasksRef(), subColId, &#x27;subtasks&#x27;);
-  }
-
-  /**
-   * Returns a document reference for a specific task by ID.
-   * 
-   * @param docId - The document ID of the task.
-   */
-  getSingleTaskRef(docId: string) {
-    return doc(collection(this.firestore, &#x27;tasks&#x27;), docId);
-  }
-
-  /**
-   * Observes all tasks in Firestore and emits updates in real-time.
-   */
-  getTasks(): Observable&lt;Task[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getTasksRef(), snapshot &#x3D;&gt; {
-        const tasks: Task[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          tasks.push({ id: doc.id, ...doc.data() } as Task);
-        });
-        observer.next(tasks);
-      }, error &#x3D;&gt; {
-        observer.error(error);
-      });
-
-      return () &#x3D;&gt; unsubscribe();
-    });
-  }
-
-  /**
-   * Observes the subtasks of a given task in real-time.
-   * 
-   * @param taskId - The ID of the parent task.
-   */
-  getSubtasks(taskId: string): Observable&lt;Subtask[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getSubtasksRef(taskId), snapshot &#x3D;&gt; {
-        const subtasks: Subtask[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          subtasks.push({ id: doc.id, ...doc.data() } as Subtask);
-        });
-        observer.next(subtasks);
-      }, error &#x3D;&gt; observer.error(error));
-
-      return () &#x3D;&gt; unsubscribe();
-    });
-  }
-
-  /**
-   * Adds a new task to Firestore.
-   * 
-   * @param newTask - The task to be added.
-   * @returns The created task including its generated ID, or null on failure.
-   */
-  async addTask(newTask: Task): Promise&lt;Task | null&gt; {
-    try {
-      const tasksRef &#x3D; this.getTasksRef();
-      const docRef &#x3D; await addDoc(tasksRef, newTask);
-      return { id: docRef.id, ...newTask };
-    } catch (err) {
-      console.error(&#x27;Error adding task:&#x27;, err);
-      return null;
+  async populateFromTask(
+    task: any,
+    formData: FormData,
+    priorityManager: PriorityManager,
+    contactManager: ContactManager,
+    subtaskManager: SubtaskManager,
+    contacts: Contact[]
+  ): Promise&lt;string&gt; {
+    this.setBasicFormData(task, formData);
+    this.setDueDate(task.date, formData);
+    priorityManager.setPriorityAndCategory(task);
+    this.setAssignedContacts(task.assignedTo, contactManager, contacts);
+    if (task.id) {
+      subtaskManager.loadAndSetSubtasks(task.id);
     }
+    return task.status || &#x27;to-do&#x27;;
   }
 
   /**
-   * Adds a subtask to a specific task&#x27;s subcollection.
-   * 
-   * @param ColId - The ID of the parent task.
-   * @param subtask - The subtask to add.
-   * @returns The created subtask with ID, or null on failure.
+   * Builds a task object from current form and manager states.
    */
-  async addSubtask(ColId: string, subtask: Subtask): Promise&lt;Subtask | null&gt; {
-    try {
-      const subtasksRef &#x3D; this.getSubtasksRef(ColId);
-      const docRef &#x3D; await addDoc(subtasksRef, subtask);
-      return { id: docRef.id, ...subtask };
-    } catch (error) {
-      console.error(&#x27;Error adding subtask:&#x27;, error);
-      return null;
+  buildTask(
+    formData: FormData,
+    status: string,
+    priorityManager: PriorityManager,
+    contactManager: ContactManager,
+    categoryManager: CategoryManager,
+    id?: string
+  ): Task {
+    const uniqueContactIds &#x3D; this.getUniqueAssignedContactIds(contactManager);
+    const task: any &#x3D; {
+      title: formData.title.trim(),
+      description: formData.description?.trim() || &#x27;&#x27;,
+      date: new Date(formData.dueDate),
+      priority: priorityManager.selectedPriority as &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;,
+      status,
+      assignedTo: uniqueContactIds,
+      category: categoryManager.getSelectedCategory() as &#x27;technical&#x27; | &#x27;user story&#x27;
+    };
+    if (id) {
+      task.id &#x3D; id;
     }
+    return task as Task;
   }
 
-  /**
-   * Updates a task document in Firestore.
-   * 
-   * @param docId - The ID of the task.
-   * @param updatedTask - The updated task data.
-   */
-  async updateTask(docId: string, updatedTask: Task) {
-    const docRef &#x3D; this.getSingleTaskRef(docId);
-    await updateDoc(docRef, this.getCleanJson(updatedTask)).catch(console.error);
+  private setBasicFormData(task: any, formData: FormData): void {
+    formData.title &#x3D; task.title || &#x27;&#x27;;
+    formData.description &#x3D; task.description || &#x27;&#x27;;
   }
 
-  /**
-   * Updates a subtask document in Firestore.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask document ID.
-   * @param updatedSubtask - The updated subtask data.
-   */
-  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask) {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await updateDoc(docRef, this.getCleanJson(updatedSubtask)).catch(console.error);
-  }
-
-  /**
-   * Deletes a subtask from a task&#x27;s subcollection.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask ID to delete.
-   */
-  async deleteSubtask(taskId: string, subtaskId: string) {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await deleteDoc(docRef).catch(err &#x3D;&gt; console.error(&#x27;Error deleting subtask:&#x27;, err));
-  }
-
-  /**
-   * Deletes a task from Firestore.
-   * 
-   * @param docId - The ID of the task to delete.
-   */
-  async deleteTask(docId: string) {
-    await deleteDoc(this.getSingleTaskRef(docId)).catch(console.error);
-  }
-
-  /**
-   * Returns a plain object representation of a Task or Subtask for Firestore updates.
-   * 
-   * @param updated - The object to clean.
-   */
-  getCleanJson(updated: Task | Subtask) {
-    if (&#x27;category&#x27; in updated) {
-      return {
-        title: updated.title,
-        description: updated.description,
-        date: updated.date,
-        priority: updated.priority,
-        status: updated.status,
-        assignedTo: updated.assignedTo,
-        category: updated.category,
-      };
-    } else if (&#x27;isCompleted&#x27; in updated) {
-      return {
-        title: updated.title,
-        isCompleted: updated.isCompleted
-      };
-    }
-    return {};
-  }
-
-  /**
-   * Converts a Firestore Timestamp or Date object to a formatted string.
-   * 
-   * @param date - The Timestamp or Date to convert.
-   * @returns A formatted date string (&#x60;dd/mm/yyyy&#x60;).
-   */
-  convertDate(date: Timestamp | Date): string {
-    if (date instanceof Timestamp) {
-      return this.formatDate(date.toDate());
+  private setDueDate(date: any, formData: FormData): void {
+    if (!date) return;
+    let dateValue: Date;
+    if (date.toDate) {
+      dateValue &#x3D; date.toDate();
     } else if (date instanceof Date) {
-      return this.formatDate(date);
+      dateValue &#x3D; date;
+    } else {
+      dateValue &#x3D; new Date(date);
     }
-    return &#x27;&#x27;;
+    formData.dueDate &#x3D; dateValue.toISOString().split(&#x27;T&#x27;)[0];
   }
 
-  /**
-   * Formats a Date object into a &#x60;dd/mm/yyyy&#x60; string.
-   * 
-   * @param date - The Date to format.
-   */
-  formatDate(date: Date): string {
-    const day &#x3D; String(date.getDate()).padStart(2, &#x27;0&#x27;);
-    const month &#x3D; String(date.getMonth() + 1).padStart(2, &#x27;0&#x27;);
-    const year &#x3D; date.getFullYear();
-    return &#x60;${day}/${month}/${year}&#x60;;
+  private setAssignedContacts(assignedToIds: string[], contactManager: ContactManager, contacts: Contact[]): void {
+    if (!assignedToIds || assignedToIds.length &#x3D;&#x3D;&#x3D; 0) return;
+    const selectedContacts &#x3D; contacts
+      .filter(contact &#x3D;&gt; contact.id !&#x3D;&#x3D; undefined)
+      .filter(contact &#x3D;&gt; assignedToIds.includes(contact.id as string));
+    contactManager.setSelectedContacts(selectedContacts);
   }
-
-  /**
-   * Sets the currently edited task.
-   * 
-   * @param task - The task being edited.
-   */
-  setEditingTask(task: Task) {
-    this.editingTask &#x3D; task;
-  }
-
-  /**
-   * Returns the task currently being edited.
-   */
-  getEditingTask(): Task | null {
-    return this.editingTask;
-  }
-
-  /**
-   * Clears the currently edited task.
-   */
-  clearEditingTask() {
-    this.editingTask &#x3D; null;
-  }
-
-  /**
-   * Capitalizes the first letter of a string.
-   * 
-   * @param text - The string to capitalize.
-   * @returns Capitalized string or empty string if undefined.
-   */
-  capitalize(text: string | undefined): string {
-    if (!text) return &#x27;&#x27;;
-    return text.charAt(0).toUpperCase() + text.slice(1);
+  
+  private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
+    const contacts &#x3D; contactManager.getSelectedContacts();
+    return [...new Set(contacts.map(c &#x3D;&gt; c.id).filter(id &#x3D;&gt; id !&#x3D;&#x3D; undefined))] as string[];
   }
 }
 </code></pre>
@@ -643,7 +410,7 @@ export class TaskService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Subtask-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormData-1.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

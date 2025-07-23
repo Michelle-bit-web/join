@@ -337,8 +337,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/services/auth.service.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/services/auth.service.ts:210</a></div>
                         </td>
                     </tr>
 
@@ -380,8 +380,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/services/auth.service.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/services/auth.service.ts:174</a></div>
                         </td>
                     </tr>
 
@@ -425,8 +425,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/services/auth.service.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/services/auth.service.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -470,8 +470,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/services/auth.service.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/services/auth.service.ts:183</a></div>
                         </td>
                     </tr>
 
@@ -547,8 +547,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="169"
-                                    class="link-to-prism">src/app/services/auth.service.ts:169</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/services/auth.service.ts:166</a></div>
                         </td>
                     </tr>
 
@@ -734,8 +734,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/services/auth.service.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/services/auth.service.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -1137,14 +1137,12 @@ export class AuthService {
         const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
         const user &#x3D; userCredential.user;
         await updateProfile(user, { displayName: &#x27;Guest User&#x27; });
-
         const userData: UserData &#x3D; {
           uid: user.uid,
           email: user.email!,
           displayName: &#x27;Guest User&#x27;,
           createdAt: new Date()
         };
-
         await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
         return { success: true };
       } catch (createError: any) {
@@ -1168,7 +1166,6 @@ export class AuthService {
   async getCurrentUserData(): Promise&lt;UserData | null&gt; {
     const currentUser &#x3D; this.auth.currentUser;
     if (!currentUser) return null;
-
     const userDoc &#x3D; await getDoc(doc(this.firestore, &#x27;users&#x27;, currentUser.uid));
     return userDoc.exists() ? userDoc.data() as UserData : null;
   }

@@ -417,8 +417,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="230"
-                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:230</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="228"
+                                    class="link-to-prism">src/app/login-signup/signup/signup.component.ts:228</a></div>
                         </td>
                     </tr>
 
@@ -864,7 +864,7 @@ saves the new user as a contact, and navigates on success.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>ValidationErrors | null</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/ValidationErrors.html" target="_self" >ValidationErrors | null</a></code>
 
                         </div>
                             <div class="io-description">
@@ -1430,10 +1430,8 @@ export class SignupComponent implements OnInit {
     const confirmControl &#x3D; this.signupform.get(&#x27;confirmPassword&#x27;);
     const passwordControl &#x3D; this.signupform.get(&#x27;password&#x27;);
     const mismatch &#x3D; this.signupform.errors?.[&#x27;passwordsDontMatch&#x27;];
-
     const touched &#x3D; confirmControl?.touched || passwordControl?.touched;
     const dirty &#x3D; confirmControl?.dirty || passwordControl?.dirty;
-
     if (mismatch &amp;&amp; (touched || dirty)) {
       return &#x27;Passwords do not match&#x27;;
     }
