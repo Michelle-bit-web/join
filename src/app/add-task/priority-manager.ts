@@ -23,6 +23,7 @@ export class PriorityManager {
   setPriority(priority: string) {
     this.selectedPriority = priority;
   }
+  
   /**
    * Sets the selected priority and category in their respective managers.
    *
