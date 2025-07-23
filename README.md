@@ -79,12 +79,12 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-##💡To-Dos / Ideas
+## 💡To-Dos / Ideas
 
 - [ ] 🖼️ Upload option for user profile or tasks
 
    
 ## 🤓 Author
 
-Created by [Michelle Puschkarow].
+Created by Michelle Puschkarow. <br>
 If you like this project, feel free to give it a ⭐️ or contribute!
