@@ -1,8 +1,10 @@
-![Join](public/assets/img/logo/logo.png)
+![Join](public/assets/img/logo/logo.png)  
 # Join
 
 This project is a web-based task manager and similar to the Kanban system. With Join you can create, organize, and track all tasks for your project.
 Join was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12. The Firebase CDKs for authentication and the firestore database were used to handle all upcoming data.
+
+Live demo: [Try Join yourself!](https://michelle-bit-web.github.io/join)
 
 ## 🪄 Features
 
