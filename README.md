@@ -26,10 +26,10 @@ Live demo: [Try Join yourself!](https://michelle-bit-web.github.io/join)
 
 ## 📸 Screenshots
 
-Mobile phone preview:
+`Mobile phone previews`<br><br>
 ![App Board](public/assets/img/readme/join_mobile.png)
 
-Desktop preview:
+`Desktop preview`<br><br>
 ![App Board](public/assets/img/readme/join_landscape.png)
 
 ## ⚙️ Technologies Used
