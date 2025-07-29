@@ -2051,7 +2051,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    */
   private prepareContactTransition(wasEmpty: boolean): void {
     this.isEditing &#x3D; false;
-    if (!this.isDeleting &amp;&amp; (this.firstLoad || wasEmpty)) {
+    if (!this.isDeleting) {
       this.contactVisible &#x3D; false;
       setTimeout(() &#x3D;&gt; {
         this.contactVisible &#x3D; true;

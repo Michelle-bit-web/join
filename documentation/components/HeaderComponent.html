@@ -1100,12 +1100,9 @@ export class HeaderComponent {
         <pre class="line-numbers"><code class="language-html">&lt;header&gt;
   &lt;div class&#x3D;&quot;header-content&quot;&gt;
     &lt;div class&#x3D;&quot;logo&quot;&gt;
-      &lt;img
-        class&#x3D;&quot;logo-img&quot;
-        src&#x3D;&quot;assets/img/logo/logo-mobile.png&quot;
-        alt&#x3D;&quot;Logo&quot;
-        routerLink&#x3D;&quot;/&quot;
-      /&gt;
+      &lt;a [routerLink]&#x3D;&quot;isLoggedIn() ? &#x27;/summary&#x27; : null&quot;&gt;
+        &lt;img class&#x3D;&quot;logo-img&quot; src&#x3D;&quot;assets/img/logo/logo-mobile.png&quot;alt&#x3D;&quot;Logo&quot;/&gt;
+      &lt;/a&gt;
     &lt;/div&gt;
 
     &lt;div class&#x3D;&quot;headline&quot;&gt;
@@ -1162,7 +1159,7 @@ export class HeaderComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header>  <div class="header-content">    <div class="logo">      <img        class="logo-img"        src="assets/img/logo/logo-mobile.png"        alt="Logo"        routerLink="/"      />    </div>    <div class="headline">      <p class="headline-text">Kanban Project Management Tool</p>    </div>    <div class="icon-section">      <div routerLink="/help">        <img class="help-icon" src="assets/img/icons/help.png" alt="" />      </div>      <div        class="user-profile"        (click)="toggleMenu($event)"        *ngIf="isLoggedIn()"      >        <p>{{ getCurrentUserInitials() }}</p>        <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>          <a class="mobile-help-link" routerLink="/help">Help</a>          <a routerLink="/privacy-policy">Privacy Policy</a>          <a routerLink="/legal-notice">Legal notice</a>          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>        </div>      </div>    </div>  </div></header></div>'
+        var COMPONENT_TEMPLATE = '<div><header>  <div class="header-content">    <div class="logo">      <a [routerLink]="isLoggedIn() ? \'/summary\' : null">        <img class="logo-img" src="assets/img/logo/logo-mobile.png"alt="Logo"/>      </a>    </div>    <div class="headline">      <p class="headline-text">Kanban Project Management Tool</p>    </div>    <div class="icon-section">      <div routerLink="/help">        <img class="help-icon" src="assets/img/icons/help.png" alt="" />      </div>      <div        class="user-profile"        (click)="toggleMenu($event)"        *ngIf="isLoggedIn()"      >        <p>{{ getCurrentUserInitials() }}</p>        <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>          <a class="mobile-help-link" routerLink="/help">Help</a>          <a routerLink="/privacy-policy">Privacy Policy</a>          <a routerLink="/legal-notice">Legal notice</a>          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>        </div>      </div>    </div>  </div></header></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
