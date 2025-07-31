@@ -22,13 +22,14 @@ class="my-uploader"
   #ctxProvider
 ></uc-upload-ctx-provider> -->
 
-   <div class="upload-input-container">
+  <div class="upload-input-container" (click)="openFileDialog()">
     <img
       class="upload-icon"
       src="assets/img/icons/upload.png"
       alt="upload icon"
-      (click)="openFileDialog()"
     />
+    <p>Drag a file or browse</p>
+    <span>Upload file</span>
     <input
       type="file"
       id="filepicker"
@@ -39,25 +40,28 @@ class="my-uploader"
       multiple
       #filepicker
     />
-    <img src="assets/img/icons/add.png" alt="Add" class="add-icon" />
   </div>
-  <div class="file-list-container" *ngIf="selectedFiles.length > 0">
+  <div class="file-list-container" *ngIf="uploadedImages.length > 0">
     <div class="close-btn-container">
-      <img src="assets/img/icons/close.png" alt="Cancel" class="cancel-icon" (click)="clearSelectedImages()"/>
+      <img
+        src="assets/img/icons/close.png"
+        alt="Cancel"
+        class="cancel-icon"
+        (click)="clearSelectedImages()"
+      />
     </div>
-    <div class="file-list">
-      @for(img of uploadedImages; track img) {
-        <div class="file-item">
-          <img
-            [src]="img.base64"
-            alt="Selected file"
-            class="file-preview"
-          />
-          <span class="file-name">{{ img.filename }}</span>
-        </div>
-      }
+    <div class="file-list" *ngIf="uploadedImages.length > 0">
+      <div
+        class="file-item"
+        *ngFor="let img of uploadedImages; trackBy: trackByFilename"
+      >
+        <img [src]="img.base64" alt="attached image" class="file-preview" />
+        <span class="file-name">{{ img.filename }}</span>
+        <span class="file-type">{{ img.fileType }}</span>
+      </div>
     </div>
   </div>
-  <div class="error-message">This field is required</div>
-  <div class="error-message" *ngIf="fileTyeError">Oops, please choose an image type.</div>
+  <div class="error-message" *ngIf="fileTypeError">
+    Oops, please choose an image type.
+  </div>
 </div>

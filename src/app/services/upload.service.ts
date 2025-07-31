@@ -22,6 +22,7 @@ export class UploadService {
 
   getImages(): UploadedImage[] {
     const data = localStorage.getItem(this.storageKey);
+    console.log(data);
     return data ? JSON.parse(data) : [];
   }
 
