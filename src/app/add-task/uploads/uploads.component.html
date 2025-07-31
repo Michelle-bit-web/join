@@ -1,0 +1,23 @@
+<div class="form-group">
+  <label for="uploads">File Upload</label>
+  <div class="upload-input-container">
+    <img  class="upload-icon" src="assets/img/icons/upload.png" alt="upload icon" (click)="openFileDialog()">
+    <input
+      type="file"
+      id="filepicker"
+      name="uploadInput"
+      placeholder="Upload files"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+      #filepicker
+    />
+    <img src="assets/img/icons/add.png" alt="Add" class="add-icon" />
+  </div>
+  <div class="file-list-container" *ngIf="selectedFiles.length > 0">
+    <img src="assets/img/icons/close.png" alt="Cancel" class="cancel-icon" />
+    <div class="file-list"></div>
+  </div>
+  <div class="error-message">
+    This field is required
+  </div>
+</div>

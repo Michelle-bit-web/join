@@ -10,6 +10,7 @@ import { CategoryManager } from './category-manager';
 import { PriorityManager } from './priority-manager';
 import { FormValidatorService, FormData, ValidationErrors } from './form-validator.service';
 import { TaskDataService } from './task-data.service';
+import { UploadsComponent } from './uploads/uploads.component';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -26,7 +27,7 @@ import { TaskDataService } from './task-data.service';
  */
 @Component({
   selector: 'app-add-task',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, UploadsComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -44,6 +45,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
+  taskImages: string[] = [];
   validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
 
   formData: FormData = {
@@ -112,6 +114,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     });
   }
 
+  onImagesUploaded(urls: string[]) {
+    this.taskImages = urls;
+  }
+
   /**
    * Clears all internal managers (contact, category, subtask)
    * to prevent leaking state between tasks.
@@ -131,11 +137,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;
       this.originalTaskStatus = await this.taskDataService.populateFromTask(
-        editingTask, 
-        this.formData, 
-        this.priorityManager, 
-        this.contactManager, 
-        this.subtaskManager, 
+        editingTask,
+        this.formData,
+        this.priorityManager,
+        this.contactManager,
+        this.subtaskManager,
         this.contacts
       ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
       this.taskService.clearEditingTask();
@@ -210,7 +216,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
-    
+
     if (this.formValidator.hasFormErrors(this.formData, this.categoryManager)) {
       this.validationErrors = this.formValidator.validateForm(this.formData, this.categoryManager);
       return;
@@ -263,7 +269,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   async addNewTask(): Promise<void> {
     if (!this.defaultStatus) this.defaultStatus = 'to-do';
-    
+
     const newTask: Task = this.taskDataService.buildTask(
       this.formData,
       this.defaultStatus,
@@ -272,8 +278,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.categoryManager
     );
     const savedTask = await this.taskService.addTask(newTask);
-    if (savedTask?.id) { 
-      await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks()) 
+    if (savedTask?.id) {
+      await this.subtaskManager.saveAllSubtasks(savedTask.id, this.subtaskManager.getSubtasks())
     }
   }
 

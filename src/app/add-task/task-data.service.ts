@@ -10,6 +10,7 @@ export interface FormData {
   title: string;
   description: string;
   dueDate: string;
+  images?: string[];
 }
 
 @Injectable({
@@ -17,7 +18,6 @@ export interface FormData {
 })
 
 export class TaskDataService {
-
   /**
    * Populates form and managers with data from an existing task.
    * Returns the original task status.
@@ -59,7 +59,8 @@ export class TaskDataService {
       priority: priorityManager.selectedPriority as 'low' | 'medium' | 'urgent',
       status,
       assignedTo: uniqueContactIds,
-      category: categoryManager.getSelectedCategory() as 'technical' | 'user story'
+      category: categoryManager.getSelectedCategory() as 'technical' | 'user story',
+      images: formData.images || [],
     };
     if (id) {
       task.id = id;
