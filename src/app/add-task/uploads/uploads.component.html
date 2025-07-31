@@ -1,7 +1,34 @@
 <div class="form-group">
-  <label for="uploads">File Upload</label>
-  <div class="upload-input-container">
-    <img  class="upload-icon" src="assets/img/icons/upload.png" alt="upload icon" (click)="openFileDialog()">
+  <label for="uploads">Attachments</label>
+  <p class="upload-info">Only image files allowed</p>
+  <!-- <uc-config
+  class="my-uploader"
+  ctx-name="my-uploader"
+  source-list="local, camera"
+  files-view-mode="grid"
+  pubkey="0b5fb7c55c6e9125ad3e"
+  multiple="true"
+  removeCopyright="true"
+></uc-config>
+
+<uc-file-uploader-regular
+class="my-uploader"
+  ctx-name="my-uploader"
+  class="uc-light"
+></uc-file-uploader-regular>
+
+<uc-upload-ctx-provider
+  ctx-name="my-uploader"
+  #ctxProvider
+></uc-upload-ctx-provider> -->
+
+   <div class="upload-input-container">
+    <img
+      class="upload-icon"
+      src="assets/img/icons/upload.png"
+      alt="upload icon"
+      (click)="openFileDialog()"
+    />
     <input
       type="file"
       id="filepicker"
@@ -9,15 +36,28 @@
       placeholder="Upload files"
       accept="image/*"
       (change)="onFileSelected($event)"
+      multiple
       #filepicker
     />
     <img src="assets/img/icons/add.png" alt="Add" class="add-icon" />
   </div>
   <div class="file-list-container" *ngIf="selectedFiles.length > 0">
-    <img src="assets/img/icons/close.png" alt="Cancel" class="cancel-icon" />
-    <div class="file-list"></div>
+    <div class="close-btn-container">
+      <img src="assets/img/icons/close.png" alt="Cancel" class="cancel-icon" (click)="clearSelectedImages()"/>
+    </div>
+    <div class="file-list">
+      @for(img of uploadedImages; track img) {
+        <div class="file-item">
+          <img
+            [src]="img.base64"
+            alt="Selected file"
+            class="file-preview"
+          />
+          <span class="file-name">{{ img.filename }}</span>
+        </div>
+      }
+    </div>
   </div>
-  <div class="error-message">
-    This field is required
-  </div>
+  <div class="error-message">This field is required</div>
+  <div class="error-message" *ngIf="fileTyeError">Oops, please choose an image type.</div>
 </div>

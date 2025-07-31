@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, HostListener, Output, Input, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService, Contact } from '../services/contact.service';
@@ -37,6 +37,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   @Output() closeOverlay = new EventEmitter<void>();
   @Input() defaultStatus = '';
   @Input() isOverlayMode = false;
+  @ViewChild(UploadsComponent) uploadsComponent!: UploadsComponent;
 
   contacts: Contact[] = [];
   subtaskInputFocused = false;
@@ -83,6 +84,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
+    this.loadImages();
   }
 
   /**
@@ -117,6 +119,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   onImagesUploaded(urls: string[]) {
     this.taskImages = urls;
   }
+
+  async loadImages() {
+    if (this.editingTaskId) {
+      const editingTask = this.taskService.getEditingTask();
+      if (editingTask) {
+        this.uploadsComponent.uploadedUrls = editingTask.images || [];
+        };
+      }
+    }
 
   /**
    * Clears all internal managers (contact, category, subtask)
@@ -223,6 +234,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     }
     this.setCreatingState(true);
     try {
+      // await this.uploadsComponent.uploadAll();
+      this.taskImages = this.uploadsComponent.uploadedUrls;
       await this.saveTaskWithSuccessFeedback();
     } catch (error) {
       console.error('Error while creating/updating task:', error);
@@ -270,12 +283,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async addNewTask(): Promise<void> {
     if (!this.defaultStatus) this.defaultStatus = 'to-do';
 
+    // Assign images to formData before building the task
+    (this.formData as any).images = this.taskImages;
     const newTask: Task = this.taskDataService.buildTask(
       this.formData,
       this.defaultStatus,
       this.priorityManager,
       this.contactManager,
-      this.categoryManager
+      this.categoryManager,
+      undefined
     );
     const savedTask = await this.taskService.addTask(newTask);
     if (savedTask?.id) {
@@ -287,7 +303,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Updates an existing task and its subtasks.
    */
   async updateTask(): Promise<void> {
-    if (!this.editingTaskId) return;
+    // Assign images to formData before building the task
+    (this.formData as any).images = this.taskImages;
     const updatedTask: Task = this.taskDataService.buildTask(
       this.formData,
       this.originalTaskStatus,
@@ -296,11 +313,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.categoryManager,
       this.editingTaskId
     );
-    await this.taskService.updateTask(this.editingTaskId, updatedTask);
+    await this.taskService.updateTask(this.editingTaskId!, updatedTask);
     const currentSubtasks = this.subtaskManager.getSubtasks();
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
-    await this.subtaskManager.deleteSubtasks(this.editingTaskId, deleted);
-    await this.subtaskManager.syncSubtasks(this.editingTaskId, currentSubtasks);
+    await this.subtaskManager.deleteSubtasks(this.editingTaskId!, deleted);
+    await this.subtaskManager.syncSubtasks(this.editingTaskId!, currentSubtasks);
     this.taskService.clearEditingTask();
   }
 

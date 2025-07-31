@@ -8,11 +8,16 @@
  * <app-contact-form (addedContact)="handleAddedContact($event)" (closeOverlay)="handleClose($event)"></app-contact-form>
  */
 
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact, notOnlyWhitespace } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
+import { UploadedImage, UploadService } from '../../services/upload.service';
+// import "@uploadcare/file-uploader/web/uc-file-uploader-regular.min.css"
+// import * as UC from '@uploadcare/file-uploader';
+
+// UC.defineComponents(UC);
 
 @Component({
   selector: 'app-contact-form',
@@ -23,6 +28,7 @@ import { Subscription } from 'rxjs';
   ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class ContactFormComponent implements OnInit, OnDestroy {
@@ -38,6 +44,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   @Output() closeOverlay = new EventEmitter<string>();
 
+  // @ViewChild('ctxProvider', { static: true }) ctxProvider!: ElementRef<typeof UC.UploadCtxProvider.prototype>;
   /**
    * The reactive form group for the contact form.
    */
@@ -52,13 +59,17 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
+  fileTypeError: boolean = false;
+  uploadedUrls: string[] = [];
+  uploadedImages: UploadedImage[] = [];
+  @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
 
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
    * @param contactService - Service that manages contact CRUD operations.
    */
-  constructor(private form: FormBuilder, public contactService: ContactService) { }
+  constructor(private form: FormBuilder, public contactService: ContactService, private uploadService: UploadService) { }
 
   /**
    * Initializes the form and subscribes to editContact$ to load contact data
@@ -71,8 +82,74 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
     this.editContactSubscription = this.contactService.editContact$.subscribe(this.getDataToEdit);
+    // this.ctxProvider.nativeElement.addEventListener('data-output', this.handleUploadevent);
+    // this.ctxProvider.nativeElement.addEventListener('done-flow', this.handleDoneFlow);
   }
 
+  // handleUploadevent(e: Event) {
+  //   if(!(e instanceof CustomEvent)) return;
+  // }
+
+  openFileDialog() {
+    this.filepickerRef.nativeElement.click();
+  }
+
+  // handleDoneFlow() {}
+  async onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    for (const file of Array.from(input.files)) {
+      if (!file.type.startsWith('image/')) {
+        this.fileTypeError = true;;
+        continue;
+      }
+
+      const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
+      const imgData = {
+        filename: file.name,
+        fileType: file.type,
+        base64: compressedBase64
+      };
+
+      this.uploadService.saveImage(imgData);
+     this.uploadedImages.push(imgData);
+     this.uploadedUrls.push(compressedBase64); //optional
+    }
+  }
+
+  async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = event => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d')!;
+          let { width, height } = img;
+
+          if (width > maxWidth || height > maxHeight) {
+            if (width > height) {
+              height = (height * maxWidth) / width;
+              width = maxWidth;
+            } else {
+              width = (width * maxHeight) / height;
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = () => reject('Fehler beim Laden des Bildes.');
+        img.src = event.target?.result as string;
+      };
+      reader.onerror = () => reject('Fehler beim Lesen der Datei.');
+      reader.readAsDataURL(file);
+    });
+  }
   /**
    * Receives a contact to be edited and pre-fills the form fields.
    * @param contact - The contact object or null to clear the form.

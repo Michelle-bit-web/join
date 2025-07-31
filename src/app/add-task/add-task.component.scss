@@ -192,20 +192,6 @@ $small-mobile-breakpoint: 480px;
     max-width: 100%;
     text-align: left;
   }
-  
-  .required-note {
-    @include inter400-fs16();
-    color: #000000;
-    margin-top: 8px;
-    text-align: left;
-    
-    .required { color: var(--text-color-error); vertical-align: top; }
-    
-    @media (max-width: $mobile-breakpoint) {
-      font-size: 12px;
-      margin-top: 12px;
-    }
-  }
 }
 
 

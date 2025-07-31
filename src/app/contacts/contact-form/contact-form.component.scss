@@ -229,6 +229,7 @@ input:focus {
   height: 120px;
   background-color: var(--background-default-dark);
   border-radius: 50%;
+  position: relative;
   @include flex-center;
   @media (max-width: 1000px) {
     border: 2px solid var(--background-light);
@@ -246,6 +247,26 @@ input:focus {
 .img-user {
   width: 64px;
   height: 64px;
+}
+
+.upload-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  translate: 20% 20%;
+  cursor: pointer;
+  &:hover {
+  rect {
+    fill: var(--accent-primary-color);
+  }
+   g path {
+    fill: var(--text-color-light);
+   }
+  }
+}
+
+.file-picker {
+  display: none
 }
 
 .contact-initials {

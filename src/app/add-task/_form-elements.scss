@@ -4,7 +4,7 @@
   @include flex-column;
   gap: 8px;
   width: 100%;
-  
+
   @media (max-width: $mobile-breakpoint) {
     width: 100%;
     max-width: 100%;
@@ -12,9 +12,11 @@
 
   @media (max-width: 310px) {
     gap: 6px;
-    label { font-size: 16px; }
+    label {
+      font-size: 16px;
+    }
   }
-  
+
   label {
     @include inter400-fs20();
     color: var(--text-color-dark);
@@ -22,23 +24,27 @@
     text-align: left;
     width: 100%;
     align-self: flex-start;
-    
-    .required { color: var(--text-color-error); margin-left: 2px; }
+
+    .required {
+      color: var(--text-color-error);
+      margin-left: 2px;
+    }
   }
-  
-  input, textarea { 
+
+  input,
+  textarea {
     @extend %form-element-base;
 
     @media (max-width: $mobile-breakpoint) {
       width: 100%;
     }
   }
-  
-  textarea { 
-    min-height: 120px; 
-    height: auto; 
-    resize: vertical; 
-    white-space: normal; 
+
+  textarea {
+    min-height: 120px;
+    height: auto;
+    resize: vertical;
+    white-space: normal;
     overflow: auto;
   }
 }
@@ -47,12 +53,12 @@
   display: flex;
   gap: 8px;
   width: 100%;
-  
+
   @media (max-width: $mobile-breakpoint) {
     justify-content: space-between;
     flex-wrap: nowrap;
   }
-  
+
   @media (max-width: $small-mobile-breakpoint) {
     gap: 8px;
   }
@@ -60,7 +66,7 @@
   @media (max-width: 310px) {
     gap: 4px;
   }
-  
+
   .priority-btn {
     @include btn();
     @include btn-light();
@@ -71,7 +77,7 @@
     height: 56px;
     border-radius: $border-radius;
     transition: box-shadow 0.2s ease;
-    
+
     &:hover:not(.active) {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
       border-color: inherit !important;
@@ -81,7 +87,7 @@
     @media (max-width: $mobile-breakpoint) {
       padding: 8px 4px;
     }
-    
+
     @media (max-width: $small-mobile-breakpoint) {
       font-size: 14px;
       gap: 4px;
@@ -96,29 +102,38 @@
     &.active {
       color: var(--text-color-light);
       border-color: transparent;
-      &.urgent { background-color: #FF3D00; border-color: #FF3D00; }
-      &.medium { background-color: #FFA800; border-color: #FFA800; }
-      &.low { background-color: #7AE229; border-color: #7AE229; }
-      & svg path{
-        fill: var(--background-light)
+      &.urgent {
+        background-color: #ff3d00;
+        border-color: #ff3d00;
+      }
+      &.medium {
+        background-color: #ffa800;
+        border-color: #ffa800;
+      }
+      &.low {
+        background-color: #7ae229;
+        border-color: #7ae229;
+      }
+      & svg path {
+        fill: var(--background-light);
       }
     }
 
-    svg { 
-      width: 20px !important; 
+    svg {
+      width: 20px !important;
       height: 20px !important;
       flex-shrink: 0;
-      
+
       @media (max-width: 1220px) {
         width: 20px !important;
         height: 20px !important;
       }
-      
+
       @media (max-width: $mobile-breakpoint) {
         width: 18px !important;
         height: 18px !important;
       }
-      
+
       @media (max-width: $small-mobile-breakpoint) {
         width: 16px !important;
         height: 16px !important;
@@ -132,12 +147,51 @@
   }
 }
 
+.right-form-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .form-actions {
   display: flex;
-  gap: 16px;
-  margin-top: 8px;
-  justify-content: flex-end;
-  
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  padding: 16px 0;
+  .form-button-wrapper {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+      justify-content: center;
+      gap: 12px;
+    }
+  }
+
+  .required-note {
+    @include inter400-fs16();
+    color: #000000;
+    margin-top: 8px;
+    text-align: left;
+
+    .required {
+      color: var(--text-color-error);
+      vertical-align: top;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+
+    @media (max-width: §small-mobile-breakpoint) {
+      display: none;
+    }
+  }
+
   @media (max-width: $mobile-breakpoint) {
     position: fixed !important;
     bottom: 70px;
@@ -151,16 +205,16 @@
     justify-content: space-between;
     gap: 12px;
   }
-  
-  .btn-clear { 
-    @include btn(); 
-    @include btn-light(); 
-    width: 110px; 
-    height: 56px; 
-    border-radius: $border-radius; 
-    border: 1px solid #2A3647;
+
+  .btn-clear {
+    @include btn();
+    @include btn-light();
+    width: 110px;
+    height: 56px;
+    border-radius: $border-radius;
+    border: 1px solid #2a3647;
     transition: box-shadow 0.2s ease;
-    
+
     &:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     }
@@ -170,17 +224,18 @@
       max-width: calc(50% - 6px);
       height: 48px;
       font-size: 14px;
+      padding: 8px 4px;
     }
   }
-  
-  .btn-create { 
-    @include btn(); 
-    @include btn-dark(); 
-    width: 183px; 
-    height: 56px; 
+
+  .btn-create {
+    @include btn();
+    @include btn-dark();
+    width: 183px;
+    height: 56px;
     border-radius: $border-radius;
     transition: box-shadow 0.2s ease;
-    
+
     &:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     }
@@ -194,19 +249,38 @@
   }
 }
 
+.required-note-mobile {
+  display: flex;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 12px;
+  @include inter400-fs16();
+  color: #000000;
+  text-align: left;
+
+  .required {
+    color: var(--text-color-error);
+    vertical-align: top;
+  }
+  @media (min-width: $small-mobile-breakpoint) {
+    display: none;
+  }
+}
+
 .error-message {
-  color: #FF4A4A;
+  color: #ff4a4a;
   font-size: 12px;
   margin-top: 4px;
   @include inter400-fs16();
   font-size: 12px;
 }
 
-input.error, textarea.error {
-  border-color: #FF4A4A !important;
-  
+input.error,
+textarea.error {
+  border-color: #ff4a4a !important;
+
   &:focus {
-    border-color: #FF4A4A !important;
+    border-color: #ff4a4a !important;
     box-shadow: 0 0 0 2px rgba(255, 74, 74, 0.1);
   }
 }
@@ -224,20 +298,20 @@ input.error, textarea.error {
   z-index: 1000;
   text-align: center;
   @include inter400-fs20;
-  
+
   @media (max-width: $small-mobile-breakpoint) {
     width: calc(100% - 32px);
     max-width: 300px;
     padding: 16px 20px;
   }
-  
+
   .success-content {
     @include flex-column;
     gap: 8px;
     font-size: 18px;
     font-weight: 600;
     @include inter400-fs20;
-    
+
     span:first-child {
       @include inter400-fs20;
 
@@ -245,7 +319,7 @@ input.error, textarea.error {
         font-size: 16px;
       }
     }
-    
+
     .redirect-text {
       font-size: 14px;
       opacity: 0.9;

@@ -44,6 +44,8 @@ export interface Task {
 
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
+
+  images?: string[]; 
 }
 
 /**
