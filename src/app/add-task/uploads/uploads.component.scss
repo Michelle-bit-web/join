@@ -38,19 +38,19 @@
     align-items: center;
     gap: 16px;
     &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.142) inset;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.142) inset;
     }
 
     p {
       color: rgba(0, 0, 0, 0.2);
-      @media(max-width: 768px) {
+      @media (max-width: 768px) {
         display: none;
       }
     }
 
     span {
       color: rgba(0, 0, 0, 0.2);
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         display: none;
       }
     }
@@ -95,64 +95,64 @@
   // }
 
   .image-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 12px;
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
 
-    .image-item {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+  .image-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
 
-    .image-item:hover {
-      transform: scale(1.05);
-    }
+  .image-item:hover {
+    transform: scale(1.05);
+  }
 
-    .preview-image {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      display: block;
-    }
+  .preview-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+  }
 
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
 
-    .image-item:hover .image-overlay {
-      opacity: 1;
-    }
+  .image-item:hover .image-overlay {
+    opacity: 1;
+  }
 
-    .remove-btn {
-      background: #ff3b30;
-      border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
+  .remove-btn {
+    background: #ff3b30;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
 
-    .remove-btn:hover {
-      background: #d70015;
-    }
+  .remove-btn:hover {
+    background: #d70015;
+  }
 
   .error-message {
     color: var(--text-color-error);
@@ -160,14 +160,14 @@
     margin-top: 4px;
   }
 
-   @media (max-width: 768px) {
-      .image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 8px;
-      }
-
-      .preview-image {
-        height: 100px;
-      }
+  @media (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
     }
+
+    .preview-image {
+      height: 100px;
+    }
+  }
 }

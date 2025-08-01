@@ -14,10 +14,6 @@ import { CommonModule } from '@angular/common';
 import { ContactService, Contact, notOnlyWhitespace } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
 import { UploadedImage, UploadService } from '../../services/upload.service';
-// import "@uploadcare/file-uploader/web/uc-file-uploader-regular.min.css"
-// import * as UC from '@uploadcare/file-uploader';
-
-// UC.defineComponents(UC);
 
 @Component({
   selector: 'app-contact-form',
@@ -86,19 +82,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
     this.editContactSubscription = this.contactService.editContact$.subscribe(this.getDataToEdit);
-    // this.ctxProvider.nativeElement.addEventListener('data-output', this.handleUploadevent);
-    // this.ctxProvider.nativeElement.addEventListener('done-flow', this.handleDoneFlow);
   }
-
-  // handleUploadevent(e: Event) {
-  //   if(!(e instanceof CustomEvent)) return;
-  // }
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
   }
-
-  // handleDoneFlow() {}
 
   async onContactImageChanged(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
@@ -106,18 +94,13 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       this.resetImageState();
       return;
     }
-
     const file = input.files[0];
-
-    // MIME-Typ prüfen
     if (!file.type.startsWith('image/')) {
       this.fileTypeError = true;
       this.resetImageState();
       return;
     }
-
     this.fileTypeError = false;
-
     const imageKey = `${Date.now()}_${file.name}`;
     const base64 = await this.compressImage(file, 800, 800, 0.7);
 
@@ -130,55 +113,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       assignedTo: 'user'
     };
     this.imageBase64 = base64;
-
-    // Optional: direkt in UploadService speichern
-    // this.uploadService.saveImage(this.imgData);
   }
-
-  // onContactImageChanged(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (!input.files) return;
-  //   if (images.length > 0) {
-  //     const image = images[0];
-  //     this.uploadedImageKey = image.imageKey;
-  //     this.imgData = image;
-  //     this.compressedBase64 = image.base64;
-  //     this.imageBase64 = image.base64;
-  //   } else {
-  //     this.uploadedImageKey = undefined;
-  //     this.imgData = undefined;
-  //     this.compressedBase64 = undefined;
-  //     this.imageBase64 = null;
-  //   }
-  // }
-
-  // async onFileSelected(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (!input.files) return;
-
-  //   for (const file of Array.from(input.files)) {
-  //     if (!file.type.startsWith('image/')) {
-  //       this.fileTypeError = true;;
-  //       continue;
-  //     }
-  //     const imageKey = `${Date.now()}_${file.name}`;
-  //     this.compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-
-  //     this.uploadedImageKey = imageKey; // <-- Wichtig!
-
-  //     this.imgData = {
-  //       imageKey: imageKey,
-  //       filename: file.name,
-  //       fileType: file.type,
-  //       base64: this.compressedBase64,
-  //       assignedTo: 'user'
-  //     };
-
-  //  this.uploadService.saveImage(this.imgData);
-  //  this.uploadedImages.push(this.imgData);
-  //  this.uploadedUrls.push(compressedBase64); //optional
-  //   }
-  // }
 
   async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -355,12 +290,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       this.addedContact.emit(newContact);
     }
   }
-
-  // saveToStorage() {
-  //   this.uploadService.saveImage(this.imgData!);
-  //   this.uploadedImages.push(this.imgData!);
-  //   this.uploadedUrls.push(this.compressedBase64!); //optional
-  // }
 
   /**
    * Clears form inputs and closes the form after submission.

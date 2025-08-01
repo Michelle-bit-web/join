@@ -1,27 +1,6 @@
 <div class="form-group">
   <label for="uploads">Attachments</label>
   <p class="upload-info">Only image files allowed</p>
-  <!-- <uc-config
-  class="my-uploader"
-  ctx-name="my-uploader"
-  source-list="local, camera"
-  files-view-mode="grid"
-  pubkey="0b5fb7c55c6e9125ad3e"
-  multiple="true"
-  removeCopyright="true"
-></uc-config>
-
-<uc-file-uploader-regular
-class="my-uploader"
-  ctx-name="my-uploader"
-  class="uc-light"
-></uc-file-uploader-regular>
-
-<uc-upload-ctx-provider
-  ctx-name="my-uploader"
-  #ctxProvider
-></uc-upload-ctx-provider> -->
-
   <div class="upload-input-container" (click)="openFileDialog()">
     <img
       class="upload-icon"
@@ -51,17 +30,6 @@ class="my-uploader"
         (click)="clearSelectedImages()"
       />
     </div>
-    <!-- <div class="file-list" *ngIf="uploadedImages.length > 0">
-      <div
-        class="file-item"
-        *ngFor="let img of uploadedImages; trackBy: trackByFilename"
-      >
-        <img [src]="img.base64" alt="attached image" class="file-preview" />
-        <span class="file-name">{{ img.filename }}</span>
-        <span class="file-type">{{ img.fileType }}</span>
-      </div>
-    </div>
-  </div> -->
   <div class="image-grid">
           <div 
             class="image-item" 

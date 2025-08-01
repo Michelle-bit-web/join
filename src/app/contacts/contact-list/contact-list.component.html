@@ -11,12 +11,6 @@
       [class.selected]="isSelected(contact)"
       (click)="onContactSelect(contact)"
     >
-      <!-- <div
-        class="avatar"
-        [style.background-color]="contactService.getContactColor(contact.name)"
-      >
-        {{ contactService.getInitials(contact?.name) }}
-      </div> -->
       <div
         class="avatar"
         [style.background-color]="contactService.getContactColor(contact.name)"

@@ -22,16 +22,13 @@ export class UploadsComponent implements OnInit {
   @Output() imageUrls = new EventEmitter<string[]>();
   @Input() multiple: boolean = true;
   @Input() maxImages: number = 10;
-  @Input() maxFileSize: number = 1 * 1024 * 1024; // 1MB
+  @Input() maxFileSize: number = 1 * 800 * 800; // 1MB
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
   @Input() assignedTo: 'user' | 'task' = 'task';
 
   constructor(private uploadService: UploadService) { }
 
-  ngOnInit(): void {
-  //  const allImages = this.uploadService.getImages();
-  //  this.uploadedImages = allImages.filter(img => img.assignedTo === this.assignedTo);
-  }
+  ngOnInit(): void {}
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
@@ -60,10 +57,9 @@ export class UploadsComponent implements OnInit {
       this.uploadService.saveImage(this.imgData!);
       this.uploadedImages.push(this.imgData!);
       this.uploadedUrls.push(compressedBase64); //optional
-    
+
     }
   }
-
 
   // openImageViewer(base64:string){
   //   console.log('Opening image viewer for:', base64);
@@ -145,19 +141,14 @@ export class UploadsComponent implements OnInit {
   removeImage(index: number) {
     const removedImage = this.uploadedImages[index];
     this.uploadedImages.splice(index, 1);
-    
-    // Remove from localStorage
     const allImages = this.uploadService.getImages();
     const updatedImages = allImages.filter(img => img.imageKey !== removedImage.imageKey);
     localStorage.setItem('allImages', JSON.stringify(updatedImages));
-    
     this.emitImagesChanged();
   }
 
   openImageViewer(index: number) {
     const imageUrls = this.uploadedImages.map(img => img.base64);
-    // This would typically emit an event to the parent component to show the image viewer
-    // For now, we'll just log the action
     console.log('Open image viewer for index:', index, 'with images:', imageUrls);
   }
 
@@ -165,18 +156,15 @@ export class UploadsComponent implements OnInit {
     this.imagesChanged.emit([...this.uploadedImages]);
   }
 
-  // Method to set images from parent component (for editing mode)
   setImages(images: UploadedImage[]) {
     this.uploadedImages = [...images];
     this.emitImagesChanged();
   }
-
-  // Method to get image keys for database storage
+  
   getImageKeys(): string[] {
     return this.uploadedImages.map(img => img.imageKey);
   }
 
-  // Method to clear all images
   clearImages() {
     this.uploadedImages = [];
     this.emitImagesChanged();

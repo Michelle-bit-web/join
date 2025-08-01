@@ -125,7 +125,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     if (this.editingTaskId) {
       const editingTask = this.taskService.getEditingTask();
        if (editingTask && editingTask.images) {
-        // Load existing images from localStorage
         const uploadService = new (await import('../services/upload.service')).UploadService();
         const existingImages = uploadService.getImagesByKeys(editingTask.images);
         this.uploadsComponent.setImages(existingImages);
@@ -231,7 +230,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
-
     if (this.formValidator.hasFormErrors(this.formData, this.categoryManager)) {
       this.validationErrors = this.formValidator.validateForm(this.formData, this.categoryManager);
       return;
