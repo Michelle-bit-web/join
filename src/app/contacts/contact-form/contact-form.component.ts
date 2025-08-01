@@ -132,7 +132,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.imageBase64 = base64;
 
     // Optional: direkt in UploadService speichern
-    this.uploadService.saveImage(this.imgData);
+    // this.uploadService.saveImage(this.imgData);
   }
 
   // onContactImageChanged(event: Event) {
@@ -301,6 +301,30 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   private isEditMode(): boolean {
     return !!this.contactToEdit?.id;
+  }
+
+  removeImage() {
+    if (!this.contactToEdit || !this.contactToEdit.id || !this.uploadedImageKey) return;
+    // Bild aus dem UploadService + localStorage entfernen
+    this.uploadService.deleteImage(this.uploadedImageKey);
+
+    // Lokale Zustände zurücksetzen
+    this.uploadedImageKey = undefined;
+    this.imgData = undefined;
+    this.imageBase64 = null;
+    this.compressedBase64 = undefined;
+
+    // Bildinformationen aus dem Kontakt entfernen
+  const updatedContact: Contact = {
+    ...this.contactToEdit,
+    imageKey: undefined
+  };
+
+   // Kontakt aktualisieren
+  this.updateContact(updatedContact);
+
+  // Optional: auch im UI den Contact zurücksetzen
+  this.contactToEdit.imageKey = undefined;
   }
 
   /**

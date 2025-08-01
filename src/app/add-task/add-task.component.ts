@@ -11,6 +11,7 @@ import { PriorityManager } from './priority-manager';
 import { FormValidatorService, FormData, ValidationErrors } from './form-validator.service';
 import { TaskDataService } from './task-data.service';
 import { UploadsComponent } from './uploads/uploads.component';
+import { UploadedImage } from '../services/upload.service';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -116,7 +117,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     });
   }
 
-  onImagesChanged(images: any[]) {
+  onImagesChanged(images: UploadedImage[]) {
     this.taskImages = images.map(img => img.imageKey);
   }
 

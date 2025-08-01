@@ -24,11 +24,13 @@ export class UploadsComponent implements OnInit {
   @Input() maxImages: number = 10;
   @Input() maxFileSize: number = 1 * 1024 * 1024; // 1MB
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
+  @Input() assignedTo: 'user' | 'task' = 'task';
 
   constructor(private uploadService: UploadService) { }
 
   ngOnInit(): void {
-    this.uploadedImages = this.uploadService.getImages();
+  //  const allImages = this.uploadService.getImages();
+  //  this.uploadedImages = allImages.filter(img => img.assignedTo === this.assignedTo);
   }
 
   openFileDialog() {
