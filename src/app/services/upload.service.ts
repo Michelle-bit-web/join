@@ -14,6 +14,7 @@ export interface UploadedImage {
 
 export class UploadService {
   private storageKey = 'allImages';
+  images: UploadedImage[] = [];
 
   constructor() { }
 
@@ -23,9 +24,12 @@ export class UploadService {
     localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
+  setImages(images: UploadedImage[]) {
+    this.images = images;
+  }
+
   getImages(): UploadedImage[] {
     const data = localStorage.getItem(this.storageKey);
-    console.log(data);
     return data ? JSON.parse(data) : [];
   }
 

@@ -11,11 +11,25 @@
       [class.selected]="isSelected(contact)"
       (click)="onContactSelect(contact)"
     >
-      <div
+      <!-- <div
         class="avatar"
         [style.background-color]="contactService.getContactColor(contact.name)"
       >
         {{ contactService.getInitials(contact?.name) }}
+      </div> -->
+      <div
+        class="avatar"
+        [style.background-color]="contactService.getContactColor(contact.name)"
+      >
+        <img 
+          *ngIf="getContactImage(contact)" 
+          [src]="getContactImage(contact)" 
+          [alt]="contact.name"
+          class="contact-image"
+        />
+        <span *ngIf="!getContactImage(contact)" class="contact-initials">
+          {{ contactService.getInitials(contact?.name) }}
+        </span>
       </div>
       <p *ngIf="contact?.email === currentUserEmail" class="active-user">Me</p>
       <div class="info">

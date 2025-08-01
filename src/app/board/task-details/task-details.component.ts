@@ -23,12 +23,15 @@ import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UploadService } from '../../services/upload.service';
+import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-task-details',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ImageViewerComponent
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
@@ -71,16 +74,33 @@ export class TaskDetailsComponent {
   subtasks: Subtask[] = [];
 
   /**
+   * The list of task images loaded from localStorage.
+   */
+  taskImages: string[] = [];
+
+  /**
+   * Controls whether the image viewer is shown.
+   */
+  showImageViewer = false;
+
+  /**
+   * The index of the currently viewed image.
+   */
+  currentImageIndex = 0;
+
+  /**
    * Constructor injects task and contact services, and the Angular Router.
    * 
    * @param taskService Service for handling tasks and subtasks.
    * @param contactService Service for fetching contacts.
    * @param router Angular Router for navigation (currently unused).
+   * @param uploadService Service for handling image uploads and storage.
    */
   constructor(
     public taskService: TaskService,
     public contactService: ContactService,
-    private router: Router
+    private router: Router,
+    private uploadService: UploadService
   ) {}
 
   /**
@@ -89,6 +109,7 @@ export class TaskDetailsComponent {
   ngOnInit(): void {
     this.loadAssignedContacts();
     this.loadSubtasks();
+    this.loadTaskImages();
   }
 
   /**
@@ -181,5 +202,31 @@ export class TaskDetailsComponent {
         }
       }
     }
+  }
+  
+  /**
+   * Loads task images from localStorage using the image keys stored in the task.
+   */
+  loadTaskImages() {
+    if (this.task?.images && this.task.images.length > 0) {
+      this.taskImages = this.uploadService.getTaskImages(this.task.images);
+    }
+  }
+
+  /**
+   * Opens the image viewer with the specified image index.
+   * 
+   * @param index The index of the image to view.
+   */
+  openImageViewer(index: number) {
+    this.currentImageIndex = index;
+    this.showImageViewer = true;
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer() {
+    this.showImageViewer = false;
   }
 }

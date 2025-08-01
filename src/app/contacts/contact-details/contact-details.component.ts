@@ -18,6 +18,7 @@ import {
 import { ContactService, Contact } from '../../services/contact.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -76,7 +77,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private contactService: ContactService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private uploadService: UploadService
   ) { }
 
   /**
@@ -284,5 +286,17 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    */
   onBackToList() {
     this.backToList.emit();
+  }
+
+    /**
+   * Gets the contact image from localStorage using the contact's imageKey.
+   * @param contact - The contact to get the image for.
+   * @returns The base64 image string or null if no image exists.
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
   }
 }

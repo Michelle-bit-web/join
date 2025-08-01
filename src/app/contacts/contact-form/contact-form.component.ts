@@ -24,7 +24,7 @@ import { UploadedImage, UploadService } from '../../services/upload.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
@@ -99,33 +99,86 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   // handleDoneFlow() {}
-  async onFileSelected(event: Event) {
+
+  async onContactImageChanged(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
-    if (!input.files) return;
-
-    for (const file of Array.from(input.files)) {
-      if (!file.type.startsWith('image/')) {
-        this.fileTypeError = true;;
-        continue;
-      }
-      const imageKey = `${Date.now()}_${file.name}`;
-      this.compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-
-      this.uploadedImageKey = imageKey; // <-- Wichtig!
-
-      this.imgData = {
-        imageKey: imageKey,
-        filename: file.name,
-        fileType: file.type,
-        base64: this.compressedBase64,
-        assignedTo: 'user'
-      };
-
-      //  this.uploadService.saveImage(this.imgData);
-      //  this.uploadedImages.push(this.imgData);
-      //  this.uploadedUrls.push(compressedBase64); //optional
+    if (!input.files || input.files.length === 0) {
+      this.resetImageState();
+      return;
     }
+
+    const file = input.files[0];
+
+    // MIME-Typ prüfen
+    if (!file.type.startsWith('image/')) {
+      this.fileTypeError = true;
+      this.resetImageState();
+      return;
+    }
+
+    this.fileTypeError = false;
+
+    const imageKey = `${Date.now()}_${file.name}`;
+    const base64 = await this.compressImage(file, 800, 800, 0.7);
+
+    this.uploadedImageKey = imageKey;
+    this.imgData = {
+      imageKey: imageKey,
+      filename: file.name,
+      fileType: file.type,
+      base64: base64,
+      assignedTo: 'user'
+    };
+    this.imageBase64 = base64;
+
+    // Optional: direkt in UploadService speichern
+    this.uploadService.saveImage(this.imgData);
   }
+
+  // onContactImageChanged(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (!input.files) return;
+  //   if (images.length > 0) {
+  //     const image = images[0];
+  //     this.uploadedImageKey = image.imageKey;
+  //     this.imgData = image;
+  //     this.compressedBase64 = image.base64;
+  //     this.imageBase64 = image.base64;
+  //   } else {
+  //     this.uploadedImageKey = undefined;
+  //     this.imgData = undefined;
+  //     this.compressedBase64 = undefined;
+  //     this.imageBase64 = null;
+  //   }
+  // }
+
+  // async onFileSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (!input.files) return;
+
+  //   for (const file of Array.from(input.files)) {
+  //     if (!file.type.startsWith('image/')) {
+  //       this.fileTypeError = true;;
+  //       continue;
+  //     }
+  //     const imageKey = `${Date.now()}_${file.name}`;
+  //     this.compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
+
+  //     this.uploadedImageKey = imageKey; // <-- Wichtig!
+
+  //     this.imgData = {
+  //       imageKey: imageKey,
+  //       filename: file.name,
+  //       fileType: file.type,
+  //       base64: this.compressedBase64,
+  //       assignedTo: 'user'
+  //     };
+
+  //  this.uploadService.saveImage(this.imgData);
+  //  this.uploadedImages.push(this.imgData);
+  //  this.uploadedUrls.push(compressedBase64); //optional
+  //   }
+  // }
 
   async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -159,6 +212,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(file);
     });
   }
+
   /**
    * Receives a contact to be edited and pre-fills the form fields.
    * @param contact - The contact object or null to clear the form.
@@ -172,11 +226,23 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         phone: this.contactToEdit.phone
       });
       if (this.contactToEdit.imageKey) {
-        this.imageBase64 = localStorage.getItem(this.contactToEdit.imageKey);
+        this.imageBase64 = this.uploadService.getContactImage(this.contactToEdit.imageKey);
+        // Load existing image into the upload component
+        const existingImage = this.uploadService.getImageByKey(this.contactToEdit.imageKey);
+        if (existingImage) {
+          this.uploadService.setImages([existingImage]);
+        }
       } else {
         this.imageBase64 = null;
       }
     }
+  }
+
+  private resetImageState() {
+    this.uploadedImageKey = undefined;
+    this.imgData = undefined;
+    this.compressedBase64 = undefined;
+    this.imageBase64 = null;
   }
 
   /**
@@ -244,7 +310,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   private updateContact(contact: Contact): void {
     if (this.imgData?.imageKey && this.imgData?.base64) {
-      this.saveToStorage();
+      this.uploadService.saveImage(this.imgData);
     }
     if (this.contactToEdit && this.contactToEdit.id) {
       this.contactService.updateContact(this.contactToEdit.id, contact);
@@ -258,7 +324,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   private async addNewContact(contact: Contact): Promise<void> {
     if (this.imgData?.imageKey && this.imgData?.base64) {
-      this.saveToStorage();
+      this.uploadService.saveImage(this.imgData);
     }
     const newContact = await this.contactService.addContact(contact);
     if (newContact) {
@@ -266,11 +332,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveToStorage() {
-    this.uploadService.saveImage(this.imgData!);
-    this.uploadedImages.push(this.imgData!);
-    this.uploadedUrls.push(this.compressedBase64!); //optional
-  }
+  // saveToStorage() {
+  //   this.uploadService.saveImage(this.imgData!);
+  //   this.uploadedImages.push(this.imgData!);
+  //   this.uploadedUrls.push(this.compressedBase64!); //optional
+  // }
 
   /**
    * Clears form inputs and closes the form after submission.

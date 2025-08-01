@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ContactService, Contact } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -111,10 +112,12 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * Constructor injecting required services.
    * @param contactService - Manages contact data and selection.
    * @param authService - Provides the currently logged-in user's info.
+   * @param uploadService - Manages image uploads and storage.
    */
   constructor(
     public contactService: ContactService,
-    private authService: AuthService
+    private authService: AuthService,
+    private uploadService: UploadService
   ) { }
 
   /**
@@ -187,5 +190,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
    */
   getInitials(name: string | undefined): string {
     return this.contactService.getInitials(name);
+  }
+
+  /**
+   * Gets the contact image from localStorage using the contact's imageKey.
+   * @param contact - The contact to get the image for.
+   * @returns The base64 image string or null if no image exists.
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
   }
 }

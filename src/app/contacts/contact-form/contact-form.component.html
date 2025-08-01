@@ -51,43 +51,23 @@
       >
         <!-- Bild aus localStorage -->
         <img
-          class="img-user"
+          class="contact-image"
           [src]="imageBase64"
           alt="User Image"
-          *ngIf="contactToEdit?.imageKey && imageBase64"
+          *ngIf="imageBase64"
         />
         <img
           class="img-user"
           src="assets/img/svg/person.svg"
           alt="User Image"
-          *ngIf="!contactToEdit"
+          *ngIf="!imageBase64 && !contactToEdit"
         />
         <p
           class="contact-initials"
-          *ngIf="contactToEdit && !contactToEdit.imageKey"
+          *ngIf="!imageBase64 && contactToEdit"
         >
           {{ contactService.getInitials(contactToEdit.name) }}
         </p>
-        <!-- <uc-config
-  ctx-name="my-uploader"
-  source-list="local, camera"
-  files-view-mode="grid"
-  pubkey="0b5fb7c55c6e9125ad3e"
-  multiple="true"
-  removeCopyright="true"
-  (upload-event)="handleUploadevent($event)"
-></uc-config>
-
-<uc-file-uploader-regular
- [ngStyle]="{'position': 'absolute', 'bottom': '0', 'right': '0', 'transform': 'translate(50%, 20%)'}"
-  ctx-name="my-uploader"
-  class="uc-light"
-></uc-file-uploader-regular>
-
-<uc-upload-ctx-provider
-  ctx-name="my-uploader"
-  #ctxProvider
-></uc-upload-ctx-provider> -->
         <input
           class="file-picker"
           type="file"
@@ -95,7 +75,8 @@
           name="uploadInput"
           placeholder="Upload files"
           accept="image/*"
-          (change)="onFileSelected($event)"
+          [multiple]="false"
+          (change)="onContactImageChanged($event)"
           #filepicker
         />
         <svg

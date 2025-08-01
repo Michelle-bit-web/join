@@ -16,12 +16,26 @@
       [@.disabled]="isAnimationDisabled"
     >
       <div class="contact-container">
-        <div
+        <!-- <div
           class="user-logo"
           [style.background-color]="getContactColor(contact.name)"
         >
           <p>{{ getInitials(contact.name) }}</p>
-        </div>
+        </div> -->
+        <div
+        class="user-logo"
+        [style.background-color]="getContactColor(contact.name)"
+      >
+        <img 
+          *ngIf="getContactImage(contact)" 
+          [src]="getContactImage(contact)" 
+          [alt]="contact.name"
+          class="contact-image"
+        />
+        <p *ngIf="!getContactImage(contact)" class="contact-initials">
+          {{ getInitials(contact?.name) }}
+        </p>
+      </div>
         <div class="user-name">
           <p>{{ contact.name || "Unbekannt" }}</p>
 

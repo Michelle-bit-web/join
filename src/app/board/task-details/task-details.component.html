@@ -57,6 +57,21 @@
                 }
             </div>
         </div>
+         <div class="task-images" *ngIf="taskImages.length > 0">
+            <span class="row-title">Images:</span>
+            <div class="image-grid">
+                <div 
+                    class="image-item" 
+                    *ngFor="let image of taskImages; let i = index"
+                    (click)="openImageViewer(i)"
+                >
+                    <img [src]="image" [alt]="'Task image ' + (i + 1)" class="task-image" />
+                    <div class="image-overlay">
+                        <span class="image-count" *ngIf="taskImages.length > 1">{{ i + 1 }}/{{ taskImages.length }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="btn-wrapper">
             <button class="btn-delete" (click)="deleteTask($event)">
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,4 +98,11 @@
             </button>
         </div>
     </div>
+    <!-- Image Viewer -->
+    <app-image-viewer 
+        *ngIf="showImageViewer"
+        [images]="taskImages"
+        [startIndex]="currentImageIndex"
+        (close)="closeImageViewer()">
+    </app-image-viewer>
 </div>
