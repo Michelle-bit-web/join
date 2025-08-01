@@ -1,7 +1,14 @@
 <div class="form-group">
   <label for="uploads">Attachments</label>
   <p class="upload-info">Only image files allowed</p>
-  <div class="upload-input-container" (click)="openFileDialog()">
+  <div 
+    class="upload-input-container"
+    (click)="openFileDialog()"
+    [class.drag-over]="isDragOver"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
     <img
       class="upload-icon"
       src="assets/img/icons/upload.png"
