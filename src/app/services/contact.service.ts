@@ -7,12 +7,10 @@ import {
   doc,
   updateDoc,
   deleteDoc,
-  getDoc,
-  getDocs,
+  getDoc
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { AuthService } from './auth.service';
 
 /**
  * Interface representing a contact.
@@ -26,6 +24,8 @@ export interface Contact {
   email: string;
   /** Optional phone number of the contact */
   phone?: string;
+  /** Optional avatar base64 for the contact */
+  imageKey?: string;
 }
 
 /**
@@ -72,10 +72,7 @@ export class ContactService {
     '#FFA000', '#084c6bff', '#6bb604ff'
   ];
 
-  constructor(
-    private firestore: Firestore,
-    private authService: AuthService
-  ) {}
+  constructor( private firestore: Firestore ) {}
 
   /**
    * Returns a Firestore reference to the `contacts` collection.
@@ -110,9 +107,7 @@ export class ContactService {
           });
           observer.next(contacts);
         },
-        (error) => {
-          observer.error(error);
-        }
+        (error) => {observer.error(error);}
       );
       return () => unsubscribe();
     });
@@ -161,6 +156,7 @@ export class ContactService {
       name: updatedContact.name,
       email: updatedContact.email,
       phone: updatedContact.phone,
+      imageKey: updatedContact.imageKey || undefined, // Ensure imageKey is included if present
     };
   }
 

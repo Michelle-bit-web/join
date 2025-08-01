@@ -55,6 +55,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   contactToEdit?: Contact;
 
+  imgData?: UploadedImage;
+  uploadedImageKey?: string;
+  compressedBase64?: string;
+  imageBase64: string | null = null;
   /**
    * Subscription to receive the contact data to be edited via the ContactService.
    */
@@ -104,17 +108,22 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         this.fileTypeError = true;;
         continue;
       }
+      const imageKey = `${Date.now()}_${file.name}`;
+      this.compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
 
-      const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-      const imgData = {
+      this.uploadedImageKey = imageKey; // <-- Wichtig!
+
+      this.imgData = {
+        imageKey: imageKey,
         filename: file.name,
         fileType: file.type,
-        base64: compressedBase64
+        base64: this.compressedBase64,
+        assignedTo: 'user'
       };
 
-      this.uploadService.saveImage(imgData);
-     this.uploadedImages.push(imgData);
-     this.uploadedUrls.push(compressedBase64); //optional
+      //  this.uploadService.saveImage(this.imgData);
+      //  this.uploadedImages.push(this.imgData);
+      //  this.uploadedUrls.push(compressedBase64); //optional
     }
   }
 
@@ -162,6 +171,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
         email: this.contactToEdit.email,
         phone: this.contactToEdit.phone
       });
+      if (this.contactToEdit.imageKey) {
+        this.imageBase64 = localStorage.getItem(this.contactToEdit.imageKey);
+      } else {
+        this.imageBase64 = null;
+      }
     }
   }
 
@@ -210,6 +224,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       name: name.trim(),
       email: email.trim(),
       phone: phone.trim(),
+      imageKey: this.uploadedImageKey || undefined
     };
   }
 
@@ -228,6 +243,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @param contact - The contact data to be saved.
    */
   private updateContact(contact: Contact): void {
+    if (this.imgData?.imageKey && this.imgData?.base64) {
+      this.saveToStorage();
+    }
     if (this.contactToEdit && this.contactToEdit.id) {
       this.contactService.updateContact(this.contactToEdit.id, contact);
     }
@@ -239,10 +257,19 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @param contact - The new contact data to be added.
    */
   private async addNewContact(contact: Contact): Promise<void> {
+    if (this.imgData?.imageKey && this.imgData?.base64) {
+      this.saveToStorage();
+    }
     const newContact = await this.contactService.addContact(contact);
     if (newContact) {
       this.addedContact.emit(newContact);
     }
+  }
+
+  saveToStorage() {
+    this.uploadService.saveImage(this.imgData!);
+    this.uploadedImages.push(this.imgData!);
+    this.uploadedUrls.push(this.compressedBase64!); //optional
   }
 
   /**
@@ -266,6 +293,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   deleteContact() {
     if (this.contactToEdit?.id) {
       this.contactService.deleteContact(this.contactToEdit.id);
+      if (this.contactToEdit?.imageKey && this.contactToEdit.imageKey) {
+        localStorage.removeItem(this.contactToEdit.imageKey);
+      }
       this.onClose();
     }
   }

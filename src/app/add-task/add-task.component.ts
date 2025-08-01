@@ -116,18 +116,21 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     });
   }
 
-  onImagesUploaded(urls: string[]) {
-    this.taskImages = urls;
+  onImagesChanged(images: any[]) {
+    this.taskImages = images.map(img => img.imageKey);
   }
 
   async loadImages() {
     if (this.editingTaskId) {
       const editingTask = this.taskService.getEditingTask();
-      if (editingTask) {
-        this.uploadsComponent.uploadedUrls = editingTask.images || [];
-        };
+       if (editingTask && editingTask.images) {
+        // Load existing images from localStorage
+        const uploadService = new (await import('../services/upload.service')).UploadService();
+        const existingImages = uploadService.getImagesByKeys(editingTask.images);
+        this.uploadsComponent.setImages(existingImages);
       }
     }
+  }
 
   /**
    * Clears all internal managers (contact, category, subtask)
@@ -234,8 +237,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     }
     this.setCreatingState(true);
     try {
-      // await this.uploadsComponent.uploadAll();
-      this.taskImages = this.uploadsComponent.uploadedUrls;
+      this.taskImages = this.uploadsComponent.getImageKeys();
       await this.saveTaskWithSuccessFeedback();
     } catch (error) {
       console.error('Error while creating/updating task:', error);

@@ -1,12 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, ViewChild, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
-import { v4 as uuidv4 } from 'uuid';
-import "@uploadcare/file-uploader/web/uc-file-uploader-regular.min.css"
-import * as UC from '@uploadcare/file-uploader';
+import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { UploadedImage, UploadService } from '../../services/upload.service';
-
-UC.defineComponents(UC);
 
 @Component({
   selector: 'app-uploads',
@@ -22,49 +16,59 @@ export class UploadsComponent implements OnInit {
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   taskCreated: boolean = false;
-  fileTypeError: boolean = false;
+  errorMessage: string = '';
+  imgData?: UploadedImage;
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
   @Output() imageUrls = new EventEmitter<string[]>();
+  @Input() multiple: boolean = true;
+  @Input() maxImages: number = 10;
+  @Input() maxFileSize: number = 1 * 1024 * 1024; // 1MB
+  @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
 
-  constructor(private storage: Storage, private uploadService: UploadService) { }
+  constructor(private uploadService: UploadService) { }
 
   ngOnInit(): void {
     this.uploadedImages = this.uploadService.getImages();
-  }
-
-
-  async onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files) return;
-
-    for (const file of Array.from(input.files)) {
-      if (!file.type.startsWith('image/')) {
-        this.fileTypeError = true;;
-        continue;
-      }
-
-      const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-      const imgData = {
-        filename: file.name,
-        fileType: file.type,
-        base64: compressedBase64
-      };
-
-      this.uploadService.saveImage(imgData);
-      this.uploadedImages.push(imgData);
-      this.uploadedUrls.push(compressedBase64); //optional
-      this.fileTypeError = false;
-    }
   }
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
   }
 
+  async onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+
+    const files = Array.from(input.files);
+    this.errorMessage = '';
+    for (const file of Array.from(input.files)) {
+      if (!file.type.startsWith('image/')) {
+        continue;
+      }
+      const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
+      const imageKey = `${Date.now()}_${file.name}`;
+      this.imgData = {
+        imageKey: imageKey,
+        filename: file.name,
+        fileType: file.type,
+        base64: compressedBase64,
+        assignedTo: 'task'
+      };
+
+      this.uploadService.saveImage(this.imgData!);
+      this.uploadedImages.push(this.imgData!);
+      this.uploadedUrls.push(compressedBase64); //optional
+    
+    }
+  }
+
+
+  // openImageViewer(base64:string){
+  //   console.log('Opening image viewer for:', base64);
+  // }
+
   clearSelectedImages() {
-    console.log('Selected files before', this.selectedFiles);
     this.selectedFiles = [];
-    console.log('Selected files cleared', this.selectedFiles);
   }
 
   async compressImage(
@@ -134,5 +138,45 @@ export class UploadsComponent implements OnInit {
 
   trackByFilename(index: number, item: UploadedImage) {
     return item.filename;
+  }
+
+  removeImage(index: number) {
+    const removedImage = this.uploadedImages[index];
+    this.uploadedImages.splice(index, 1);
+    
+    // Remove from localStorage
+    const allImages = this.uploadService.getImages();
+    const updatedImages = allImages.filter(img => img.imageKey !== removedImage.imageKey);
+    localStorage.setItem('allImages', JSON.stringify(updatedImages));
+    
+    this.emitImagesChanged();
+  }
+
+  openImageViewer(index: number) {
+    const imageUrls = this.uploadedImages.map(img => img.base64);
+    // This would typically emit an event to the parent component to show the image viewer
+    // For now, we'll just log the action
+    console.log('Open image viewer for index:', index, 'with images:', imageUrls);
+  }
+
+  private emitImagesChanged() {
+    this.imagesChanged.emit([...this.uploadedImages]);
+  }
+
+  // Method to set images from parent component (for editing mode)
+  setImages(images: UploadedImage[]) {
+    this.uploadedImages = [...images];
+    this.emitImagesChanged();
+  }
+
+  // Method to get image keys for database storage
+  getImageKeys(): string[] {
+    return this.uploadedImages.map(img => img.imageKey);
+  }
+
+  // Method to clear all images
+  clearImages() {
+    this.uploadedImages = [];
+    this.emitImagesChanged();
   }
 }

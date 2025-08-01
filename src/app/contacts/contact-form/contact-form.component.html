@@ -42,18 +42,30 @@
       <div
         class="img-user-wrapper"
         [style.background-color]="
-          contactToEdit
+          contactToEdit && !contactToEdit.imageKey
+            ? 'transparent'
+            : contactToEdit
             ? contactService.getContactColor(contactToEdit.name)
             : '#d1d1d1'
         "
       >
+        <!-- Bild aus localStorage -->
+        <img
+          class="img-user"
+          [src]="imageBase64"
+          alt="User Image"
+          *ngIf="contactToEdit?.imageKey && imageBase64"
+        />
         <img
           class="img-user"
           src="assets/img/svg/person.svg"
           alt="User Image"
           *ngIf="!contactToEdit"
         />
-        <p class="contact-initials" *ngIf="contactToEdit">
+        <p
+          class="contact-initials"
+          *ngIf="contactToEdit && !contactToEdit.imageKey"
+        >
           {{ contactService.getInitials(contactToEdit.name) }}
         </p>
         <!-- <uc-config
@@ -77,14 +89,13 @@
   #ctxProvider
 ></uc-upload-ctx-provider> -->
         <input
-        class="file-picker"
+          class="file-picker"
           type="file"
           id="filepicker"
           name="uploadInput"
           placeholder="Upload files"
           accept="image/*"
           (change)="onFileSelected($event)"
-          multiple
           #filepicker
         />
         <svg

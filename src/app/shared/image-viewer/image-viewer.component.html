@@ -1,0 +1,56 @@
+<div class="image-viewer-overlay" (click)="onClose()">
+      <div class="image-viewer-content" (click)="$event.stopPropagation()">
+        <div class="image-viewer-header">
+          <h3>Image Viewer</h3>
+          <button class="btn-close" (click)="onClose()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="image-container">
+          <button 
+            class="nav-btn prev-btn" 
+            (click)="previousImage()" 
+            [disabled]="currentIndex === 0"
+            *ngIf="images.length > 1"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z" fill="#2A3647"/>
+            </svg>
+          </button>
+          
+          <div class="image-wrapper">
+            <img 
+              [src]="currentImage" 
+              [alt]="'Image ' + (currentIndex + 1)"
+              class="viewer-image"
+            />
+          </div>
+          
+          <button 
+            class="nav-btn next-btn" 
+            (click)="nextImage()" 
+            [disabled]="currentIndex === images.length - 1"
+            *ngIf="images.length > 1"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12L8.59 16.59Z" fill="#2A3647"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="image-controls">
+          <div class="image-counter" *ngIf="images.length > 1">
+            {{ currentIndex + 1 }} / {{ images.length }}
+          </div>
+          <button class="btn-download" (click)="downloadImage()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2L10 12M10 12L6 8M10 12L14 8M3 15L17 15" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download
+          </button>
+        </div>
+      </div>
+    </div>
