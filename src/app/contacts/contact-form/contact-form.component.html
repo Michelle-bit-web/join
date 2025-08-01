@@ -54,6 +54,7 @@
           [src]="imageBase64"
           alt="User Image"
           *ngIf="imageBase64"
+          (click)="openContactImageViewer()"
         />
         <img
           class="img-user"
@@ -303,4 +304,12 @@
       </form>
     </div>
   </div>
+  <app-image-viewer 
+    *ngIf="showImageViewer"
+    [images]="contactImages"
+    [imageKeys]="contactImageKeys"
+    [allowDelete]="true"
+    (close)="closeImageViewer()"
+    (deleteImage)="onDeleteImage($event)">
+  </app-image-viewer>
 </section>

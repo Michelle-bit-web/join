@@ -231,6 +231,7 @@ export class TaskService {
         status: updated.status,
         assignedTo: updated.assignedTo,
         category: updated.category,
+        images: updated.images,
       };
     } else if ('isCompleted' in updated) {
       return {

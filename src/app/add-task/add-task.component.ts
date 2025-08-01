@@ -11,7 +11,7 @@ import { PriorityManager } from './priority-manager';
 import { FormValidatorService, FormData, ValidationErrors } from './form-validator.service';
 import { TaskDataService } from './task-data.service';
 import { UploadsComponent } from './uploads/uploads.component';
-import { UploadedImage } from '../services/upload.service';
+import { UploadedImage, UploadService } from '../services/upload.service';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -76,7 +76,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     public subtaskManager: SubtaskManager,
     public contactManager: ContactManager,
     public categoryManager: CategoryManager,
-    public priorityManager: PriorityManager
+    public priorityManager: PriorityManager,
+    private uploadService: UploadService,
   ) { }
 
   /**
@@ -125,9 +126,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     if (this.editingTaskId) {
       const editingTask = this.taskService.getEditingTask();
        if (editingTask && editingTask.images) {
-        const uploadService = new (await import('../services/upload.service')).UploadService();
-        const existingImages = uploadService.getImagesByKeys(editingTask.images);
-        this.uploadsComponent.setImages(existingImages);
+        const existingImages = this.uploadService.getImagesByKeys(editingTask.images);
+        this.uploadService.setImages(existingImages);
       }
     }
   }
@@ -218,6 +218,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.contactManager.clearAll();
     this.categoryManager.clearAll();
     this.subtaskManager.clearAll();
+    this.taskImages = [];
+    if (this.uploadsComponent) {
+      this.uploadsComponent.clearImages();
+    }
   }
 
   private setCreatingState(state: boolean): void {
@@ -352,6 +356,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
+     if (this.uploadsComponent) {
+      this.uploadsComponent.uploadedImages.forEach(image => {
+        this.uploadService.deleteImage(image.imageKey);
+      });
+    }
     this.clearForm();
     this.closeOverlay.emit();
   }

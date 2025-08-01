@@ -14,13 +14,15 @@ import { CommonModule } from '@angular/common';
 import { ContactService, Contact, notOnlyWhitespace } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
 import { UploadedImage, UploadService } from '../../services/upload.service';
+import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-contact-form',
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ImageViewerComponent
   ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
@@ -63,7 +65,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
-
+  showImageViewer = false;
+  contactImages: string[] = [];
+  contactImageKeys: string[] = [];
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
@@ -101,6 +105,14 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       return;
     }
     this.fileTypeError = false;
+// Remove old image from localStorage if exists
+    if (this.uploadedImageKey) {
+      this.uploadService.deleteImage(this.uploadedImageKey);
+    }
+    if (this.contactToEdit?.imageKey) {
+      this.uploadService.deleteImage(this.contactToEdit.imageKey);
+    }
+
     const imageKey = `${Date.now()}_${file.name}`;
     const base64 = await this.compressImage(file, 800, 800, 0.7);
 
@@ -181,6 +193,45 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Opens the image viewer for the contact image.
+   */
+  openContactImageViewer() {
+    if (this.imageBase64) {
+      this.contactImages = [this.imageBase64];
+      this.contactImageKeys = this.contactToEdit?.imageKey ? [this.contactToEdit.imageKey] : 
+      this.uploadedImageKey ? [this.uploadedImageKey] : [];
+      this.showImageViewer = true;
+    }
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer() {
+    this.showImageViewer = false;
+  }
+
+  /**
+   * Handles image deletion from the image viewer.
+   */
+  onDeleteImage(event: { imageKey?: string }) {
+    if (event.imageKey) {
+      this.uploadService.deleteImage(event.imageKey);
+    }
+    
+    // Reset image state
+    this.resetImageState();
+    
+    // Update contact if editing
+    if (this.contactToEdit) {
+      this.contactToEdit.imageKey = undefined;
+    }
+    
+    // Close image viewer
+    this.closeImageViewer();
+  }
+
+  /**
    * Cleans up the subscription on component destruction to prevent memory leaks.
    */
   ngOnDestroy(): void {
@@ -193,6 +244,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Closes the contact form, resets its state, and emits a closing event.
    */
   onClose(): void {
+     // Clear any unsaved images from localStorage
+    if (this.uploadedImageKey && !this.contactToEdit) {
+      this.uploadService.deleteImage(this.uploadedImageKey);
+    }
     this.contactService.hideForm();
     this.contactForm.reset();
     this.closeOverlay.emit('closed');

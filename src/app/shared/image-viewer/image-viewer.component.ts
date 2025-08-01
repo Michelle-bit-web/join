@@ -13,7 +13,10 @@ export class ImageViewerComponent {
 
   @Input() images: string[] = [];
   @Input() startIndex: number = 0;
+  @Input() imageKeys: string[] = []; // Add image keys for deletion
+  @Input() allowDelete: boolean = false; // Allow deletion
   @Output() close = new EventEmitter<void>();
+  @Output() deleteImage = new EventEmitter<{index: number, imageKey?: string}>();
 
   currentIndex: number = 0;
 
@@ -23,6 +26,10 @@ export class ImageViewerComponent {
 
   get currentImage(): string {
     return this.images[this.currentIndex] || '';
+  }
+
+  get currentImageKey(): string | undefined {
+    return this.imageKeys[this.currentIndex];
   }
 
   previousImage() {
@@ -46,7 +53,16 @@ export class ImageViewerComponent {
     document.body.removeChild(link);
   }
 
+  onDeleteImage() {
+    if (this.allowDelete) {
+      this.deleteImage.emit({
+        index: this.currentIndex,
+        imageKey: this.currentImageKey
+      });
+    }
+  }
+
   onClose() {
-    this.close.emit();
+   this.close.emit();
   }
 }

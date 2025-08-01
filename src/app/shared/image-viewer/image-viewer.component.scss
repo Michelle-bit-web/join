@@ -128,6 +128,26 @@
   background: #0056cc;
 }
 
+.btn-delete {
+  background: #ff3b30;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-left: 12px;
+}
+
+.btn-delete:hover {
+  background: #d70015;
+}
+
 @media (max-width: 768px) {
   .image-viewer-content {
     max-width: 95vw;
