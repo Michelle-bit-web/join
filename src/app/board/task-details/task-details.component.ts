@@ -15,7 +15,7 @@
  * - Angular Router for navigation
  */
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Task, TaskService } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
 import { Timestamp } from '@angular/fire/firestore';
@@ -37,7 +37,10 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
   styleUrl: './task-details.component.scss'
 })
 
-export class TaskDetailsComponent {
+export class TaskDetailsComponent implements OnChanges {
+
+
+
   /**
    * Emits an event when the task detail view should be closed.
    */
@@ -79,6 +82,11 @@ export class TaskDetailsComponent {
   taskImages: string[] = [];
 
   /**
+ * The list of task image keys for deletion.
+ */
+  taskImageKeys: string[] = [];
+
+  /**
    * Controls whether the image viewer is shown.
    */
   showImageViewer = false;
@@ -101,15 +109,26 @@ export class TaskDetailsComponent {
     public contactService: ContactService,
     private router: Router,
     private uploadService: UploadService
-  ) {}
+  ) { }
 
   /**
    * Lifecycle hook to load assigned contacts and subtasks on component initialization.
    */
   ngOnInit(): void {
+    console.log('Task details initialized with task:', this.task);
     this.loadAssignedContacts();
     this.loadSubtasks();
     this.loadTaskImages();
+  }
+
+  /**
+ * Lifecycle hook to reload images when task input changes.
+ */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['task'] && changes['task'].currentValue) {
+      console.log('Task changed in task details:', changes['task'].currentValue);
+      this.loadTaskImages();
+    }
   }
 
   /**
@@ -203,13 +222,20 @@ export class TaskDetailsComponent {
       }
     }
   }
-  
+
   /**
    * Loads task images from localStorage using the image keys stored in the task.
    */
   loadTaskImages() {
+    console.log('Loading task images for task:', this.task);
+    console.log('Task images array:', this.task?.images);
     if (this.task?.images && this.task.images.length > 0) {
       this.taskImages = this.uploadService.getTaskImages(this.task.images);
+      this.taskImageKeys = this.task.images;
+      console.log('Loaded task images:', this.taskImages);
+      console.log('Task image keys:', this.taskImageKeys);
+    } else {
+      console.log('No images found for task');
     }
   }
 
@@ -228,5 +254,28 @@ export class TaskDetailsComponent {
    */
   closeImageViewer() {
     this.showImageViewer = false;
+  }
+
+  /**
+  * Handles image deletion from the image viewer.
+  */
+  onDeleteImage(event: { index: number, imageKey?: string }) {
+    if (event.imageKey && this.task.id) {
+      // Remove image from localStorage
+      this.uploadService.deleteImage(event.imageKey);
+
+      // Remove image key from task, handling possible undefined
+      const updatedImages = this.task.images?.filter(key => key !== event.imageKey) || [];
+      this.task.images = updatedImages;
+
+      // Update task in database
+      this.taskService.updateTask(this.task.id, this.task);
+
+      // Reload images
+      this.loadTaskImages();
+    }
+
+    // Close image viewer
+    this.closeImageViewer();
   }
 }

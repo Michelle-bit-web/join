@@ -102,7 +102,11 @@
     <app-image-viewer 
         *ngIf="showImageViewer"
         [images]="taskImages"
+        [imageKeys]="taskImageKeys"
         [startIndex]="currentImageIndex"
-        (close)="closeImageViewer()">
+        [allowDelete]="true"
+        (close)="closeImageViewer()"
+        (deleteImage)="onDeleteImage($event)"
+        >
     </app-image-viewer>
 </div>
