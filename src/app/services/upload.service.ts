@@ -4,6 +4,7 @@ export interface UploadedImage {
   imageKey: string;
   filename: string;
   fileType: string;
+  fileSize: number;
   base64: string;
   assignedTo: 'user' | 'task';
 }

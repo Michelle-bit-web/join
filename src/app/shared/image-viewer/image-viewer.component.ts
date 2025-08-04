@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-image-viewer',
@@ -19,6 +20,8 @@ export class ImageViewerComponent {
   @Output() deleteImage = new EventEmitter<{index: number, imageKey?: string}>();
 
   currentIndex: number = 0;
+
+  constructor(public uploadService: UploadService) {}
 
   ngOnInit() {
     this.currentIndex = this.startIndex;
@@ -44,6 +47,19 @@ export class ImageViewerComponent {
     }
   }
 
+  getImageName(): string | undefined {
+    let imageName = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    return imageName?.filename;
+  }
+
+  getImagesize(): string {
+    let imageSize = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    if(imageSize){
+      return Math.round(imageSize.fileSize / 1000) + ' KB';
+    }
+    return '';
+  }
+
   downloadImage() {
     const link = document.createElement('a');
     link.href = this.currentImage;
@@ -52,7 +68,7 @@ export class ImageViewerComponent {
     link.click();
     document.body.removeChild(link);
   }
-
+  
   onDeleteImage() {
     if (this.allowDelete) {
       this.deleteImage.emit({

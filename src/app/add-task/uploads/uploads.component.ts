@@ -86,6 +86,7 @@ export class UploadsComponent implements OnInit {
           imageKey: imageKey,
           filename: file.name,
           fileType: file.type,
+          fileSize: file.size,
           base64: compressedBase64,
           assignedTo: 'task'
         };

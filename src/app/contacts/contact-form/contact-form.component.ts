@@ -121,6 +121,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       imageKey: imageKey,
       filename: file.name,
       fileType: file.type,
+      fileSize: file.size,
       base64: base64,
       assignedTo: 'user'
     };
