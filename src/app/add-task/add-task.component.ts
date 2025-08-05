@@ -47,7 +47,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
   isEditingMode: boolean = false;
   editingTaskId: string | undefined;
+  editingTask: Task | undefined;
   taskImages: string[] = [];
+  uploadedImages: UploadedImage[] = [];
   validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
 
   formData: FormData = {
@@ -86,7 +88,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
-    this.loadImages();
+    // this.loadImages();
   }
 
   /**
@@ -123,13 +125,16 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   async loadImages() {
-    if (this.editingTaskId) {
-      const editingTask = this.taskService.getEditingTask();
-       if (editingTask && editingTask.images) {
-        const existingImages = this.uploadService.getImagesByKeys(editingTask.images);
-        this.uploadService.setImages(existingImages);
+    // if (this.editingTaskId) {
+    //   this.editingTask = this.taskService.getEditingTask() ?? undefined;
+      if (this.editingTask && this.editingTask.images) {
+        // const existingImages = this.uploadService.getImagesByKeys(this.editingTask.images);
+        // this.uploadService.setImages(existingImages);
+        this.taskImages = [...this.editingTask.images];
+        this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
+        console.log('[AddTask] Uploaded images', this.uploadedImages);
       }
-    }
+    // }
   }
 
   /**
@@ -150,6 +155,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     if (editingTask) {
       this.isEditingMode = true;
       this.editingTaskId = editingTask.id;
+      this.editingTask = editingTask;
       this.originalTaskStatus = await this.taskDataService.populateFromTask(
         editingTask,
         this.formData,
@@ -158,6 +164,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
         this.subtaskManager,
         this.contacts
       ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
+
+       // HIER direkt auch die Bilder im UploadService setzen:
+    if (editingTask.images && editingTask.images.length > 0) {
+      // const existingImages = this.uploadService.getImagesByKeys(editingTask.images);
+      // this.uploadService.setImages(existingImages);
+      this.loadImages();
+      // console.log('[loadEditingTask] restored images', existingImages);
+    }
+
       this.taskService.clearEditingTask();
     } else {
       this.clearAllManagers();
@@ -356,7 +371,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
-     if (this.uploadsComponent) {
+    if (this.uploadsComponent) {
       this.uploadsComponent.uploadedImages.forEach(image => {
         this.uploadService.deleteImage(image.imageKey);
       });

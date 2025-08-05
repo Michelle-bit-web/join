@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, HostListener } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { UploadedImage, UploadService } from '../../services/upload.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class UploadsComponent implements OnInit {
   errorMessage: string = '';
   imgData?: UploadedImage;
   isDragOver = false;
+  // imagesForEditingTask: string[] = [];
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
   @Output() imageUrls = new EventEmitter<string[]>();
   @Input() multiple: boolean = true;
@@ -26,10 +27,36 @@ export class UploadsComponent implements OnInit {
   @Input() maxFileSize: number = 1 * 800 * 800; // 1MB
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
   @Input() assignedTo: 'user' | 'task' = 'task';
+  @Input() isEditingMode: boolean = false;
+  @Input() preloadedImages: UploadedImage[] = [];
 
   constructor(private uploadService: UploadService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // if (this.isEditingMode && this.preloadedImages?.length > 0) {
+    //   this.setImages(this.preloadedImages);
+    //   console.log('[UploadsComponent] Loaded preloaded images', this.preloadedImages);
+    // }
+    if(this.isEditingMode) {
+      // this.uploadedImages = this.uploadService.getImages();
+    }
+
+//  ngOnChanges(changes: SimpleChanges): void {
+//   if (this.isEditingMode && this.editingTaskImageKeys?.length > 0) {
+//     const existingImages = this.uploadService.getImagesByKeys(this.editingTaskImageKeys);
+//     this.setImages(existingImages);
+//     console.log('[UploadsComponent] Loaded images on changes', existingImages);
+//   }
+}
+
+ngAfterViewInit(): void {
+    // if (this.isEditingMode && this.preloadedImages?.length > 0) { 
+    //   for(const img of this.preloadedImages) {
+    //       this.imagesForEditingTask.push(img.imageKey);
+    //       console.log('Bildtyyp:', this.imagesForEditingTask)
+    //     }
+    //   }
+  }
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
@@ -74,7 +101,7 @@ export class UploadsComponent implements OnInit {
         this.errorMessage = 'Only image files are allowed';
         continue;
       }
-       if (this.uploadedImages.length >= this.maxImages) {
+      if (this.uploadedImages.length >= this.maxImages) {
         this.errorMessage = `Maximum ${this.maxImages} images allowed`;
         break;
       }
@@ -90,7 +117,7 @@ export class UploadsComponent implements OnInit {
           base64: compressedBase64,
           assignedTo: 'task'
         };
-         // Save to localStorage immediately for tasks (multiple images allowed)
+        // Save to localStorage immediately for tasks (multiple images allowed)
         this.uploadService.saveImage(this.imgData!);
         this.uploadedImages.push(this.imgData!);
         this.uploadedUrls.push(compressedBase64);
@@ -194,10 +221,10 @@ export class UploadsComponent implements OnInit {
   }
 
   setImages(images: UploadedImage[]) {
-    this.uploadedImages = [...images];
+    this.uploadedImages = images;
     this.emitImagesChanged();
   }
-  
+
   getImageKeys(): string[] {
     return this.uploadedImages.map(img => img.imageKey);
   }

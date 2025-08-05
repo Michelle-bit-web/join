@@ -225,7 +225,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     
     // Update contact if editing
     if (this.contactToEdit) {
-      this.contactToEdit.imageKey = undefined;
+      this.contactToEdit.imageKey = '';
+      this.updateContact(this.contactToEdit);
     }
     
     // Close image viewer

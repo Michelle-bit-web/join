@@ -262,7 +262,7 @@
     color: var(--text-color-error);
     vertical-align: top;
   }
-  @media (min-width: $small-mobile-breakpoint) {
+  @media (min-width: $mobile-breakpoint) {
     display: none;
   }
 }

@@ -225,10 +225,13 @@
         </div>
         <div class="form-divider"></div>
         <div class="form-right">
-           <div class="form-group">
+          <div class="form-group">
             <label for="images">Images</label>
-            <app-uploads 
-              (imagesChanged)="onImagesChanged($event)">
+            <app-uploads
+              (imagesChanged)="onImagesChanged($event)"
+              [isEditingMode]="isEditingMode"
+              [preloadedImages]="uploadedImages"
+            >
             </app-uploads>
           </div>
 
@@ -483,7 +486,9 @@
         </div>
       </div>
       <div class="form-actions">
-        <p class="required-note"><span class="required">*</span>This field is required</p>
+        <p class="required-note">
+          <span class="required">*</span>This field is required
+        </p>
         <div class="form-button-wrapper">
           <button
             type="button"
@@ -494,11 +499,21 @@
             Clear
           </button>
           <button type="submit" class="btn-create" [disabled]="isCreatingTask">
-            {{isCreatingTask? isEditingMode? "Updating...": "Creating...": isEditingMode? "Update Task": "Create Task"}}
+            {{
+              isCreatingTask
+                ? isEditingMode
+                  ? "Updating..."
+                  : "Creating..."
+                : isEditingMode
+                ? "Update Task"
+                : "Create Task"
+            }}
           </button>
         </div>
       </div>
-      <p class="required-note-mobile"><span class="required">*</span>This field is required</p>
+      <p class="required-note-mobile">
+        <span class="required">*</span>This field is required
+      </p>
     </form>
   </div>
 </section>

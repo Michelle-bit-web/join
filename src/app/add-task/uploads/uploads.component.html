@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="uploads">Attachments</label>
   <p class="upload-info">Only image files allowed</p>
-  <div 
+  <div
     class="upload-input-container"
     (click)="openFileDialog()"
     [class.drag-over]="isDragOver"
@@ -28,7 +28,7 @@
       #filepicker
     />
   </div>
-  <div class="file-list-container" *ngIf="uploadedImages.length > 0">
+  <div class="file-list-container" *ngIf="uploadedImages.length > 0 || preloadedImages.length > 0">
     <div class="close-btn-container">
       <img
         src="assets/img/icons/close.png"
@@ -37,23 +37,47 @@
         (click)="clearSelectedImages()"
       />
     </div>
-  <div class="image-grid">
-          <div 
-            class="image-item" 
-            *ngFor="let image of uploadedImages; let i = index"
-            (click)="openImageViewer(i)"
+    <div class="image-grid">
+      <!-- Bilder aus UploadService -->
+      <div
+        class="image-item"
+        *ngFor="let image of uploadedImages; let i = index"
+        (click)="openImageViewer(i)"
+      >
+        <img
+          [src]="image.base64"
+          [alt]="image.filename"
+          class="preview-image"
+        />
+        <div class="image-overlay">
+          <button
+            class="remove-btn"
+            (click)="removeImage(i); $event.stopPropagation()"
           >
-            <img [src]="image.base64" [alt]="image.filename" class="preview-image" />
-            <div class="image-overlay">
-              <button class="remove-btn" (click)="removeImage(i); $event.stopPropagation()">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 4L4 12M4 4L12 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-            </div>
-          </div>
+            <svg>...</svg>
+          </button>
         </div>
-  <div class="error-message" *ngIf="errorMessage">
-    {{ errorMessage }}
+      </div>
+
+      <!-- Vorgefüllte Bilder im Edit-Modus -->
+      <div
+        class="image-item"
+        *ngFor="let img of preloadedImages; let i = index"
+        (click)="openImageViewer(i)"
+      >
+        <img [src]="img.base64" [alt]="img.filename" class="preview-image" />
+        <div class="image-overlay">
+          <button
+            class="remove-btn"
+            (click)="removeImage(i); $event.stopPropagation()"
+          >
+            <svg>...</svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
   </div>
 </div>
