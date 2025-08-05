@@ -51,6 +51,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   taskImages: string[] = [];
   uploadedImages: UploadedImage[] = [];
   validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
+  formCleared = false;
 
   formData: FormData = {
     title: '',
@@ -88,7 +89,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadStatus();
     this.loadContacts();
-    // this.loadImages();
   }
 
   /**
@@ -125,16 +125,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   async loadImages() {
-    // if (this.editingTaskId) {
-    //   this.editingTask = this.taskService.getEditingTask() ?? undefined;
-      if (this.editingTask && this.editingTask.images) {
-        // const existingImages = this.uploadService.getImagesByKeys(this.editingTask.images);
-        // this.uploadService.setImages(existingImages);
-        this.taskImages = [...this.editingTask.images];
-        this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
-        console.log('[AddTask] Uploaded images', this.uploadedImages);
-      }
-    // }
+    if (this.editingTask && this.editingTask.images) {
+      this.taskImages = [...this.editingTask.images];
+      this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
+      console.log('[AddTask] Uploaded images', this.uploadedImages);
+    }
   }
 
   /**
@@ -148,34 +143,52 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Loads a task currently being edited from the TaskService and populates the form.
-   */
+ * Loads a task currently being edited from the TaskService and initializes the form.
+ */
   async loadEditingTask(): Promise<void> {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask) {
-      this.isEditingMode = true;
-      this.editingTaskId = editingTask.id;
-      this.editingTask = editingTask;
-      this.originalTaskStatus = await this.taskDataService.populateFromTask(
-        editingTask,
-        this.formData,
-        this.priorityManager,
-        this.contactManager,
-        this.subtaskManager,
-        this.contacts
-      ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
-
-       // HIER direkt auch die Bilder im UploadService setzen:
-    if (editingTask.images && editingTask.images.length > 0) {
-      // const existingImages = this.uploadService.getImagesByKeys(editingTask.images);
-      // this.uploadService.setImages(existingImages);
-      this.loadImages();
-      // console.log('[loadEditingTask] restored images', existingImages);
-    }
-
+      this.enterEditMode(editingTask);
+      await this.populateFormWithTaskData(editingTask);
+      this.loadImagesIfAvailable(editingTask);
       this.taskService.clearEditingTask();
     } else {
       this.clearAllManagers();
+    }
+  }
+
+  /**
+   * Activates edit mode and stores relevant metadata from the task.
+   * @param task The task being edited
+   */
+  private enterEditMode(task: Task): void {
+    this.isEditingMode = true;
+    this.editingTaskId = task.id;
+    this.editingTask = task;
+  }
+
+  /**
+   * Populates the form and managers with values from the given task.
+   * @param task The task to populate the form with
+   */
+  private async populateFormWithTaskData(task: Task): Promise<void> {
+    this.originalTaskStatus = await this.taskDataService.populateFromTask(
+      task,
+      this.formData,
+      this.priorityManager,
+      this.contactManager,
+      this.subtaskManager,
+      this.contacts
+    ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
+  }
+
+  /**
+   * Loads associated images from the task into the component state if available.
+   * @param task The task containing potential images
+   */
+  private loadImagesIfAvailable(task: Task): void {
+    if (task.images && task.images.length > 0) {
+      this.loadImages();
     }
   }
 
@@ -218,21 +231,49 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-  * Resets the task creation form to its default state.
-  */
+ * Resets the task creation form to its default state.
+ */
   clearForm(): void {
+    this.resetFormData();
+    this.resetTaskState();
+    this.resetManagers();
+    this.clearUploadedImages();
+    this.resetValidationErrors();
+  }
+
+  /**
+   * Clears basic task form fields such as title, description, and due date.
+   */
+  private resetFormData(): void {
     this.formData = { title: '', description: '', dueDate: '' };
     this.priorityManager.selectedPriority = 'medium';
+    this.showSuccessMessage = false;
+  }
+
+  /**
+   * Resets task-related flags and IDs to their default state.
+   */
+  private resetTaskState(): void {
     this.isCreatingTask = false;
     this.isEditingMode = false;
     this.editingTaskId = undefined;
     this.originalTaskStatus = 'to-do';
     this.subtaskManager.originalSubtasks = [];
-    this.showSuccessMessage = false;
-    this.resetValidationErrors();
+  }
+
+  /**
+   * Clears all manager-related selections (contacts, categories, subtasks).
+   */
+  private resetManagers(): void {
     this.contactManager.clearAll();
     this.categoryManager.clearAll();
     this.subtaskManager.clearAll();
+  }
+
+  /**
+   * Clears uploaded images from both task and upload component.
+   */
+  private clearUploadedImages(): void {
     this.taskImages = [];
     if (this.uploadsComponent) {
       this.uploadsComponent.clearImages();
@@ -285,7 +326,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     }, 2000);
   }
 
-
   /**
    * Creates or updates the task depending on the mode.
    */
@@ -302,9 +342,14 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   async addNewTask(): Promise<void> {
     if (!this.defaultStatus) this.defaultStatus = 'to-do';
-
-    // Assign images to formData before building the task
     (this.formData as any).images = this.taskImages;
+
+    // Save all pending images before creating the task
+    for (const img of this.uploadsComponent.uploadedImages) {
+      await this.uploadService.saveImage(img);
+    }
+    this.uploadsComponent.uploadedImages = [];
+
     const newTask: Task = this.taskDataService.buildTask(
       this.formData,
       this.defaultStatus,
@@ -320,12 +365,46 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Updates an existing task and its subtasks.
-   */
+ * Updates an existing task, including its details and associated subtasks.
+ */
   async updateTask(): Promise<void> {
-    // Assign images to formData before building the task
+    this.attachImagesToFormData();
+    const existingImageKeys = this.editingTask?.images ?? [];
+
+    // 2. Get new image keys from uploadsComponent
+    const newImageKeys = this.uploadsComponent.getImageKeys();
+
+    // 3. Merge and deduplicate
+    const allImageKeys = Array.from(new Set([...existingImageKeys, ...newImageKeys]));
+
+    // 4. Assign to formData
+    (this.formData as any).images = allImageKeys;
+    this.taskImages = allImageKeys;
+    // Save all pending images before creating the task
+    for (const img of this.uploadsComponent.uploadedImages) {
+      await this.uploadService.saveImage(img);
+    }
+    this.uploadsComponent.uploadedImages = [];
+
+    const updatedTask = this.buildUpdatedTask();
+    await this.saveUpdatedTask(updatedTask);
+    await this.updateSubtasks();
+    this.taskService.clearEditingTask();
+  }
+
+  /**
+   * Assigns the current image list to the form data before task construction.
+   */
+  private attachImagesToFormData(): void {
     (this.formData as any).images = this.taskImages;
-    const updatedTask: Task = this.taskDataService.buildTask(
+  }
+
+  /**
+   * Constructs an updated Task object from form inputs and managers.
+   * @returns The constructed Task object.
+   */
+  private buildUpdatedTask(): Task {
+    return this.taskDataService.buildTask(
       this.formData,
       this.originalTaskStatus,
       this.priorityManager,
@@ -333,12 +412,24 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.categoryManager,
       this.editingTaskId
     );
-    await this.taskService.updateTask(this.editingTaskId!, updatedTask);
+  }
+
+  /**
+   * Persists the updated task using the TaskService.
+   * @param task - The task to be saved.
+   */
+  private async saveUpdatedTask(task: Task): Promise<void> {
+    await this.taskService.updateTask(this.editingTaskId!, task);
+  }
+
+  /**
+   * Synchronizes current and deleted subtasks in Firestore.
+   */
+  private async updateSubtasks(): Promise<void> {
     const currentSubtasks = this.subtaskManager.getSubtasks();
     const deleted = this.subtaskManager.getDeletedSubtasks(currentSubtasks);
     await this.subtaskManager.deleteSubtasks(this.editingTaskId!, deleted);
     await this.subtaskManager.syncSubtasks(this.editingTaskId!, currentSubtasks);
-    this.taskService.clearEditingTask();
   }
 
   /**

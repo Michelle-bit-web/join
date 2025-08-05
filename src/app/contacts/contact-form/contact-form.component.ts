@@ -15,6 +15,7 @@ import { ContactService, Contact, notOnlyWhitespace } from '../../services/conta
 import { Subscription } from 'rxjs';
 import { UploadedImage, UploadService } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
+import { ImageManager } from './image-manager';
 
 @Component({
   selector: 'app-contact-form',
@@ -61,7 +62,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
-  fileTypeError: boolean = false;
+  // fileTypeError: boolean = false;
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
@@ -73,7 +74,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @param form - Angular's FormBuilder for creating the form.
    * @param contactService - Service that manages contact CRUD operations.
    */
-  constructor(private form: FormBuilder, public contactService: ContactService, private uploadService: UploadService) { }
+  constructor(private form: FormBuilder, public contactService: ContactService, private uploadService: UploadService, public imageManager: ImageManager) { }
 
   /**
    * Initializes the form and subscribes to editContact$ to load contact data
@@ -85,105 +86,93 @@ export class ContactFormComponent implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
-    this.editContactSubscription = this.contactService.editContact$.subscribe(this.getDataToEdit);
+    this.editContactSubscription = this.contactService.editContact$.subscribe(contact => this.getDataToEdit(contact));
   }
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
   }
 
+  /**
+ * Handles a new image file selection for a contact.
+ * Validates the file, deletes old image, and compresses the new image.
+ * @param event - The input change event.
+ */
   async onContactImageChanged(event: Event): Promise<void> {
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
-      this.resetImageState();
-      return;
-    }
-    const file = input.files[0];
-    if (!file.type.startsWith('image/')) {
-      this.fileTypeError = true;
-      this.resetImageState();
-      return;
-    }
-    this.fileTypeError = false;
-// Remove old image from localStorage if exists
+    // this.imageManager.onContactImageChanged(event);
+    const file = this.imageManager.extractValidImageFile(event);
+    if (!file) return;
+    await this.deletePreviousImages();
+    const imageKey = `${Date.now()}_${file.name}`;
+    const base64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
+    this.setImageState(file, imageKey, base64);
+  }
+
+  /**
+   * Deletes any previously uploaded or assigned image from storage.
+   */
+  private async deletePreviousImages(): Promise<void> {
     if (this.uploadedImageKey) {
       this.uploadService.deleteImage(this.uploadedImageKey);
     }
     if (this.contactToEdit?.imageKey) {
       this.uploadService.deleteImage(this.contactToEdit.imageKey);
     }
+  }
 
-    const imageKey = `${Date.now()}_${file.name}`;
-    const base64 = await this.compressImage(file, 800, 800, 0.7);
-
+  /**
+   * Sets the local image state and prepares it for saving.
+   * @param file - The uploaded image file.
+   * @param imageKey - The generated unique image key.
+   * @param base64 - The base64 representation of the image.
+   */
+  private setImageState(file: File, imageKey: string, base64: string): void {
     this.uploadedImageKey = imageKey;
+    this.imageBase64 = base64;
     this.imgData = {
-      imageKey: imageKey,
+      imageKey,
       filename: file.name,
       fileType: file.type,
       fileSize: file.size,
-      base64: base64,
+      base64,
       assignedTo: 'user'
     };
-    this.imageBase64 = base64;
   }
 
-  async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = event => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d')!;
-          let { width, height } = img;
+  /**
+ * Populates the form with the contact's data for editing.
+ * @param contact - The contact to edit or null to clear the form.
+ */
+  getDataToEdit(contact: Contact | null): void {
+    this.contactToEdit = contact || undefined;
+    if (!this.contactToEdit) return;
+    this.fillContactForm();
+    this.loadContactImage();
+  }
 
-          if (width > maxWidth || height > maxHeight) {
-            if (width > height) {
-              height = (height * maxWidth) / width;
-              width = maxWidth;
-            } else {
-              width = (width * maxHeight) / height;
-              height = maxHeight;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL('image/jpeg', quality));
-        };
-        img.onerror = () => reject('Fehler beim Laden des Bildes.');
-        img.src = event.target?.result as string;
-      };
-      reader.onerror = () => reject('Fehler beim Lesen der Datei.');
-      reader.readAsDataURL(file);
+  /**
+   * Fills the contact form fields with the selected contact’s data.
+   */
+  private fillContactForm(): void {
+    this.contactForm.patchValue({
+      name: this.contactToEdit!.name,
+      email: this.contactToEdit!.email,
+      phone: this.contactToEdit!.phone
     });
   }
 
   /**
-   * Receives a contact to be edited and pre-fills the form fields.
-   * @param contact - The contact object or null to clear the form.
+   * Loads the contact image into the upload preview.
    */
-  getDataToEdit = (contact: Contact | null) => {
-    this.contactToEdit = contact || undefined;
-    if (this.contactToEdit) {
-      this.contactForm.patchValue({
-        name: this.contactToEdit.name,
-        email: this.contactToEdit.email,
-        phone: this.contactToEdit.phone
-      });
-      if (this.contactToEdit.imageKey) {
-        this.imageBase64 = this.uploadService.getContactImage(this.contactToEdit.imageKey);
-        // Load existing image into the upload component
-        const existingImage = this.uploadService.getImageByKey(this.contactToEdit.imageKey);
-        if (existingImage) {
-          this.uploadService.setImages([existingImage]);
-        }
-      } else {
-        this.imageBase64 = null;
-      }
+  private loadContactImage(): void {
+    const imageKey = this.contactToEdit!.imageKey;
+    if (!imageKey) {
+      this.imageBase64 = null;
+      return;
     }
+    this.imageBase64 = this.uploadService.getContactImage(imageKey);
+    const existingImage = this.uploadService.getImageByKey(imageKey);
+    if (existingImage) this.uploadService.setImages([existingImage]);
   }
 
   private resetImageState() {
@@ -199,8 +188,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   openContactImageViewer() {
     if (this.imageBase64) {
       this.contactImages = [this.imageBase64];
-      this.contactImageKeys = this.contactToEdit?.imageKey ? [this.contactToEdit.imageKey] : 
-      this.uploadedImageKey ? [this.uploadedImageKey] : [];
+      this.contactImageKeys = this.contactToEdit?.imageKey ? [this.contactToEdit.imageKey] :
+        this.uploadedImageKey ? [this.uploadedImageKey] : [];
       this.showImageViewer = true;
     }
   }
@@ -209,7 +198,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Closes the image viewer.
    */
   closeImageViewer() {
-    this.showImageViewer = false;
+   this.showImageViewer = false;
   }
 
   /**
@@ -219,16 +208,16 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     if (event.imageKey) {
       this.uploadService.deleteImage(event.imageKey);
     }
-    
+
     // Reset image state
     this.resetImageState();
-    
+
     // Update contact if editing
     if (this.contactToEdit) {
       this.contactToEdit.imageKey = '';
       this.updateContact(this.contactToEdit);
     }
-    
+
     // Close image viewer
     this.closeImageViewer();
   }
@@ -246,7 +235,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Closes the contact form, resets its state, and emits a closing event.
    */
   onClose(): void {
-     // Clear any unsaved images from localStorage
+    // Clear any unsaved images from localStorage
     if (this.uploadedImageKey && !this.contactToEdit) {
       this.uploadService.deleteImage(this.uploadedImageKey);
     }
@@ -291,32 +280,29 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * 
    * @returns True if editing an existing contact, false if creating a new one.
    */
-  private isEditMode(): boolean {
+  public isEditMode(): boolean {
     return !!this.contactToEdit?.id;
   }
 
   removeImage() {
-    if (!this.contactToEdit || !this.contactToEdit.id || !this.uploadedImageKey) return;
-    // Bild aus dem UploadService + localStorage entfernen
-    this.uploadService.deleteImage(this.uploadedImageKey);
+     if (!this.contactToEdit || !this.contactToEdit.id || !this.uploadedImageKey) return;
+        // Bild aus dem UploadService + localStorage entfernen
+        this.uploadService.deleteImage(this.uploadedImageKey);
 
-    // Lokale Zustände zurücksetzen
-    this.uploadedImageKey = undefined;
-    this.imgData = undefined;
-    this.imageBase64 = null;
-    this.compressedBase64 = undefined;
+        this.uploadedImageKey = undefined;
+        this.imgData = undefined;
+        this.imageBase64 = null;
+        this.compressedBase64 = undefined;
 
-    // Bildinformationen aus dem Kontakt entfernen
-  const updatedContact: Contact = {
-    ...this.contactToEdit,
-    imageKey: undefined
-  };
+        const updatedContact: Contact = {
+            ...this.contactToEdit,
+            imageKey: undefined
+        };
 
-   // Kontakt aktualisieren
-  this.updateContact(updatedContact);
+    this.updateContact(updatedContact);
 
-  // Optional: auch im UI den Contact zurücksetzen
-  this.contactToEdit.imageKey = undefined;
+    // Optional: auch im UI den Contact zurücksetzen
+    this.contactToEdit.imageKey = undefined;
   }
 
   /**
@@ -324,7 +310,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * 
    * @param contact - The contact data to be saved.
    */
-  private updateContact(contact: Contact): void {
+  public updateContact(contact: Contact): void {
     if (this.imgData?.imageKey && this.imgData?.base64) {
       this.uploadService.saveImage(this.imgData);
     }
@@ -376,4 +362,3 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     }
   }
 }
-

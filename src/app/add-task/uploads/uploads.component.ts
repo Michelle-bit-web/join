@@ -19,7 +19,6 @@ export class UploadsComponent implements OnInit {
   errorMessage: string = '';
   imgData?: UploadedImage;
   isDragOver = false;
-  // imagesForEditingTask: string[] = [];
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
   @Output() imageUrls = new EventEmitter<string[]>();
   @Input() multiple: boolean = true;
@@ -32,31 +31,7 @@ export class UploadsComponent implements OnInit {
 
   constructor(private uploadService: UploadService) { }
 
-  ngOnInit(): void {
-    // if (this.isEditingMode && this.preloadedImages?.length > 0) {
-    //   this.setImages(this.preloadedImages);
-    //   console.log('[UploadsComponent] Loaded preloaded images', this.preloadedImages);
-    // }
-    if(this.isEditingMode) {
-      // this.uploadedImages = this.uploadService.getImages();
-    }
-
-//  ngOnChanges(changes: SimpleChanges): void {
-//   if (this.isEditingMode && this.editingTaskImageKeys?.length > 0) {
-//     const existingImages = this.uploadService.getImagesByKeys(this.editingTaskImageKeys);
-//     this.setImages(existingImages);
-//     console.log('[UploadsComponent] Loaded images on changes', existingImages);
-//   }
-}
-
-ngAfterViewInit(): void {
-    // if (this.isEditingMode && this.preloadedImages?.length > 0) { 
-    //   for(const img of this.preloadedImages) {
-    //       this.imagesForEditingTask.push(img.imageKey);
-    //       console.log('Bildtyyp:', this.imagesForEditingTask)
-    //     }
-    //   }
-  }
+  ngOnInit(): void {}
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
@@ -118,7 +93,7 @@ ngAfterViewInit(): void {
           assignedTo: 'task'
         };
         // Save to localStorage immediately for tasks (multiple images allowed)
-        this.uploadService.saveImage(this.imgData!);
+        // this.uploadService.saveImage(this.imgData!);
         this.uploadedImages.push(this.imgData!);
         this.uploadedUrls.push(compressedBase64);
         this.emitImagesChanged();

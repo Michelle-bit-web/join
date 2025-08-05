@@ -38,7 +38,6 @@
       />
     </div>
     <div class="image-grid">
-      <!-- Bilder aus UploadService -->
       <div
         class="image-item"
         *ngFor="let image of uploadedImages; let i = index"
@@ -58,8 +57,6 @@
           </button>
         </div>
       </div>
-
-      <!-- Vorgefüllte Bilder im Edit-Modus -->
       <div
         class="image-item"
         *ngFor="let img of preloadedImages; let i = index"
