@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { UploadedImage, UploadService } from '../../services/upload.service';
+import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-uploads',
-  imports: [CommonModule],
+  imports: [CommonModule, ImageViewerComponent],
   templateUrl: './uploads.component.html',
   styleUrl: './uploads.component.scss',
   standalone: true,
@@ -19,6 +20,7 @@ export class UploadsComponent implements OnInit {
   errorMessage: string = '';
   imgData?: UploadedImage;
   isDragOver = false;
+  showImageViewer = false;
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
   @Output() imageUrls = new EventEmitter<string[]>();
   @Input() multiple: boolean = true;
@@ -186,9 +188,29 @@ export class UploadsComponent implements OnInit {
     this.emitImagesChanged();
   }
 
+   /**
+   * Opens the image viewer for the contact image.
+   */
   openImageViewer(index: number) {
     const imageUrls = this.uploadedImages.map(img => img.base64);
+    this.showImageViewer = true;
     console.log('Open image viewer for index:', index, 'with images:', imageUrls);
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer() {
+   this.showImageViewer = false;
+  }
+
+  /**
+   * Handles image deletion from the image viewer.
+   */
+  onDeleteImage(event: { imageKey?: string }) {
+    if (event.imageKey) {
+      this.uploadService.deleteImage(event.imageKey);
+    }
   }
 
   private emitImagesChanged() {
@@ -207,5 +229,17 @@ export class UploadsComponent implements OnInit {
   clearImages() {
     this.uploadedImages = [];
     this.emitImagesChanged();
+  }
+
+  allImages(): UploadedImage[] {
+    return [...this.uploadedImages, ...this.preloadedImages];
+  }
+
+  getAllImageKeys(): string[] {
+    return this.allImages().map(img => img.imageKey);
+  }
+
+  getAllImageBase64(): string[] {
+    return this.allImages().map(img => img.base64);
   }
 }
