@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  @media (max-width: 850px) {
+  @media (max-width: 1100px) {
     height: 100dvh;
     width: 100%;
   }
@@ -149,6 +149,7 @@
 }
 
 .image-counter {
+  @include inter400-fs16;
   font-size: 14px;
   color: var(--text-color-light);
   font-weight: 500;

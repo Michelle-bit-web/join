@@ -42,7 +42,7 @@
     &:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.142) inset;
     }
-    
+
     &.drag-over {
       border-color: var(--primary-color);
       background-color: rgba(0, 123, 255, 0.1);
@@ -139,7 +139,6 @@
   }
 
   .remove-btn {
-    background: #ff3b30;
     border: none;
     border-radius: 50%;
     width: 32px;
@@ -149,10 +148,18 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.2s;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+    svg path {
+      fill: var(--background-light);
+    }
   }
 
   .remove-btn:hover {
-    background: #d70015;
+    background-color: var(--accent-primary-color);
   }
 
   .error-message {

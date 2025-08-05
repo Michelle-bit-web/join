@@ -14,7 +14,7 @@ $small-mobile-breakpoint: 480px;
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100dvh - 200px);
   overflow: hidden;
   @media(max-width: 1000px) {
     height: calc(100dvh - 180px);
@@ -23,7 +23,7 @@ $small-mobile-breakpoint: 480px;
 
 .add-task-header {
   width: 100%;
-  height: 140px;
+  height: 120px;
   padding: 0 $form-padding;
   @include flex-center;
   position: relative;
