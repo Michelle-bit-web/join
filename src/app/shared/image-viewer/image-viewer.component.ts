@@ -16,12 +16,12 @@ export class ImageViewerComponent {
   @Input() startIndex: number = 0;
   @Input() imageKeys: string[] = []; // Add image keys for deletion
   @Input() allowDelete: boolean = false; // Allow deletion
-  @Output() close = new EventEmitter<void>();
-  @Output() deleteImage = new EventEmitter<{index: number, imageKey?: string}>();
+  @Output() close = new EventEmitter<Event>();
+  @Output() deleteImage = new EventEmitter<{ index: number, imageKey?: string }>();
 
   currentIndex: number = 0;
 
-  constructor(public uploadService: UploadService) {}
+  constructor(public uploadService: UploadService) { }
 
   ngOnInit() {
     this.currentIndex = this.startIndex;
@@ -54,7 +54,7 @@ export class ImageViewerComponent {
 
   getImagesize(): string {
     let imageSize = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
-    if(imageSize){
+    if (imageSize) {
       return Math.round(imageSize.fileSize / 1000) + ' KB';
     }
     return '';
@@ -68,7 +68,7 @@ export class ImageViewerComponent {
     link.click();
     document.body.removeChild(link);
   }
-  
+
   onDeleteImage() {
     if (this.allowDelete) {
       this.deleteImage.emit({
@@ -78,7 +78,9 @@ export class ImageViewerComponent {
     }
   }
 
-  onClose() {
-   this.close.emit();
+  onClose(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.close.emit(event);
   }
 }

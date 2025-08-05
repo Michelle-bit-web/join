@@ -86,7 +86,7 @@
   [images]="getAllImageBase64()"
   [imageKeys]="getAllImageKeys()"
   [allowDelete]="true"
-  (close)="closeImageViewer()"
+  (close)="closeImageViewer($event)"
   (deleteImage)="onDeleteImage($event)"
 >
 </app-image-viewer>

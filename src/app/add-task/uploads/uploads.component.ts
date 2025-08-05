@@ -33,7 +33,7 @@ export class UploadsComponent implements OnInit {
 
   constructor(private uploadService: UploadService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
@@ -188,9 +188,9 @@ export class UploadsComponent implements OnInit {
     this.emitImagesChanged();
   }
 
-   /**
-   * Opens the image viewer for the contact image.
-   */
+  /**
+  * Opens the image viewer for the contact image.
+  */
   openImageViewer(index: number) {
     const imageUrls = this.uploadedImages.map(img => img.base64);
     this.showImageViewer = true;
@@ -200,8 +200,13 @@ export class UploadsComponent implements OnInit {
   /**
    * Closes the image viewer.
    */
-  closeImageViewer() {
-   this.showImageViewer = false;
+  // In your uploads.component.ts
+  closeImageViewer(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    this.showImageViewer = false;
   }
 
   /**
