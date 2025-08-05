@@ -20,11 +20,13 @@ export class ImageViewerComponent {
   @Output() deleteImage = new EventEmitter<{ index: number, imageKey?: string }>();
 
   currentIndex: number = 0;
+  isTouchDevice: boolean = false;
 
   constructor(public uploadService: UploadService) { }
 
   ngOnInit() {
     this.currentIndex = this.startIndex;
+    this.checkIfTouchDevice();
   }
 
   get currentImage(): string {
@@ -33,6 +35,10 @@ export class ImageViewerComponent {
 
   get currentImageKey(): string | undefined {
     return this.imageKeys[this.currentIndex];
+  }
+
+  checkIfTouchDevice() {
+    this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   }
 
   previousImage() {

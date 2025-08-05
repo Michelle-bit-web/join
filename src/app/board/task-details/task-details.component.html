@@ -1,112 +1,238 @@
 <div class="content-wrapper" *ngIf="showContent">
-    <div class="wrapper-top">
-        <p class="category-flag" [style.background-color]="task.category == 'user story' ? '#0038ff': '#1fd7c1'">{{taskService.capitalize(task.category)}}</p>
-        <button class="btn-close" (click)="onClose()" >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                    <rect width="24" height="24" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask0_331509_883)">
-                    <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>
-                </g>
-            </svg>
-        </button>
-    </div>
-    <div class="task-content">
-        <h1>{{ taskService.capitalize(task.title) }}</h1>
-        <p class="description">{{ taskService.capitalize(task.description) }}</p>
-        <div class="date-row">
-            <span class="row-title">Due date:</span>
-            <span>{{ convertDate(task.date) }}</span>
-        </div>
-        <div class="priority-row">
-            <span class="row-title">Priority:</span>
-            <span>{{ task.priority }}</span>
-            <div>
-                <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === 'urgent'">
-                <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === 'medium'">
-                <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === 'low'">
-            </div>
-        </div>
-        <div class="assigned-to-row">
-            <span class="row-title">Assigned To:</span>
-            <span *ngIf="contactList.length <= 0" class="info-no-selection">No contact selected</span>
-            <div class="contact-list">
-                @for (contact of contactList; track $index) {
-                    <div class="contact-item">
-                        <div class="img-user-wrapper">
-                            <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">
-                                <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>
-                            </div>
-                            <p class="contact-name">{{ contact.name }}</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-       <div class="subtask-row">
-            <span class="row-title">Subtasks:</span>
-            <span *ngIf="subtasks.length <= 0" class="info-no-selection">No subtasks defined</span>
-            <div class="subtask-list">
-                @for (subtask of subtasks; track $index) {
-                    <div class="subtask-item">
-                        <input class="checkbox" [id]="'subtask-cb' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">
-                        <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
-                        <span>{{ subtask.title }}</span>
-                    </div>
-                }
-            </div>
-        </div>
-         <div class="task-images" *ngIf="taskImages.length > 0">
-            <span class="row-title">Images:</span>
-            <div class="image-grid">
-                <div 
-                    class="image-item" 
-                    *ngFor="let image of taskImages; let i = index"
-                    (click)="openImageViewer(i)"
-                >
-                    <img [src]="image" [alt]="'Task image ' + (i + 1)" class="task-image" />
-                    <div class="image-overlay">
-                        <span class="image-count" *ngIf="taskImages.length > 1">{{ i + 1 }}/{{ taskImages.length }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="btn-wrapper">
-            <button class="btn-delete" (click)="deleteTask($event)">
-                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-                    <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-                    </mask>
-                    <g mask="url(#mask0_75592_9951)">
-                    <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z" fill="#2A3647"/>
-                    </g>
-                </svg>
-                Delete
-            </button>
-            <div class="separator"></div>
-            <button class="btn-edit" (click)="openEditTask($event)">
-                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask0_75592_8413" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">
-                    <rect x="0.394531" y="0.80835" width="32" height="32" fill="#D9D9D9"/>
-                    </mask>
-                    <g mask="url(#mask0_75592_8413)">
-                    <path d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z" fill="#2A3647"/>
-                    </g>
-                </svg>
-                Edit
-            </button>
-        </div>
-    </div>
-    <!-- Image Viewer -->
-    <app-image-viewer 
-        *ngIf="showImageViewer"
-        [images]="taskImages"
-        [imageKeys]="taskImageKeys"
-        [startIndex]="currentImageIndex"
-        [allowDelete]="true"
-        (close)="closeImageViewer()"
-        (deleteImage)="onDeleteImage($event)"
+  <div class="wrapper-top">
+    <p
+      class="category-flag"
+      [style.background-color]="
+        task.category == 'user story' ? '#0038ff' : '#1fd7c1'
+      "
+    >
+      {{ taskService.capitalize(task.category) }}
+    </p>
+    <button class="btn-close" (click)="onClose()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <mask
+          id="mask0_331509_883"
+          style="mask-type: alpha"
+          maskUnits="userSpaceOnUse"
+          x="0"
+          y="0"
+          width="24"
+          height="24"
         >
-    </app-image-viewer>
+          <rect width="24" height="24" fill="#D9D9D9" />
+        </mask>
+        <g mask="url(#mask0_331509_883)">
+          <path
+            d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"
+            fill="#2A3647"
+          />
+        </g>
+      </svg>
+    </button>
+  </div>
+  <div class="task-content">
+    <h1>{{ taskService.capitalize(task.title) }}</h1>
+    <p class="description">{{ taskService.capitalize(task.description) }}</p>
+    <div class="date-row">
+      <span class="row-title">Due date:</span>
+      <span>{{ convertDate(task.date) }}</span>
+    </div>
+    <div class="priority-row">
+      <span class="row-title">Priority:</span>
+      <span>{{ task.priority }}</span>
+      <div>
+        <img
+          src="assets/img/icons/prio-high.png"
+          alt="Priority High Icon"
+          *ngIf="task.priority === 'urgent'"
+        />
+        <img
+          src="assets/img/icons/prio-medium.png"
+          alt="Priorit Medium Icon"
+          *ngIf="task.priority === 'medium'"
+        />
+        <img
+          src="assets/img/icons/prio-low.png"
+          alt="Priority Low Icon"
+          *ngIf="task.priority === 'low'"
+        />
+      </div>
+    </div>
+    <div class="assigned-to-row">
+      <span class="row-title">Assigned To:</span>
+      <span *ngIf="contactList.length <= 0" class="info-no-selection"
+        >No contact selected</span
+      >
+      <div class="contact-list">
+        @for (contact of contactList; track $index) {
+        <div class="contact-item">
+          <div class="img-user-wrapper">
+            <div
+              class="img-user"
+              [style.background-color]="
+                contactService.getContactColor(contact.name)
+              "
+            >
+              <p class="contact-initials">
+                {{ contactService.getInitials(contact.name) }}
+              </p>
+            </div>
+            <p class="contact-name">{{ contact.name }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="subtask-row">
+      <span class="row-title">Subtasks:</span>
+      <span *ngIf="subtasks.length <= 0" class="info-no-selection"
+        >No subtasks defined</span
+      >
+      <div class="subtask-list">
+        @for (subtask of subtasks; track $index) {
+        <div class="subtask-item">
+          <input
+            class="checkbox"
+            [id]="'subtask-cb' + $index"
+            type="checkbox"
+            (change)="onSubtaskToggle(subtask)"
+            [(ngModel)]="subtask.isCompleted"
+          />
+          <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
+          <span>{{ subtask.title }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="task-images" *ngIf="taskImages.length > 0">
+      <span class="row-title">Images:</span>
+      <div class="image-grid">
+        <div
+          class="image-item"
+          *ngFor="let image of taskImages; let i = index"
+          (click)="openImageViewer(i)"
+        >
+          <img
+            [src]="image"
+            [alt]="'Task image ' + (i + 1)"
+            class="task-image"
+          />
+          <div class="image-overlay">
+            <button class="btn-download" (click)="downloadImage($event, i, taskImages[i])">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <mask
+                  id="mask0_264018_1332"
+                  style="mask-type: alpha"
+                  maskUnits="userSpaceOnUse"
+                  x="-1"
+                  y="0"
+                  width="25"
+                  height="24"
+                >
+                  <rect x="-0.144531" width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_264018_1332)">
+                  <path
+                    d="M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z"
+                    fill="white"
+                  />
+                </g>
+              </svg>
+            </button>
+            <span class="image-count" *ngIf="taskImages.length > 1"
+              >{{ i + 1 }}/{{ taskImages.length }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-wrapper">
+      <button class="btn-delete" (click)="deleteTask($event)">
+        <svg
+          width="25"
+          height="24"
+          viewBox="0 0 25 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask0_75592_9951"
+            style="mask-type: alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="25"
+            height="24"
+          >
+            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_75592_9951)">
+            <path
+              d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"
+              fill="#2A3647"
+            />
+          </g>
+        </svg>
+        Delete
+      </button>
+      <div class="separator"></div>
+      <button class="btn-edit" (click)="openEditTask($event)">
+        <svg
+          width="33"
+          height="33"
+          viewBox="0 0 33 33"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask0_75592_8413"
+            style="mask-type: alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="33"
+            height="33"
+          >
+            <rect
+              x="0.394531"
+              y="0.80835"
+              width="32"
+              height="32"
+              fill="#D9D9D9"
+            />
+          </mask>
+          <g mask="url(#mask0_75592_8413)">
+            <path
+              d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z"
+              fill="#2A3647"
+            />
+          </g>
+        </svg>
+        Edit
+      </button>
+    </div>
+  </div>
+  <!-- Image Viewer -->
+  <app-image-viewer
+    *ngIf="showImageViewer"
+    [images]="taskImages"
+    [imageKeys]="taskImageKeys"
+    [startIndex]="currentImageIndex"
+    [allowDelete]="true"
+    (close)="closeImageViewer()"
+    (deleteImage)="onDeleteImage($event)"
+  >
+  </app-image-viewer>
 </div>

@@ -278,4 +278,15 @@ export class TaskDetailsComponent implements OnChanges {
     // Close image viewer
     this.closeImageViewer();
   }
+
+  downloadImage(event: Event, currentIndex: number, currentImage: string) {
+    event.stopPropagation();
+    event.preventDefault();
+    const link = document.createElement('a');
+    link.href = currentImage;
+    link.download = `image_${currentIndex + 1}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }

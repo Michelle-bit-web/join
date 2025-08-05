@@ -1,8 +1,9 @@
 <div class="image-viewer-overlay" >
-  <div class="image-viewer-content" (click)="$event.stopPropagation()">
+  <div class="image-viewer-content" (click)="$event.stopPropagation()" [ngClass]="{'visible-on-touchDevice': isTouchDevice}">
     <div class="image-viewer-header">
       <h3>{{ getImageName() || "Image" }} / {{ getImagesize() }}</h3>
-      <button class="btn-download" (click)="downloadImage()">
+      <div class="viewer-actions-wrapper">
+        <button class="btn-download" (click)="downloadImage()">
         <svg
           width="24"
           height="24"
@@ -43,6 +44,7 @@
           />
         </svg>
       </button>
+      </div>
     </div>
 
     <div class="image-container">
