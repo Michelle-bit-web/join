@@ -1,7 +1,9 @@
 <div class="form-group">
-  <label for="uploads">Attachments</label>
+  <label for="filepicker">Attachments</label>
   <p class="upload-info">Only image files allowed</p>
-  <div
+  <button
+    type="button"
+    aria-label="Upload image"
     class="upload-input-container"
     (click)="openFileDialog()"
     [class.drag-over]="isDragOver"
@@ -16,7 +18,7 @@
     />
     <p>Drag a file or browse</p>
     <span>Upload file</span>
-    <input
+    <!-- <input
       type="file"
       id="filepicker"
       name="uploadInput"
@@ -26,8 +28,20 @@
       multiple
       [maxLength]="10"
       #filepicker
+    /> -->
+  </button>
+  <input
+      type="file"
+      id="filepicker"
+      name="uploadInput"
+      placeholder="Upload files"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+      multiple
+      [maxLength]="10"
+      #filepicker
+      hidden
     />
-  </div>
   <div
     class="file-list-container"
     *ngIf="uploadedImages.length > 0 || preloadedImages.length > 0"
