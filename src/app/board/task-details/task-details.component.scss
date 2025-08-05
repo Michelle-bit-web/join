@@ -217,6 +217,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    @media(max-width: 430px) {
+        width: 90%;
+    }
 }
 
 .image-grid {

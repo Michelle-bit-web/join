@@ -17,7 +17,8 @@ export class UploadsComponent implements OnInit {
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   taskCreated: boolean = false;
-  errorMessage: string = '';
+  // errorMessage: string = '';
+  errorMessages: string[] = [];
   imgData?: UploadedImage;
   isDragOver = false;
   showImageViewer = false;
@@ -72,15 +73,21 @@ export class UploadsComponent implements OnInit {
   }
 
   private async processFiles(files: File[]) {
-    this.errorMessage = '';
+    // this.errorMessage = '';
+    this.errorMessages = [];
+
     for (const file of files) {
       if (!file.type.startsWith('image/')) {
-        this.errorMessage = 'Only image files are allowed';
+        this.errorMessages.push('Only image files are allowed');
         continue;
+        // this.errorMessage = 'Only image files are allowed';
+        // continue;
       }
       if (this.uploadedImages.length >= this.maxImages) {
-        this.errorMessage = `Maximum ${this.maxImages} images allowed`;
+        this.errorMessages.push(`Maximum ${this.maxImages} images allowed`);
         break;
+        // this.errorMessage = `Maximum ${this.maxImages} images allowed`;
+        // break;
       }
 
       try {
@@ -100,10 +107,15 @@ export class UploadsComponent implements OnInit {
         this.uploadedUrls.push(compressedBase64);
         this.emitImagesChanged();
       } catch (error) {
-        this.errorMessage = 'Error processing image';
+        this.errorMessages.push(`Error processing file ${file.name}`);
+        // this.errorMessage = 'Error processing image';
         console.error('Error processing image:', error);
       }
     }
+    // setTimeout(() => {
+    //   this.errorMessages = errorMessages.length > 0 ? errorMessages[0] : '';
+    // });;
+    console.log(this.errorMessages)
   }
 
   clearSelectedImages() {
@@ -120,7 +132,7 @@ export class UploadsComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = event =>
         this.handleImageLoad(event, maxWidth, maxHeight, quality, resolve, reject);
-      reader.onerror = () => reject('Fehler beim Lesen der Datei.');
+      reader.onerror = () => reject('Error on reading the file.');
       reader.readAsDataURL(file);
     });
   }
@@ -136,7 +148,7 @@ export class UploadsComponent implements OnInit {
     const img = new Image();
     img.onload = () =>
       this.drawCompressedImage(img, maxWidth, maxHeight, quality, resolve);
-    img.onerror = () => reject('Fehler beim Laden des Bildes.');
+    img.onerror = () => reject('Error on loading image.');
     img.src = event.target?.result as string;
   }
 

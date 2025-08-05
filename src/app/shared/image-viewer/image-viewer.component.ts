@@ -58,7 +58,12 @@ export class ImageViewerComponent {
     return imageName?.filename;
   }
 
-  getImagesize(): string {
+  getImageType(): string | undefined {
+    let imageType = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    return imageType?.fileType;
+  }
+
+  getImageSize(): string {
     let imageSize = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
     if (imageSize) {
       return Math.round(imageSize.fileSize / 1000) + ' KB';

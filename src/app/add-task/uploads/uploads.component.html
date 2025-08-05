@@ -72,7 +72,7 @@
                 width="25"
                 height="24"
               >
-                <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
+                <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
               </mask>
               <g mask="url(#mask0_75592_9951)">
                 <path
@@ -100,9 +100,9 @@
         </div>
       </div>
     </div>
-    <div class="error-message" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessages.length > 0">
+    <p *ngFor="let msg of errorMessages">{{ msg }}</p>
   </div>
 </div>
 <app-image-viewer
