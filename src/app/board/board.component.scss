@@ -32,10 +32,8 @@ section {
   align-items: flex-start;
   overflow: visible;
   gap: 20px;
-  padding: 0 clamp(20px, calc(2vw + 10px), 40px);
+  padding: 0 clamp(10px, calc(2vw + 10px), 40px);
   @include inter400-fs12;
-  @media (max-width: 1000px) and (min-width: 830px) {
-  }
 }
 
 .column {
@@ -56,6 +54,7 @@ section {
     align-items: center;
     gap: 10px;
     color: #42526e;
+    @include inter400-fs16;
   }
 
   .icon-container {

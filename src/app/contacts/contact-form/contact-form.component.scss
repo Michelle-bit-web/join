@@ -145,10 +145,11 @@ form {
   flex-direction: column;
   gap: clamp(12px, calc(1.56vw + 7px), 32px);
   flex: 1;
+  position: relative;
   @media (max-width: 1000px) {
-    margin-top: 80px;
+    margin-top: 50px;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 730px) {
     margin-top: 30px;
   }
 }
@@ -175,6 +176,10 @@ form {
   @include inter400-fs12;
   color: var(--text-color-error);
   display: hidden;
+}
+
+.invalid-image-upload {
+  margin-left: 8px;
 }
 
 input:focus {
@@ -227,6 +232,7 @@ input:focus {
 .img-user-wrapper {
   min-width: 120px;
   height: 120px;
+  @include flex-center();
   background-color: var(--background-default-dark);
   border-radius: 50%;
   position: relative;
@@ -259,11 +265,8 @@ input:focus {
 }
 
 .image-upload-icon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  translate: 20% 20%;
-  cursor: pointer;
+  height: 46px;
+  width: 46px;
   &:hover {
     rect {
       fill: var(--accent-primary-color);
@@ -275,9 +278,17 @@ input:focus {
 }
 
 .user-image-upload-button {
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  translate: 20% 20%;
+  cursor: pointer;
   @include flex-center();
-  width: fit-content;
-  height: fit-content;
+  border: unset;
+  background-color: transparent;
 }
 
 .contact-initials {

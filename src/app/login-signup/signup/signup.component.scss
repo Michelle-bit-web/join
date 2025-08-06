@@ -117,6 +117,9 @@
 
 form {
   padding: 8px 33px;
+  @media(max-width: 450px) {
+    padding: 8px 16px;
+  }
 }
 
 .form-group-wrapper {
@@ -136,7 +139,7 @@ form {
     width: 100%;
     background-color: transparent;
     color: var(--text-color-main);
-    padding-right: 28px;
+    padding-right: 16px;
     @include inter400-fs20();
     height: 16px;
     font-size: 16px;
@@ -165,7 +168,7 @@ form {
     width: 100%;
 
     input {
-      font-size: 15px;
+      font-size: 16px;
       height: 14px;
     }
 
@@ -183,7 +186,7 @@ form {
   margin: 8px;
   margin-top: 16px;
   width: 100%;
-  @include inter400-fs14();
+  @include inter400-fs16();
   color: var(--text-color-medium);
   cursor: pointer;
   position: relative;
@@ -221,7 +224,7 @@ form {
   }
 
   @media (max-width: 406px) {
-    font-size: 12px;
+    font-size: 15px;
     gap: 4px;
     margin: 4px;
   }
@@ -241,6 +244,7 @@ form {
   transition: background-color 0.2s ease;
   justify-content: center;
   @include btn-dark();
+  @include inter400-fs16;
 
   &:hover {
     background-color: #29abe2;
@@ -266,17 +270,17 @@ form {
 }
 
 .error-message {
-  @include inter400-fs12;
+  @include inter400-fs16;
   color: var(--text-color-error);
   display: hidden;
 
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
 .success-message {
-  @include inter400-fs12;
+  @include inter400-fs16;
   color: var(--text-color-success);
   display: block;
   margin-top: 16px;
@@ -284,7 +288,7 @@ form {
 }
 
 .login-link {
-  @include inter400-fs12;
+  @include inter400-fs16;
   color: var(--text-color-light);
   text-align: center;
   margin-top: 16px;

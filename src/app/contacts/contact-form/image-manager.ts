@@ -15,6 +15,7 @@ export class ImageManager {
   extractValidImageFile(event: Event): File | null {
     const input = event.target as HTMLInputElement;
     const file = input?.files?.[0];
+    const maxFileSize = 3 * 1024 * 1024;
 
     if (!file) {
       this.fileTypeError = false;
@@ -22,6 +23,11 @@ export class ImageManager {
     }
 
     if (!file.type.startsWith('image/')) {
+      this.fileTypeError = true;
+      return null;
+    }
+
+    if (file.size > maxFileSize) {
       this.fileTypeError = true;
       return null;
     }

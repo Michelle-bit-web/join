@@ -69,6 +69,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   showImageViewer = false;
   contactImages: string[] = [];
   contactImageKeys: string[] = [];
+  errorMessage: string = '';
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
@@ -100,12 +101,17 @@ export class ContactFormComponent implements OnInit, OnDestroy {
  */
   async onContactImageChanged(event: Event): Promise<void> {
     // this.imageManager.onContactImageChanged(event);
+    this.errorMessage = '';
     const file = this.imageManager.extractValidImageFile(event);
-    if (!file) return;
+    if (!file) {
+      this.errorMessage = 'Hoppla, please select an image file (max 3MB).';
+      return
+    };
     await this.deletePreviousImages();
     const imageKey = `${Date.now()}_${file.name}`;
     const base64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
     this.setImageState(file, imageKey, base64);
+     this.errorMessage = '';
   }
 
   /**

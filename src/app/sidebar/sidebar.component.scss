@@ -171,7 +171,7 @@
     width: 100%;
 
     a {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 400;
       color: #a8a8a8;
       text-decoration: none;
@@ -234,7 +234,7 @@
       color: #a8a8a8;
       cursor: pointer;
       padding: 2px 0;
-      font-size: 15px;
+      font-size: 16px;
 
       &:hover {
           color: #29abe2;
@@ -320,7 +320,7 @@
             height: 20px;
           }
           span {
-            font-size: 12px;
+            font-size: 16px;
             white-space: nowrap;
           }
         }
@@ -347,8 +347,11 @@
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 450px) {
   .sidebar .navigation li {
     width: 70px;
+    a span{
+      font-size: 14px;
+    }
   }
 }

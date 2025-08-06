@@ -25,8 +25,8 @@ export class UploadsComponent implements OnInit {
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
   @Output() imageUrls = new EventEmitter<string[]>();
   @Input() multiple: boolean = true;
-  @Input() maxImages: number = 10;
-  @Input() maxFileSize: number = 1 * 800 * 800; // 1MB
+  @Input() maxImages: number = 5;
+  @Input() maxFileSize: number = 3 * 1024 * 1024;
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
   @Input() assignedTo: 'user' | 'task' = 'task';
   @Input() isEditingMode: boolean = false;
@@ -82,6 +82,11 @@ export class UploadsComponent implements OnInit {
         continue;
         // this.errorMessage = 'Only image files are allowed';
         // continue;
+      }
+      if (file.size > this.maxFileSize) {
+        const maxSizeMB = (this.maxFileSize / 1024 / 1024).toFixed(2);
+        this.errorMessages.push(`File ${file.name} is too large. Max ${maxSizeMB} MB allowed.`);
+        continue;
       }
       if (this.uploadedImages.length >= this.maxImages) {
         this.errorMessages.push(`Maximum ${this.maxImages} images allowed`);

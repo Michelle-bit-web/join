@@ -14,8 +14,8 @@
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  padding-left: clamp(15px, 3vw, 50px);
-  padding-right: clamp(15px, 3vw, 50px);
+  padding-left: 24px;
+  padding-right: 8px;
   min-height: 100vh;
   overflow-y: auto;
 }
@@ -29,8 +29,7 @@
 
   h1 {
     font-family: var(--font-primary);
-    font-size: clamp(1.5rem, 5vw, 3.5rem);
-    font-weight: 600;
+    @include inter700-fs61;
     margin: 0;
     color: var(--text-color-dark);
   }
@@ -48,6 +47,7 @@
     font-weight: 400;
     margin: 0;
     color: black;
+    width: 45%;
   }
 }
 
@@ -97,7 +97,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 60%;
+  max-width: 70%;
 
   > p {
     font-family: var(--font-primary);
@@ -150,7 +150,7 @@
       min-width: fit-content;
       margin: 0;
       font-family: var(--font-primary);
-      font-size: 15px;
+      font-size: 16px;
       color: black;
       transition: color 0.2s, font-size 0.2s;
     }
@@ -160,12 +160,12 @@
 .contact-info {
   display: flex;
   flex-direction: column;
-  margin-top: clamp(15px, 3vw, 30px);
+  margin-top: clamp(16px, 3vw, 30px);
   gap: clamp(10px, 2vw, 20px);
 
   h3 {
     font-family: var(--font-primary);
-    font-size: clamp(14px, 2.5vw, 18px);
+    font-size: clamp(16px, 3vw, 20px);
     font-weight: 300;
     color: black;
     margin: 0 0 8px 0;
@@ -178,7 +178,7 @@
 
     .contact-label {
       font-family: var(--font-primary);
-      font-size: clamp(11px, 2vw, 14px);
+      font-size: clamp(16px, 3vw, 20px);
       font-weight: bold;
       color: black;
       margin: 0;
@@ -186,7 +186,7 @@
 
     .contact-value {
       font-family: var(--font-primary);
-      font-size: clamp(11px, 2vw, 14px);
+      font-size: clamp(16px, 2vw, 18px);
       font-weight: 400;
       color: black;
       margin: 0;
@@ -199,10 +199,10 @@
   }
 }
 
-@media (max-width: 1210px) {
+@media (max-width: 1120px) {
   .contact-header {
     h1 {
-      font-size: clamp(1.5rem, 2.5vw, 3.5rem);
+      @include inter700-fs47;
     }
 
     .header-divider {
@@ -216,15 +216,18 @@
 
   .user-name {
     gap: 10px;
+    max-width: 80%;
 
     > p {
-      font-size: clamp(18px, 2.5vw, 42px);
+      font-size: 32px;
     }
   }
+}
 
+@media (max-width: 1000px) {
   .user-logo {
-    width: clamp(60px, 8vw, 110px);
-    height: clamp(60px, 8vw, 110px);
+    width: 80px;
+    height: 80px;
 
     p {
       font-size: clamp(18px, 3vmin, 38px);
@@ -246,7 +249,6 @@
     width: 100%;
     margin: 0;
     padding-left: 20px;
-    padding-right: 20px;
     height: calc(100dvh - 180px);
   }
 
@@ -310,6 +312,7 @@
 
   .user-name {
     gap: 15px;
+    max-width: 100%;
 
     > p {
       font-size: 28px;
@@ -335,6 +338,25 @@
 
       .contact-value {
         font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    .user-name {
+      max-width: 70%;
+      p {
+        font-size: 24px;
+      }
+    }
+
+    .user-logo {
+      width: clamp(60px, 8vw, 110px);
+      height: clamp(60px, 8vw, 110px);
+
+      p {
+        font-size: clamp(18px, 3vmin, 38px);
+        font-weight: 500;
       }
     }
   }

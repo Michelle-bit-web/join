@@ -16,6 +16,7 @@
   @include inter400-fs16();
   h1 {
     @include inter700-fs16();
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -43,7 +44,7 @@
     @include word-break;
   }
   span {
-    @include inter400-fs12();
+    @include inter400-fs16();
   }
   .task-description.truncated {
     position: relative;
@@ -70,6 +71,9 @@
   height: fit-content;
   @include flex-center();
   gap: 8px;
+  span {
+    font-size: 14px;
+  }
 }
 
 .subtask-bar-default {
@@ -209,8 +213,8 @@ table {
     background-color: var(--background-default-light);
     border-radius: 50%;
     border: 2px solid var(--background-light);
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     @include flex-center();
     margin-left: -8px;
     &:first-child {
@@ -221,7 +225,7 @@ table {
     &.more-count {
       background-color: var(--background-default-dark);
       color: white;
-      font-size: 0.75rem;
+      font-size: 14px;
       font-weight: bold;
       cursor: default;
     }
@@ -229,7 +233,7 @@ table {
 }
 
 .contact-initials {
-  @include inter400-fs12;
+  @include inter400-fs14;
   color: var(--text-color-light, white);
 }
 
@@ -303,14 +307,14 @@ table {
     gap: 16px;
     padding: 16px 12px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-    font-size: 0.85rem;
+    font-size: 1rem;
     h1 {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .category-flag-card {
       padding: 3px 6px;
       border-radius: 8px;
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
   }
 }
@@ -336,14 +340,14 @@ table {
     gap: 16px;
     padding: 16px 12px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-    font-size: 0.85rem;
+    font-size: 1rem;
     h1 {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .category-flag-card {
       padding: 3px 6px;
       border-radius: 8px;
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
   }
 }
@@ -356,6 +360,11 @@ table {
     .task-description.truncated {
       max-height: 2lh;
       overflow: hidden;
+    }
+    h1 {
+      max-height: 2lh;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -376,7 +385,7 @@ table {
     right: 6px;
     a {
       padding: 6px 4px;
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
   }
 
