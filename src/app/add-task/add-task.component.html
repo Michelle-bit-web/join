@@ -35,7 +35,7 @@
     </button>
   </div>
   <div class="success-message" *ngIf="showSuccessMessage">
-    <div class="success-content">
+    <div class="success-content" aria-live="polite">
       <span
         >✓ Task successfully {{ isEditingMode ? "updated" : "created" }}!</span
       >
@@ -57,7 +57,7 @@
               (input)="onTitleInput()"
               [class.error]="validationErrors.showTitleError"
             />
-            <div class="error-message" *ngIf="validationErrors.showTitleError">
+            <div class="error-message" *ngIf="validationErrors.showTitleError" aria-live="polite">
               This field is required
             </div>
           </div>
@@ -84,7 +84,7 @@
               [class.error]="validationErrors.showDateError"
               [min]="getTodayDate()"
             />
-            <div class="error-message" *ngIf="validationErrors.showDateError">
+            <div class="error-message" *ngIf="validationErrors.showDateError" aria-live="polite">
               This field is required
             </div>
           </div>
@@ -218,6 +218,7 @@
             <div
               class="error-message"
               *ngIf="categoryManager.showCategoryError"
+              aria-live="polite"
             >
               This field is required
             </div>

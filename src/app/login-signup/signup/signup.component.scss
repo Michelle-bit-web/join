@@ -1,38 +1,38 @@
 @import "./../../../styles.scss";
 
 .signup-content {
-    position: relative;
-    max-width: 1440px;
-    margin: 0 auto;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .dark-logo-wrapper {
-    padding: 32px 40px;
+  padding: 32px 40px;
 
-    img {
-        @media (max-width: 768px) {
-            height: 72px;
-            width: 64px;
-        }
-
-        @media (max-width: 406px){
-            height: 48px;
-            width: auto;
-            margin: 0 4px;
-        }
+  img {
+    @media (max-width: 768px) {
+      height: 72px;
+      width: 64px;
     }
 
-    @media (max-width: 406px){
-        padding: 12px;
+    @media (max-width: 406px) {
+      height: 48px;
+      width: auto;
+      margin: 0 4px;
     }
+  }
 
-    @media(min-width: 768px) {
-        height: 180px;
-    }
+  @media (max-width: 406px) {
+    padding: 12px;
+  }
+
+  @media (min-width: 768px) {
+    height: 180px;
+  }
 }
 
 .signup-frame {
@@ -51,7 +51,7 @@
   height: 65dvh;
   max-height: 650px;
 
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     width: 90vw;
     max-width: 400px;
     padding: 24px 12px;
@@ -61,13 +61,11 @@
     max-height: 536px;
   }
 
-
-  @media (max-width: 406px){
+  @media (max-width: 406px) {
     margin-top: 2rem;
     overflow-y: auto;
   }
-
-}  
+}
 
 .signup-header {
   width: 100%;
@@ -87,219 +85,222 @@
     }
   }
 
-    h2 {
-        @include inter700-fs47;
-        color: var(--text-color-main);
-        position: relative;
-        margin-bottom: 0;
+  h2 {
+    @include inter700-fs47;
+    color: var(--text-color-main);
+    position: relative;
+    margin-bottom: 0;
 
-        &::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 3px;
-        background-color: var(--accent-primary-color);
-        margin: 12px auto 0;
-        border-radius: 3px;
-        }
-
-       @media (max-width: 768px){
-            font-family: "Inter";
-            font-weight: 700;
-            font-size: 36px;
-        }
-
-        @media (max-width: 406px){
-            font-family: "Inter";
-            font-weight: 700;
-            font-size: 26px;
-        }
+    &::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent-primary-color);
+      margin: 12px auto 0;
+      border-radius: 3px;
     }
-}    
+
+    @media (max-width: 768px) {
+      font-family: "Inter";
+      font-weight: 700;
+      font-size: 36px;
+    }
+
+    @media (max-width: 406px) {
+      font-family: "Inter";
+      font-weight: 700;
+      font-size: 26px;
+    }
+  }
+}
 
 form {
-    padding: 8px 33px;
-
+  padding: 8px 33px;
 }
 
 .form-group-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .form-group {
-    @include form-group();
-    background-color: var(--background-light);
-    position: relative;
-    
+  @include form-group();
+  background-color: var(--background-light);
+  position: relative;
+
+  input {
+    width: 100%;
+    background-color: transparent;
+    color: var(--text-color-main);
+    padding-right: 28px;
+    @include inter400-fs20();
+    height: 16px;
+    font-size: 16px;
+  }
+
+  input::placeholder {
+    color: var(--text-color-medium);
+    opacity: 1;
+  }
+
+  input.invalid {
+    border: 2px solid var(--text-color-error);
+  }
+
+  .input-icon {
+    position: absolute;
+    right: clamp(12px, 2vw, 18px);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
 
     input {
-        width: 100%;
-        background-color: transparent;
-        color: var(--text-color-main);
-        padding-right: 28px;
-        @include inter400-fs20();
-        height: 16px;
-        font-size: 16px;
-    }
-
-    input::placeholder {
-        color: var(--text-color-medium);
-        opacity: 1; 
-    }
-
-    input.invalid {
-        border: 2px solid var(--text-color-error);
+      font-size: 15px;
+      height: 14px;
     }
 
     .input-icon {
-        position: absolute;
-        right: clamp(12px, 2vw, 18px);
-        top: 50%;
-        transform: translateY(-50%);
-        height: 20px;
-        width: 20px;
-        opacity: 0.6;
+      width: 18px;
+      height: 18px;
+      right: 12px;
     }
-
-    @media(max-width: 768px) {
-        width: 100%;
-
-        input {
-            font-size: 15px;
-            height: 14px;
-        }
-
-        .input-icon {
-            width: 18px;
-            height: 18px;
-            right: 12px;
-        }
-    }
-
+  }
 }
 
 .checkbox-label {
-    @include flex-center;
-    gap: 8px;
-    margin: 8px;
-    margin-top: 16px;
-    width: 100%;
-    @include inter400-fs14();
-    color: var(--text-color-medium);
+  @include flex-center;
+  gap: 8px;
+  margin: 8px;
+  margin-top: 16px;
+  width: 100%;
+  @include inter400-fs14();
+  color: var(--text-color-medium);
+  cursor: pointer;
+  position: relative;
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
-    position: relative;
+    background-image: url("./../../../../public/assets/img/icons/checkbox.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
 
-    input[type="checkbox"] {
-        appearance: none;
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-        background-image: url("./../../../../public/assets/img/icons/checkbox.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        border: none;
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
-    }
+  input[type="checkbox"]:checked {
+    background-image: url("./../../../../public/assets/img/icons/checkbox-checked.png");
+  }
 
-    input[type="checkbox"]:checked {
-        background-image: url("./../../../../public/assets/img/icons/checkbox-checked.png");
-    }
+  input[type="checkbox"]:focus {
+    outline: 2px solid var(--background-default-light);
+    outline-offset: 1px;
+    border-radius: 4px;
+  }
 
-    .highlight {
-        color: var(--accent-primary-color);
-        text-decoration: none;
-        cursor: pointer;
-    }
+  .highlight {
+    color: var(--accent-primary-color);
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-    @media (max-width: 406px){
-        font-size: 12px;
-        gap: 4px;
-        margin: 4px;
-    }
+  @media (max-width: 406px) {
+    font-size: 12px;
+    gap: 4px;
+    margin: 4px;
+  }
 }
 
 .btn-wrapper {
-    width: 100%;
-    @include flex-center;
+  width: 100%;
+  @include flex-center;
 }
 
 .btn-signup {
-    cursor: pointer;
-    height: 44px;
-    border-radius: 8px;
-    border: unset;
-    min-width: 120px;
-    transition: background-color 0.2s ease;
-    justify-content: center;
-    @include btn-dark();
+  cursor: pointer;
+  height: 44px;
+  border-radius: 8px;
+  border: unset;
+  min-width: 120px;
+  transition: background-color 0.2s ease;
+  justify-content: center;
+  @include btn-dark();
 
-    &:hover {
-        background-color: #29abe2;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    }
+  &:hover {
+    background-color: #29abe2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
 
-    &:disabled {
-        background-color: #ccc;
-        color: #666;
-        cursor: not-allowed;
-        opacity: 0.6;
-    }
+  &:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 
-    @media (max-width: 406px){
-        font-size: 16px;
-        height: 32px;
-        min-width: 96px;
-    }
+  @media (max-width: 406px) {
+    font-size: 16px;
+    height: 32px;
+    min-width: 96px;
+  }
 }
 
 .colorError {
-    border: 1px solid var(--text-color-error);
+  border: 1px solid var(--text-color-error);
 }
 
 .error-message {
-    @include inter400-fs12;
-    color: var(--text-color-error);
-    display: hidden;
+  @include inter400-fs12;
+  color: var(--text-color-error);
+  display: hidden;
 
-    @media(max-width: 768px) {
-        font-size: 13px;
-    }
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 }
 
 .success-message {
-    @include inter400-fs12;
-    color: var(--text-color-success);
-    display: block;
-    margin-top: 16px;
-    text-align: center;
+  @include inter400-fs12;
+  color: var(--text-color-success);
+  display: block;
+  margin-top: 16px;
+  text-align: center;
 }
 
 .login-link {
-    @include inter400-fs12;
-    color: var(--text-color-light);
-    text-align: center;
-    margin-top: 16px;
-    
-    a {
-        color: var(--accent-color);
-        text-decoration: none;
-        
-        &:hover {
-            text-decoration: underline;
-        }
+  @include inter400-fs12;
+  color: var(--text-color-light);
+  text-align: center;
+  margin-top: 16px;
+
+  a {
+    color: var(--accent-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
+  }
 }
 
 input:focus {
-    border: unset;
+  border: unset;
 }
 
 .spinner {
@@ -320,10 +321,9 @@ input:focus {
 }
 
 .input-icon.toggle-eye {
-    cursor: pointer;
-    right: 16px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+  cursor: pointer;
+  right: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
-

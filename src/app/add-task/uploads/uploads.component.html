@@ -18,17 +18,6 @@
     />
     <p>Drag a file or browse</p>
     <span>Upload file</span>
-    <!-- <input
-      type="file"
-      id="filepicker"
-      name="uploadInput"
-      placeholder="Upload files"
-      accept="image/*"
-      (change)="onFileSelected($event)"
-      multiple
-      [maxLength]="10"
-      #filepicker
-    /> -->
   </button>
   <input
       type="file"
@@ -115,7 +104,7 @@
       </div>
     </div>
   </div>
-  <div class="error-message" *ngIf="errorMessages.length > 0">
+  <div class="error-message" *ngIf="errorMessages.length > 0" aria-live="polite">
     <p *ngFor="let msg of errorMessages">{{ msg }}</p>
   </div>
 </div>
