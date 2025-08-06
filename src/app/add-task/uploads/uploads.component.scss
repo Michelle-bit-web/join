@@ -84,11 +84,27 @@
     font-size: 16px;
   }
 
-  .close-btn-container {
+  .clear-btn-container {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-bottom: 8px;
+
+    .clear-btn {
+      width: fit-content;
+      height: auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: unset;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(1.1);
+      }
+    }
   }
 
   .image-grid {
@@ -159,7 +175,7 @@
     background-color: var(--accent-primary-color);
   }
 
-  .error-message p{
+  .error-message p {
     color: var(--text-color-error);
     font-family: Inter;
     font-size: 14px;

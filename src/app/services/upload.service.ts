@@ -25,6 +25,13 @@ export class UploadService {
     localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
+  /**
+ * Ersetzt alle gespeicherten Bilder im LocalStorage.
+ */
+  saveImages(images: UploadedImage[]): void {
+    localStorage.setItem('allImages', JSON.stringify(images));
+  }
+
   setImages(images: UploadedImage[]) {
     this.images = images;
   }
@@ -65,7 +72,7 @@ export class UploadService {
     localStorage.removeItem(this.storageKey);
   }
 
-   // Method to get images for a specific task
+  // Method to get images for a specific task
   getTaskImages(taskImageKeys: string[]): string[] {
     return taskImageKeys
       .map(key => this.getBase64ByKey(key))

@@ -10,7 +10,7 @@
         <h4>{{ getImageType() }} ( {{ getImageSize() }} )</h4>
       </div>
       <div class="viewer-actions-wrapper">
-        <button class="btn-download" (click)="downloadImage()">
+        <button type="button" class="btn-download" (click)="downloadImage()">
           <svg
             width="24"
             height="24"
@@ -37,7 +37,7 @@
             </g>
           </svg>
         </button>
-        <button class="btn-close" (click)="onClose($event)">
+        <button type="button" class="btn-close" (click)="onClose($event)">
           <svg
             width="24"
             height="24"
@@ -56,6 +56,7 @@
 
     <div class="image-container">
       <button
+        type="button"
         class="nav-btn prev-btn"
         (click)="previousImage()"
         [disabled]="currentIndex === 0"
@@ -84,6 +85,7 @@
       </div>
 
       <button
+        type="button"
         class="nav-btn next-btn"
         (click)="nextImage()"
         [disabled]="currentIndex === images.length - 1"
@@ -105,6 +107,7 @@
 
       <div class="nav-btn-wrapper-mobile">
         <button
+          type="button"
           class="nav-btn-mobile prev-btn"
           (click)="previousImage()"
           [disabled]="currentIndex === 0"
@@ -124,6 +127,7 @@
           </svg>
         </button>
         <button
+          type="button"
           class="nav-btn-mobile next-btn"
           (click)="nextImage()"
           [disabled]="currentIndex === images.length - 1"
@@ -149,7 +153,7 @@
       <div class="image-counter" *ngIf="images.length > 1">
         {{ currentIndex + 1 }} / {{ images.length }}
       </div>
-      <button class="btn-delete" (click)="onDeleteImage()" *ngIf="allowDelete">
+      <button type="button" class="btn-delete" (click)="onDeleteImage()" *ngIf="allowDelete">
         <svg
           width="25"
           height="24"

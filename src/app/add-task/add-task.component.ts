@@ -364,26 +364,21 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
- * Updates an existing task, including its details and associated subtasks.
- */
   async updateTask(): Promise<void> {
-    this.attachImagesToFormData();
-    const existingImageKeys = this.editingTask?.images ?? [];
+    // 1. Aktuelle Bilder direkt verwenden
+    const currentImageKeys = this.taskImages; // <- aus onImagesChanged()
+    const currentImages: UploadedImage[] = this.uploadsComponent.allImages();
+    // 2. FormData setzen
+    (this.formData as any).images = currentImageKeys;
+    this.taskImages = currentImageKeys;
 
-    // 2. Get new image keys from uploadsComponent
-    const newImageKeys = this.uploadsComponent.getImageKeys();
+    // // 3. Speichern der Bilder im UploadsComponent
+    // for (const img of this.uploadsComponent.uploadedImages) {
+    //   await this.uploadService.saveImage(img);
+    // }
 
-    // 3. Merge and deduplicate
-    const allImageKeys = Array.from(new Set([...existingImageKeys, ...newImageKeys]));
-
-    // 4. Assign to formData
-    (this.formData as any).images = allImageKeys;
-    this.taskImages = allImageKeys;
-    // Save all pending images before creating the task
-    for (const img of this.uploadsComponent.uploadedImages) {
-      await this.uploadService.saveImage(img);
-    }
+    // 3. Nur die sichtbaren Bilder im Storage behalten
+    await this.uploadService.saveImages(currentImages);
     this.uploadsComponent.uploadedImages = [];
 
     const updatedTask = this.buildUpdatedTask();
@@ -392,12 +387,40 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.taskService.clearEditingTask();
   }
 
-  /**
-   * Assigns the current image list to the form data before task construction.
-   */
-  private attachImagesToFormData(): void {
-    (this.formData as any).images = this.taskImages;
-  }
+  //   /**
+  //  * Updates an existing task, including its details and associated subtasks.
+  //  */
+  //   async updateTask(): Promise<void> {
+  //     this.attachImagesToFormData();
+  //     const existingImageKeys = this.editingTask?.images ?? [];
+
+  //     // 2. Get new image keys from uploadsComponent
+  //     const newImageKeys = this.uploadsComponent.getImageKeys();
+
+  //     // 3. Merge and deduplicate
+  //     const allImageKeys = Array.from(new Set([...existingImageKeys, ...newImageKeys]));
+
+  //     // 4. Assign to formData
+  //     (this.formData as any).images = allImageKeys;
+  //     this.taskImages = allImageKeys;
+  //     // Save all pending images before creating the task
+  //     for (const img of this.uploadsComponent.uploadedImages) {
+  //       await this.uploadService.saveImage(img);
+  //     }
+  //     this.uploadsComponent.uploadedImages = [];
+
+  //     const updatedTask = this.buildUpdatedTask();
+  //     await this.saveUpdatedTask(updatedTask);
+  //     await this.updateSubtasks();
+  //     this.taskService.clearEditingTask();
+  //   }
+
+  //   /**
+  //    * Assigns the current image list to the form data before task construction.
+  //    */
+  //   private attachImagesToFormData(): void {
+  //     (this.formData as any).images = this.taskImages;
+  //   }
 
   /**
    * Constructs an updated Task object from form inputs and managers.

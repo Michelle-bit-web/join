@@ -70,6 +70,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   contactImages: string[] = [];
   contactImageKeys: string[] = [];
   errorMessage: string = '';
+  imageMarkedForDeletion: boolean = false;
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
@@ -111,7 +112,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     const imageKey = `${Date.now()}_${file.name}`;
     const base64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
     this.setImageState(file, imageKey, base64);
-     this.errorMessage = '';
+    this.errorMessage = '';
   }
 
   /**
@@ -195,7 +196,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     if (this.imageBase64) {
       this.contactImages = [this.imageBase64];
       this.contactImageKeys = this.contactToEdit?.imageKey ? [this.contactToEdit.imageKey] :
-        this.uploadedImageKey ? [this.uploadedImageKey] : [];
+      this.uploadedImageKey ? [this.uploadedImageKey] : [];
       this.showImageViewer = true;
     }
   }
@@ -204,7 +205,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Closes the image viewer.
    */
   closeImageViewer() {
-   this.showImageViewer = false;
+    this.showImageViewer = false;
   }
 
   /**
@@ -212,17 +213,18 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   onDeleteImage(event: { imageKey?: string }) {
     if (event.imageKey) {
-      this.uploadService.deleteImage(event.imageKey);
+      // this.uploadService.deleteImage(event.imageKey);
+      this.imageMarkedForDeletion = true;
     }
 
     // Reset image state
     this.resetImageState();
 
     // Update contact if editing
-    if (this.contactToEdit) {
-      this.contactToEdit.imageKey = '';
-      this.updateContact(this.contactToEdit);
-    }
+    // if (this.contactToEdit) {
+    //   this.contactToEdit.imageKey = '';
+    //   this.updateContact(this.contactToEdit);
+    // }
 
     // Close image viewer
     this.closeImageViewer();
@@ -247,6 +249,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     }
     this.contactService.hideForm();
     this.contactForm.reset();
+    this.imageMarkedForDeletion = false;
     this.closeOverlay.emit('closed');
   }
 
@@ -258,6 +261,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
     const contact = this.buildContactFromForm();
+    if (this.imageMarkedForDeletion && this.contactToEdit?.imageKey) {
+      await this.uploadService.deleteImage(this.contactToEdit.imageKey);
+      contact.imageKey = '';
+    }
     if (this.isEditMode()) {
       this.updateContact(contact);
     } else {
@@ -291,24 +298,24 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   removeImage() {
-     if (!this.contactToEdit || !this.contactToEdit.id || !this.uploadedImageKey) return;
-        // Bild aus dem UploadService + localStorage entfernen
-        this.uploadService.deleteImage(this.uploadedImageKey);
+    if (!this.contactToEdit || !this.contactToEdit.id || !this.uploadedImageKey) return;
+    // Bild aus dem UploadService + localStorage entfernen
+    this.uploadService.deleteImage(this.uploadedImageKey);
 
-        this.uploadedImageKey = undefined;
-        this.imgData = undefined;
-        this.imageBase64 = null;
-        this.compressedBase64 = undefined;
+    this.uploadedImageKey = undefined;
+    this.imgData = undefined;
+    this.imageBase64 = null;
+    this.compressedBase64 = undefined;
 
-        const updatedContact: Contact = {
-            ...this.contactToEdit,
-            imageKey: undefined
-        };
+    const updatedContact: Contact = {
+      ...this.contactToEdit,
+      imageKey: ''
+    };
 
     this.updateContact(updatedContact);
 
     // Optional: auch im UI den Contact zurücksetzen
-    this.contactToEdit.imageKey = undefined;
+    this.contactToEdit.imageKey = '';
   }
 
   /**
