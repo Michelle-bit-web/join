@@ -16,7 +16,7 @@ section {
     max-width: 390px;
     min-width: 320px;
   }
-  @media (max-width: 780px) {
+  @media (max-width: 720px) {
     height: 90dvh;
   }
 }
@@ -230,7 +230,6 @@ input:focus {
   background-color: var(--background-default-dark);
   border-radius: 50%;
   position: relative;
-  @include flex-center;
   @media (max-width: 1000px) {
     border: 2px solid var(--background-light);
     position: absolute;
@@ -259,7 +258,7 @@ input:focus {
   max-height: 64px;
 }
 
-.upload-icon {
+.image-upload-icon {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -275,8 +274,10 @@ input:focus {
   }
 }
 
-.file-picker {
-  display: none;
+.user-image-upload-button {
+  @include flex-center();
+  width: fit-content;
+  height: fit-content;
 }
 
 .contact-initials {
