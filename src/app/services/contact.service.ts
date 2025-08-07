@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  deleteField,
   Firestore,
   collection,
   onSnapshot,
@@ -72,7 +73,7 @@ export class ContactService {
     '#FFA000', '#084c6bff', '#6bb604ff'
   ];
 
-  constructor( private firestore: Firestore ) {}
+  constructor(private firestore: Firestore) { }
 
   /**
    * Returns a Firestore reference to the `contacts` collection.
@@ -107,7 +108,7 @@ export class ContactService {
           });
           observer.next(contacts);
         },
-        (error) => {observer.error(error);}
+        (error) => { observer.error(error); }
       );
       return () => unsubscribe();
     });
@@ -152,12 +153,15 @@ export class ContactService {
    * @returns A JSON object containing name, email, and phone.
    */
   getCleanJson(updatedContact: Contact): Partial<Contact> {
-    return {
+    const contact: Contact = {
       name: updatedContact.name,
       email: updatedContact.email,
-      phone: updatedContact.phone,
-      imageKey: updatedContact.imageKey || undefined, // Ensure imageKey is included if present
+      phone: updatedContact.phone
     };
+    if (updatedContact.imageKey) {
+      contact.imageKey = updatedContact.imageKey;
+    }
+    return contact;
   }
 
   /**
@@ -200,6 +204,27 @@ export class ContactService {
   hideForm(): void {
     this.showFormSubject.next(false);
     this.editContactSubject.next(null);
+  }
+
+  /**
+   * Deletes the imageKey field from Firestore.
+   *
+   * @param contactToEdit - The contact to delete the imageKey from.
+   */
+
+  deleteImageFromContact(contactToEdit: Contact): void {
+    if (!contactToEdit.id) {
+      console.error('Contact id is undefined. Cannot delete image.');
+      return;
+    }
+    const contactRef = this.getSingleContactsRef(contactToEdit.id);
+    updateDoc(contactRef, {
+      imageKey: deleteField()
+    }).then(() => {
+      console.log('Image field deleted from contact:', contactToEdit.id);
+    }).catch((err) => {
+      console.error('Failed to delete image from contact:', err);
+    });
   }
 
   /**
