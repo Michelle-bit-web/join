@@ -109,7 +109,7 @@
 
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
     gap: 12px;
   }
 
@@ -130,6 +130,16 @@
     height: 120px;
     object-fit: cover;
     display: block;
+  }
+
+  .image-filename {
+    border: 2px solid var(--background-default-light);
+    border-radius: 0 5px 5px 0;
+    min-height: 40px;
+    @include inter400-fs16();
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
   }
 
   .image-overlay {

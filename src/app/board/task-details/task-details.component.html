@@ -119,12 +119,13 @@
           (click)="openImageViewer(i)"
         >
           <img
-            [src]="image"
-            [alt]="'Task image ' + (i + 1)"
+            [src]="image.base64"
+            [alt]="image.filename + ' (' + (i + 1) + ')' "
             class="task-image"
           />
+          <p class="image-filename">{{ image.filename }} test</p>
           <div class="image-overlay">
-            <button class="btn-download" (click)="downloadImage($event, i, taskImages[i])">
+            <button class="btn-download" (click)="downloadImage($event, i, image.imageKey)">
               <svg
                 width="24"
                 height="24"
@@ -227,7 +228,7 @@
   <!-- Image Viewer -->
   <app-image-viewer
     *ngIf="showImageViewer"
-    [images]="taskImages"
+    [images]="taskImageBase64"
     [imageKeys]="taskImageKeys"
     [startIndex]="currentImageIndex"
     [allowDelete]="true"

@@ -81,6 +81,7 @@
           [alt]="image.filename"
           class="preview-image"
         />
+        <p class="image-filename">{{ image.filename }}</p>
         <div class="image-overlay">
           <button
             type="button"
@@ -121,6 +122,7 @@
         (click)="openImageViewer(i)"
       >
         <img [src]="img.base64" [alt]="img.filename" class="preview-image" />
+        <p class="image-filename">{{ img.filename }}</p>
         <div class="image-overlay">
           <button
             type="button"

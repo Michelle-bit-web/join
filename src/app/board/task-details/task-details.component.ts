@@ -23,7 +23,7 @@ import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../services/contact.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { UploadService } from '../../services/upload.service';
+import { UploadedImage, UploadService } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
 @Component({
@@ -77,12 +77,17 @@ export class TaskDetailsComponent implements OnChanges {
   /**
    * The list of task images loaded from localStorage.
    */
-  taskImages: string[] = [];
+  taskImages: UploadedImage[] = [];
 
   /**
  * The list of task image keys for deletion.
  */
   taskImageKeys: string[] = [];
+
+  /**
+ * The list of task image keys for deletion.
+ */
+  taskImageBase64: string[] = [];
 
   /**
    * Controls whether the image viewer is shown.
@@ -224,18 +229,29 @@ export class TaskDetailsComponent implements OnChanges {
   /**
    * Loads task images from localStorage using the image keys stored in the task.
    */
+  // loadTaskImages() {
+  //   console.log('Loading task images for task:', this.task);
+  //   console.log('Task images array:', this.task?.imageKey);
+  //   if (this.task?.imageKey && this.task.imageKey.length > 0) {
+  //     this.taskImages = this.uploadService.getTaskImages(this.task.imageKey);
+  //     this.taskImageKeys = this.task.imageKey;
+  //     console.log('Loaded task images:', this.taskImages);
+  //     console.log('Task image keys:', this.taskImageKeys);
+  //   } else {
+  //     console.log('No images found for task');
+  //   }
+  // }
   loadTaskImages() {
-    console.log('Loading task images for task:', this.task);
-    console.log('Task images array:', this.task?.imageKey);
-    if (this.task?.imageKey && this.task.imageKey.length > 0) {
-      this.taskImages = this.uploadService.getTaskImages(this.task.imageKey);
-      this.taskImageKeys = this.task.imageKey;
-      console.log('Loaded task images:', this.taskImages);
-      console.log('Task image keys:', this.taskImageKeys);
-    } else {
-      console.log('No images found for task');
-    }
+  if (this.task?.imageKey && this.task.imageKey.length > 0) {
+    this.taskImages = this.uploadService.getImagesByKeys(this.task.imageKey);
+    this.taskImageKeys = this.task.imageKey;
+    this.taskImageBase64 = this.taskImages.map(img => img.base64);
+  } else {
+    this.taskImages = [];
+    this.taskImageKeys = [];
+    this.taskImageBase64 = [];
   }
+}
 
   /**
    * Opens the image viewer with the specified image index.
