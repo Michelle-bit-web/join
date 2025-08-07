@@ -73,15 +73,12 @@ export class UploadsComponent implements OnInit {
   }
 
   private async processFiles(files: File[]) {
-    // this.errorMessage = '';
     this.errorMessages = [];
 
     for (const file of files) {
       if (!file.type.startsWith('image/')) {
         this.errorMessages.push('Only image files are allowed');
         continue;
-        // this.errorMessage = 'Only image files are allowed';
-        // continue;
       }
       if (file.size > this.maxFileSize) {
         const maxSizeMB = (this.maxFileSize / 1024 / 1024).toFixed(2);
@@ -91,8 +88,6 @@ export class UploadsComponent implements OnInit {
       if (this.uploadedImages.length >= this.maxImages) {
         this.errorMessages.push(`Maximum ${this.maxImages} images allowed`);
         break;
-        // this.errorMessage = `Maximum ${this.maxImages} images allowed`;
-        // break;
       }
 
       try {
@@ -106,26 +101,15 @@ export class UploadsComponent implements OnInit {
           base64: compressedBase64,
           assignedTo: 'task'
         };
-        // Save to localStorage immediately for tasks (multiple images allowed)
-        // this.uploadService.saveImage(this.imgData!);
         this.uploadedImages.push(this.imgData!);
         this.uploadedUrls.push(compressedBase64);
         this.emitImagesChanged();
       } catch (error) {
         this.errorMessages.push(`Error processing file ${file.name}`);
-        // this.errorMessage = 'Error processing image';
         console.error('Error processing image:', error);
       }
     }
-    // setTimeout(() => {
-    //   this.errorMessages = errorMessages.length > 0 ? errorMessages[0] : '';
-    // });;
-    console.log(this.errorMessages)
   }
-
-  // clearSelectedImages() {
-  //   this.preloadedImages = [];
-  // }
 
   async compressImage(
     file: File,
@@ -197,12 +181,6 @@ export class UploadsComponent implements OnInit {
   }
 
   removeImage(index: number, source: 'uploaded' | 'preloaded') {
-    // const removedImage = this.uploadedImages[index];
-    // this.uploadedImages.splice(index, 1);
-    // const allImages = this.uploadService.getImages();
-    // const updatedImages = allImages.filter(img => img.imageKey !== removedImage.imageKey);
-    // localStorage.setItem('allImages', JSON.stringify(updatedImages));
-    // this.emitImagesChanged();
     if (source === 'uploaded') {
       this.selectedFiles.push(this.uploadedImages[index]);
       this.uploadedImages.splice(index, 1);
@@ -238,7 +216,6 @@ openImageViewer(index: number) {
 /**
  * Closes the image viewer.
  */
-// In your uploads.component.ts
 closeImageViewer(event ?: Event): void {
   if(event) {
     event.stopPropagation();

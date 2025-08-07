@@ -20,7 +20,20 @@
         class="user-logo"
         [style.background-color]="getContactColor(contact.name)"
       >
-        <img 
+      <ng-container *ngIf="getContactImage(contact) as image; else initials">
+      <img 
+        [src]="image" 
+        [alt]="contact.name"
+        class="contact-image"
+      />
+    </ng-container>
+
+    <ng-template #initials>
+      <p class="contact-initials">
+        {{ getInitials(contact.name) }}
+      </p>
+    </ng-template>
+        <!-- <img 
           *ngIf="getContactImage(contact)" 
           [src]="getContactImage(contact)" 
           [alt]="contact.name"
@@ -28,7 +41,7 @@
         />
         <p *ngIf="!getContactImage(contact)" class="contact-initials">
           {{ getInitials(contact.name) }}
-        </p>
+        </p> -->
       </div>
         <div class="user-name">
           <p>{{ contact.name || "Unbekannt" }}</p>

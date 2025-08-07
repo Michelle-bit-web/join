@@ -71,6 +71,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   contactImageKeys: string[] = [];
   errorMessage: string = '';
   imageMarkedForDeletion: boolean = false;
+  formSubmitted: boolean = false;
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
@@ -104,7 +105,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
  * @param event - The input change event.
  */
   async onContactImageChanged(event: Event): Promise<void> {
-    // this.imageManager.onContactImageChanged(event);
     this.errorMessage = '';
     const file = this.imageManager.extractValidImageFile(event);
     if (!file) {
@@ -239,7 +239,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   onClose(): void {
     // Clear any unsaved images from localStorage
-    if (this.uploadedImageKey && !this.contactToEdit) {
+    if (this.uploadedImageKey && !this.contactToEdit && !this.formSubmitted) {
       this.uploadService.deleteImage(this.uploadedImageKey);
     }
     this.contactService.hideForm();
@@ -255,6 +255,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
+    this.formSubmitted = true;
     const contact = this.buildContactFromForm();
     if (this.imageMarkedForDeletion && this.contactToEdit?.imageKey) {
       await this.uploadService.deleteImage(this.contactToEdit.imageKey);
@@ -324,10 +325,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @param contact - The new contact data to be added.
    */
   private async addNewContact(contact: Contact): Promise<void> {
+    console.log('imageData for new contact:', this.imgData);
     if (this.imgData?.imageKey && this.imgData?.base64) {
       this.uploadService.saveImage(this.imgData);
     }
     const newContact = await this.contactService.addContact(contact);
+    console.log('New contact added:', newContact);
     if (newContact) {
       this.addedContact.emit(newContact);
     }
