@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  deleteField,
   Firestore,
   collection,
   onSnapshot,
@@ -45,7 +46,7 @@ export interface Task {
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
 
-  images?: string[]; 
+  imageKey?: string[]; 
 }
 
 /**
@@ -147,7 +148,7 @@ export class TaskService {
   async addTask(newTask: Task): Promise<Task | null> {
     try {
       const tasksRef = this.getTasksRef();
-      const docRef = await addDoc(tasksRef, newTask);
+      const docRef = await addDoc(tasksRef, this.getCleanJson(newTask));
       return { id: docRef.id, ...newTask };
     } catch (err) {
       console.error('Error adding task:', err);
@@ -223,24 +224,48 @@ export class TaskService {
    */
   getCleanJson(updated: Task | Subtask) {
     if ('category' in updated) {
-      return {
-        title: updated.title,
-        description: updated.description,
-        date: updated.date,
-        priority: updated.priority,
-        status: updated.status,
-        assignedTo: updated.assignedTo,
-        category: updated.category,
-        images: updated.images,
-      };
-    } else if ('isCompleted' in updated) {
-      return {
-        title: updated.title,
-        isCompleted: updated.isCompleted
-      };
+    const clean: any = {
+      title: updated.title,
+      description: updated.description,
+      date: updated.date,
+      priority: updated.priority,
+      status: updated.status,
+      assignedTo: updated.assignedTo,
+      category: updated.category,
+    };
+    if (Array.isArray(updated.imageKey)) {
+      clean.imageKey = updated.imageKey;
     }
-    return {};
+    return clean;
+  } else if ('isCompleted' in updated) {
+    return {
+      title: updated.title,
+      isCompleted: updated.isCompleted
+    };
   }
+  return {};
+  }
+
+    /**
+     * Deletes the imageKey field from Firestore.
+     *
+     * @param task - The contact to delete the imageKey from.
+     */
+
+    deleteImageFromTask(task: Task): void {
+      if (!task.id) {
+        console.error('Task id is undefined. Cannot delete image.');
+        return;
+      }
+      const taskRef = this.getSingleTaskRef(task.id);
+      updateDoc(taskRef, {
+       imageKey: deleteField()
+      }).then(() => {
+        console.log('Image field deleted from task:', task.id);
+      }).catch((err) => {
+        console.error('Failed to delete image from task:', err);
+      });
+    }
 
   /**
    * Converts a Firestore Timestamp or Date object to a formatted string.

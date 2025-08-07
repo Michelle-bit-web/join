@@ -125,8 +125,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   async loadImages() {
-    if (this.editingTask && this.editingTask.images) {
-      this.taskImages = [...this.editingTask.images];
+    if (this.editingTask && this.editingTask.imageKey) {
+      this.taskImages = [...this.editingTask.imageKey];
       this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
       console.log('[AddTask] Uploaded images', this.uploadedImages);
     }
@@ -187,7 +187,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * @param task The task containing potential images
    */
   private loadImagesIfAvailable(task: Task): void {
-    if (task.images && task.images.length > 0) {
+    if (task.imageKey && task.imageKey.length > 0) {
       this.loadImages();
     }
   }
@@ -365,62 +365,30 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   async updateTask(): Promise<void> {
-    // 1. Aktuelle Bilder direkt verwenden
-    const currentImageKeys = this.taskImages; // <- aus onImagesChanged()
+    // 1. Get previous image keys for this task
+    const previousImageKeys = this.editingTask?.imageKey ?? [];
+    // 2. Get current image keys from UI
     const currentImages: UploadedImage[] = this.uploadsComponent.allImages();
-    // 2. FormData setzen
+    const currentImageKeys = currentImages.map(img => img.imageKey);
+    // 3. Find images that were removed from this task
+    const removedKeys = previousImageKeys.filter(key => !currentImageKeys.includes(key));
+    // 4. Remove only those images from local storage
+    if (removedKeys.length > 0) {
+      this.uploadService.deleteImages(removedKeys);
+    }
+    // Make sure formData.images is set to the current image keys
     (this.formData as any).images = currentImageKeys;
     this.taskImages = currentImageKeys;
-
-    // // 3. Speichern der Bilder im UploadsComponent
-    // for (const img of this.uploadsComponent.uploadedImages) {
-    //   await this.uploadService.saveImage(img);
-    // }
-
-    // 3. Nur die sichtbaren Bilder im Storage behalten
-    await this.uploadService.saveImages(currentImages);
-    this.uploadsComponent.uploadedImages = [];
-
+    // 5. Save/merge current images to local storage
+    this.uploadService.saveImages(currentImages);
+    // 6. Neues Task-Objekt aufbauen
     const updatedTask = this.buildUpdatedTask();
-    await this.saveUpdatedTask(updatedTask);
+    await this.taskService.updateTask(this.editingTask!.id!, updatedTask);
+    // 10. Subtasks aktualisieren (optional)
     await this.updateSubtasks();
+    // 11. Cleanup
     this.taskService.clearEditingTask();
   }
-
-  //   /**
-  //  * Updates an existing task, including its details and associated subtasks.
-  //  */
-  //   async updateTask(): Promise<void> {
-  //     this.attachImagesToFormData();
-  //     const existingImageKeys = this.editingTask?.images ?? [];
-
-  //     // 2. Get new image keys from uploadsComponent
-  //     const newImageKeys = this.uploadsComponent.getImageKeys();
-
-  //     // 3. Merge and deduplicate
-  //     const allImageKeys = Array.from(new Set([...existingImageKeys, ...newImageKeys]));
-
-  //     // 4. Assign to formData
-  //     (this.formData as any).images = allImageKeys;
-  //     this.taskImages = allImageKeys;
-  //     // Save all pending images before creating the task
-  //     for (const img of this.uploadsComponent.uploadedImages) {
-  //       await this.uploadService.saveImage(img);
-  //     }
-  //     this.uploadsComponent.uploadedImages = [];
-
-  //     const updatedTask = this.buildUpdatedTask();
-  //     await this.saveUpdatedTask(updatedTask);
-  //     await this.updateSubtasks();
-  //     this.taskService.clearEditingTask();
-  //   }
-
-  //   /**
-  //    * Assigns the current image list to the form data before task construction.
-  //    */
-  //   private attachImagesToFormData(): void {
-  //     (this.formData as any).images = this.taskImages;
-  //   }
 
   /**
    * Constructs an updated Task object from form inputs and managers.

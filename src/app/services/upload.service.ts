@@ -25,11 +25,13 @@ export class UploadService {
     localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
-  /**
- * Ersetzt alle gespeicherten Bilder im LocalStorage.
- */
   saveImages(images: UploadedImage[]): void {
-    localStorage.setItem('allImages', JSON.stringify(images));
+    const existing = this.getImages();
+    const filtered = existing.filter(
+      img => !images.some(newImg => newImg.imageKey === img.imageKey)
+    );
+    const merged = [...filtered, ...images];
+    localStorage.setItem(this.storageKey, JSON.stringify(merged));
   }
 
   setImages(images: UploadedImage[]) {

@@ -39,8 +39,6 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
 
 export class TaskDetailsComponent implements OnChanges {
 
-
-
   /**
    * Emits an event when the task detail view should be closed.
    */
@@ -228,10 +226,10 @@ export class TaskDetailsComponent implements OnChanges {
    */
   loadTaskImages() {
     console.log('Loading task images for task:', this.task);
-    console.log('Task images array:', this.task?.images);
-    if (this.task?.images && this.task.images.length > 0) {
-      this.taskImages = this.uploadService.getTaskImages(this.task.images);
-      this.taskImageKeys = this.task.images;
+    console.log('Task images array:', this.task?.imageKey);
+    if (this.task?.imageKey && this.task.imageKey.length > 0) {
+      this.taskImages = this.uploadService.getTaskImages(this.task.imageKey);
+      this.taskImageKeys = this.task.imageKey;
       console.log('Loaded task images:', this.taskImages);
       console.log('Task image keys:', this.taskImageKeys);
     } else {
@@ -265,8 +263,8 @@ export class TaskDetailsComponent implements OnChanges {
       this.uploadService.deleteImage(event.imageKey);
 
       // Remove image key from task, handling possible undefined
-      const updatedImages = this.task.images?.filter(key => key !== event.imageKey) || [];
-      this.task.images = updatedImages;
+      const updatedImages = this.task.imageKey?.filter(key => key !== event.imageKey) || [];
+      this.task.imageKey = updatedImages;
 
       // Update task in database
       this.taskService.updateTask(this.task.id, this.task);

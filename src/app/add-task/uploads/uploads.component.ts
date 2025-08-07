@@ -182,84 +182,84 @@ export class UploadsComponent implements OnInit {
 
   removeImage(index: number, source: 'uploaded' | 'preloaded') {
     if (source === 'uploaded') {
-      this.selectedFiles.push(this.uploadedImages[index]);
       this.uploadedImages.splice(index, 1);
     } else if (source === 'preloaded') {
-      this.selectedFiles.push(this.preloadedImages[index]);
       this.preloadedImages.splice(index, 1);
     }
-
-    const allImages = this.uploadService.getImages();
-    const updatedImages = allImages.filter(img => img.imageKey !== this.selectedFiles[0].imageKey);
-    localStorage.setItem('allImages', JSON.stringify(updatedImages));
+    if (!this.isEditingMode) {
+      const allImages = this.uploadService.getImages();
+      const updatedImages = allImages.filter(img => img.imageKey !== this.selectedFiles[0]?.imageKey);
+      localStorage.setItem('allImages', JSON.stringify(updatedImages));
+    }
     this.emitImagesChanged();
-    this.selectedFiles = [];
   }
 
-removeAllImages() {
-  this.uploadedImages = [];
-  this.preloadedImages = [];
-  const allImages = this.uploadService.getImages();
-  localStorage.setItem('allImages', JSON.stringify(allImages));
-  this.emitImagesChanged();
-}
-
-/**
-* Opens the image viewer for the contact image.
-*/
-openImageViewer(index: number) {
-  const imageUrls = this.uploadedImages.map(img => img.base64);
-  this.showImageViewer = true;
-  console.log('Open image viewer for index:', index, 'with images:', imageUrls);
-}
-
-/**
- * Closes the image viewer.
- */
-closeImageViewer(event ?: Event): void {
-  if(event) {
-    event.stopPropagation();
-    event.preventDefault();
+  removeAllImages() {
+    this.uploadedImages = [];
+    this.preloadedImages = [];
+    if (!this.isEditingMode) {
+      const allImages = this.uploadService.getImages();
+      localStorage.setItem('allImages', JSON.stringify(allImages));
+    }
+    this.emitImagesChanged();
   }
+
+  /**
+  * Opens the image viewer for the contact image.
+  */
+  openImageViewer(index: number) {
+    const imageUrls = this.uploadedImages.map(img => img.base64);
+    this.showImageViewer = true;
+    console.log('Open image viewer for index:', index, 'with images:', imageUrls);
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     this.showImageViewer = false;
-}
-
-/**
- * Handles image deletion from the image viewer.
- */
-onDeleteImage(event: { imageKey?: string }) {
-  if (event.imageKey) {
-    this.uploadService.deleteImage(event.imageKey);
   }
-}
 
-private emitImagesChanged() {
-  this.imagesChanged.emit([...this.uploadedImages]);
-}
+  /**
+   * Handles image deletion from the image viewer.
+   */
+  onDeleteImage(event: { imageKey?: string }) {
+    if (event.imageKey) {
+      this.uploadService.deleteImage(event.imageKey);
+    }
+  }
 
-setImages(images: UploadedImage[]) {
-  this.uploadedImages = images;
-  this.emitImagesChanged();
-}
+  private emitImagesChanged() {
+    this.imagesChanged.emit([...this.uploadedImages]);
+  }
 
-getImageKeys(): string[] {
-  return this.uploadedImages.map(img => img.imageKey);
-}
+  setImages(images: UploadedImage[]) {
+    this.uploadedImages = images;
+    this.emitImagesChanged();
+  }
 
-clearImages() {
-  this.uploadedImages = [];
-  this.emitImagesChanged();
-}
+  getImageKeys(): string[] {
+    return this.uploadedImages.map(img => img.imageKey);
+  }
 
-allImages(): UploadedImage[] {
-  return [...this.uploadedImages, ...this.preloadedImages];
-}
+  clearImages() {
+    this.uploadedImages = [];
+    this.emitImagesChanged();
+  }
 
-getAllImageKeys(): string[] {
-  return this.allImages().map(img => img.imageKey);
-}
+  allImages(): UploadedImage[] {
+    return [...this.uploadedImages, ...this.preloadedImages];
+  }
 
-getAllImageBase64(): string[] {
-  return this.allImages().map(img => img.base64);
-}
+  getAllImageKeys(): string[] {
+    return this.allImages().map(img => img.imageKey);
+  }
+
+  getAllImageBase64(): string[] {
+    return this.allImages().map(img => img.base64);
+  }
 }

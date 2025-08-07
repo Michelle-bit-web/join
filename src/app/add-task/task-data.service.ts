@@ -60,7 +60,7 @@ export class TaskDataService {
       status,
       assignedTo: uniqueContactIds,
       category: categoryManager.getSelectedCategory() as 'technical' | 'user story',
-      images: formData.images || [],
+      imageKey: formData.images || [],
     };
     if (id) {
       task.id = id;
