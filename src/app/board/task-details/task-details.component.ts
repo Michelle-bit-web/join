@@ -37,7 +37,7 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
   styleUrl: './task-details.component.scss'
 })
 
-export class TaskDetailsComponent  {
+export class TaskDetailsComponent {
 
   /**
    * Emits an event when the task detail view should be closed.
@@ -62,7 +62,6 @@ export class TaskDetailsComponent  {
   /**
    * The list of contacts assigned to this task.
    */
-  // @Input() contactList: Contact[] = [];
   contactList: Contact[] = [];
 
   /**
@@ -123,17 +122,6 @@ export class TaskDetailsComponent  {
     this.loadSubtasks();
     this.loadTaskImages();
   }
-
-//   /**
-//  * Lifecycle hook to reload images when task input changes.
-//  */
-//   ngOnChanges(changes: SimpleChanges): void {
-//     if (changes['task']?.currentValue && changes['task']?.currentValue !== changes['task']?.previousValue) {
-//       this.contactList = [];
-//       this.loadAssignedContacts(); 
-//       this.loadTaskImages();
-//     }
-//   }
 
   /**
    * Closes the task detail view and emits the close event.
@@ -231,16 +219,16 @@ export class TaskDetailsComponent  {
    * Loads task images from localStorage using the image keys stored in the task.
    */
   loadTaskImages() {
-  if (this.task?.imageKey && this.task.imageKey.length > 0) {
-    this.taskImages = this.uploadService.getImagesByKeys(this.task.imageKey);
-    this.taskImageKeys = this.task.imageKey;
-    this.taskImageBase64 = this.taskImages.map(img => img.base64);
-  } else {
-    this.taskImages = [];
-    this.taskImageKeys = [];
-    this.taskImageBase64 = [];
+    if (this.task?.imageKey && this.task.imageKey.length > 0) {
+      this.taskImages = this.uploadService.getImagesByKeys(this.task.imageKey);
+      this.taskImageKeys = this.task.imageKey;
+      this.taskImageBase64 = this.taskImages.map(img => img.base64);
+    } else {
+      this.taskImages = [];
+      this.taskImageKeys = [];
+      this.taskImageBase64 = [];
+    }
   }
-}
 
   /**
    * Opens the image viewer with the specified image index.
@@ -260,25 +248,16 @@ export class TaskDetailsComponent  {
   }
 
   /**
-  * Handles image deletion from the image viewer.
-  */
+   * Handles image deletion from the image viewer.
+   */
   onDeleteImage(event: { index: number, imageKey?: string }) {
     if (event.imageKey && this.task.id) {
-      // Remove image from localStorage
       this.uploadService.deleteImage(event.imageKey);
-
-      // Remove image key from task, handling possible undefined
       const updatedImages = this.task.imageKey?.filter(key => key !== event.imageKey) || [];
       this.task.imageKey = updatedImages;
-
-      // Update task in database
       this.taskService.updateTask(this.task.id, this.task);
-
-      // Reload images
       this.loadTaskImages();
     }
-
-    // Close image viewer
     this.closeImageViewer();
   }
 

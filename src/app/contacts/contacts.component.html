@@ -1,21 +1,21 @@
 <div class="contacts-layout">
-    <div
-      class="contact-list-container"
-     [class.mobile-hidden]="showContactDetails"
-    >
-     <app-contact-list
-       (contactSelected)="onContactSelected()"
-     ></app-contact-list>
-    </div>
-     <div
-       class="contact-details-wrapper"
-       [class.mobile-visible]="showContactDetails"
-     >
-      <app-contact-details
-        (backToList)="onBackToList()"
-        (noContactVisible)="onNoContactVisible()"
-      ></app-contact-details>
-    </div>
+  <div
+    class="contact-list-container"
+    [class.mobile-hidden]="showContactDetails"
+  >
+    <app-contact-list
+      (contactSelected)="onContactSelected()"
+    ></app-contact-list>
+  </div>
+  <div
+    class="contact-details-wrapper"
+    [class.mobile-visible]="showContactDetails"
+  >
+    <app-contact-details
+      (backToList)="onBackToList()"
+      (noContactVisible)="onNoContactVisible()"
+    ></app-contact-details>
+  </div>
 </div>
 
 <div
@@ -27,9 +27,9 @@
 >
   <div class="max-width-container">
     <app-contact-form
-    (addedContact)="onContactAdded($event)"
-    (closeOverlay)="removeBackground($event)"
-  ></app-contact-form>
+      (addedContact)="onContactAdded($event)"
+      (closeOverlay)="removeBackground($event)"
+    ></app-contact-form>
   </div>
 </div>
 

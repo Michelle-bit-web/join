@@ -1,11 +1,15 @@
 <div class="login-header-wrapper">
-    <div class="dark-logo-wrapper">
-        <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo" [@fadeOut]="logoState">
+  <div class="dark-logo-wrapper">
+    <img
+      src="./assets/img/logo/favicon.png"
+      alt="Dark Join Logo"
+      [@fadeOut]="logoState"
+    />
+  </div>
+  <a routerLink="/signup" class="wanna-signup-wrapper">
+    <span>Not a Join user?</span>
+    <div class="btn-wrapper">
+      <button class="btn-signup">Sign up</button>
     </div>
-    <a routerLink="/signup" class="wanna-signup-wrapper">
-        <span>Not a Join user?</span>
-        <div class="btn-wrapper">
-            <button class="btn-signup">Sign up</button>
-        </div>
-    </a>
+  </a>
 </div>

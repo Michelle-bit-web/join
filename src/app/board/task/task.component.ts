@@ -101,7 +101,7 @@ export class TaskComponent {
   constructor(
     public taskService: TaskService,
     public contactService: ContactService
-  ) {}
+  ) { }
 
   /**
    * Detects clicks outside the "dots" menu and closes it if open.
@@ -231,9 +231,9 @@ export class TaskComponent {
     }
   }
 
-   /**
-   * Returns a unique list of contacts (removes duplicates based on ID)
-   */
+  /**
+  * Returns a unique list of contacts (removes duplicates based on ID)
+  */
   getAllUniqueContacts(): Contact[] {
     if (!this.contactList || this.contactList.length === 0) {
       return [];

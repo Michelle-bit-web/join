@@ -93,7 +93,7 @@ export class TaskDataService {
       .filter(contact => assignedToIds.includes(contact.id as string));
     contactManager.setSelectedContacts(selectedContacts);
   }
-  
+
   private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
     const contacts = contactManager.getSelectedContacts();
     return [...new Set(contacts.map(c => c.id).filter(id => id !== undefined))] as string[];

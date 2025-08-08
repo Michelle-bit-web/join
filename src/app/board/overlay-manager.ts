@@ -22,7 +22,7 @@ export class OverlayManager {
   constructor(
     private router: Router,
     private taskService: TaskService
-  ) {}
+  ) { }
 
   /**
    * Gets the current animation direction

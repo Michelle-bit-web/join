@@ -1,22 +1,22 @@
 @import "./../../styles.scss";
 $form-width: 1000px;
 $input-width: 460px;
-$border-color: #D1D1D1;
+$border-color: #d1d1d1;
 $border-radius: 10px;
 $form-padding: clamp(20px, calc(2vw + 10px), 40px);
 $mobile-breakpoint: 768px;
 $small-mobile-breakpoint: 480px;
-@import './mixins';
-@import './form-elements';
-@import './dropdown';
-@import './subtasks';
+@import "./mixins";
+@import "./form-elements";
+@import "./dropdown";
+@import "./subtasks";
 
 .layout-container {
   display: flex;
   flex-direction: column;
   height: calc(100dvh - 200px);
   overflow: hidden;
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     height: calc(100dvh - 180px);
   }
 }
@@ -49,12 +49,12 @@ $small-mobile-breakpoint: 480px;
     border-radius: 50%;
     transition: all 0.2s ease;
     @include flex-center;
-    
+
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
       transform: translateY(-50%) scale(1.1);
     }
-    
+
     svg {
       width: 24px;
       height: 24px;
@@ -63,15 +63,15 @@ $small-mobile-breakpoint: 480px;
 
   @media (max-width: $mobile-breakpoint) {
     height: 120px;
-    
+
     h1 {
       font-size: clamp(32px, 6vw, 48px);
       text-align: center;
     }
-    
+
     .btn-close-overlay {
       padding: 6px;
-      
+
       svg {
         width: 20px;
         height: 20px;
@@ -82,16 +82,16 @@ $small-mobile-breakpoint: 480px;
   @media (max-width: $small-mobile-breakpoint) {
     height: 100px;
     padding: 0 16px;
-    
+
     h1 {
       font-size: 28px;
       text-align: center;
     }
-    
+
     .btn-close-overlay {
       right: 16px;
       padding: 4px;
-      
+
       svg {
         width: 18px;
         height: 18px;
@@ -102,13 +102,15 @@ $small-mobile-breakpoint: 480px;
   @media (max-width: 310px) {
     height: 80px;
     padding: 0 12px;
-    
-    h1 { font-size: 24px; }
-    
+
+    h1 {
+      font-size: 24px;
+    }
+
     .btn-close-overlay {
       right: 12px;
       padding: 4px;
-      
+
       svg {
         width: 16px;
         height: 16px;
@@ -117,7 +119,7 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-.add-task-content { 
+.add-task-content {
   padding: 0 $form-padding;
   display: block;
   width: 100%;
@@ -125,14 +127,14 @@ $small-mobile-breakpoint: 480px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;
-  
+
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
     padding-bottom: 100px;
     overflow-y: auto;
     min-height: 0;
   }
-  
+
   @media (max-width: $small-mobile-breakpoint) {
     padding: 16px;
     padding-bottom: 100px;
@@ -143,14 +145,14 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-.task-form { 
-  @include flex-column; 
-  gap: 32px; 
+.task-form {
+  @include flex-column;
+  gap: 32px;
   width: 100%;
   max-width: $form-width;
   margin: 0 auto;
   padding-bottom: 24px;
-  
+
   @media (max-width: $mobile-breakpoint) {
     gap: 24px;
     text-align: left;
@@ -158,12 +160,12 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-.form-main { 
-  display: flex; 
-  gap: 40px; 
+.form-main {
+  display: flex;
+  gap: 40px;
   align-items: flex-start;
   width: 100%;
-  
+
   @media (max-width: $mobile-breakpoint) {
     flex-direction: column;
     gap: 24px;
@@ -171,29 +173,26 @@ $small-mobile-breakpoint: 480px;
   }
 }
 
-.form-divider { 
-  width: 1px; 
-  background-color: $border-color; 
-  flex-shrink: 0; 
+.form-divider {
+  width: 1px;
+  background-color: $border-color;
+  flex-shrink: 0;
   align-self: stretch;
-  
+
   @media (max-width: $mobile-breakpoint) {
     display: none;
   }
 }
 
-.form-left, .form-right { 
-  @include flex-column; 
-  gap: 18px; 
+.form-left,
+.form-right {
+  @include flex-column;
+  gap: 18px;
   width: 100%;
   max-width: $input-width;
-  
+
   @media (max-width: $mobile-breakpoint) {
     max-width: 100%;
     text-align: left;
   }
 }
-
-
-
-

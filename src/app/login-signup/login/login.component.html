@@ -1,60 +1,134 @@
 <div class="login-content">
-    <app-login-header class="login-header"></app-login-header>
-    <div 
-    class="dark-logo-wrapper" 
+  <app-login-header class="login-header"></app-login-header>
+  <div
+    class="dark-logo-wrapper"
     [@fadeOutWrapper]="logoState"
-    [ngStyle]="{'background': isTouchDevice ? '#2a3647' : 'transparent'}">
-        <img 
-        [src]="isTouchDevice ? './assets/img/logo/logo.png' : './assets/img/logo/favicon.png'"
-        alt="Join Logo" 
-        [ngClass]="{'load':pageLoaded}">
-    </div>
-    <div class="main-content-wrapper">
-        <section class="login-frame">
-            <h2>Log in</h2>
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <div class="form-group-wrapper flex-center">
-                    <div>
-                        <div class="form-group" [ngClass]="{'colorError': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
-                            <label for="email"></label>
-                            <input id="email" type="email" placeholder="Email" formControlName="email">
-                            <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
-                        </div>
-                        <p class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" aria-live="polite">
-                            {{ getValidationMessage('email') }}
-                        </p>
-                    </div>
-                    <div>
-                        <div class="form-group" [ngClass]="{'colorError': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
-                            <label for="password"></label>
-                            <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password">
-                            <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!loginForm.get('password')?.value">
-                            <img class="input-icon toggle-eye" [src]="showPassword ? 'assets/img/icons/visibility.png' : 'assets/img/icons/visibility-off.png'" alt="Toggle Password Visibility" *ngIf="loginForm.get('password')?.value" (click)="showPassword = !showPassword">
-                        </div>
-                        <p class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" aria-live="polite">
-                            {{ getValidationMessage('password') }}
-                        </p>
-                    </div>
-                    <p class="error-message" *ngIf="errorMessage" aria-live="polite">{{ errorMessage }}</p>
-                </div>
-                <div class="btn-wrapper">
-                    <button type="submit" class="btn-login" [disabled]="loginForm.invalid || isLoading">
-                        {{ isLoading ? 'Loading...' : 'Log in' }}
-                    </button>
-                    <button type="button" class="btn-guestlogin" (click)="onGuestLogin()" [disabled]="isLoading">
-                        {{ isLoading ? 'Loading...' : 'Guest Log in' }}
-                    </button>
-                </div>
-            </form>
-        </section>
-       <div class="lower-content-wrapper">          
-            <div class="wanna-signup-wrapper">
-                <span>Not a Join user?</span>
-                <div routerLink="/signup" class="btn-wrapper">
-                    <button class="btn-signup">Sign up</button>
-                </div>
+    [ngStyle]="{ background: isTouchDevice ? '#2a3647' : 'transparent' }"
+  >
+    <img
+      [src]="
+        isTouchDevice
+          ? './assets/img/logo/logo.png'
+          : './assets/img/logo/favicon.png'
+      "
+      alt="Join Logo"
+      [ngClass]="{ load: pageLoaded }"
+    />
+  </div>
+  <div class="main-content-wrapper">
+    <section class="login-frame">
+      <h2>Log in</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group-wrapper flex-center">
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  loginForm.get('email')?.invalid &&
+                  loginForm.get('email')?.touched
+              }"
+            >
+              <label for="email"></label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                formControlName="email"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/mail.png"
+                alt="Mail Icon"
+              />
             </div>
-            <app-footer></app-footer>
+            <p
+              class="error-message"
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              "
+              aria-live="polite"
+            >
+              {{ getValidationMessage("email") }}
+            </p>
+          </div>
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+              }"
+            >
+              <label for="password"></label>
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/lock.png"
+                alt="Lock Icon"
+                *ngIf="!loginForm.get('password')?.value"
+              />
+              <img
+                class="input-icon toggle-eye"
+                [src]="
+                  showPassword
+                    ? 'assets/img/icons/visibility.png'
+                    : 'assets/img/icons/visibility-off.png'
+                "
+                alt="Toggle Password Visibility"
+                *ngIf="loginForm.get('password')?.value"
+                (click)="showPassword = !showPassword"
+              />
+            </div>
+            <p
+              class="error-message"
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+              aria-live="polite"
+            >
+              {{ getValidationMessage("password") }}
+            </p>
+          </div>
+          <p class="error-message" *ngIf="errorMessage" aria-live="polite">
+            {{ errorMessage }}
+          </p>
         </div>
+        <div class="btn-wrapper">
+          <button
+            type="submit"
+            class="btn-login"
+            [disabled]="loginForm.invalid || isLoading"
+          >
+            {{ isLoading ? "Loading..." : "Log in" }}
+          </button>
+          <button
+            type="button"
+            class="btn-guestlogin"
+            (click)="onGuestLogin()"
+            [disabled]="isLoading"
+          >
+            {{ isLoading ? "Loading..." : "Guest Log in" }}
+          </button>
+        </div>
+      </form>
+    </section>
+    <div class="lower-content-wrapper">
+      <div class="wanna-signup-wrapper">
+        <span>Not a Join user?</span>
+        <div routerLink="/signup" class="btn-wrapper">
+          <button class="btn-signup">Sign up</button>
+        </div>
+      </div>
+      <app-footer></app-footer>
     </div>
+  </div>
 </div>

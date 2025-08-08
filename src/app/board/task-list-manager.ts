@@ -34,7 +34,7 @@ export class TaskListManager {
   getTodoTasks(): Task[] {
     return this.todo;
   }
-
+  
   getInProgressTasks(): Task[] {
     return this.inprogress;
   }
@@ -185,7 +185,6 @@ export class TaskListManager {
     this.awaitfeedback = this.sortTasksByDueDate(this.awaitfeedback);
     this.done = this.sortTasksByDueDate(this.done);
   }
-
 
   /**
    * Empties all task lists (to-do, in-progress, await-feedback, done).

@@ -17,7 +17,6 @@ export class UploadsComponent implements OnInit {
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   taskCreated: boolean = false;
-  // errorMessage: string = '';
   errorMessages: string[] = [];
   imgData?: UploadedImage;
   isDragOver = false;
@@ -228,11 +227,8 @@ export class UploadsComponent implements OnInit {
    * Handles image deletion from the image viewer.
    */
   onDeleteImage(event: { index: number, imageKey?: string }) {
-    // if (event.imageKey) {
-    //   this.uploadService.deleteImage(event.imageKey);
-    // }
     if (this.isEditingMode && event.imageKey) {
-      this.  removeImage(event.index, 'preloaded');
+      this.removeImage(event.index, 'preloaded');
     } else if (!this.isEditingMode && event.imageKey) {
       this.uploadService.deleteImage(event.imageKey);
     }

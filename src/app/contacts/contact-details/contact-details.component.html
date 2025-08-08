@@ -5,7 +5,10 @@
       <div class="header-divider"></div>
       <p>Better with a team</p>
       <div class="mobile-back-btn" (click)="onBackToList()">
-        <img src="assets/img/icons/arrow-left-line.png" alt="Zurück zur Kontaktliste" />
+        <img
+          src="assets/img/icons/arrow-left-line.png"
+          alt="Zurück zur Kontaktliste"
+        />
       </div>
     </div>
 
@@ -17,32 +20,21 @@
     >
       <div class="contact-container">
         <div
-        class="user-logo"
-        [style.background-color]="getContactColor(contact.name)"
-      >
-      <ng-container *ngIf="getContactImage(contact) as image; else initials">
-      <img 
-        [src]="image" 
-        [alt]="contact.name"
-        class="contact-image"
-      />
-    </ng-container>
+          class="user-logo"
+          [style.background-color]="getContactColor(contact.name)"
+        >
+          <ng-container
+            *ngIf="getContactImage(contact) as image; else initials"
+          >
+            <img [src]="image" [alt]="contact.name" class="contact-image" />
+          </ng-container>
 
-    <ng-template #initials>
-      <p class="contact-initials">
-        {{ getInitials(contact.name) }}
-      </p>
-    </ng-template>
-        <!-- <img 
-          *ngIf="getContactImage(contact)" 
-          [src]="getContactImage(contact)" 
-          [alt]="contact.name"
-          class="contact-image"
-        />
-        <p *ngIf="!getContactImage(contact)" class="contact-initials">
-          {{ getInitials(contact.name) }}
-        </p> -->
-      </div>
+          <ng-template #initials>
+            <p class="contact-initials">
+              {{ getInitials(contact.name) }}
+            </p>
+          </ng-template>
+        </div>
         <div class="user-name">
           <p>{{ contact.name || "Unbekannt" }}</p>
 
@@ -128,7 +120,11 @@
       </div>
 
       <div class="mobile-option-item" (click)="onDeleteContact()">
-        <img class="default-icon" src="assets/img/icons/delete.png" alt="Kontakt löschen Icon" />
+        <img
+          class="default-icon"
+          src="assets/img/icons/delete.png"
+          alt="Kontakt löschen Icon"
+        />
         <img
           class="hover-icon"
           src="assets/img/icons/delete-hover.png"

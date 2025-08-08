@@ -27,9 +27,7 @@ export class UploadService {
 
   saveImages(images: UploadedImage[]): void {
     const existing = this.getImages();
-    const filtered = existing.filter(
-      img => !images.some(newImg => newImg.imageKey === img.imageKey)
-    );
+    const filtered = existing.filter(img => !images.some(newImg => newImg.imageKey === img.imageKey));
     const merged = [...filtered, ...images];
     localStorage.setItem(this.storageKey, JSON.stringify(merged));
   }
@@ -74,14 +72,12 @@ export class UploadService {
     localStorage.removeItem(this.storageKey);
   }
 
-  // Method to get images for a specific task
   getTaskImages(taskImageKeys: string[]): string[] {
     return taskImageKeys
       .map(key => this.getBase64ByKey(key))
       .filter(base64 => base64 !== null) as string[];
   }
 
-  // Method to get image for a specific contact
   getContactImage(contactImageKey: string): string | null {
     return this.getBase64ByKey(contactImageKey);
   }

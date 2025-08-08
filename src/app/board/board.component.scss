@@ -324,9 +324,11 @@ section {
   gap: 24px;
   position: relative;
   @include inter400-fs20();
+
   h1 {
     @include inter700-fs47();
   }
+  
   @media (max-width: 550px) {
     width: 95%;
   }
@@ -344,6 +346,7 @@ section {
   border-radius: 50%;
   border: unset;
   background-color: transparent;
+
   &:hover {
     background-color: var(--background-default-light);
   }

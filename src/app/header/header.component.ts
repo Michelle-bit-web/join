@@ -64,7 +64,7 @@ export class HeaderComponent {
    * Initializes the header component and injects the authentication service.
    * @param authService Service responsible for user authentication.
    */
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   /**
    * Updates the `isMobile` flag and closes the menu on window resize

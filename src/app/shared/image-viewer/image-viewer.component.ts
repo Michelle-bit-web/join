@@ -86,7 +86,7 @@ export class ImageViewerComponent {
         index: this.currentIndex,
         imageKey: this.currentImageKey,
       });
-      if(this.imageKeys.length <= 0) {
+      if (this.imageKeys.length <= 0) {
         this.onClose(new Event('close'));
       }
     }

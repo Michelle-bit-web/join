@@ -1,18 +1,30 @@
 .subtask-input {
   @extend %dropdown-base;
-  
-  &.confirmation { border-color: var(--primary-color); }
-  input { &[readonly] { cursor: default; } }
-  
-  .add-icon { @include icon-size(20px); }
+
+  &.confirmation {
+    border-color: var(--primary-color);
+  }
+  input {
+    &[readonly] {
+      cursor: default;
+    }
+  }
+
+  .add-icon {
+    @include icon-size(20px);
+  }
 
   .confirmation-icons {
     display: flex;
     gap: 8px;
     align-items: center;
 
-    .cancel-icon { @include icon-size(24px); }
-    .confirm-icon { @include icon-size(14px); }
+    .cancel-icon {
+      @include icon-size(24px);
+    }
+    .confirm-icon {
+      @include icon-size(14px);
+    }
   }
 }
 
@@ -33,9 +45,9 @@
   }
 }
 
-.subtasks-list { 
-  @include flex-column; 
-  gap: 8px; 
+.subtasks-list {
+  @include flex-column;
+  gap: 8px;
   height: 60px;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -48,41 +60,43 @@
   gap: 8px;
   padding: 4px 0;
   transition: all 0.2s ease;
-  
+
   .bullet {
     font-size: 16px;
     color: var(--text-color-dark);
     font-weight: bold;
     min-width: 16px;
   }
-  
+
   .subtask-text-simple {
     @include inter400-fs16();
     color: var(--text-color-dark);
     flex: 1;
-    
+
     &.completed {
       text-decoration: line-through;
       color: var(--text-color-medium);
       opacity: 0.7;
     }
   }
-  
+
   .subtask-display {
     display: flex;
     align-items: center;
     gap: 8px;
     width: 100%;
-    
-    .subtask-text-simple { flex: 1; }
+
+    .subtask-text-simple {
+      flex: 1;
+    }
   }
-  
+
   .subtask-edit {
     display: flex;
     align-items: center;
     gap: 8px;
     width: 100%;
-    
+
     .subtask-edit-input {
       @include inter400-fs16();
       flex: 1;
@@ -91,7 +105,7 @@
       border-radius: 4px;
       background-color: var(--background-light);
       color: var(--text-color-dark);
-      
+
       &:focus {
         outline: none;
         border-color: var(--accent-primary-color);
@@ -99,31 +113,37 @@
       }
     }
   }
-  
+
   .subtask-actions {
     display: flex;
     gap: 8px;
     opacity: 0;
     transition: opacity 0.2s ease;
     margin-left: auto;
-    
-    .action-icon { 
+
+    .action-icon {
       @include icon-size(16px);
       cursor: pointer;
-      
-      &:hover { opacity: 0.7; }
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
-  
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.02);
     border-radius: 4px;
     padding: 4px 4px;
-    
-    .subtask-actions { opacity: 1; }
+
+    .subtask-actions {
+      opacity: 1;
+    }
   }
-  
-  .subtask-edit .subtask-actions { opacity: 1; }
+
+  .subtask-edit .subtask-actions {
+    opacity: 1;
+  }
 }
 
 .subtask-checkbox-container {
@@ -146,7 +166,7 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
-  background-image: url('./../../../public//assets/img/icons/checkbox.png');
+  background-image: url("./../../../public//assets/img/icons/checkbox.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -155,5 +175,5 @@
 }
 
 .subtask-checkbox:checked + .checkbox-label {
-  background-image: url('./../../../public//assets/img/icons/checkbox-checked.png');
+  background-image: url("./../../../public//assets/img/icons/checkbox-checked.png");
 }

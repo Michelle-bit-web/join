@@ -211,7 +211,6 @@ export class ContactService {
    *
    * @param contactToEdit - The contact to delete the imageKey from.
    */
-
   deleteImageFromContact(contactToEdit: Contact): void {
     if (!contactToEdit.id) {
       console.error('Contact id is undefined. Cannot delete image.');

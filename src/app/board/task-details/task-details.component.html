@@ -120,12 +120,15 @@
         >
           <img
             [src]="image.base64"
-            [alt]="image.filename + ' (' + (i + 1) + ')' "
+            [alt]="image.filename + ' (' + (i + 1) + ')'"
             class="task-image"
           />
           <p class="image-filename">{{ image.filename }} test</p>
           <div class="image-overlay">
-            <button class="btn-download" (click)="downloadImage($event, i, image.imageKey)">
+            <button
+              class="btn-download"
+              (click)="downloadImage($event, i, image.imageKey)"
+            >
               <svg
                 width="24"
                 height="24"

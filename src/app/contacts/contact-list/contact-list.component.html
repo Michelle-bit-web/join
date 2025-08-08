@@ -15,9 +15,9 @@
         class="avatar"
         [style.background-color]="contactService.getContactColor(contact.name)"
       >
-        <img 
-          *ngIf="getContactImage(contact)" 
-          [src]="getContactImage(contact)" 
+        <img
+          *ngIf="getContactImage(contact)"
+          [src]="getContactImage(contact)"
           [alt]="contact.name"
           class="contact-image"
         />

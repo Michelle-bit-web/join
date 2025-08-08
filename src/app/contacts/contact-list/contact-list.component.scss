@@ -124,7 +124,7 @@
     .info {
       flex: 1;
       min-width: 0;
-      
+
       .name {
         font-family: "Inter", sans-serif;
         font-weight: 400;
@@ -149,7 +149,7 @@
   }
 }
 
-@media(max-width: 1000px) {
+@media (max-width: 1000px) {
   .contact-list {
     height: calc(100dvh - 190px);
   }
@@ -170,32 +170,32 @@
       background-color: --background-default-dark;
       border-radius: 4px;
     }
-    
+
     .add-button {
       display: none;
     }
-    
+
     h4 {
       max-width: none;
       width: 100%;
     }
-    
+
     .contact-entry {
       width: 100%;
       max-width: none;
     }
   }
-  
+
   .fab-container {
     display: block !important;
     bottom: 100px !important;
     right: 24px !important;
   }
-  
+
   .fab {
     width: 56px;
     height: 56px;
-    
+
     img {
       width: 30px;
       height: 21px;
@@ -225,7 +225,7 @@
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #29ABE2;
+    background-color: #29abe2;
     border: none;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     transform: scale(1.1);

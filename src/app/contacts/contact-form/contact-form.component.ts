@@ -43,7 +43,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   @Output() closeOverlay = new EventEmitter<string>();
 
-  // @ViewChild('ctxProvider', { static: true }) ctxProvider!: ElementRef<typeof UC.UploadCtxProvider.prototype>;
   /**
    * The reactive form group for the contact form.
    */
@@ -58,11 +57,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   uploadedImageKey?: string;
   compressedBase64?: string;
   imageBase64: string | null = null;
+
   /**
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
-  // fileTypeError: boolean = false;
   uploadedUrls: string[] = [];
   uploadedImages: UploadedImage[] = [];
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
@@ -72,6 +71,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   imageMarkedForDeletion: boolean = false;
   formSubmitted: boolean = false;
+
   /**
    * Constructor injecting the form builder and contact service.
    * @param form - Angular's FormBuilder for creating the form.
@@ -92,7 +92,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.editContactSubscription = this.contactService.editContact$.subscribe(contact => this.getDataToEdit(contact));
   }
 
-   /**
+  /**
    * Opens the file dialog for image selection.
    */
   openFileDialog() {
@@ -100,10 +100,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Handles a new image file selection for a contact.
- * Validates the file, deletes old image, and compresses the new image.
- * @param event - The input change event.
- */
+   * Handles a new image file selection for a contact.
+   * Validates the file, deletes old image, and compresses the new image.
+   * @param event - The input change event.
+   */
   async onContactImageChanged(event: Event): Promise<void> {
     this.errorMessage = '';
     const file = this.imageManager.extractValidImageFile(event);
@@ -150,9 +150,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Populates the form with the contact's data for editing.
- * @param contact - The contact to edit or null to clear the form.
- */
+   * Populates the form with the contact's data for editing.
+   * @param contact - The contact to edit or null to clear the form.
+   */
   getDataToEdit(contact: Contact | null): void {
     this.contactToEdit = contact || undefined;
     if (!this.contactToEdit) return;
@@ -185,7 +185,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     if (existingImage) this.uploadService.setImages([existingImage]);
   }
 
-   /**
+  /**
    * Resets contact image data.
    */
   private resetImageState() {
@@ -312,7 +312,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     if (this.imgData?.imageKey && this.imgData?.base64) {
       this.uploadService.saveImage(this.imgData);
     }
-    if(contact.imageKey === '') {
+    if (contact.imageKey === '') {
       this.contactService.deleteImageFromContact(contact);
     } else if (this.contactToEdit && this.contactToEdit.id) {
       this.contactService.updateContact(this.contactToEdit.id, contact);

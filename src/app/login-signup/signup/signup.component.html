@@ -1,88 +1,209 @@
-<div class="signup-content">  
-    <div class="upper-content">   
-        <div class="dark-logo-wrapper">
-            <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo">
-        </div>   
-        <section class="signup-frame">
-            <div class="signup-header">
-                <a class="btn-back" (click)="onBackToLogin()">
-                    <img src="assets/img/icons/arrow-back.png" alt="Back Icon">
-                </a>
-                <h2>Sign up</h2>
-            </div>
-                <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
-                    <div class="form-group-wrapper">
-                        <div>
-                            <div class="form-group" [ngClass]="{'colorError': signupform.get('name')?.invalid && signupform.get('name')?.touched}">
-                                <label for="name"></label>
-                                <input id="name" type="text" placeholder="Name" formControlName="name">
-                                <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">
-                            </div>
-                            <p class="error-message" *ngIf="signupform.get('name')?.invalid && signupform.get('name')?.touched" aria-live="polite">
-                                {{ getValidationMessage('name') }}
-                            </p>
-                        </div>
-                    </div>   
-                    <div class="form-group-wrapper">
-                        <div>
-                            <div class="form-group" [ngClass]="{'colorError': signupform.get('email')?.invalid && signupform.get('email')?.touched}">
-                                <label for="email"></label>
-                                <input id="email" type="text" placeholder="Email" formControlName="email">
-                                <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">
-                            </div>
-                            <p class="error-message" *ngIf="signupform.get('email')?.invalid && signupform.get('email')?.touched" aria-live="polite">
-                                {{ getValidationMessage('email') }}
-                            </p>
-                        </div>
-                    </div>    
-                    <div class="form-group-wrapper">
-                        <div>
-                            <div class="form-group" [ngClass]="{'colorError': signupform.get('password')?.invalid && signupform.get('password')?.touched}">
-                                <label for="password"></label>
-                                <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password">
-                                <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('password')?.value">
-                                <img class="input-icon toggle-eye" [src]="showPassword ? 'assets/img/icons/visibility.png' : 'assets/img/icons/visibility-off.png'" alt="Toggle Password Visibility" *ngIf="signupform.get('password')?.value" (click)="showPassword = !showPassword" />
-                            </div>
-                            <p class="error-message" *ngIf="signupform.get('password')?.invalid && signupform.get('password')?.touched" aria-live="polite">
-                                {{ getValidationMessage('password') }}
-                            </p>
-                        </div>
-                    </div>    
-                    <div class="form-group-wrapper"> 
-                        <div>
-                            <div class="form-group"   [ngClass]="{'colorError': signupform.get('confirmPassword')?.invalid && signupform.get('confirmPassword')?.touched}">
-                                <label for="confirmPassword"></label>
-                                <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm Password" formControlName="confirmPassword">
-                                <img class="input-icon" src="assets/img/icons/lock.png" alt="Lock Icon" *ngIf="!signupform.get('confirmPassword')?.value">
-                                <img class="input-icon toggle-eye" [src]="showConfirmPassword ? 'assets/img/icons/visibility.png' : 'assets/img/icons/visibility-off.png'" alt="Toggle Confirm Password Visibility" *ngIf="signupform.get('confirmPassword')?.value" (click)="showConfirmPassword = !showConfirmPassword"/>
-                            </div>
-                            <p class="error-message" *ngIf="getValidationMessage('confirmPassword')" aria-live="polite">
-                                {{ getValidationMessage('confirmPassword') }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group-wrapper">    
-                        <label for="accept-privacy-checkbox" class="checkbox-label">
-                            <input id="accept-privacy-checkbox" type="checkbox" formControlName="privacyPolicy" />
-                            I accept the <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>
-                        </label>
-                    </div>    
-                    <div class="btn-wrapper">
-                        <button class="btn-signup" type="submit" [disabled]="signupform.invalid || isLoading">
-                            <ng-container *ngIf="!isLoading">Sign Up</ng-container>
-                            <ng-container *ngIf="isLoading">
-                                <span class="spinner"></span>
-                                Signing up...
-                            </ng-container>
-                        </button>
-                    </div>
-                    <p class="success-message" *ngIf="successMessage" aria-live="polite">{{ successMessage }}</p>
-                    <p class="error-message" *ngIf="errorMessage" aria-live="polite">{{ errorMessage }}</p>
-                </form>    
-        </section>
+<div class="signup-content">
+  <div class="upper-content">
+    <div class="dark-logo-wrapper">
+      <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo" />
     </div>
-    <app-footer></app-footer>    
+    <section class="signup-frame">
+      <div class="signup-header">
+        <a class="btn-back" (click)="onBackToLogin()">
+          <img src="assets/img/icons/arrow-back.png" alt="Back Icon" />
+        </a>
+        <h2>Sign up</h2>
+      </div>
+      <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
+        <div class="form-group-wrapper">
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  signupform.get('name')?.invalid &&
+                  signupform.get('name')?.touched
+              }"
+            >
+              <label for="name"></label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Name"
+                formControlName="name"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/person.png"
+                alt="Person Icon"
+              />
+            </div>
+            <p
+              class="error-message"
+              *ngIf="
+                signupform.get('name')?.invalid &&
+                signupform.get('name')?.touched
+              "
+              aria-live="polite"
+            >
+              {{ getValidationMessage("name") }}
+            </p>
+          </div>
+        </div>
+        <div class="form-group-wrapper">
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  signupform.get('email')?.invalid &&
+                  signupform.get('email')?.touched
+              }"
+            >
+              <label for="email"></label>
+              <input
+                id="email"
+                type="text"
+                placeholder="Email"
+                formControlName="email"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/mail.png"
+                alt="Mail Icon"
+              />
+            </div>
+            <p
+              class="error-message"
+              *ngIf="
+                signupform.get('email')?.invalid &&
+                signupform.get('email')?.touched
+              "
+              aria-live="polite"
+            >
+              {{ getValidationMessage("email") }}
+            </p>
+          </div>
+        </div>
+        <div class="form-group-wrapper">
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  signupform.get('password')?.invalid &&
+                  signupform.get('password')?.touched
+              }"
+            >
+              <label for="password"></label>
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/lock.png"
+                alt="Lock Icon"
+                *ngIf="!signupform.get('password')?.value"
+              />
+              <img
+                class="input-icon toggle-eye"
+                [src]="
+                  showPassword
+                    ? 'assets/img/icons/visibility.png'
+                    : 'assets/img/icons/visibility-off.png'
+                "
+                alt="Toggle Password Visibility"
+                *ngIf="signupform.get('password')?.value"
+                (click)="showPassword = !showPassword"
+              />
+            </div>
+            <p
+              class="error-message"
+              *ngIf="
+                signupform.get('password')?.invalid &&
+                signupform.get('password')?.touched
+              "
+              aria-live="polite"
+            >
+              {{ getValidationMessage("password") }}
+            </p>
+          </div>
+        </div>
+        <div class="form-group-wrapper">
+          <div>
+            <div
+              class="form-group"
+              [ngClass]="{
+                colorError:
+                  signupform.get('confirmPassword')?.invalid &&
+                  signupform.get('confirmPassword')?.touched
+              }"
+            >
+              <label for="confirmPassword"></label>
+              <input
+                id="confirmPassword"
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                placeholder="Confirm Password"
+                formControlName="confirmPassword"
+              />
+              <img
+                class="input-icon"
+                src="assets/img/icons/lock.png"
+                alt="Lock Icon"
+                *ngIf="!signupform.get('confirmPassword')?.value"
+              />
+              <img
+                class="input-icon toggle-eye"
+                [src]="
+                  showConfirmPassword
+                    ? 'assets/img/icons/visibility.png'
+                    : 'assets/img/icons/visibility-off.png'
+                "
+                alt="Toggle Confirm Password Visibility"
+                *ngIf="signupform.get('confirmPassword')?.value"
+                (click)="showConfirmPassword = !showConfirmPassword"
+              />
+            </div>
+            <p
+              class="error-message"
+              *ngIf="getValidationMessage('confirmPassword')"
+              aria-live="polite"
+            >
+              {{ getValidationMessage("confirmPassword") }}
+            </p>
+          </div>
+        </div>
+        <div class="form-group-wrapper">
+          <label for="accept-privacy-checkbox" class="checkbox-label">
+            <input
+              id="accept-privacy-checkbox"
+              type="checkbox"
+              formControlName="privacyPolicy"
+            />
+            I accept the
+            <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>
+          </label>
+        </div>
+        <div class="btn-wrapper">
+          <button
+            class="btn-signup"
+            type="submit"
+            [disabled]="signupform.invalid || isLoading"
+          >
+            <ng-container *ngIf="!isLoading">Sign Up</ng-container>
+            <ng-container *ngIf="isLoading">
+              <span class="spinner"></span>
+              Signing up...
+            </ng-container>
+          </button>
+        </div>
+        <p class="success-message" *ngIf="successMessage" aria-live="polite">
+          {{ successMessage }}
+        </p>
+        <p class="error-message" *ngIf="errorMessage" aria-live="polite">
+          {{ errorMessage }}
+        </p>
+      </form>
+    </section>
+  </div>
+  <app-footer></app-footer>
 </div>
-
-
-

@@ -46,6 +46,7 @@ export interface Task {
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
 
+  /** Optional array of imageKeys */
   imageKey?: string[];
 }
 
@@ -72,6 +73,8 @@ export interface Subtask {
 })
 
 export class TaskService {
+
+  /** A task marked as being edited */
   private editingTask: Task | null = null;
 
   constructor(private firestore: Firestore) { }
@@ -115,7 +118,6 @@ export class TaskService {
       }, error => {
         observer.error(error);
       });
-
       return () => unsubscribe();
     });
   }
@@ -134,7 +136,6 @@ export class TaskService {
         });
         observer.next(subtasks);
       }, error => observer.error(error));
-
       return () => unsubscribe();
     });
   }

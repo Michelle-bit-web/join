@@ -13,8 +13,7 @@ import {
   Firestore, 
   doc, 
   setDoc, 
-  getDoc, 
-  DocumentData 
+  getDoc
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';

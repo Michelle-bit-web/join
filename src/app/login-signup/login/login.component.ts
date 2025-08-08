@@ -167,7 +167,6 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-
     this.startLoading();
     const { email, password } = this.loginForm.value;
     const result = await this.authService.signIn(email, password);
@@ -199,10 +198,7 @@ export class LoginComponent {
    * @param result - The result object returned from the auth service.
    * @param fallbackError - The fallback error message if no message is provided.
    */
-  private handleAuthResult(
-    result: { success: boolean; message?: string },
-    fallbackError: string
-  ): void {
+  private handleAuthResult(result: { success: boolean; message?: string },fallbackError: string): void {
     if (result.success) {
       this.router.navigate(['/summary']);
     } else {

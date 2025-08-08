@@ -214,7 +214,8 @@
   width: clamp(350px, calc(6.43vw + 142.6px), 422px);
   border-radius: 10px;
   border: 1px solid var(--background-default-dark);
-  padding: clamp(8px, calc(0.45vw + 6.56px), 13px) clamp(18px, calc(0.27vw + 17.14px), 21px);
+  padding: clamp(8px, calc(0.45vw + 6.56px), 13px)
+    clamp(18px, calc(0.27vw + 17.14px), 21px);
   @include flex-between();
   @include inter400-fs20();
   &:focus-within {

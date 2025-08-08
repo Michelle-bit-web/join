@@ -75,7 +75,12 @@
           #filepicker
           hidden
         />
-        <button (click)="openFileDialog()"  type="button" aria-label="Upload user image" class="user-image-upload-button">
+        <button
+          (click)="openFileDialog()"
+          type="button"
+          aria-label="Upload user image"
+          class="user-image-upload-button"
+        >
           <svg
             class="image-upload-icon"
             width="54"
@@ -135,7 +140,13 @@
         </button>
       </div>
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <p class="error-message invalid-image-upload" *ngIf="errorMessage" aria-live="polite">{{this.errorMessage}}</p>
+        <p
+          class="error-message invalid-image-upload"
+          *ngIf="errorMessage"
+          aria-live="polite"
+        >
+          {{ this.errorMessage }}
+        </p>
         <div class="form-group-wrapper">
           <div
             class="form-group"
