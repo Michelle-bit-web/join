@@ -227,10 +227,16 @@ export class UploadsComponent implements OnInit {
   /**
    * Handles image deletion from the image viewer.
    */
-  onDeleteImage(event: { imageKey?: string }) {
-    if (event.imageKey) {
+  onDeleteImage(event: { index: number, imageKey?: string }) {
+    // if (event.imageKey) {
+    //   this.uploadService.deleteImage(event.imageKey);
+    // }
+    if (this.isEditingMode && event.imageKey) {
+      this.  removeImage(event.index, 'preloaded');
+    } else if (!this.isEditingMode && event.imageKey) {
       this.uploadService.deleteImage(event.imageKey);
     }
+    this.closeImageViewer();
   }
 
   private emitImagesChanged() {

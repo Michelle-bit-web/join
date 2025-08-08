@@ -14,8 +14,8 @@ export class ImageViewerComponent {
 
   @Input() images: string[] = [];
   @Input() startIndex: number = 0;
-  @Input() imageKeys: string[] = []; // Add image keys for deletion
-  @Input() allowDelete: boolean = false; // Allow deletion
+  @Input() imageKeys: string[] = [];
+  @Input() allowDelete: boolean = false;
   @Output() close = new EventEmitter<Event>();
   @Output() deleteImage = new EventEmitter<{ index: number, imageKey?: string }>();
 
@@ -84,7 +84,7 @@ export class ImageViewerComponent {
     if (this.allowDelete) {
       this.deleteImage.emit({
         index: this.currentIndex,
-        imageKey: this.currentImageKey
+        imageKey: this.currentImageKey,
       });
       if(this.imageKeys.length <= 0) {
         this.onClose(new Event('close'));

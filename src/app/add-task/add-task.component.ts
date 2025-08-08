@@ -86,9 +86,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   /**
    * Initializes the component by loading the status and contacts.
    */
-  ngOnInit() {
+  async ngOnInit() {
     this.loadStatus();
-    this.loadContacts();
+    await this.loadContacts();
   }
 
   /**
@@ -180,6 +180,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.subtaskManager,
       this.contacts
     ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
+    // Explicitly set category if needed
+    if (task.category) {
+      this.categoryManager.setSelectedCategory(task.category);
+    }
   }
 
   /**

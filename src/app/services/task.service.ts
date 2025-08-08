@@ -46,7 +46,7 @@ export interface Task {
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
 
-  imageKey?: string[]; 
+  imageKey?: string[];
 }
 
 /**
@@ -74,7 +74,7 @@ export interface Subtask {
 export class TaskService {
   private editingTask: Task | null = null;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) { }
 
   /**
    * Returns a reference to the 'tasks' Firestore collection.
@@ -224,48 +224,48 @@ export class TaskService {
    */
   getCleanJson(updated: Task | Subtask) {
     if ('category' in updated) {
-    const clean: any = {
-      title: updated.title,
-      description: updated.description,
-      date: updated.date,
-      priority: updated.priority,
-      status: updated.status,
-      assignedTo: updated.assignedTo,
-      category: updated.category,
-    };
-    if (Array.isArray(updated.imageKey)) {
-      clean.imageKey = updated.imageKey;
-    }
-    return clean;
-  } else if ('isCompleted' in updated) {
-    return {
-      title: updated.title,
-      isCompleted: updated.isCompleted
-    };
-  }
-  return {};
-  }
-
-    /**
-     * Deletes the imageKey field from Firestore.
-     *
-     * @param task - The contact to delete the imageKey from.
-     */
-
-    deleteImageFromTask(task: Task): void {
-      if (!task.id) {
-        console.error('Task id is undefined. Cannot delete image.');
-        return;
+      const clean: any = {
+        title: updated.title,
+        description: updated.description,
+        date: updated.date,
+        priority: updated.priority,
+        status: updated.status,
+        assignedTo: updated.assignedTo,
+        category: updated.category,
+      };
+      if (Array.isArray(updated.imageKey)) {
+        clean.imageKey = updated.imageKey;
       }
-      const taskRef = this.getSingleTaskRef(task.id);
-      updateDoc(taskRef, {
-       imageKey: deleteField()
-      }).then(() => {
-        console.log('Image field deleted from task:', task.id);
-      }).catch((err) => {
-        console.error('Failed to delete image from task:', err);
-      });
+      return clean;
+    } else if ('isCompleted' in updated) {
+      return {
+        title: updated.title,
+        isCompleted: updated.isCompleted
+      };
     }
+    return {};
+  }
+
+  /**
+   * Deletes the imageKey field from Firestore.
+   *
+   * @param task - The contact to delete the imageKey from.
+   */
+
+  deleteImageFromTask(task: Task): void {
+    if (!task.id) {
+      console.error('Task id is undefined. Cannot delete image.');
+      return;
+    }
+    const taskRef = this.getSingleTaskRef(task.id);
+    updateDoc(taskRef, {
+      imageKey: deleteField()
+    }).then(() => {
+      console.log('Image field deleted from task:', task.id);
+    }).catch((err) => {
+      console.error('Failed to delete image from task:', err);
+    });
+  }
 
   /**
    * Converts a Firestore Timestamp or Date object to a formatted string.
