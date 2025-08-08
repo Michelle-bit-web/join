@@ -278,10 +278,17 @@
   @include flex-center();
   background-color: white;
   border-radius: 30px;
-  gap: 24px;
+  gap: 16px;
   cursor: pointer;
   box-shadow: 5px 10px 18px #888888;
   transition: all 0.2s ease-in-out;
+  svg {
+    width: 60px;
+    height: 60px;
+    @media(max-width: 600px) {
+      scale: 0.9;
+    }
+  }
 }
 
 @mixin summary-card-responsive {
