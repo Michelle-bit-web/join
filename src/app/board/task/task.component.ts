@@ -29,6 +29,7 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
 import { SimpleChanges, OnChanges } from '@angular/core';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-task',
@@ -97,10 +98,12 @@ export class TaskComponent {
    * 
    * @param taskService Service for task data handling.
    * @param contactService Service for fetching contact information.
+   * @param uploadService Service for retrieving contact images.
    */
   constructor(
     public taskService: TaskService,
-    public contactService: ContactService
+    public contactService: ContactService,
+    private uploadService: UploadService
   ) { }
 
   /**
@@ -260,5 +263,19 @@ export class TaskComponent {
     const all = this.getAllUniqueContacts();
     const remaining = all.slice(4);
     return remaining.map((c) => c.name).join(', ');
+  }
+
+  /**
+   * Gets the contact's profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
   }
 }

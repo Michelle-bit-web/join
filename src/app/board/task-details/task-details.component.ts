@@ -261,6 +261,13 @@ export class TaskDetailsComponent {
     this.closeImageViewer();
   }
 
+  /**
+   * Downloads the image at the given index, triggering a browser download.
+   * 
+   * @param event The event that triggered the download.
+   * @param currentIndex The index of the current image.
+   * @param currentImage The URL of the current image.
+   */
   downloadImage(event: Event, currentIndex: number, currentImage: string) {
     event.stopPropagation();
     event.preventDefault();
@@ -270,5 +277,19 @@ export class TaskDetailsComponent {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  /**
+   * Gets the contact's profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
   }
 }

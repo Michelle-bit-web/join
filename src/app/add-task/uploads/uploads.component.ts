@@ -19,52 +19,52 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
 export class UploadsComponent implements OnInit {
   /** Array of selected files for upload */
   selectedFiles: UploadedImage[] = [];
-  
+
   /** Array of uploaded image URLs */
   uploadedUrls: string[] = [];
-  
+
   /** Array of uploaded image objects */
   uploadedImages: UploadedImage[] = [];
-  
+
   /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
-  
+
   /** Array of error messages for upload validation */
   errorMessages: string[] = [];
-  
+
   /** Current image data being processed */
   imgData?: UploadedImage;
-  
+
   /** Flag indicating if drag over state is active */
   isDragOver = false;
-  
+
   /** Flag to control image viewer visibility */
   showImageViewer = false;
-  
+
   /** Reference to the file input element */
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
-  
+
   /** Event emitter for image URLs */
   @Output() imageUrls = new EventEmitter<string[]>();
-  
+
   /** Whether multiple file selection is allowed */
   @Input() multiple: boolean = true;
-  
+
   /** Maximum number of images allowed */
   @Input() maxImages: number = 5;
-  
+
   /** Maximum file size in bytes */
   @Input() maxFileSize: number = 3 * 1024 * 1024;
-  
+
   /** Event emitter for when images change */
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
-  
+
   /** Assignment target for uploaded images */
   @Input() assignedTo: 'user' | 'task' = 'task';
-  
+
   /** Flag indicating if component is in editing mode */
   @Input() isEditingMode: boolean = false;
-  
+
   /** Array of preloaded images for editing mode */
   @Input() preloadedImages: UploadedImage[] = [];
 
@@ -93,7 +93,6 @@ export class UploadsComponent implements OnInit {
   async onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
-
     const files = Array.from(input.files);
     await this.processFiles(files);
   }
@@ -136,117 +135,87 @@ export class UploadsComponent implements OnInit {
   /**
    * Processes and validates uploaded files.
    * @param files - Array of files to process
-   * @private
    */
   private async processFiles(files: File[]) {
     this.errorMessages = [];
-
     for (const file of files) {
-      if (!file.type.startsWith('image/')) {
-        this.errorMessages.push('Only image files are allowed');
-        continue;
-      }
-      if (file.size > this.maxFileSize) {
-        const maxSizeMB = (this.maxFileSize / 1024 / 1024).toFixed(2);
-        this.errorMessages.push(`File ${file.name} is too large. Max ${maxSizeMB} MB allowed.`);
-        continue;
-      }
-      if (this.uploadedImages.length >= this.maxImages) {
-        this.errorMessages.push(`Maximum ${this.maxImages} images allowed`);
-        break;
-      }
+      const error = this.validateFile(file);
+      if (error) { this.errorMessages.push(error); continue; }
+      await this.processSingleFile(file);
+    }
+  }
 
-      try {
-        const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-        const imageKey = `${Date.now()}_${file.name}`;
-        this.imgData = {
-          imageKey: imageKey,
-          filename: file.name,
-          fileType: file.type,
-          fileSize: file.size,
-          base64: compressedBase64,
-          assignedTo: 'task'
-        };
-        this.uploadedImages.push(this.imgData!);
-        this.uploadedUrls.push(compressedBase64);
-        this.emitImagesChanged();
-      } catch (error) {
-        this.errorMessages.push(`Error processing file ${file.name}`);
-        console.error('Error processing image:', error);
-      }
+  /**
+   * Validates a single file against type, size, and count restrictions.
+   * @param file - File to validate
+   * @returns Error message string or null if valid
+   */
+  private validateFile(file: File): string | null {
+    if (!file.type.startsWith('image/')) return 'Only image files are allowed';
+    if (file.size > this.maxFileSize) {
+      const maxSizeMB = (this.maxFileSize / 1024 / 1024).toFixed(2);
+      return `File ${file.name} is too large. Max ${maxSizeMB} MB allowed.`;
+    }
+    if (this.uploadedImages.length >= this.maxImages) {
+      return `Maximum ${this.maxImages} images allowed`;
+    }
+    return null;
+  }
+
+  /**
+   * Compresses and stores a single valid file.
+   * @param file - File to process
+   */
+  private async processSingleFile(file: File) {
+    try {
+      const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
+      const imageKey = `${Date.now()}_${file.name}`;
+      this.imgData = {
+        imageKey, filename: file.name, fileType: file.type,
+        fileSize: file.size, base64: compressedBase64, assignedTo: 'task'
+      };
+      this.uploadedImages.push(this.imgData!);
+      this.uploadedUrls.push(compressedBase64);
+      this.emitImagesChanged();
+    } catch {
+      this.errorMessages.push(`Error processing file ${file.name}`);
     }
   }
 
   /**
    * Compresses an image to specified dimensions and quality.
-   * @param file - File to compress
-   * @param maxWidth - Maximum width in pixels
-   * @param maxHeight - Maximum height in pixels
-   * @param quality - Compression quality (0-1)
-   * @returns Promise resolving to base64 string of compressed image
    */
-  async compressImage(
-    file: File,
-    maxWidth: number,
-    maxHeight: number,
-    quality: number
-  ): Promise<string> {
+  async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = event =>
-        this.handleImageLoad(event, maxWidth, maxHeight, quality, resolve, reject);
-      reader.onerror = () => reject('Error on reading the file.');
+      reader.onload = e => this.handleImageLoad(e, maxWidth, maxHeight, quality, resolve, reject);
+      reader.onerror = () => reject('Error reading file');
       reader.readAsDataURL(file);
     });
   }
 
   /**
-   * Handles image load event during compression process.
-   * @param event - FileReader progress event
-   * @param maxWidth - Maximum width for compression
-   * @param maxHeight - Maximum height for compression
-   * @param quality - Compression quality
-   * @param resolve - Promise resolve function
-   * @param reject - Promise reject function
-   * @private
+   * Handles image load event during compression.
    */
   private handleImageLoad(
-    event: ProgressEvent<FileReader>,
-    maxWidth: number,
-    maxHeight: number,
-    quality: number,
-    resolve: (value: string) => void,
-    reject: (reason?: any) => void
+    e: ProgressEvent<FileReader>, maxWidth: number, maxHeight: number,
+    quality: number, resolve: (v: string) => void, reject: (r?: any) => void
   ) {
     const img = new Image();
-    img.onload = () =>
-      this.drawCompressedImage(img, maxWidth, maxHeight, quality, resolve);
-    img.onerror = () => reject('Error on loading image.');
-    img.src = event.target?.result as string;
+    img.onload = () => this.drawCompressedImage(img, maxWidth, maxHeight, quality, resolve);
+    img.onerror = () => reject('Error loading image');
+    img.src = e.target?.result as string;
   }
 
   /**
-   * Draws compressed image on canvas.
-   * @param img - HTML image element
-   * @param maxWidth - Maximum width
-   * @param maxHeight - Maximum height
-   * @param quality - Compression quality
-   * @param resolve - Promise resolve function
-   * @private
+   * Draws compressed image to canvas.
    */
-  private drawCompressedImage(
-    img: HTMLImageElement,
-    maxWidth: number,
-    maxHeight: number,
-    quality: number,
-    resolve: (value: string) => void
-  ) {
+  private drawCompressedImage(img: HTMLImageElement, maxWidth: number, maxHeight: number,
+    quality: number, resolve: (v: string) => void) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d')!;
     const { width, height } = this.getResizedDimensions(img, maxWidth, maxHeight);
-
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width; canvas.height = height;
     ctx.drawImage(img, 0, 0, width, height);
     resolve(canvas.toDataURL('image/jpeg', quality));
   }

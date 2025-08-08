@@ -20,6 +20,17 @@ import { Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UploadService } from '../../services/upload.service';
 
+/**
+ * ContactDetailsComponent displays detailed information about a selected contact
+ * with smooth animations, mobile responsiveness, and edit/delete functionality.
+ * Features slide-in animations, mobile menu support, and contact image display.
+ *
+ * @example
+ * <app-contact-details
+ *   (backToList)="handleBackToList()"
+ *   (noContactVisible)="handleNoContact()">
+ * </app-contact-details>
+ */
 @Component({
   selector: 'app-contact-details',
   standalone: true,
@@ -62,19 +73,45 @@ import { UploadService } from '../../services/upload.service';
 })
 
 export class ContactDetailsComponent implements OnInit, OnDestroy {
+  /** Flag to control contact visibility with animations */
   contactVisible = false;
+  
+  /** The currently displayed contact object */
   contact?: Contact;
+  
+  /** Animation state counter for triggering enter animations */
   animationState = 0;
+  
+  /** Flag indicating if contact is being deleted */
   isDeleting = false;
+  
+  /** Flag indicating if contact is being edited */
   isEditing = false;
+  
+  /** Flag for mobile menu visibility */
   menuOpen = false;
+  
+  /** Flag for mobile layout detection */
   isMobile = window.innerWidth < 768;
+  
+  /** Subscription to contact changes */
   private subscription?: Subscription;
+  
+  /** Flag to track first load for animation purposes */
   private firstLoad = true;
 
+  /** Event emitted when user wants to return to contact list */
   @Output() backToList = new EventEmitter<void>();
+  
+  /** Event emitted when no contact is visible */
   @Output() noContactVisible = new EventEmitter<void>();
 
+  /**
+   * Constructor injecting required services for contact management and DOM manipulation.
+   * @param contactService - Service for managing contact data and operations
+   * @param elementRef - Reference to component's DOM element for menu detection
+   * @param uploadService - Service for retrieving contact images
+   */
   constructor(
     private contactService: ContactService,
     private elementRef: ElementRef,
@@ -82,10 +119,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   /**
-   * Triggered when clicking outside the mobile menu.
-   * Closes the menu if it is open and the click occurred outside.
+   * Handles clicks outside the mobile menu to close it automatically.
+   * Prevents menu from staying open when user clicks elsewhere.
    *
-   * @param {Event} event - The click event.
+   * @param event - The document click event
    */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
@@ -102,10 +139,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Triggered on window resize.
-   * Adjusts the mobile layout and menu accordingly.
+   * Handles window resize events to adjust mobile layout and menu behavior.
+   * Closes mobile menu when switching from mobile to desktop view.
    *
-   * @param {Event} event - The resize event.
+   * @param event - The window resize event
    */
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -117,7 +154,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens or closes the mobile menu when on a mobile device.
+   * Toggles the mobile menu visibility when on mobile devices.
+   * Only functions in mobile view to prevent desktop interference.
    */
   toggleMobileMenu() {
     if (this.isMobile) {
@@ -126,17 +164,18 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Returns whether animations are disabled (e.g., when deleting or editing).
+   * Determines if animations should be disabled during certain operations.
+   * Prevents animation conflicts during delete or edit operations.
    *
-   * @returns {boolean} True if animations are disabled.
+   * @returns True if animations should be disabled
    */
   get isAnimationDisabled(): boolean {
     return this.isDeleting || this.isEditing;
   }
 
   /**
-   * Initializes the component, subscribes to selected and all contacts,
-   * and handles visibility and animation transitions.
+   * Initializes the component and sets up contact data subscriptions.
+   * Subscribes to both selected contact and full contact list for data consistency.
    */
   ngOnInit(): void {
     this.subscribeToSelectedContact();
@@ -144,7 +183,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   /**
    * Subscribes to changes in the selected contact and all contacts.
-   * Ensures synced data, updates animation state, and manages visibility.
+   * Ensures contact data stays synced and handles visibility/animation transitions.
    */
   private subscribeToSelectedContact(): void {
     this.subscription = combineLatest([
@@ -158,12 +197,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Matches the selected contact with the full contact list to ensure it exists.
-   * Falls back to the selected contact if no match is found.
+   * Matches the selected contact with the full contact list to ensure it still exists.
+   * Handles cases where a contact might be deleted while being viewed.
    *
-   * @param selected - The selected contact object.
-   * @param all - All available contacts.
-   * @returns A resolved contact object or null.
+   * @param selected - The currently selected contact from the service
+   * @param all - Array of all available contacts from the service
+   * @returns The resolved contact object or null if not found
    */
   private resolveSelectedContact(
     selected: Contact | null,
@@ -174,9 +213,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles contact changes, visibility state, and animations.
+   * Handles contact changes, manages visibility state, and triggers animations.
+   * Coordinates the display logic when contacts are selected, changed, or cleared.
    *
-   * @param contact - The resolved contact to display, or null if none.
+   * @param contact - The resolved contact to display, or null if none selected
    */
   private handleContactChange(contact: Contact | null): void {
     const wasEmpty = !this.contact;
@@ -192,7 +232,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Resets state when no contact is selected and emits visibility change.
+   * Resets component state when no contact is selected.
+   * Clears flags and emits visibility change event with slight delay.
    */
   private resetContactState(): void {
     this.isDeleting = false;
@@ -205,8 +246,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   /**
    * Prepares animation and visibility transition when a new contact is selected.
+   * Handles the smooth transition between different contacts or from empty state.
    *
-   * @param wasEmpty - Indicates if the previous contact was undefined.
+   * @param wasEmpty - Indicates if the previous state had no contact selected
    */
   private prepareContactTransition(wasEmpty: boolean): void {
     this.isEditing = false;
@@ -221,8 +263,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Called when the component is destroyed.
-   * Unsubscribes from the subscription to avoid memory leaks.
+   * Cleanup method called when the component is destroyed.
+   * Unsubscribes from all active subscriptions to prevent memory leaks.
    */
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -231,7 +273,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens the edit form for the current contact.
+   * Opens the edit form for the currently displayed contact.
+   * Sets editing state and triggers the contact form service.
    */
   onEditContact(): void {
     if (this.contact) {
@@ -242,7 +285,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Deletes the current contact and clears the selection.
+   * Deletes the current contact and clears the selection state.
+   * Sets deleting flag to prevent animation conflicts during deletion.
    */
   onDeleteContact(): void {
     if (this.contact?.id) {
@@ -254,20 +298,22 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Returns the initials of a name.
+   * Generates initials from a contact's name using the contact service.
+   * Provides consistent initial generation across the application.
    *
-   * @param {string} [name] - The name from which to generate initials.
-   * @returns {string} The initials.
+   * @param name - The contact's full name
+   * @returns String containing the person's initials
    */
   getInitials(name?: string): string {
     return this.contactService.getInitials(name);
   }
 
   /**
-   * Returns the color for a contact.
+   * Gets the color associated with a contact's name for consistent theming.
+   * Uses contact service to ensure consistent colors across components.
    *
-   * @param {string} [name] - The contact's name.
-   * @returns {string} The corresponding color as a hex code.
+   * @param name - The contact's name for color generation
+   * @returns Hex color code string, defaults to gray if no name provided
    */
   getContactColor(name?: string): string {
     if (!name) return '#9E9E9E';
@@ -275,23 +321,27 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Closes the contact details view.
+   * Closes the contact details view with animation.
+   * Sets visibility flag to trigger exit animations.
    */
   closeContactDetails(): void {
     this.contactVisible = false;
   }
 
   /**
-   * Emits the event to return to the contact list.
+   * Emits the event to return to the contact list view.
+   * Used for mobile navigation and parent component communication.
    */
   onBackToList() {
     this.backToList.emit();
   }
 
-    /**
-   * Gets the contact image from localStorage using the contact's imageKey.
-   * @param contact - The contact to get the image for.
-   * @returns The base64 image string or null if no image exists.
+  /**
+   * Retrieves the contact's profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   *
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
    */
   getContactImage(contact: Contact): string | null {
     if (contact.imageKey) {

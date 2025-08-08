@@ -12,6 +12,7 @@ import { FormValidatorService, FormData, ValidationErrors } from './form-validat
 import { TaskDataService } from './task-data.service';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadedImage, UploadService } from '../services/upload.service';
+import { AddTaskService } from './add-task.service';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -51,8 +52,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   taskImages: string[] = [];
   uploadedImages: UploadedImage[] = [];
   validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
-  formCleared = false;
-
   formData: FormData = {
     title: '',
     description: '',
@@ -81,6 +80,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     public categoryManager: CategoryManager,
     public priorityManager: PriorityManager,
     private uploadService: UploadService,
+    private addTaskService: AddTaskService
   ) { }
 
   /**
@@ -113,7 +113,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   /**
    * Loads all contacts from the ContactService and then loads any task being edited.
    */
-  async loadContacts() {
+  private async loadContacts(): Promise<void> {
     this.contactService.getContacts().subscribe(async contacts => {
       this.contacts = contacts;
       await this.loadEditingTask();
@@ -128,7 +128,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     if (this.editingTask && this.editingTask.imageKey) {
       this.taskImages = [...this.editingTask.imageKey];
       this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
-      console.log('[AddTask] Uploaded images', this.uploadedImages);
     }
   }
 
@@ -148,51 +147,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async loadEditingTask(): Promise<void> {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask) {
-      this.enterEditMode(editingTask);
-      await this.populateFormWithTaskData(editingTask);
-      this.loadImagesIfAvailable(editingTask);
-      this.taskService.clearEditingTask();
+      await this.addTaskService.setupEditMode(this, editingTask);
     } else {
       this.clearAllManagers();
-    }
-  }
-
-  /**
-   * Activates edit mode and stores relevant metadata from the task.
-   * @param task The task being edited
-   */
-  private enterEditMode(task: Task): void {
-    this.isEditingMode = true;
-    this.editingTaskId = task.id;
-    this.editingTask = task;
-  }
-
-  /**
-   * Populates the form and managers with values from the given task.
-   * @param task The task to populate the form with
-   */
-  private async populateFormWithTaskData(task: Task): Promise<void> {
-    this.originalTaskStatus = await this.taskDataService.populateFromTask(
-      task,
-      this.formData,
-      this.priorityManager,
-      this.contactManager,
-      this.subtaskManager,
-      this.contacts
-    ) as 'to-do' | 'in-progress' | 'await-feedback' | 'done';
-    // Explicitly set category if needed
-    if (task.category) {
-      this.categoryManager.setSelectedCategory(task.category);
-    }
-  }
-
-  /**
-   * Loads associated images from the task into the component state if available.
-   * @param task The task containing potential images
-   */
-  private loadImagesIfAvailable(task: Task): void {
-    if (task.imageKey && task.imageKey.length > 0) {
-      this.loadImages();
     }
   }
 
@@ -238,10 +195,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
  * Resets the task creation form to its default state.
  */
   clearForm(): void {
-    this.resetFormData();
-    this.resetTaskState();
-    this.resetManagers();
-    this.clearUploadedImages();
+    this.addTaskService.resetFormData(this);
+    this.addTaskService.resetTaskState(this);
+    this.addTaskService.resetManagers(this);
+    this.addTaskService.clearUploadedImages(this);
     this.resetValidationErrors();
   }
 
@@ -294,19 +251,10 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async createTask(event: Event): Promise<void> {
     event.preventDefault();
     this.resetValidationErrors();
-    if (this.formValidator.hasFormErrors(this.formData, this.categoryManager)) {
-      this.validationErrors = this.formValidator.validateForm(this.formData, this.categoryManager);
+    if (this.addTaskService.validateForm(this)) {
       return;
     }
-    this.setCreatingState(true);
-    try {
-      this.taskImages = this.uploadsComponent.getImageKeys();
-      await this.saveTaskWithSuccessFeedback();
-    } catch (error) {
-      console.error('Error while creating/updating task:', error);
-    } finally {
-      this.setCreatingState(false);
-    }
+    await this.addTaskService.processTaskCreation(this);
   }
 
   /**
@@ -369,28 +317,19 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   async updateTask(): Promise<void> {
-    // 1. Get previous image keys for this task
     const previousImageKeys = this.editingTask?.imageKey ?? [];
-    // 2. Get current image keys from UI
     const currentImages: UploadedImage[] = this.uploadsComponent.allImages();
     const currentImageKeys = currentImages.map(img => img.imageKey);
-    // 3. Find images that were removed from this task
     const removedKeys = previousImageKeys.filter(key => !currentImageKeys.includes(key));
-    // 4. Remove only those images from local storage
     if (removedKeys.length > 0) {
       this.uploadService.deleteImages(removedKeys);
     }
-    // Make sure formData.images is set to the current image keys
     (this.formData as any).images = currentImageKeys;
     this.taskImages = currentImageKeys;
-    // 5. Save/merge current images to local storage
     this.uploadService.saveImages(currentImages);
-    // 6. Neues Task-Objekt aufbauen
     const updatedTask = this.buildUpdatedTask();
     await this.taskService.updateTask(this.editingTask!.id!, updatedTask);
-    // 10. Subtasks aktualisieren (optional)
     await this.updateSubtasks();
-    // 11. Cleanup
     this.taskService.clearEditingTask();
   }
 
@@ -431,18 +370,14 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Handles title input changes and clears error state.
    */
   onTitleInput() {
-    if (this.formData.title.trim()) {
-      this.validationErrors.showTitleError = false;
-    }
+    if (this.formData.title.trim()) { this.validationErrors.showTitleError = false; }
   }
 
   /**
    * Handles date selection and clears error state.
    */
   onDateSelect() {
-    if (this.formData.dueDate) {
-      this.validationErrors.showDateError = false;
-    }
+    if (this.formData.dueDate) { this.validationErrors.showDateError = false; }
   }
 
   /**
@@ -457,12 +392,22 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
-    if (this.uploadsComponent) {
-      this.uploadsComponent.uploadedImages.forEach(image => {
-        this.uploadService.deleteImage(image.imageKey);
-      });
-    }
+    this.addTaskService.cleanupOnClose(this);
     this.clearForm();
     this.closeOverlay.emit();
+  }
+
+  /**
+   * Gets the contact's profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
   }
 }

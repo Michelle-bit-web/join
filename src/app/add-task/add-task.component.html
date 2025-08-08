@@ -259,7 +259,17 @@
                         contactManager.getContactColor(contact)
                       "
                     >
-                      {{ contactManager.getContactInitials(contact) }}
+                      <img
+                        *ngIf="getContactImage(contact)"
+                        [src]="getContactImage(contact)"
+                        [alt]="contact.name"
+                        class="contact-image"
+                      />
+                      <span 
+                        *ngIf="!getContactImage(contact)"
+                        class="contact-initials">
+                        {{ contactManager.getContactInitials(contact) }}
+                      </span>
                     </div>
                     <span class="contact-name">{{ contact.name }}</span>
                   </div>
@@ -292,7 +302,17 @@
                 [style.background-color]="contactManager.getContactColor(contact)"
                 [title]="contact.name"
               >
-                {{ contactManager.getContactInitials(contact) }}
+                <img
+                  *ngIf="getContactImage(contact)"
+                  [src]="getContactImage(contact)"
+                  [alt]="contact.name"
+                  class="contact-image"
+                />
+                <span 
+                  *ngIf="!getContactImage(contact)"
+                  class="contact-initials">
+                  {{ contactManager.getContactInitials(contact) }}
+                </span>
               </div>
               <div
                 class="selected-contact-avatar"

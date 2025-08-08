@@ -222,6 +222,7 @@ table {
     }
     z-index: 1;
     position: relative;
+    overflow: hidden;
     &.more-count {
       background-color: var(--background-default-dark);
       color: white;
@@ -230,6 +231,13 @@ table {
       cursor: default;
     }
   }
+}
+
+.contact-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .contact-initials {

@@ -3,6 +3,11 @@
  * handles contact selection, highlights the current user, and allows triggering
  * the creation of a new contact. It interacts with the ContactService to load,
  * group, and manage contact selection.
+ * 
+ * @example
+ * <app-contact-list
+ *   (contactSelected)="onContactSelect()">
+ * </app-contact-list>
  */
 
 import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
@@ -23,10 +28,58 @@ import { UploadService } from '../../services/upload.service';
 export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
-  * Initializes the component by loading contacts,
-  * grouping them by initial, identifying the current user,
-  * and handling errors and contact selection.
-  */
+   * Holds the contacts grouped by the first letter of their name.
+   * Each key is a letter, each value is an array of contacts starting with that letter.
+   */
+  groupedContacts: { [key: string]: Contact[] } = {};
+
+  /**
+   * The currently selected contact for highlighting in the list.
+   */
+  selectedContact: Contact | null = null;
+
+  /**
+   * The email address of the currently authenticated user for highlighting.
+   */
+  currentUserEmail: string | null = null;
+
+  /**
+   * The display name of the currently authenticated user.
+   */
+  currentUser: string | null = null;
+
+  /**
+   * Subscription to contact data changes from the service.
+   */
+  private contactsSubscription: Subscription = new Subscription();
+  
+  /**
+   * Subscription to contact selection changes from the service.
+   */
+  private selectionSubscription: Subscription = new Subscription();
+
+  /**
+   * Event emitted when a contact is selected from the list.
+   */
+  @Output() contactSelected = new EventEmitter<void>();
+
+  /**
+   * Constructor injecting required services for contact management and authentication.
+   * @param contactService - Service that manages contact data and selection state
+   * @param authService - Service that provides current user authentication info  
+   * @param uploadService - Service that manages image uploads and retrieval
+   */
+  constructor(
+    public contactService: ContactService,
+    private authService: AuthService,
+    private uploadService: UploadService
+  ) { }
+
+  /**
+   * Initializes the component by loading contacts,
+   * grouping them by initial, identifying the current user,
+   * and handling errors and contact selection.
+   */
   ngOnInit(): void {
     this.subscribeToContacts();
     this.getCurrentUser();
@@ -34,7 +87,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Subscribes to the contact list, groups them by initial letter,
-   * and selects the current user’s contact if available.
+   * and selects the current user's contact if available.
    */
   private subscribeToContacts(): void {
     this.contactsSubscription = this.contactService.getContacts().subscribe({
@@ -47,7 +100,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * Processes the loaded contacts by grouping them
    * and selecting the current user's contact if present.
    * 
-   * @param contacts - The array of contact objects.
+   * @param contacts - The array of contact objects loaded from the service
    */
   private handleContactsLoaded(contacts: Contact[]): void {
     this.groupedContacts = this.groupByInitial(contacts);
@@ -61,15 +114,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Handles an error that occurred while loading contacts.
+   * Logs the error to console for debugging purposes.
    * 
-   * @param error - The error object returned from the subscription.
+   * @param error - The error object returned from the subscription
    */
   private handleContactsError(error: any): void {
     console.error('Error loading contacts:', error);
   }
 
   /**
-   * Identifying the current user to directly select this user in the contact list.
+   * Identifies the current authenticated user to directly select them in the contact list.
+   * Also subscribes to contact selection changes to maintain selection state.
    */
   getCurrentUser() {
     const user = this.authService.getCurrentUser();
@@ -81,47 +136,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Holds the contacts grouped by the first letter of their name.
-   */
-  groupedContacts: { [key: string]: Contact[] } = {};
-
-  /**
-   * The currently selected contact (if any).
-   */
-  selectedContact: Contact | null = null;
-
-  /**
-   * The email of the currently authenticated user.
-   */
-  currentUserEmail: string | null = null;
-
-  /**
-   * The display name of the currently authenticated user.
-   */
-  currentUser: string | null = null;
-
-  private contactsSubscription: Subscription = new Subscription();
-  private selectionSubscription: Subscription = new Subscription();
-
-  /**
-   * Emits an event when a contact is selected.
-   */
-  @Output() contactSelected = new EventEmitter<void>();
-
-  /**
-   * Constructor injecting required services.
-   * @param contactService - Manages contact data and selection.
-   * @param authService - Provides the currently logged-in user's info.
-   * @param uploadService - Manages image uploads and storage.
-   */
-  constructor(
-    public contactService: ContactService,
-    private authService: AuthService,
-    private uploadService: UploadService
-  ) { }
-
-  /**
-   * Unsubscribes from all subscriptions to avoid memory leaks.
+   * Unsubscribes from all active subscriptions to prevent memory leaks.
+   * Called automatically when the component is destroyed.
    */
   ngOnDestroy(): void {
     this.contactsSubscription.unsubscribe();
@@ -129,17 +145,21 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Checks if the given contact matches the current logged-in user.
-   * @param contact - The contact to compare with the current user.
-   * @returns True if the contact's email matches the user's email.
+   * Checks if the given contact matches the currently logged-in user.
+   * Used for highlighting the current user in the contact list.
+   * 
+   * @param contact - The contact to compare with the current user
+   * @returns True if the contact's email matches the authenticated user's email
    */
   isCurrentUser(contact: Contact): boolean {
     return typeof contact.email === 'string' && contact.email === this.currentUserEmail;
   }
 
   /**
-   * Handles selection of a contact.
-   * @param contact - The contact to select.
+   * Handles selection of a contact from the list.
+   * Updates the selection state and emits the selection event.
+   * 
+   * @param contact - The contact that was selected
    */
   onContactSelect(contact: Contact): void {
     this.contactService.selectContact(contact);
@@ -147,9 +167,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Determines if a contact is currently selected.
-   * @param contact - The contact to check.
-   * @returns True if the contact is selected.
+   * Determines if a contact is currently selected for highlighting.
+   * 
+   * @param contact - The contact to check selection status for
+   * @returns True if the contact is currently selected
    */
   isSelected(contact: Contact): boolean {
     return this.selectedContact?.id === contact.id;
@@ -157,6 +178,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Triggers the display of the "add contact" form via the ContactService.
+   * Opens the contact creation overlay/modal.
    */
   onAddNewContact(): void {
     this.contactService.showAddForm();
@@ -164,8 +186,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Groups contacts alphabetically by the first character of their name.
-   * @param contacts - The list of contacts to group.
-   * @returns An object with initials as keys and arrays of contacts as values.
+   * Filters out invalid contacts and sorts contacts within each group.
+   * 
+   * @param contacts - The list of contacts to group by initial letter
+   * @returns An object with uppercase letters as keys and arrays of contacts as values
    */
   groupByInitial(contacts: Contact[]): { [key: string]: Contact[] } {
     const validContacts = contacts.filter(contact => contact && contact.name);
@@ -179,23 +203,28 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Sorting helper for alphabetical keys.
+   * Sorting helper function for alphabetical ordering of grouped contact keys.
+   * Used with keyvalue pipe in template for consistent alphabetical display.
    */
   keyAsc = (a: any, b: any) => a.key.localeCompare(b.key);
 
   /**
-   * Returns the initials of the given name using ContactService.
-   * @param name - The full name of the contact.
-   * @returns Initials string.
+   * Returns the initials of the given name using ContactService utility.
+   * Falls back to service method for consistent initial generation logic.
+   * 
+   * @param name - The full name of the contact
+   * @returns String containing the person's initials (e.g., "JD" for "John Doe")
    */
   getInitials(name: string | undefined): string {
     return this.contactService.getInitials(name);
   }
 
   /**
-   * Gets the contact image from localStorage using the contact's imageKey.
-   * @param contact - The contact to get the image for.
-   * @returns The base64 image string or null if no image exists.
+   * Gets the contact's profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns The base64 encoded image string or null if no image exists
    */
   getContactImage(contact: Contact): string | null {
     if (contact.imageKey) {

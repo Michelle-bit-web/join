@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  deleteField,
-  Firestore,
-  collection,
-  onSnapshot,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-  Timestamp
-} from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 /**
  * Represents a task in the system.
@@ -115,9 +105,7 @@ export class TaskService {
           tasks.push({ id: doc.id, ...doc.data() } as Task);
         });
         observer.next(tasks);
-      }, error => {
-        observer.error(error);
-      });
+      }, error => observer.error(error));
       return () => unsubscribe();
     });
   }
@@ -181,7 +169,7 @@ export class TaskService {
    * @param docId - The ID of the task.
    * @param updatedTask - The updated task data.
    */
-  async updateTask(docId: string, updatedTask: Task) {
+  async updateTask(docId: string, updatedTask: Task): Promise<void> {
     const docRef = this.getSingleTaskRef(docId);
     await updateDoc(docRef, this.getCleanJson(updatedTask)).catch(console.error);
   }
@@ -193,7 +181,7 @@ export class TaskService {
    * @param subtaskId - The subtask document ID.
    * @param updatedSubtask - The updated subtask data.
    */
-  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask) {
+  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask): Promise<void> {
     const docRef = doc(this.firestore, `tasks/${taskId}/subtasks/${subtaskId}`);
     await updateDoc(docRef, this.getCleanJson(updatedSubtask)).catch(console.error);
   }
@@ -204,7 +192,7 @@ export class TaskService {
    * @param taskId - The parent task ID.
    * @param subtaskId - The subtask ID to delete.
    */
-  async deleteSubtask(taskId: string, subtaskId: string) {
+  async deleteSubtask(taskId: string, subtaskId: string): Promise<void> {
     const docRef = doc(this.firestore, `tasks/${taskId}/subtasks/${subtaskId}`);
     await deleteDoc(docRef).catch(err => console.error('Error deleting subtask:', err));
   }
@@ -214,7 +202,7 @@ export class TaskService {
    * 
    * @param docId - The ID of the task to delete.
    */
-  async deleteTask(docId: string) {
+  async deleteTask(docId: string): Promise<void> {
     await deleteDoc(this.getSingleTaskRef(docId)).catch(console.error);
   }
 
@@ -223,28 +211,33 @@ export class TaskService {
    * 
    * @param updated - The object to clean.
    */
-  getCleanJson(updated: Task | Subtask) {
+  getCleanJson(updated: Task | Subtask): any {
     if ('category' in updated) {
-      const clean: any = {
-        title: updated.title,
-        description: updated.description,
-        date: updated.date,
-        priority: updated.priority,
-        status: updated.status,
-        assignedTo: updated.assignedTo,
-        category: updated.category,
-      };
-      if (Array.isArray(updated.imageKey)) {
-        clean.imageKey = updated.imageKey;
-      }
-      return clean;
+      return this.buildTaskJson(updated);
     } else if ('isCompleted' in updated) {
-      return {
-        title: updated.title,
-        isCompleted: updated.isCompleted
-      };
+      return this.buildSubtaskJson(updated);
     }
     return {};
+  }
+
+  private buildTaskJson(updated: Task): any {
+    const clean: any = {
+      title: updated.title, description: updated.description,
+      date: updated.date, priority: updated.priority,
+      status: updated.status, assignedTo: updated.assignedTo,
+      category: updated.category
+    };
+    if (Array.isArray(updated.imageKey)) {
+      clean.imageKey = updated.imageKey;
+    }
+    return clean;
+  }
+
+  private buildSubtaskJson(updated: Subtask): any {
+    return {
+      title: updated.title,
+      isCompleted: updated.isCompleted
+    };
   }
 
   /**
@@ -259,13 +252,13 @@ export class TaskService {
       return;
     }
     const taskRef = this.getSingleTaskRef(task.id);
-    updateDoc(taskRef, {
-      imageKey: deleteField()
-    }).then(() => {
-      console.log('Image field deleted from task:', task.id);
-    }).catch((err) => {
-      console.error('Failed to delete image from task:', err);
-    });
+    this.updateTaskImage(taskRef);
+  }
+
+  private updateTaskImage(taskRef: any): void {
+    updateDoc(taskRef, { imageKey: deleteField() })
+      .then(() => console.log('Image field deleted from task'))
+      .catch(err => console.error('Failed to delete image from task:', err));
   }
 
   /**
@@ -300,7 +293,7 @@ export class TaskService {
    * 
    * @param task - The task being edited.
    */
-  setEditingTask(task: Task) {
+  setEditingTask(task: Task): void {
     this.editingTask = task;
   }
 
@@ -314,7 +307,7 @@ export class TaskService {
   /**
    * Clears the currently edited task.
    */
-  clearEditingTask() {
+  clearEditingTask(): void {
     this.editingTask = null;
   }
 

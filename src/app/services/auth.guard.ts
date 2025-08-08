@@ -6,6 +6,15 @@ import { Observable, combineLatest, map, filter, take } from 'rxjs';
 /**
  * Route guard that prevents access to certain routes
  * unless the user is authenticated.
+ * Waits for Firebase Auth to initialize before making routing decisions.
+ * 
+ * @example
+ * // In routing configuration
+ * {
+ *   path: 'dashboard',
+ *   component: DashboardComponent,
+ *   canActivate: [AuthGuard]
+ * }
  */
 @Injectable({
   providedIn: 'root'
@@ -14,9 +23,9 @@ import { Observable, combineLatest, map, filter, take } from 'rxjs';
 export class AuthGuard implements CanActivate {
 
   /**
-   * Constructs the AuthGuard.
+   * Constructs the AuthGuard with required dependencies.
    * @param authService - Service to check the user's authentication status
-   * @param router - Angular Router used for navigation
+   * @param router - Angular Router used for navigation to login page
    */
   constructor(
     private authService: AuthService,
@@ -24,11 +33,12 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   /**
-   * Determines whether a route can be activated.
-   * If the user is not authenticated, redirects to the login page.
-   * Waits for Firebase Auth to initialize before making the decision.
-   *
-   * @returns Observable<boolean> that resolves to true if user is logged in
+   * Determines whether a route can be activated based on authentication status.
+   * Waits for Firebase Auth to initialize before making the decision to ensure
+   * accurate authentication state. If user is not authenticated, redirects to login.
+   * 
+   * @returns Observable<boolean> that resolves to true if user is logged in,
+   *          false if not (after redirecting to login)
    */
   canActivate(): Observable<boolean> {
     return combineLatest([

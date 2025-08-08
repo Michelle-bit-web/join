@@ -98,7 +98,15 @@
     width: 32px;
     height: 32px;
     @include flex-center();
+    overflow: hidden;
   }
+}
+
+.contact-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .contact-initials {
