@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 
+/**
+ * Service for managing contact images with validation and compression capabilities.
+ * Provides methods for file validation and image compression.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class ImageManager {
+  /** Flag indicating if there's a file type validation error */
   fileTypeError: boolean = false;
 
+  /**
+   * Creates an instance of ImageManager.
+   * @param uploadService - Service for handling uploads
+   */
   constructor(public uploadService: UploadService) {}
 
   /**
-   * Prüft den Dateityp und gibt das Bild zurück, falls gültig.
+   * Validates and extracts image file from file input event.
+   * Checks file type and size constraints.
+   * @param event - File input change event
+   * @returns Valid File object or null if validation fails
    */
   extractValidImageFile(event: Event): File | null {
     const input = event.target as HTMLInputElement;
@@ -37,7 +49,13 @@ export class ImageManager {
   }
 
   /**
-   * Komprimiert ein Bild auf gewünschte Maße und Qualität.
+   * Compresses an image file to specified dimensions and quality.
+   * Maintains aspect ratio while resizing to fit within max dimensions.
+   * @param file - Image file to compress
+   * @param maxWidth - Maximum width in pixels
+   * @param maxHeight - Maximum height in pixels
+   * @param quality - Compression quality (0-1, where 1 is highest quality)
+   * @returns Promise resolving to base64 encoded compressed image
    */
   async compressImage(file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> {
     return new Promise((resolve, reject) => {

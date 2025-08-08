@@ -3,6 +3,10 @@ import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, 
 import { UploadedImage, UploadService } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
+/**
+ * Component for handling file uploads with drag & drop functionality and image compression.
+ * Supports multiple image uploads with size and type validation.
+ */
 @Component({
   selector: 'app-uploads',
   imports: [CommonModule, ImageViewerComponent],
@@ -13,32 +17,79 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
 })
 
 export class UploadsComponent implements OnInit {
+  /** Array of selected files for upload */
   selectedFiles: UploadedImage[] = [];
+  
+  /** Array of uploaded image URLs */
   uploadedUrls: string[] = [];
+  
+  /** Array of uploaded image objects */
   uploadedImages: UploadedImage[] = [];
+  
+  /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
+  
+  /** Array of error messages for upload validation */
   errorMessages: string[] = [];
+  
+  /** Current image data being processed */
   imgData?: UploadedImage;
+  
+  /** Flag indicating if drag over state is active */
   isDragOver = false;
+  
+  /** Flag to control image viewer visibility */
   showImageViewer = false;
+  
+  /** Reference to the file input element */
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
+  
+  /** Event emitter for image URLs */
   @Output() imageUrls = new EventEmitter<string[]>();
+  
+  /** Whether multiple file selection is allowed */
   @Input() multiple: boolean = true;
+  
+  /** Maximum number of images allowed */
   @Input() maxImages: number = 5;
+  
+  /** Maximum file size in bytes */
   @Input() maxFileSize: number = 3 * 1024 * 1024;
+  
+  /** Event emitter for when images change */
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
+  
+  /** Assignment target for uploaded images */
   @Input() assignedTo: 'user' | 'task' = 'task';
+  
+  /** Flag indicating if component is in editing mode */
   @Input() isEditingMode: boolean = false;
+  
+  /** Array of preloaded images for editing mode */
   @Input() preloadedImages: UploadedImage[] = [];
 
+  /**
+   * Creates an instance of UploadsComponent.
+   * @param uploadService - Service for handling image uploads and storage
+   */
   constructor(private uploadService: UploadService) { }
 
+  /**
+   * Angular lifecycle hook - component initialization.
+   */
   ngOnInit(): void { }
 
+  /**
+   * Opens the file selection dialog.
+   */
   openFileDialog() {
     this.filepickerRef.nativeElement.click();
   }
 
+  /**
+   * Handles file selection from input element.
+   * @param event - File selection event
+   */
   async onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
@@ -47,6 +98,10 @@ export class UploadsComponent implements OnInit {
     await this.processFiles(files);
   }
 
+  /**
+   * Handles drag over events for drag & drop functionality.
+   * @param event - Drag event
+   */
   @HostListener('dragover', ['$event'])
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -54,6 +109,10 @@ export class UploadsComponent implements OnInit {
     this.isDragOver = true;
   }
 
+  /**
+   * Handles drag leave events.
+   * @param event - Drag event
+   */
   @HostListener('dragleave', ['$event'])
   onDragLeave(event: DragEvent) {
     event.preventDefault();
@@ -61,16 +120,24 @@ export class UploadsComponent implements OnInit {
     this.isDragOver = false;
   }
 
+  /**
+   * Handles file drop events for drag & drop functionality.
+   * @param event - Drop event containing files
+   */
   @HostListener('drop', ['$event'])
   async onDrop(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.isDragOver = false;
-
     const files = Array.from(event.dataTransfer?.files || []);
     await this.processFiles(files);
   }
 
+  /**
+   * Processes and validates uploaded files.
+   * @param files - Array of files to process
+   * @private
+   */
   private async processFiles(files: File[]) {
     this.errorMessages = [];
 
@@ -110,6 +177,14 @@ export class UploadsComponent implements OnInit {
     }
   }
 
+  /**
+   * Compresses an image to specified dimensions and quality.
+   * @param file - File to compress
+   * @param maxWidth - Maximum width in pixels
+   * @param maxHeight - Maximum height in pixels
+   * @param quality - Compression quality (0-1)
+   * @returns Promise resolving to base64 string of compressed image
+   */
   async compressImage(
     file: File,
     maxWidth: number,
@@ -125,6 +200,16 @@ export class UploadsComponent implements OnInit {
     });
   }
 
+  /**
+   * Handles image load event during compression process.
+   * @param event - FileReader progress event
+   * @param maxWidth - Maximum width for compression
+   * @param maxHeight - Maximum height for compression
+   * @param quality - Compression quality
+   * @param resolve - Promise resolve function
+   * @param reject - Promise reject function
+   * @private
+   */
   private handleImageLoad(
     event: ProgressEvent<FileReader>,
     maxWidth: number,
@@ -140,6 +225,15 @@ export class UploadsComponent implements OnInit {
     img.src = event.target?.result as string;
   }
 
+  /**
+   * Draws compressed image on canvas.
+   * @param img - HTML image element
+   * @param maxWidth - Maximum width
+   * @param maxHeight - Maximum height
+   * @param quality - Compression quality
+   * @param resolve - Promise resolve function
+   * @private
+   */
   private drawCompressedImage(
     img: HTMLImageElement,
     maxWidth: number,
@@ -157,6 +251,14 @@ export class UploadsComponent implements OnInit {
     resolve(canvas.toDataURL('image/jpeg', quality));
   }
 
+  /**
+   * Calculates resized dimensions while maintaining aspect ratio.
+   * @param img - HTML image element
+   * @param maxWidth - Maximum allowed width
+   * @param maxHeight - Maximum allowed height
+   * @returns Object containing calculated width and height
+   * @private
+   */
   private getResizedDimensions(
     img: HTMLImageElement,
     maxWidth: number,
@@ -175,10 +277,21 @@ export class UploadsComponent implements OnInit {
     return { width, height };
   }
 
+  /**
+   * Track function for Angular ngFor optimization.
+   * @param index - Array index
+   * @param item - UploadedImage item
+   * @returns Tracking identifier
+   */
   trackByFilename(index: number, item: UploadedImage) {
     return item.filename;
   }
 
+  /**
+   * Removes an image from the uploaded or preloaded arrays.
+   * @param index - Index of image to remove
+   * @param source - Source array ('uploaded' or 'preloaded')
+   */
   removeImage(index: number, source: 'uploaded' | 'preloaded') {
     if (source === 'uploaded') {
       this.uploadedImages.splice(index, 1);
@@ -193,6 +306,9 @@ export class UploadsComponent implements OnInit {
     this.emitImagesChanged();
   }
 
+  /**
+   * Removes all uploaded and preloaded images.
+   */
   removeAllImages() {
     this.uploadedImages = [];
     this.preloadedImages = [];
@@ -205,6 +321,7 @@ export class UploadsComponent implements OnInit {
 
   /**
   * Opens the image viewer for the contact image.
+  * @param index - Index of image to display initially
   */
   openImageViewer(index: number) {
     const imageUrls = this.uploadedImages.map(img => img.base64);
@@ -214,6 +331,7 @@ export class UploadsComponent implements OnInit {
 
   /**
    * Closes the image viewer.
+   * @param event - Optional event to stop propagation
    */
   closeImageViewer(event?: Event): void {
     if (event) {
@@ -225,6 +343,7 @@ export class UploadsComponent implements OnInit {
 
   /**
    * Handles image deletion from the image viewer.
+   * @param event - Event containing index and imageKey for deletion
    */
   onDeleteImage(event: { index: number, imageKey?: string }) {
     if (this.isEditingMode && event.imageKey) {
@@ -235,32 +354,59 @@ export class UploadsComponent implements OnInit {
     this.closeImageViewer();
   }
 
+  /**
+   * Emits the imagesChanged event with current uploaded images.
+   * @private
+   */
   private emitImagesChanged() {
     this.imagesChanged.emit([...this.uploadedImages]);
   }
 
+  /**
+   * Sets the uploaded images array and emits change event.
+   * @param images - Array of images to set
+   */
   setImages(images: UploadedImage[]) {
     this.uploadedImages = images;
     this.emitImagesChanged();
   }
 
+  /**
+   * Gets array of image keys from uploaded images.
+   * @returns Array of image keys
+   */
   getImageKeys(): string[] {
     return this.uploadedImages.map(img => img.imageKey);
   }
 
+  /**
+   * Clears all uploaded images and emits change event.
+   */
   clearImages() {
     this.uploadedImages = [];
     this.emitImagesChanged();
   }
 
+  /**
+   * Gets combined array of uploaded and preloaded images.
+   * @returns Combined array of all images
+   */
   allImages(): UploadedImage[] {
     return [...this.uploadedImages, ...this.preloadedImages];
   }
 
+  /**
+   * Gets all image keys from both uploaded and preloaded images.
+   * @returns Array of all image keys
+   */
   getAllImageKeys(): string[] {
     return this.allImages().map(img => img.imageKey);
   }
 
+  /**
+   * Gets all base64 strings from both uploaded and preloaded images.
+   * @returns Array of all base64 strings
+   */
   getAllImageBase64(): string[] {
     return this.allImages().map(img => img.base64);
   }
