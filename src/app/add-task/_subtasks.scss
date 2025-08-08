@@ -48,7 +48,7 @@
 .subtasks-list {
   @include flex-column;
   gap: 8px;
-  height: 60px;
+  height: 120px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--background-default-light) white;

@@ -92,10 +92,10 @@
           }
           <div
             class="img-user more-count"
-            *ngIf="getAllUniqueContacts().length > 4"
+            *ngIf="getAllUniqueContacts().length > 3"
             [title]="getRemainingContactNames()"
           >
-            +{{ getAllUniqueContacts().length - 4 }}
+            +{{ getAllUniqueContacts().length - 3 }}
           </div>
         </div>
       </div>

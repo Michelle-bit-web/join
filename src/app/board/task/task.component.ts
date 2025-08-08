@@ -250,7 +250,7 @@ export class TaskComponent {
    * Returns the first 4 contacts for display.
    */
   getUniqueContacts(): Contact[] {
-    return this.getAllUniqueContacts().slice(0, 4);
+    return this.getAllUniqueContacts().slice(0, 3);
   }
 
   /**
@@ -261,7 +261,7 @@ export class TaskComponent {
    */
   getRemainingContactNames(): string {
     const all = this.getAllUniqueContacts();
-    const remaining = all.slice(4);
+    const remaining = all.slice(3);
     return remaining.map((c) => c.name).join(', ');
   }
 

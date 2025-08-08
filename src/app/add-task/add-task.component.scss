@@ -3,7 +3,7 @@ $form-width: 1000px;
 $input-width: 460px;
 $border-color: #d1d1d1;
 $border-radius: 10px;
-$form-padding: clamp(20px, calc(2vw + 10px), 40px);
+$form-padding: clamp(20px, calc(1.8vw + 10px), 40px);
 $mobile-breakpoint: 768px;
 $small-mobile-breakpoint: 480px;
 @import "./mixins";
@@ -14,7 +14,7 @@ $small-mobile-breakpoint: 480px;
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - 200px);
+  height: 90dvh;
   overflow: hidden;
   @media (max-width: 1000px) {
     height: calc(100dvh - 180px);
@@ -24,7 +24,7 @@ $small-mobile-breakpoint: 480px;
 .add-task-header {
   width: 100%;
   height: 120px;
-  padding: 0 $form-padding;
+  padding: 0 24px;
   @include flex-center;
   position: relative;
 
@@ -59,6 +59,10 @@ $small-mobile-breakpoint: 480px;
       width: 24px;
       height: 24px;
     }
+  }
+
+  @media(max-width: 1000px) {
+     padding: 0 $form-padding;
   }
 
   @media (max-width: $mobile-breakpoint) {
@@ -120,13 +124,16 @@ $small-mobile-breakpoint: 480px;
 }
 
 .add-task-content {
-  padding: 0 $form-padding;
+  padding: 0 24px;
   display: block;
   width: 100%;
   flex: 1;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--background-default-light) white;
+  scrollbar-color: transparent transparent;
+
+  @media(max-width: 1000px) {
+     padding: 0 $form-padding;
+  }
 
   @media (max-width: $mobile-breakpoint) {
     padding: 16px;
@@ -162,7 +169,7 @@ $small-mobile-breakpoint: 480px;
 
 .form-main {
   display: flex;
-  gap: 40px;
+  gap: 35px;
   align-items: flex-start;
   width: 100%;
 
