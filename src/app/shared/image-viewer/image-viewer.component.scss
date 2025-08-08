@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-
+  height: 100dvh;
   background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
@@ -21,9 +21,6 @@
 
 .image-viewer-content {
   width: 100%;
-  // height: 100vh;
-  // max-height: 90vh;
-  // max-width: 90vw;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -118,13 +115,13 @@
   align-items: center;
   justify-content: space-between;
   padding: clamp(8px, 1.5vw, 15px) clamp(8px, 2vw, 24px);
-  height: calc(100dvh - 144px);
+  height: calc(100dvh - 160px);
   width: 100%;
 }
 
 .image-wrapper {
   display: flex;
-  flex:1;
+  flex: 1;
   justify-content: center;
   align-items: center;
 }
@@ -175,6 +172,7 @@
 }
 
 .image-controls {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -232,22 +230,6 @@
 }
 
 @media (max-width: 900px) {
-  .image-container {
-    // justify-content: center;
-    // padding-bottom: 80px;
-  }
-
-  .image-wrapper {
-    padding-bottom: 80px;
-    width: 100%;
-    height: 100%;
-  }
-
-  .viewer-image {
-    max-height: calc(100% - 80px);
-    max-width: 100%;
-  }
-
   .nav-btn {
     display: none;
   }
@@ -259,42 +241,24 @@
     left: 50%;
     transform: translateX(-50%);
   }
-}
 
-@media (min-width: 901px) {
-  .image-container {
-    width: 100%;
+  .nav-btn-mobile:hover:not(:disabled) {
+    background-color: var(--accent-primary-color);
+    border: transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    svg path {
+      fill: var(--text-color-light);
+    }
   }
 
-  .image-wrapper {
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-
-  .viewer-image {
-    max-width: calc(100% - 200px);
-    max-height: 100%;
-  }
-
-  .nav-btn {
-    display: flex;
-  }
-
-  .nav-btn-wrapper-mobile {
-    display: none;
+  .nav-btn-mobile:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
 @media (max-width: 768px) {
-  .image-viewer-content {
-    width: 100%;
-    height: 100dvh;
-  }
-
-  .image-container {
-    padding: 10px;
-  }
-
   .nav-btn {
     width: 40px;
     height: 40px;
@@ -311,13 +275,12 @@
     padding: 8px;
   }
 
-  .nav-btn {
-    width: 36px;
-    height: 36px;
-    margin: 0 4px;
-  }
-
   .viewer-image {
     max-height: 65dvh;
+  }
+
+  .nav-btn-mobile {
+    width: 35px;
+    height: 35px;
   }
 }
