@@ -1,35 +1,40 @@
-<header>
+<header role="banner">
   <div class="header-content">
     <div class="logo">
-      <a [routerLink]="isLoggedIn() ? '/summary' : '/'">
+      <a [routerLink]="isLoggedIn() ? '/summary' : '/'" aria-label="Go to home page">
         <img
           class="logo-img"
           src="assets/img/logo/logo-mobile.png"
-          alt="Logo"
+          alt="Join Logo"
         />
       </a>
     </div>
 
-    <div class="headline">
+    <div class="headline" role="heading" aria-level="1">
       <p class="headline-text">Kanban Project Management Tool</p>
     </div>
 
-    <div class="icon-section">
-      <div routerLink="/help">
-        <img class="help-icon" src="assets/img/icons/help.png" alt="" />
+    <div class="icon-section" role="group" aria-label="User actions">
+      <div routerLink="/help" role="link" tabindex="0" aria-label="Get help">
+        <img class="help-icon" src="assets/img/icons/help.png" alt="Help icon" />
       </div>
 
       <div
         class="user-profile"
         (click)="toggleMenu($event)"
         *ngIf="isLoggedIn()"
+        role="button"
+        tabindex="0"
+        aria-label="User menu"
+        [attr.aria-expanded]="menuOpen"
+        aria-haspopup="true"
       >
-        <p>{{ getCurrentUserInitials() }}</p>
-        <nav #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>
-          <a class="mobile-help-link" routerLink="/help">Help</a>
-          <a routerLink="/privacy-policy">Privacy Policy</a>
-          <a routerLink="/legal-notice">Legal notice</a>
-          <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>
+        <p aria-label="User initials">{{ getCurrentUserInitials() }}</p>
+        <nav #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut role="menu" aria-label="User menu options">
+          <a class="mobile-help-link" routerLink="/help" role="menuitem" aria-label="Get help">Help</a>
+          <a routerLink="/privacy-policy" role="menuitem" aria-label="Read Privacy Policy">Privacy Policy</a>
+          <a routerLink="/legal-notice" role="menuitem" aria-label="Read Legal Notice">Legal notice</a>
+          <a (click)="logout()" *ngIf="isLoggedIn()" role="menuitem" aria-label="Log out">Log out</a>
         </nav>
       </div>
     </div>

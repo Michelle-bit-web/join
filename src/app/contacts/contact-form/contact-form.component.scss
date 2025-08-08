@@ -166,6 +166,11 @@ form {
     @include inter400-fs20();
     flex: 1;
   }
+  > label {
+    font-size: 10px;
+    position: absolute;
+    opacity: 0;
+  }
 }
 
 .colorError {

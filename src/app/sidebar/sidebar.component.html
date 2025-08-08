@@ -1,51 +1,51 @@
-<div class="sidebar">
+<aside class="sidebar" role="navigation" aria-label="Main navigation">
   <div class="logo-section">
     <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo" />
   </div>
-  <nav class="navigation" *ngIf="isLoggedIn()">
-    <ul>
-      <li routerLinkActive="active">
-        <a routerLink="/summary">
-          <img src="assets/img/icons/summary-light.png" alt="Summary Icon" />
+  <nav class="navigation" *ngIf="isLoggedIn()" role="navigation" aria-label="Primary navigation">
+    <ul role="list">
+      <li routerLinkActive="active" role="listitem">
+        <a routerLink="/summary" aria-label="Go to Summary page">
+          <img src="assets/img/icons/summary-light.png" alt="" aria-hidden="true" />
           <span>Summary</span>
         </a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/board">
-          <img src="assets/img/icons/board.png" alt="Board Icon" />
+      <li routerLinkActive="active" role="listitem">
+        <a routerLink="/board" aria-label="Go to Board page">
+          <img src="assets/img/icons/board.png" alt="" aria-hidden="true" />
           <span>Board</span>
         </a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/add-task">
-          <img src="assets/img/icons/add-task.png" alt="Add Task Icon" />
+      <li routerLinkActive="active" role="listitem">
+        <a routerLink="/add-task" aria-label="Go to Add Task page">
+          <img src="assets/img/icons/add-task.png" alt="" aria-hidden="true" />
           <span>Add Task</span>
         </a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/contacts">
-          <img src="assets/img/icons/contacts.png" alt="Contacts Icon" />
+      <li routerLinkActive="active" role="listitem">
+        <a routerLink="/contacts" aria-label="Go to Contacts page">
+          <img src="assets/img/icons/contacts.png" alt="" aria-hidden="true" />
           <span>Contacts</span>
         </a>
       </li>
     </ul>
   </nav>
-  <nav class="login-navigation" *ngIf="!isLoggedIn()">
-    <ul>
-      <li>
-        <a routerLink="/login">
-          <img src="assets/img/svg/log-in.svg" alt="Log In Icon" />
+  <nav class="login-navigation" *ngIf="!isLoggedIn()" role="navigation" aria-label="Login navigation">
+    <ul role="list">
+      <li role="listitem">
+        <a routerLink="/login" aria-label="Go to Login page">
+          <img src="assets/img/svg/log-in.svg" alt="" aria-hidden="true" />
           <span>Log In</span>
         </a>
       </li>
     </ul>
-    <div class="login-legal-links">
-      <a routerLink="/privacy-policy">Privacy Policy</a>
-      <a routerLink="/legal-notice">Legal notice</a>
+    <div class="login-legal-links" role="group" aria-label="Legal links">
+      <a routerLink="/privacy-policy" aria-label="Read Privacy Policy">Privacy Policy</a>
+      <a routerLink="/legal-notice" aria-label="Read Legal Notice">Legal notice</a>
     </div>
   </nav>
-  <div class="legal-links">
-    <a routerLink="/privacy-policy">Privacy Policy</a>
-    <a routerLink="/legal-notice">Legal notice</a>
+  <div class="legal-links" role="group" aria-label="Legal information">
+    <a routerLink="/privacy-policy" aria-label="Read Privacy Policy">Privacy Policy</a>
+    <a routerLink="/legal-notice" aria-label="Read Legal Notice">Legal notice</a>
   </div>
-</div>
+</aside>

@@ -1,10 +1,12 @@
-<div class="card-layout" (click)="openTaskDetails(task)">
+<div class="card-layout" (click)="openTaskDetails(task)" role="button" tabindex="0" [attr.aria-label]="'Open task: ' + task.title">
   <div class="wrapper-top">
     <p
       class="category-flag-card"
       [style.background-color]="
         task.category == 'user story' ? '#0038ff' : '#1fd7c1'
       "
+      role="badge"
+      [attr.aria-label]="'Category: ' + taskService.capitalize(task.category)"
     >
       {{ taskService.capitalize(task.category) }}
     </p>
@@ -13,47 +15,57 @@
       class="dots-menu-btn"
       type="button"
       (click)="openDotsMenuHandler($event)"
-      aria-label="Mehr Optionen"
+      aria-label="Task options menu"
+      [attr.aria-expanded]="isDotsMenuOpen"
+      aria-haspopup="true"
     >
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="dot" aria-hidden="true"></span>
     </button>
 
     <div
       class="dots-menu-overlay"
       *ngIf="isDotsMenuOpen"
       (click)="$event.stopPropagation()"
+      role="menu"
+      aria-label="Task status options"
     >
-      <a *ngIf="task.status !== 'to-do'" (click)="changeStatus('to-do', $event)"
+      <a *ngIf="task.status !== 'to-do'" (click)="changeStatus('to-do', $event)" role="menuitem" tabindex="0"
         >To Do</a
       >
       <a
         *ngIf="task.status !== 'in-progress'"
         (click)="changeStatus('in-progress', $event)"
+        role="menuitem" tabindex="0"
         >In Progress</a
       >
       <a
         *ngIf="task.status !== 'await-feedback'"
         (click)="changeStatus('await-feedback', $event)"
+        role="menuitem" tabindex="0"
         >Awaiting Feedback</a
       >
-      <a *ngIf="task.status !== 'done'" (click)="changeStatus('done', $event)"
+      <a *ngIf="task.status !== 'done'" (click)="changeStatus('done', $event)" role="menuitem" tabindex="0"
         >Done</a
       >
     </div>
   </div>
   <div class="task-card">
-    <h1 class="see-more">{{ taskService.capitalize(task.title) }}</h1>
-    <p class="task-description truncated">
+    <h1 class="see-more" role="heading" aria-level="3">{{ taskService.capitalize(task.title) }}</h1>
+    <p class="task-description truncated" [attr.aria-label]="'Description: ' + taskService.capitalize(task.description)">
       {{ taskService.capitalize(task.description) }}
-      <span class="see-more">…</span>
+      <span class="see-more" aria-hidden="true">…</span>
     </p>
     <div
       class="subtask-wrapper"
       [style.visibility]="
         subtaskList && subtaskList.length > 0 ? 'visible' : 'hidden'
       "
+      role="progressbar"
+      [attr.aria-valuenow]="getCompletedSubtasksCount(subtaskList)"
+      [attr.aria-valuemax]="subtaskList?.length || 0"
+      [attr.aria-label]="getCompletedSubtasksCount(subtaskList) + ' of ' + (subtaskList?.length || 0) + ' subtasks completed'"
     >
       <div class="subtask-bar-default">
         <div
@@ -67,7 +79,7 @@
       </span>
     </div>
     <div class="card-bottom-wrapper">
-      <div class="collaborators-wrapper">
+      <div class="collaborators-wrapper" role="group" aria-label="Assigned team members">
         <div class="img-user-wrapper">
           @for (contact of getUniqueContacts(); track contact.id) {
           <div
@@ -75,6 +87,8 @@
             [style.background-color]="
               contactService.getContactColor(contact.name)
             "
+            role="img"
+            [attr.aria-label]="'Team member: ' + contact.name"
           >
             <img
               *ngIf="getContactImage(contact)"
@@ -94,6 +108,8 @@
             class="img-user more-count"
             *ngIf="getAllUniqueContacts().length > 3"
             [title]="getRemainingContactNames()"
+            role="img"
+            [attr.aria-label]="'Plus ' + (getAllUniqueContacts().length - 3) + ' more team members'"
           >
             +{{ getAllUniqueContacts().length - 3 }}
           </div>
@@ -101,21 +117,27 @@
       </div>
       <img
         src="assets/img/icons/prio-high.png"
-        alt="Priority High Icon"
+        alt="High priority"
         class="card-priority"
         *ngIf="task.priority === 'urgent'"
+        role="img"
+        aria-label="Priority: High"
       />
       <img
         src="assets/img/icons/prio-medium.png"
-        alt="Priority Medium Icon"
+        alt="Medium priority"
         class="card-priority"
         *ngIf="task.priority === 'medium'"
+        role="img"
+        aria-label="Priority: Medium"
       />
       <img
         src="assets/img/icons/prio-low.png"
-        alt="Priority Low Icon"
+        alt="Low priority"
         class="card-priority"
         *ngIf="task.priority === 'low'"
+        role="img"
+        aria-label="Priority: Low"
       />
     </div>
   </div>

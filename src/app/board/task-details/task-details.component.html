@@ -1,14 +1,16 @@
-<div class="content-wrapper" *ngIf="showContent">
+<div class="content-wrapper" *ngIf="showContent" role="dialog" aria-modal="true" [attr.aria-label]="'Task details for: ' + task.title">
   <div class="wrapper-top">
     <p
       class="category-flag"
       [style.background-color]="
         task.category == 'user story' ? '#0038ff' : '#1fd7c1'
       "
+      role="badge"
+      [attr.aria-label]="'Category: ' + taskService.capitalize(task.category)"
     >
       {{ taskService.capitalize(task.category) }}
     </p>
-    <button class="btn-close" (click)="onClose()">
+    <button class="btn-close" (click)="onClose()" aria-label="Close task details">
       <svg
         width="24"
         height="24"
@@ -37,13 +39,13 @@
     </button>
   </div>
   <div class="task-content">
-    <h1>{{ taskService.capitalize(task.title) }}</h1>
+    <h1 role="heading" aria-level="2">{{ taskService.capitalize(task.title) }}</h1>
     <p class="description">{{ taskService.capitalize(task.description) }}</p>
-    <div class="date-row">
+    <div class="date-row" role="group" aria-label="Task due date">
       <span class="row-title">Due date:</span>
       <span>{{ convertDate(task.date) }}</span>
     </div>
-    <div class="priority-row">
+    <div class="priority-row" role="group" aria-label="Task priority">
       <span class="row-title">Priority:</span>
       <span>{{ task.priority }}</span>
       <div>
@@ -66,12 +68,12 @@
     </div>
     <div class="assigned-to-row">
       <span class="row-title">Assigned To:</span>
-      <span *ngIf="contactList.length <= 0" class="info-no-selection"
+      <span *ngIf="contactList.length <= 0" class="info-no-selection" role="status"
         >No contact selected</span
       >
-      <div class="contact-list">
+      <div class="contact-list" role="list" aria-label="Assigned team members">
         @for (contact of contactList; track $index) {
-        <div class="contact-item">
+        <div class="contact-item" role="listitem">
           <div class="img-user-wrapper">
             <div
               class="img-user"
@@ -100,18 +102,19 @@
     </div>
     <div class="subtask-row">
       <span class="row-title">Subtasks:</span>
-      <span *ngIf="subtasks.length <= 0" class="info-no-selection"
+      <span *ngIf="subtasks.length <= 0" class="info-no-selection" role="status"
         >No subtasks defined</span
       >
-      <div class="subtask-list">
+      <div class="subtask-list" role="list" aria-label="Task subtasks">
         @for (subtask of subtasks; track $index) {
-        <div class="subtask-item">
+        <div class="subtask-item" role="listitem">
           <input
             class="checkbox"
             [id]="'subtask-cb' + $index"
             type="checkbox"
             (change)="onSubtaskToggle(subtask)"
             [(ngModel)]="subtask.isCompleted"
+            [attr.aria-label]="'Mark subtask as ' + (subtask.isCompleted ? 'incomplete' : 'complete') + ': ' + subtask.title"
           />
           <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
           <span>{{ subtask.title }}</span>
@@ -121,11 +124,14 @@
     </div>
     <div class="task-images" *ngIf="taskImages.length > 0">
       <span class="row-title">Images:</span>
-      <div class="image-grid">
+      <div class="image-grid" role="grid" aria-label="Task images">
         <div
           class="image-item"
           *ngFor="let image of taskImages; let i = index"
           (click)="openImageViewer(i)"
+          role="gridcell"
+          tabindex="0"
+          [attr.aria-label]="'Image ' + (i + 1) + ' of ' + taskImages.length + ': ' + image.filename"
         >
           <img
             [src]="image.base64"
@@ -171,8 +177,8 @@
         </div>
       </div>
     </div>
-    <div class="btn-wrapper">
-      <button class="btn-delete" (click)="deleteTask($event)">
+    <div class="btn-wrapper" role="group" aria-label="Task actions">
+      <button class="btn-delete" (click)="deleteTask($event)" aria-label="Delete this task">
         <svg
           width="25"
           height="24"
@@ -200,8 +206,8 @@
         </svg>
         Delete
       </button>
-      <div class="separator"></div>
-      <button class="btn-edit" (click)="openEditTask($event)">
+      <div class="separator" aria-hidden="true"></div>
+      <button class="btn-edit" (click)="openEditTask($event)" aria-label="Edit this task">
         <svg
           width="33"
           height="33"

@@ -1,4 +1,4 @@
-<section #scrollSection (scroll)="onSectionScroll()">
+<section #scrollSection (scroll)="onSectionScroll()" role="main" aria-label="Task board">
   <div class="layout-container">
     <div class="board-header">
       <div class="header-headline">
@@ -6,26 +6,33 @@
         <img
           class="add-icon"
           src="assets/img/icons/add-box-fill.png"
-          alt="add task button"
+          alt="Add new task"
           (click)="openAddOrEditOverlay('open', 'to-do')"
           (click)="saveTaskStatus('to-do')"
+          role="button"
+          tabindex="0"
+          aria-label="Add new task to To Do column"
         />
       </div>
 
-      <div class="header-controls">
-        <div class="search-input-container">
+      <div class="header-controls" role="group" aria-label="Board controls">
+        <div class="search-input-container" role="search">
           <input
             type="text"
             placeholder="Find Task"
             [(ngModel)]="searchTerm"
             (input)="onSearchInput()"
             #searchInput
+            aria-label="Search tasks"
           />
 
           @if (searchTerm.trim()) {
           <div
             class="clear-search-wrapper"
             (click)="clearSearch(); searchInput.focus()"
+            role="button"
+            tabindex="0"
+            aria-label="Clear search"
           >
             <img
               src="assets/img/icons/close.png"
@@ -35,8 +42,8 @@
           </div>
           }
 
-          <div class="separator"></div>
-          <div class="search-icon-wrapper">
+          <div class="separator" aria-hidden="true"></div>
+          <div class="search-icon-wrapper" aria-hidden="true">
             <img
               src="assets/img/icons/search.png"
               alt="Search"
@@ -48,20 +55,24 @@
         <button
           (click)="openAddOrEditOverlay('open', 'to-do')"
           (click)="saveTaskStatus('to-do')"
+          aria-label="Add new task"
         >
           Add Task +
         </button>
       </div>
     </div>
 
-    <div class="task-columns">
-      <div class="column">
+    <div class="task-columns" role="group" aria-label="Task columns">
+      <div class="column" role="region" aria-label="To Do tasks">
         <div class="column-header">
           <h2>To do</h2>
           <div
             class="icon-container"
             (click)="openAddOrEditOverlay('open', 'to-do')"
             (click)="saveTaskStatus('to-do')"
+            role="button"
+            tabindex="0"
+            aria-label="Add task to To Do column"
           >
             <img
               class="default-icon"
@@ -89,9 +100,12 @@
           class="drop-list"
           [class.drop-list-empty]="getFilteredTasks('to-do').length === 0"
           (cdkDropListDropped)="drop($event)"
+          role="list"
+          aria-label="To Do tasks"
+          [attr.aria-describedby]="getFilteredTasks('to-do').length === 0 ? 'todo-empty' : null"
         >
           @if (getFilteredTasks('to-do').length === 0) {
-          <div class="empty-column">
+          <div class="empty-column" role="status" id="todo-empty">
             @if (searchTerm.trim()) { No matching tasks found } @else { No tasks
             To do }
           </div>
@@ -110,18 +124,22 @@
             (openDotsMenu)="openedMenuTaskId = $event"
             (closeDotsMenu)="openedMenuTaskId = null"
             (changeTaskStatus)="changeTaskStatus($event)"
+            role="listitem"
           ></app-task>
           }
         </div>
       </div>
 
-      <div class="column">
+      <div class="column" role="region" aria-label="In Progress tasks">
         <div class="column-header">
           <h2>In progress</h2>
           <div
             class="icon-container"
             (click)="openAddOrEditOverlay('open', 'in-progress')"
             (click)="saveTaskStatus('in-progress')"
+            role="button"
+            tabindex="0"
+            aria-label="Add task to In Progress column"
           >
             <img
               class="default-icon"
@@ -144,6 +162,8 @@
           class="drop-list"
           [class.drop-list-empty]="getFilteredTasks('in-progress').length === 0"
           (cdkDropListDropped)="drop($event)"
+          role="list"
+          aria-label="In Progress tasks"
         >
           @if (getFilteredTasks('in-progress').length === 0) {
           <div class="empty-column">
@@ -165,18 +185,22 @@
             (openDotsMenu)="openedMenuTaskId = $event"
             (closeDotsMenu)="openedMenuTaskId = null"
             (changeTaskStatus)="changeTaskStatus($event)"
+            role="listitem"
           ></app-task>
           }
         </div>
       </div>
 
-      <div class="column">
+      <div class="column" role="region" aria-label="Await Feedback tasks">
         <div class="column-header">
           <h2>Await feedback</h2>
           <div
             class="icon-container"
             (click)="openAddOrEditOverlay('open', 'await-feedback')"
             (click)="saveTaskStatus('await-feedback')"
+            role="button"
+            tabindex="0"
+            aria-label="Add task to Await Feedback column"
           >
             <img
               class="default-icon"
@@ -202,6 +226,8 @@
             getFilteredTasks('await-feedback').length === 0
           "
           (cdkDropListDropped)="drop($event)"
+          role="list"
+          aria-label="Await Feedback tasks"
         >
           @if (getFilteredTasks('await-feedback').length === 0) {
           <div class="empty-column">
@@ -222,12 +248,13 @@
             (openDotsMenu)="openedMenuTaskId = $event"
             (closeDotsMenu)="openedMenuTaskId = null"
             (changeTaskStatus)="changeTaskStatus($event)"
+            role="listitem"
           ></app-task>
           }
         </div>
       </div>
 
-      <div class="column">
+      <div class="column" role="region" aria-label="Done tasks">
         <div class="column-header">
           <h2>Done</h2>
         </div>
@@ -245,6 +272,8 @@
           class="drop-list"
           [class.drop-list-empty]="getFilteredTasks('done').length === 0"
           (cdkDropListDropped)="drop($event)"
+          role="list"
+          aria-label="Done tasks"
         >
           @if (getFilteredTasks('done').length === 0) {
           <div class="empty-column">
@@ -266,6 +295,7 @@
             (openDotsMenu)="openedMenuTaskId = $event"
             (closeDotsMenu)="openedMenuTaskId = null"
             (changeTaskStatus)="changeTaskStatus($event)"
+            role="listitem"
           ></app-task>
           }
         </div>
@@ -273,8 +303,8 @@
     </div>
   </div>
 
-  <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop">
-    <span class="arrow-up">↑</span>
+  <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop" aria-label="Scroll to top">
+    <span class="arrow-up" aria-hidden="true">↑</span>
   </button>
 </section>
 
@@ -284,6 +314,9 @@
   (@slideInOut.done)="onOverlayAnimationDone($event)"
   [class.backgroundVisible]="backgroundVisible"
   *ngIf="overlayVisible"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Task overlay"
 >
   <div class="max-width-container">
     <div class="content-wrapper" *ngIf="showAddOrEditTask">
