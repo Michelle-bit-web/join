@@ -133,7 +133,7 @@ section {
   justify-content: center;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 1000;
   transition: background 0.2s, box-shadow 0.2s;
 
   &:hover {

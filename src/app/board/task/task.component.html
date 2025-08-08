@@ -64,8 +64,8 @@
       "
       role="progressbar"
       [attr.aria-valuenow]="getCompletedSubtasksCount(subtaskList)"
-      [attr.aria-valuemax]="subtaskList?.length || 0"
-      [attr.aria-label]="getCompletedSubtasksCount(subtaskList) + ' of ' + (subtaskList?.length || 0) + ' subtasks completed'"
+      [attr.aria-valuemax]="subtaskList.length || 0"
+      [attr.aria-label]="getCompletedSubtasksCount(subtaskList) + ' of ' + (subtaskList.length || 0) + ' subtasks completed'"
     >
       <div class="subtask-bar-default">
         <div

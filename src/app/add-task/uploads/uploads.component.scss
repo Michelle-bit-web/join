@@ -115,6 +115,10 @@
     grid-template-columns: repeat(auto-fill, minmax(130px, 130px));
     gap: 12px;
     margin: 0 auto;
+
+    @media(max-width: 1000px) {
+       grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+    }
   }
 
   .image-item {

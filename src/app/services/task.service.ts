@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 /**
@@ -108,6 +108,29 @@ export class TaskService {
       }, error => observer.error(error));
       return () => unsubscribe();
     });
+  }
+
+  /**
+   * Gets a single task by ID from Firestore.
+   * 
+   * @param taskId - The ID of the task to retrieve.
+   * @returns Promise resolving to the task or null if not found.
+   */
+  async getTaskById(taskId: string): Promise<Task | null> {
+    try {
+      const docRef = this.getSingleTaskRef(taskId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() } as Task;
+      } else {
+        console.warn(`Task with ID ${taskId} not found`);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error getting task by ID:', error);
+      return null;
+    }
   }
 
   /**
