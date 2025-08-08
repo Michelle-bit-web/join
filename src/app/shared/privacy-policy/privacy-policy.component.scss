@@ -3,11 +3,21 @@
 .privacy-policy-page {
   width: 100%;
   max-width: 1200px;
-  height: calc(100dvh - 100px);
+  height: calc(100dvh - 140px);
   padding: clamp(15px, 3vw, 50px);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+  scrollbar-color: var(--background-default-dark) transparent;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--background-default-dark);
+    border-radius: 4px;
+  }
   gap: 16px;
   color: var(--text-color-dark);
 
@@ -55,7 +65,7 @@
   .list {
     @include inter400-fs20;
     margin: 0.5em 0;
-    
+
     li {
       margin-left: 16px;
     }
@@ -70,7 +80,7 @@
 
   a {
     @include flex-center();
-    
+
     img {
       width: 40px;
       height: 40px;

@@ -9,7 +9,18 @@
   margin-top: -9px;
   padding-bottom: 80px;
   background-color: var(--background-light);
+  scrollbar-width: thin;
   scrollbar-color: var(--background-default-dark) transparent;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--background-default-dark);
+    border-radius: 4px;
+  }
 
   .add-button {
     @include btn;
@@ -160,16 +171,6 @@
     width: 100%;
     max-width: none;
     margin: 0;
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: --background-default-dark;
-      border-radius: 4px;
-    }
 
     .add-button {
       display: none;

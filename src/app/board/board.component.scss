@@ -8,7 +8,18 @@ section {
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: var(--background-default-light) white;
+  scrollbar-width: thin;
+  scrollbar-color: var(--background-default-dark) transparent;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--background-default-dark);
+    border-radius: 4px;
+  }
   display: flex;
   flex-direction: column;
   padding-bottom: 18px;
@@ -328,7 +339,7 @@ section {
   h1 {
     @include inter700-fs47();
   }
-  
+
   @media (max-width: 550px) {
     width: 95%;
   }

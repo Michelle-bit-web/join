@@ -138,7 +138,18 @@ app-task {
     overflow-y: hidden;
     gap: 22px;
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--background-default-dark) transparent;
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--background-default-dark);
+      border-radius: 4px;
+    }
 
     &.drop-list-empty {
       min-height: 100px;
