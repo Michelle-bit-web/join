@@ -37,7 +37,7 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
   styleUrl: './task-details.component.scss'
 })
 
-export class TaskDetailsComponent implements OnChanges {
+export class TaskDetailsComponent  {
 
   /**
    * Emits an event when the task detail view should be closed.
@@ -62,7 +62,8 @@ export class TaskDetailsComponent implements OnChanges {
   /**
    * The list of contacts assigned to this task.
    */
-  @Input() contactList: Contact[] = [];
+  // @Input() contactList: Contact[] = [];
+  contactList: Contact[] = [];
 
   /**
    * Controls whether the detail view content is shown.
@@ -118,21 +119,21 @@ export class TaskDetailsComponent implements OnChanges {
    * Lifecycle hook to load assigned contacts and subtasks on component initialization.
    */
   ngOnInit(): void {
-    console.log('Task details initialized with task:', this.task);
     this.loadAssignedContacts();
     this.loadSubtasks();
     this.loadTaskImages();
   }
 
-  /**
- * Lifecycle hook to reload images when task input changes.
- */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['task'] && changes['task'].currentValue) {
-      console.log('Task changed in task details:', changes['task'].currentValue);
-      this.loadTaskImages();
-    }
-  }
+//   /**
+//  * Lifecycle hook to reload images when task input changes.
+//  */
+//   ngOnChanges(changes: SimpleChanges): void {
+//     if (changes['task']?.currentValue && changes['task']?.currentValue !== changes['task']?.previousValue) {
+//       this.contactList = [];
+//       this.loadAssignedContacts(); 
+//       this.loadTaskImages();
+//     }
+//   }
 
   /**
    * Closes the task detail view and emits the close event.
@@ -215,8 +216,8 @@ export class TaskDetailsComponent implements OnChanges {
    * and updates the contactList accordingly.
    */
   async loadAssignedContacts() {
-    this.contactList = [];
     if (this.task?.assignedTo?.length) {
+      this.contactList = [];
       for (let contactId of this.task.assignedTo) {
         const contact = await this.contactService.getContactById(contactId);
         if (contact) {
@@ -229,18 +230,6 @@ export class TaskDetailsComponent implements OnChanges {
   /**
    * Loads task images from localStorage using the image keys stored in the task.
    */
-  // loadTaskImages() {
-  //   console.log('Loading task images for task:', this.task);
-  //   console.log('Task images array:', this.task?.imageKey);
-  //   if (this.task?.imageKey && this.task.imageKey.length > 0) {
-  //     this.taskImages = this.uploadService.getTaskImages(this.task.imageKey);
-  //     this.taskImageKeys = this.task.imageKey;
-  //     console.log('Loaded task images:', this.taskImages);
-  //     console.log('Task image keys:', this.taskImageKeys);
-  //   } else {
-  //     console.log('No images found for task');
-  //   }
-  // }
   loadTaskImages() {
   if (this.task?.imageKey && this.task.imageKey.length > 0) {
     this.taskImages = this.uploadService.getImagesByKeys(this.task.imageKey);

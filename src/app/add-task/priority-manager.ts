@@ -31,7 +31,7 @@ export class PriorityManager {
    */
   public setPriorityAndCategory(task: any): void {
     this.selectedPriority = task.priority || 'medium';
-    this.categoryManager.setSelectedCategory(task.category || '');
+    this.categoryManager.setSelectedCategory(task.category);
   }
 
 }
