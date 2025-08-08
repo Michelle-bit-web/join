@@ -5,23 +5,30 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh;
-  border-radius: 30px;
-  min-width: 318px;
-  max-width: calc(1440px + 232px);
+
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2001;
+  z-index: 9999;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+
+  &.backgroundVisible {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 }
 
 .image-viewer-content {
-  background: rgba(0, 0, 0, 0.814);
-  border-radius: 30px;
   width: 100%;
+  // height: 100vh;
+  // max-height: 90vh;
+  // max-width: 90vw;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  transform-origin: center bottom;
 
   &:hover .image-viewer-header {
     opacity: 1;
@@ -226,7 +233,19 @@
 
 @media (max-width: 900px) {
   .image-container {
-    flex-direction: column;
+    // justify-content: center;
+    // padding-bottom: 80px;
+  }
+
+  .image-wrapper {
+    padding-bottom: 80px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .viewer-image {
+    max-height: calc(100% - 80px);
+    max-width: 100%;
   }
 
   .nav-btn {
@@ -235,29 +254,34 @@
 
   .nav-btn-wrapper-mobile {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 80%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
-    .nav-btn-mobile:hover:not(:disabled) {
-      background-color: var(--accent-primary-color);
-      border: transparent;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transform: scale(1.05);
-
-      svg path {
-        fill: var(--text-color-light);
-      }
-    }
-
-    .nav-btn-mobile:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+@media (min-width: 901px) {
+  .image-container {
+    width: 100%;
   }
 
-  .image-container{
-    align-items: space-between;
+  .image-wrapper {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .viewer-image {
+    max-width: calc(100% - 200px);
+    max-height: 100%;
+  }
+
+  .nav-btn {
+    display: flex;
+  }
+
+  .nav-btn-wrapper-mobile {
+    display: none;
   }
 }
 

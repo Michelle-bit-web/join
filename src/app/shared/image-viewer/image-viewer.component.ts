@@ -1,17 +1,36 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../services/upload.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
  * Component for viewing images in a modal overlay with navigation and delete functionality.
- * Supports touch devices and keyboard navigation.
+ * Supports touch devices, keyboard navigation, and slide-in/out animations.
  */
 @Component({
   selector: 'app-image-viewer',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './image-viewer.component.html',
-  styleUrl: './image-viewer.component.scss'
+  styleUrl: './image-viewer.component.scss',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate(
+          '300ms ease-out',
+          style({ transform: 'translateY(0)', opacity: 1 })
+        ),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateY(0)', opacity: 1 }),
+        animate(
+          '300ms ease-in',
+          style({ transform: 'translateY(100%)', opacity: 0 })
+        ),
+      ]),
+    ]),
+  ],
 })
 
 export class ImageViewerComponent {
@@ -40,6 +59,15 @@ export class ImageViewerComponent {
   /** Flag indicating if device supports touch */
   isTouchDevice: boolean = false;
 
+  /** Animation state for controlling slide transitions */
+  animationState: 'in' | 'out' = 'in';
+
+  /** Flag to control background visibility during animation */
+  backgroundVisible: boolean = false;
+
+  /** Flag to control component visibility */
+  isVisible: boolean = true;
+
   /**
    * Creates an instance of ImageViewerComponent.
    * @param uploadService - Service for image operations
@@ -52,6 +80,9 @@ export class ImageViewerComponent {
   ngOnInit() {
     this.currentIndex = this.startIndex;
     this.checkIfTouchDevice();
+    setTimeout(() => {
+      this.backgroundVisible = true;
+    }, 280);
   }
 
   /**
@@ -153,12 +184,26 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Handles closing the image viewer.
+   * Handles closing the image viewer with slide-out animation.
    * @param event - Close event
    */
   onClose(event: Event) {
     event.stopPropagation();
     event.preventDefault();
-    this.close.emit(event);
+    this.animationState = 'out';
+    this.backgroundVisible = false;
+    // Delay the actual close emission to allow animation to complete
+      this.close.emit(event);
+  }
+
+  /**
+   * Handles animation completion events.
+   * @param event - Animation event
+   */
+  onAnimationDone(event: any) {
+    if (event.toState === 'void' && event.fromState === 'in') {
+      // Animation completed, component can be destroyed
+      this.isVisible = false;
+    }
   }
 }

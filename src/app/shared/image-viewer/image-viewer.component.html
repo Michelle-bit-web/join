@@ -1,8 +1,14 @@
-<div class="image-viewer-overlay">
+<div
+  class="image-viewer-overlay"
+  [class.backgroundVisible]="backgroundVisible"
+  *ngIf="isVisible"
+>
   <div
     class="image-viewer-content"
     (click)="$event.stopPropagation()"
     [ngClass]="{ 'visible-on-touchDevice': isTouchDevice }"
+    [@slideInOut]="animationState"
+    (@slideInOut.done)="onAnimationDone($event)"
   >
     <div class="image-viewer-header">
       <div class="headline-wrapper">
