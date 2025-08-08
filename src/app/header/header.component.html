@@ -25,12 +25,12 @@
         *ngIf="isLoggedIn()"
       >
         <p>{{ getCurrentUserInitials() }}</p>
-        <div #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>
+        <nav #menu class="user-menu-links" *ngIf="menuOpen" @slideInOut>
           <a class="mobile-help-link" routerLink="/help">Help</a>
           <a routerLink="/privacy-policy">Privacy Policy</a>
           <a routerLink="/legal-notice">Legal notice</a>
           <a (click)="logout()" *ngIf="isLoggedIn()">Log out</a>
-        </div>
+        </nav>
       </div>
     </div>
   </div>

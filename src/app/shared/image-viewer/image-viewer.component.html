@@ -3,14 +3,14 @@
   [class.backgroundVisible]="backgroundVisible"
   *ngIf="isVisible"
 >
-  <div
+  <main
     class="image-viewer-content"
     (click)="$event.stopPropagation()"
     [ngClass]="{ 'visible-on-touchDevice': isTouchDevice }"
     [@slideInOut]="animationState"
     (@slideInOut.done)="onAnimationDone($event)"
   >
-    <div class="image-viewer-header">
+    <header class="image-viewer-header">
       <div class="headline-wrapper">
         <h3>{{ getImageName() || "Image" }}</h3>
         <h4>{{ getImageType() }} ( {{ getImageSize() }} )</h4>
@@ -58,7 +58,7 @@
           </svg>
         </button>
       </div>
-    </div>
+    </header>
 
     <div class="image-container">
       <button
@@ -155,7 +155,7 @@
       </div>
     </div>
 
-    <div class="image-controls">
+    <footer class="image-controls">
       <div class="image-counter" *ngIf="images.length > 1">
         {{ currentIndex + 1 }} / {{ images.length }}
       </div>
@@ -191,6 +191,6 @@
           </g>
         </svg>
       </button>
-    </div>
-  </div>
+    </footer>
+  </main>
 </div>
