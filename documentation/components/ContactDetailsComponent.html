@@ -2335,11 +2335,11 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact?.id) {
       this.isDeleting &#x3D; true;
       this.menuOpen &#x3D; false;
-      this.contactService.deleteContact(this.contact.id);
-      this.contactService.clearSelection();
       if(this.contact.imageKey &amp;&amp; this.contact.imageKey.length &gt; 0) {
         this.uploadService.deleteImage(this.contact.imageKey);
       }
+      this.contactService.deleteContact(this.contact.id);
+      this.contactService.clearSelection();
     }
   }
 
