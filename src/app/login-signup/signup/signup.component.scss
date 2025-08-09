@@ -162,6 +162,7 @@ form {
     height: 20px;
     width: 20px;
     opacity: 0.6;
+    @include flex-center;
   }
 
   @media (max-width: 768px) {
@@ -330,6 +331,13 @@ input:focus {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  border: transparent;
+  background-color: transparent;
+
+  img {
+    height: 20px;
+    width: 20px;
+  }
 }
 
 .sr-only {
