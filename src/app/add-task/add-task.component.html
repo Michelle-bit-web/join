@@ -36,7 +36,9 @@
   </div>
   <div class="success-message" *ngIf="showSuccessMessage">
     <div class="success-content" aria-live="polite">
-      <span>✓ Task successfully {{ isEditingMode ? "updated" : "created" }}!</span>
+      <span
+        >✓ Task successfully {{ isEditingMode ? "updated" : "created" }}!</span
+      >
       <span class="redirect-text">Redirecting to board...</span>
     </div>
   </div>
@@ -177,7 +179,10 @@
               Category
               <span class="required">*</span>
             </label>
-            <div class="dropdown" [class.open]="categoryManager.getShowCategoryDropdown()">
+            <div
+              class="dropdown"
+              [class.open]="categoryManager.getShowCategoryDropdown()"
+            >
               <input
                 type="text"
                 id="category"
@@ -186,7 +191,14 @@
                 (click)="toggleCategoryDropdown()"
                 [class.error]="categoryManager.showCategoryError"
                 [disabled]="isEditingMode"
-                [ngStyle]="isEditingMode ? { color: 'var(--background-default-dark)', cursor: 'not-allowed' } : {}"
+                [ngStyle]="
+                  isEditingMode
+                    ? {
+                        color: 'var(--background-default-dark)',
+                        cursor: 'not-allowed'
+                      }
+                    : {}
+                "
               />
               <img
                 src="assets/img/icons/arrow-dropdown.png"
@@ -194,7 +206,10 @@
                 class="dropdown-arrow"
                 (click)="toggleCategoryDropdown()"
               />
-              <div class="dropdown-menu" *ngIf="categoryManager.getShowCategoryDropdown()">
+              <div
+                class="dropdown-menu"
+                *ngIf="categoryManager.getShowCategoryDropdown()"
+              >
                 <div
                   class="category-item"
                   *ngFor="let category of categoryManager.getCategories()"
@@ -232,7 +247,10 @@
 
           <div class="form-group">
             <label for="assigned-to">Assigned to</label>
-            <div class="dropdown" [class.open]="contactManager.getShowContactDropdown()">
+            <div
+              class="dropdown"
+              [class.open]="contactManager.getShowContactDropdown()"
+            >
               <input
                 type="text"
                 id="assigned-to"
@@ -246,18 +264,31 @@
                 class="dropdown-arrow"
                 (click)="toggleContactDropdown()"
               />
-              <div class="dropdown-menu" *ngIf="contactManager.getShowContactDropdown()">
+              <div
+                class="dropdown-menu"
+                *ngIf="contactManager.getShowContactDropdown()"
+              >
                 <div
                   class="contact-item"
                   [class.selected]="contactManager.isContactSelected(contact)"
-                  *ngFor="let contact of contacts" (click)="contactManager.selectContact(contact)"
+                  *ngFor="let contact of contacts"
+                  (click)="contactManager.selectContact(contact)"
                 >
                   <div class="contact-info">
-                    <div
-                      class="contact-avatar"
-                      [style.background-color]="contactManager.getContactColor(contact)"
+                    <div class="contact-avatar"
+                      [style.background-color]="
+                        contactManager.getContactColor(contact)
+                      "
                     >
-                      {{ contactManager.getContactInitials(contact) }}
+                      <img
+                        *ngIf="getContactImage(contact)"
+                        [src]="getContactImage(contact)"
+                        [alt]="contact.name"
+                        class="contact-image"
+                      />
+                      <span *ngIf="!getContactImage(contact)">
+                        {{ contactManager.getContactInitials(contact) }}
+                      </span>
                     </div>
                     <span class="contact-name">{{ contact.name }}</span>
                   </div>
@@ -287,16 +318,31 @@
                     .getSelectedContacts()
                     .slice(0, 6)
                 "
-                [style.background-color]="contactManager.getContactColor(contact)"
                 [title]="contact.name"
               >
-                {{ contactManager.getContactInitials(contact) }}
+                <img
+                  *ngIf="getContactImage(contact)"
+                  [src]="getContactImage(contact)"
+                  [alt]="contact.name"
+                  class="contact-image-selected"
+                />
+                <div
+                  *ngIf="!getContactImage(contact)"
+                  class="contact-initials"
+                  [style.background-color]="contactManager.getContactColor(contact)"
+                >
+                  {{ contactManager.getContactInitials(contact) }}
+                </div>
               </div>
               <div
                 class="selected-contact-avatar"
                 *ngIf="contactManager.getSelectedContacts().length > 6"
                 [style.background-color]="'#d1d1d1'"
-                [title]="contactManager.getRemainingContactNames(contactManager.getSelectedContacts().slice(6))"
+                [title]="
+                  contactManager.getRemainingContactNames(
+                    contactManager.getSelectedContacts().slice(6)
+                  )
+                "
               >
                 +{{ contactManager.getSelectedContacts().length - 6 }}
               </div>
@@ -307,7 +353,9 @@
             <div class="subtask-input-container">
               <div
                 class="subtask-input"
-                [class.confirmation]="subtaskManager.getShowSubtaskConfirmation()"
+                [class.confirmation]="
+                  subtaskManager.getShowSubtaskConfirmation()
+                "
               >
                 <input
                   type="text"
@@ -315,7 +363,9 @@
                   name="subtaskInput"
                   placeholder="Add new subtask"
                   [value]="subtaskManager.getSubtaskInput()"
-                  (input)="subtaskManager.setSubtaskInput($any($event.target).value)"
+                  (input)="
+                    subtaskManager.setSubtaskInput($any($event.target).value)
+                  "
                   (click)="subtaskManager.onSubtaskInputClick()"
                   (keydown.enter)="subtaskManager.onSubtaskEnter($event)"
                   [readonly]="subtaskManager.getShowSubtaskConfirmation()"
@@ -323,7 +373,10 @@
                   (blur)="subtaskInputFocused = false"
                 />
                 <img
-                  *ngIf="!subtaskManager.getShowSubtaskConfirmation() &&!subtaskInputFocused"
+                  *ngIf="
+                    !subtaskManager.getShowSubtaskConfirmation() &&
+                    !subtaskInputFocused
+                  "
                   src="assets/img/icons/add.png"
                   alt="Add"
                   class="add-icon"
@@ -354,19 +407,33 @@
                   class="subtask-item-simple"
                   *ngFor="let subtask of subtaskManager.getSubtasks()"
                 >
-                  <div *ngIf="subtaskManager.getEditingSubtaskId() !== subtask.id" class="subtask-display">
-                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                  <div
+                    *ngIf="subtaskManager.getEditingSubtaskId() !== subtask.id"
+                    class="subtask-display"
+                  >
+                    <div
+                      *ngIf="isEditingMode"
+                      class="subtask-checkbox-container"
+                    >
                       <input
                         type="checkbox"
                         class="subtask-checkbox"
                         [checked]="subtask.completed"
-                        (change)="subtaskManager.toggleSubtaskCompletion(subtask.id)"
+                        (change)="
+                          subtaskManager.toggleSubtaskCompletion(subtask.id)
+                        "
                         [id]="'subtask-' + subtask.id"
                       />
-                      <label [for]="'subtask-' + subtask.id" class="checkbox-label"></label>
+                      <label
+                        [for]="'subtask-' + subtask.id"
+                        class="checkbox-label"
+                      ></label>
                     </div>
                     <span *ngIf="!isEditingMode" class="bullet">•</span>
-                    <span class="subtask-text-simple" [class.completed]="isEditingMode && subtask.completed">
+                    <span
+                      class="subtask-text-simple"
+                      [class.completed]="isEditingMode && subtask.completed"
+                    >
                       {{ subtask.text }}
                     </span>
                     <div class="subtask-actions">
@@ -374,7 +441,12 @@
                         src="assets/img/icons/edit-single.png"
                         alt="Edit"
                         class="action-icon"
-                        (click)="subtaskManager.editSubtaskPrompt(subtask.id,subtask.text)"
+                        (click)="
+                          subtaskManager.editSubtaskPrompt(
+                            subtask.id,
+                            subtask.text
+                          )
+                        "
                       />
                       <img
                         src="assets/img/icons/delete.png"
@@ -384,23 +456,38 @@
                       />
                     </div>
                   </div>
-                  <div *ngIf="subtaskManager.getEditingSubtaskId() === subtask.id" class="subtask-edit">
-                    <div *ngIf="isEditingMode" class="subtask-checkbox-container">
+                  <div
+                    *ngIf="subtaskManager.getEditingSubtaskId() === subtask.id"
+                    class="subtask-edit"
+                  >
+                    <div
+                      *ngIf="isEditingMode"
+                      class="subtask-checkbox-container"
+                    >
                       <input
                         type="checkbox"
                         class="subtask-checkbox"
                         [checked]="subtask.completed"
-                        (change)=" subtaskManager.toggleSubtaskCompletion(subtask.id)"
+                        (change)="
+                          subtaskManager.toggleSubtaskCompletion(subtask.id)
+                        "
                         [id]="'subtask-edit-' + subtask.id"
                       />
-                      <label [for]="'subtask-edit-' + subtask.id" class="checkbox-label"></label>
+                      <label
+                        [for]="'subtask-edit-' + subtask.id"
+                        class="checkbox-label"
+                      ></label>
                     </div>
                     <span *ngIf="!isEditingMode" class="bullet">•</span>
                     <input
                       type="text"
                       class="subtask-edit-input"
                       [value]="subtaskManager.getEditingSubtaskText()"
-                      (input)="subtaskManager.setEditingSubtaskText($any($event.target).value)"
+                      (input)="
+                        subtaskManager.setEditingSubtaskText(
+                          $any($event.target).value
+                        )
+                      "
                       (keydown)="subtaskManager.onSubtaskEditKeydown($event)"
                       #editInput
                     />
