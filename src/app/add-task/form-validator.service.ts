@@ -75,7 +75,6 @@ export class FormValidatorService {
     const titleError = this.validateTitle(formData.title);
     const categoryError = this.validateCategory(categoryManager);
     const dateError = this.validateDueDate(formData.dueDate);
-    
     categoryManager.showCategoryError = categoryError;
     return titleError || categoryError || dateError;
   }

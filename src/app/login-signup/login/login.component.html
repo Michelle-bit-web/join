@@ -1,4 +1,4 @@
-<main class="login-content">
+<main class="login-content" role="main">
   <app-login-header class="login-header"></app-login-header>
   <div
     class="dark-logo-wrapper"
@@ -16,9 +16,9 @@
     />
   </div>
   <div class="main-content-wrapper">
-    <section class="login-frame">
-      <h2>Log in</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <section class="login-frame" role="form" aria-labelledby="login-heading">
+      <h2 id="login-heading">Log in</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
         <div class="form-group-wrapper flex-center">
           <div>
             <div
@@ -29,26 +29,31 @@
                   loginForm.get('email')?.touched
               }"
             >
-              <label for="email"></label>
+              <label for="email" class="sr-only">Email Address</label>
               <input
                 id="email"
                 type="email"
                 placeholder="Email"
                 formControlName="email"
+                aria-describedby="email-error"
+                [attr.aria-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/mail.png"
-                alt="Mail Icon"
+                alt="email icon"
+                aria-hidden="true"
               />
             </div>
             <p
+              id="email-error"
               class="error-message"
               *ngIf="
                 loginForm.get('email')?.invalid &&
                 loginForm.get('email')?.touched
               "
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("email") }}
             </p>
@@ -62,51 +67,64 @@
                   loginForm.get('password')?.touched
               }"
             >
-              <label for="password"></label>
+              <label for="password" class="sr-only">Password</label>
               <input
                 id="password"
                 [type]="showPassword ? 'text' : 'password'"
                 placeholder="Password"
                 formControlName="password"
+                aria-describedby="password-error"
+                [attr.aria-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/lock.png"
-                alt="Lock Icon"
+                alt="password icon"
+                aria-hidden="true"
                 *ngIf="!loginForm.get('password')?.value"
               />
-              <img
+              <button
+                type="button"
                 class="input-icon toggle-eye"
-                [src]="
-                  showPassword
-                    ? 'assets/img/icons/visibility.png'
-                    : 'assets/img/icons/visibility-off.png'
-                "
-                alt="Toggle Password Visibility"
                 *ngIf="loginForm.get('password')?.value"
                 (click)="showPassword = !showPassword"
-              />
+                [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                [attr.aria-pressed]="showPassword"
+              >
+                <img
+                  [src]="
+                    showPassword
+                      ? 'assets/img/icons/visibility.png'
+                      : 'assets/img/icons/visibility-off.png'
+                  "
+                  alt="Toggle password visibility"
+                  aria-hidden="true"
+                />
+              </button>
             </div>
             <p
+              id="password-error"
               class="error-message"
               *ngIf="
                 loginForm.get('password')?.invalid &&
                 loginForm.get('password')?.touched
               "
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("password") }}
             </p>
           </div>
-          <p class="error-message" *ngIf="errorMessage" aria-live="polite">
+          <p class="error-message" *ngIf="errorMessage" aria-live="polite" role="alert">
             {{ errorMessage }}
           </p>
         </div>
-        <div class="btn-wrapper">
+        <div class="btn-wrapper" role="group" aria-label="Login options">
           <button
             type="submit"
             class="btn-login"
             [disabled]="loginForm.invalid || isLoading"
+            [attr.aria-busy]="isLoading"
           >
             {{ isLoading ? "Loading..." : "Log in" }}
           </button>
@@ -115,6 +133,8 @@
             class="btn-guestlogin"
             (click)="onGuestLogin()"
             [disabled]="isLoading"
+            [attr.aria-busy]="isLoading"
+            aria-label="Log in as guest without creating an account"
           >
             {{ isLoading ? "Loading..." : "Guest Log in" }}
           </button>
@@ -125,7 +145,7 @@
       <div class="wanna-signup-wrapper">
         <span>Not a Join user?</span>
         <div routerLink="/signup" class="btn-wrapper">
-          <button class="btn-signup">Sign up</button>
+          <button class="btn-signup" aria-label="Navigate to sign up page">Sign up</button>
         </div>
       </div>
       <app-footer></app-footer>

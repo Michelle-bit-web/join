@@ -16,7 +16,7 @@ import { AddTaskService } from './add-task.service';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
- * It supports task creation with priority, category, assigned contacts, due dates and subtasks.
+ * It supports task creation with priority, category, assigned contacts, due dates, subtasks and images.
  * The component can operate in both standalone mode and overlay mode, and handles both creating new tasks and editing existing ones.
  *
  * @example
@@ -35,23 +35,89 @@ import { AddTaskService } from './add-task.service';
 })
 
 export class AddTaskComponent implements OnInit, OnDestroy {
-  @Output() taskAdded = new EventEmitter<string>;
+  /**
+   * Emits the ID of a newly created task to the parent component.
+   */
+  @Output() taskAdded = new EventEmitter<string>();
+
+  /**
+   * Emits an event to close the overlay in the parent component.
+   */
   @Output() closeOverlay = new EventEmitter<void>();
+
+  /**
+   * Sets the default task status when creating a new task.
+   */
   @Input() defaultStatus = '';
+
+  /**
+   * Determines if the component is displayed in overlay mode.
+   */
   @Input() isOverlayMode = false;
+
+  /**
+   * Reference to the child UploadsComponent instance used for image uploads.
+   */
   @ViewChild(UploadsComponent) uploadsComponent!: UploadsComponent;
 
+  /**
+   * List of all available contacts that can be assigned to tasks.
+   */
   contacts: Contact[] = [];
+
+  /**
+   * Indicates whether the subtask input field is currently focused.
+   */
   subtaskInputFocused = false;
+
+  /**
+   * True while a new task is being created.
+   */
   isCreatingTask: boolean = false;
+
+  /**
+   * Controls whether a success message is displayed after an operation.
+   */
   showSuccessMessage: boolean = false;
+
+  /**
+   * Stores the original status of the task before editing.
+   */
   originalTaskStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done' = 'to-do';
+
+  /**
+   * True if the component is currently in task editing mode.
+   */
   isEditingMode: boolean = false;
+
+  /**
+   * ID of the task being edited, if any.
+   */
   editingTaskId: string | undefined;
+
+  /**
+   * The full task object being edited, if any.
+   */
   editingTask: Task | undefined;
+
+  /**
+   * Array of image URLs/paths associated with the task.
+   */
   taskImages: string[] = [];
+
+  /**
+   * Array of uploaded image objects with metadata.
+   */
   uploadedImages: UploadedImage[] = [];
+
+  /**
+   * Object containing validation error flags for the form.
+   */
   validationErrors: ValidationErrors = { showTitleError: false, showDateError: false };
+
+  /**
+   * Form input data for creating or editing a task.
+   */
   formData: FormData = {
     title: '',
     description: '',
@@ -149,8 +215,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Loads a task currently being edited from the TaskService and initializes the form.
- */
+   * Loads a task currently being edited from the TaskService and initializes the form.
+   */
   async loadEditingTask(): Promise<void> {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask && editingTask.id) {
@@ -162,8 +228,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Loads task data fresh from the database by ID
- */
+   * Loads task data fresh from the database by ID
+   */
   private async loadTaskById(taskId: string): Promise<void> {
     try {
       const freshTask = await this.taskService.getTaskById(taskId);
@@ -183,8 +249,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Loads task basic data into form
- */
+   * Loads task basic data into form
+   */
   private async loadFreshTaskData(task: Task): Promise<void> {
     this.originalTaskStatus = await this.taskDataService.populateFromTask(
       task,
@@ -243,8 +309,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Resets the task creation form to its default state.
- */
+   * Resets the task creation form to its default state.
+   */
   clearForm(): void {
     this.addTaskService.resetFormData(this);
     this.addTaskService.resetTaskState(this);

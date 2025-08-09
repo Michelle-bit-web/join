@@ -41,10 +41,10 @@ export class ImageManager {
   }
 
   /**
- * Loads an image from a file and returns an HTMLImageElement.
- * @param file - Image file to load
- * @returns Promise resolving to loaded HTMLImageElement
- */
+   * Loads an image from a file and returns an HTMLImageElement.
+   * @param file - Image file to load
+   * @returns Promise resolving to loaded HTMLImageElement
+   */
   private loadImageFromFile(file: File): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

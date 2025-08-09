@@ -1,15 +1,17 @@
-<section>
+<section role="main" aria-labelledby="summary-title">
   <div class="summary-header">
-    <h1>Join 360</h1>
-    <div class="header-divider"></div>
+    <h1 id="summary-title">Join 360</h1>
+    <div class="header-divider" aria-hidden="true"></div>
     <p>Key Metrics at a Glance</p>
-    <div class="mobile-header-divider"></div>
+    <div class="mobile-header-divider" aria-hidden="true"></div>
   </div>
 
   <div
     class="greeting-overlay"
     *ngIf="showGreeting && isMobile"
     [@fadeOutGreeting]="greetingState"
+    role="status"
+    aria-live="polite"
   >
     <div class="greeting-overlay-container">
       <p class="greet-overlay">{{ greeting }}</p>
@@ -19,14 +21,20 @@
 
   <div class="content-wrapper" *ngIf="!showGreeting || !isMobile">
     <div class="summary-content">
-      <div class="first-row">
-        <div class="to-do" (click)="goToBoard()">
+      <div class="first-row" role="group" aria-label="Primary task statistics">
+        <button
+          type="button"
+          class="to-do"
+          (click)="goToBoard()"
+          aria-label="Go to board - {{ todoCount }} to-do tasks"
+        >
           <svg
             width="70"
             height="70"
             viewBox="0 0 70 70"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <circle
               class="svg-circle"
@@ -62,18 +70,24 @@
           </svg>
 
           <div class="info-text">
-            <p class="counter">{{ todoCount }}</p>
-            <p class="task-info">To-do</p>
+            <p class="counter" aria-hidden="true">{{ todoCount }}</p>
+            <p class="task-info" aria-hidden="true">To-do</p>
           </div>
-        </div>
+        </button>
 
-        <div class="done" (click)="goToBoard()">
+        <button
+          type="button"
+          class="done"
+          (click)="goToBoard()"
+          aria-label="Go to board - {{ doneCount }} completed tasks"
+        >
           <svg
             width="70"
             height="70"
             viewBox="0 0 70 70"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <circle
               class="svg-circle"
@@ -92,13 +106,18 @@
             />
           </svg>
           <div class="info-text">
-            <p class="counter">{{ doneCount }}</p>
-            <p class="task-info">Done</p>
+            <p class="counter" aria-hidden="true">{{ doneCount }}</p>
+            <p class="task-info" aria-hidden="true">Done</p>
           </div>
-        </div>
+        </button>
       </div>
 
-      <div class="deadline" (click)="goToBoard()">
+      <button
+        type="button"
+        class="deadline"
+        (click)="goToBoard()"
+        aria-label="Go to board - {{ nextDeadlineCount }} urgent tasks, next deadline {{ nextDeadlineDate | date : 'MMMM d, y' }}"
+      >
         <div class="svg-container">
           <svg
             width="40"
@@ -106,6 +125,7 @@
             viewBox="0 0 21 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <path
               d="M19.2597 15.4464C19.0251 15.4468 18.7965 15.3719 18.6077 15.2328L10.3556 9.14965L2.10356 15.2328C1.98771 15.3184 1.85613 15.3803 1.71633 15.4151C1.57652 15.4498 1.43124 15.4567 1.28877 15.4354C1.14631 15.414 1.00944 15.3648 0.885997 15.2906C0.762552 15.2164 0.654943 15.1186 0.569314 15.0029C0.483684 14.8871 0.421712 14.7556 0.386936 14.6159C0.352159 14.4762 0.345259 14.331 0.366629 14.1887C0.409788 13.9012 0.565479 13.6425 0.799451 13.4697L9.70356 6.89926C9.89226 6.75967 10.1208 6.68433 10.3556 6.68433C10.5904 6.68433 10.819 6.75967 11.0077 6.89926L19.9118 13.4697C20.0977 13.6067 20.2356 13.7988 20.3057 14.0186C20.3759 14.2385 20.3747 14.4749 20.3024 14.6941C20.2301 14.9133 20.0904 15.1041 19.9031 15.2391C19.7159 15.3742 19.4907 15.4468 19.2597 15.4464Z"
@@ -119,39 +139,54 @@
         </div>
 
         <div class="info-text">
-          <p class="counter">{{ nextDeadlineCount }}</p>
-          <p class="task-info">Urgent</p>
+          <p class="counter" aria-hidden="true">{{ nextDeadlineCount }}</p>
+          <p class="task-info" aria-hidden="true">Urgent</p>
         </div>
-        <div class="container-divider"></div>
+        <div class="container-divider" aria-hidden="true"></div>
         <div class="deadline-info">
-          <p class="date">{{ nextDeadlineDate | date : "MMMM d, y" }}</p>
-          <p class="text">Upcoming Deadline</p>
+          <p class="date" aria-hidden="true">{{ nextDeadlineDate | date : "MMMM d, y" }}</p>
+          <p class="text" aria-hidden="true">Upcoming Deadline</p>
         </div>
-      </div>
+      </button>
 
-      <div class="last-row">
-        <div class="board-tasks" (click)="goToBoard()">
+      <div class="last-row" role="group" aria-label="Additional task statistics">
+        <button
+          type="button"
+          class="board-tasks"
+          (click)="goToBoard()"
+          aria-label="Go to board - {{ totalTaskCount }} total tasks"
+        >
           <div class="info-text">
-            <p class="counter">{{ totalTaskCount }}</p>
-            <p class="task-info">Tasks in<br />Board</p>
+            <p class="counter" aria-hidden="true">{{ totalTaskCount }}</p>
+            <p class="task-info" aria-hidden="true">Tasks in<br />Board</p>
           </div>
-        </div>
-        <div class="in-progress" (click)="goToBoard()">
+        </button>
+        <button
+          type="button"
+          class="in-progress"
+          (click)="goToBoard()"
+          aria-label="Go to board - {{ inProgressCount }} tasks in progress"
+        >
           <div class="info-text">
-            <p class="counter">{{ inProgressCount }}</p>
-            <p class="task-info">Tasks in Progress</p>
+            <p class="counter" aria-hidden="true">{{ inProgressCount }}</p>
+            <p class="task-info" aria-hidden="true">Tasks in Progress</p>
           </div>
-        </div>
-        <div class="await-feedback" (click)="goToBoard()">
+        </button>
+        <button
+          type="button"
+          class="await-feedback"
+          (click)="goToBoard()"
+          aria-label="Go to board - {{ awaitingFeedbackCount }} tasks awaiting feedback"
+        >
           <div class="info-text">
-            <p class="counter">{{ awaitingFeedbackCount }}</p>
-            <p class="task-info">Awaiting Feedback</p>
+            <p class="counter" aria-hidden="true">{{ awaitingFeedbackCount }}</p>
+            <p class="task-info" aria-hidden="true">Awaiting Feedback</p>
           </div>
-        </div>
+        </button>
       </div>
     </div>
 
-    <div class="greeting-container">
+    <div class="greeting-container" role="complementary" aria-label="User greeting">
       <p class="greet">{{ greeting }}</p>
       <p class="user-name">{{ userName }}</p>
     </div>

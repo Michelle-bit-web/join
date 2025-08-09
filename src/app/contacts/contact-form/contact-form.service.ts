@@ -9,21 +9,24 @@ import { UploadService } from '../../services/upload.service';
  * Provides helper methods for contact form component to maintain separation of concerns.
  * 
  * @example
+ * ```typescript
  * // Inject in component constructor
  * constructor(private formService: ContactFormService) {}
  * 
  * // Use service methods
  * await this.formService.processSubmission(this, contact);
+ * ```
  */
 @Injectable({
     providedIn: 'root'
 })
+
 export class ContactFormService {
 
     /**
      * Creates an instance of ContactFormService.
-     * @param contactService - Service for contact CRUD operations
-     * @param uploadService - Service for image upload and storage operations
+     * @param {ContactService} contactService - Service for contact CRUD operations
+     * @param {UploadService} uploadService - Service for image upload and storage operations
      */
     constructor(
         private contactService: ContactService,
@@ -34,9 +37,9 @@ export class ContactFormService {
      * Deletes any previously uploaded or assigned images from storage.
      * Cleans up orphaned images to prevent storage bloat.
      * 
-     * @param uploadedKey - Key of uploaded image to delete (optional)
-     * @param contactKey - Key of contact's existing image to delete (optional)
-     * @returns Promise that resolves when deletion is complete
+     * @param {string} [uploadedKey] - Key of uploaded image to delete
+     * @param {string} [contactKey] - Key of contact's existing image to delete
+     * @returns {Promise<void>} Promise that resolves when deletion is complete
      */
     async deletePreviousImages(uploadedKey?: string, contactKey?: string): Promise<void> {
         if (uploadedKey) {
@@ -51,10 +54,11 @@ export class ContactFormService {
      * Sets the local image state and prepares it for saving.
      * Updates component's image-related properties with new image data.
      * 
-     * @param component - The contact form component instance
-     * @param file - The uploaded image file
-     * @param imageKey - Generated unique key for the image
-     * @param base64 - Base64 encoded image data
+     * @param {any} component - The contact form component instance
+     * @param {File} file - The uploaded image file
+     * @param {string} imageKey - Generated unique key for the image
+     * @param {string} base64 - Base64 encoded image data
+     * @returns {void}
      */
     setImageState(component: any, file: File, imageKey: string, base64: string): void {
         component.uploadedImageKey = imageKey;
@@ -69,8 +73,9 @@ export class ContactFormService {
      * Fills the contact form fields with the selected contact's data.
      * Populates form controls with existing contact information for editing.
      * 
-     * @param form - The reactive form group to populate
-     * @param contact - The contact object containing data to fill
+     * @param {FormGroup} form - The reactive form group to populate
+     * @param {Contact} contact - The contact object containing data to fill
+     * @returns {void}
      */
     fillContactForm(form: FormGroup, contact: Contact): void {
         form.patchValue({
@@ -84,8 +89,9 @@ export class ContactFormService {
      * Loads the contact image into the upload preview.
      * Retrieves and displays existing contact image if available.
      * 
-     * @param component - The contact form component instance
-     * @param contact - The contact object with potential imageKey
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object with potential imageKey
+     * @returns {void}
      */
     loadContactImage(component: any, contact: Contact): void {
         const imageKey = contact.imageKey;
@@ -100,9 +106,10 @@ export class ContactFormService {
      * Sets contact image data from storage into component state.
      * Helper method for loading existing contact images.
      * 
-     * @param component - The contact form component instance
-     * @param imageKey - The image key to retrieve from storage
      * @private
+     * @param {any} component - The contact form component instance
+     * @param {string} imageKey - The image key to retrieve from storage
+     * @returns {void}
      */
     private setContactImageData(component: any, imageKey: string): void {
         component.imageBase64 = this.uploadService.getContactImage(imageKey);
@@ -116,7 +123,8 @@ export class ContactFormService {
      * Resets contact image data to clear state.
      * Clears all image-related properties in the component.
      * 
-     * @param component - The contact form component instance
+     * @param {any} component - The contact form component instance
+     * @returns {void}
      */
     resetImageState(component: any): void {
         component.uploadedImageKey = undefined;
@@ -128,7 +136,8 @@ export class ContactFormService {
      * Sets up the image viewer with contact images.
      * Configures image viewer component with current contact image data.
      * 
-     * @param component - The contact form component instance
+     * @param {any} component - The contact form component instance
+     * @returns {void}
      */
     setupImageViewer(component: any): void {
         component.contactImages = [component.imageBase64];
@@ -140,9 +149,9 @@ export class ContactFormService {
      * Gets image keys for the image viewer based on component state.
      * Returns appropriate image keys for editing vs. new contact scenarios.
      * 
-     * @param component - The contact form component instance
-     * @returns Array of image keys for the viewer
      * @private
+     * @param {any} component - The contact form component instance
+     * @returns {string[]} Array of image keys for the viewer
      */
     private getImageKeys(component: any): string[] {
         if (component.contactToEdit?.imageKey) {
@@ -155,7 +164,8 @@ export class ContactFormService {
      * Handles form close operations including cleanup.
      * Performs necessary cleanup when form is closed without saving.
      * 
-     * @param component - The contact form component instance
+     * @param {any} component - The contact form component instance
+     * @returns {void}
      */
     handleFormClose(component: any): void {
         if (this.shouldDeleteUnsavedImage(component)) {
@@ -169,9 +179,9 @@ export class ContactFormService {
      * Determines if an unsaved image should be deleted on form close.
      * Checks conditions for cleaning up temporary images.
      * 
-     * @param component - The contact form component instance
-     * @returns True if image should be deleted, false otherwise
      * @private
+     * @param {any} component - The contact form component instance
+     * @returns {boolean} True if image should be deleted, false otherwise
      */
     private shouldDeleteUnsavedImage(component: any): boolean {
         return component.uploadedImageKey &&
@@ -183,8 +193,8 @@ export class ContactFormService {
      * Builds a trimmed Contact object from form values.
      * Creates contact object with cleaned form data and appropriate image key.
      * 
-     * @param component - The contact form component instance
-     * @returns Contact object built from form data
+     * @param {any} component - The contact form component instance
+     * @returns {Contact} Contact object built from form data
      */
     buildContactFromForm(component: any): Contact {
         const { name, email, phone } = component.contactForm.value;
@@ -204,9 +214,10 @@ export class ContactFormService {
      * Sets the appropriate image key on the contact object.
      * Determines correct image key based on component state and edit mode.
      * 
-     * @param component - The contact form component instance
-     * @param contact - The contact object to update with image key
      * @private
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object to update with image key
+     * @returns {void}
      */
     private setContactImageKey(component: any, contact: Contact): void {
         if (component.uploadedImageKey) {
@@ -220,9 +231,9 @@ export class ContactFormService {
      * Processes form submission based on edit mode.
      * Handles both new contact creation and existing contact updates.
      * 
-     * @param component - The contact form component instance
-     * @param contact - The contact object to process
-     * @returns Promise that resolves when submission is complete
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object to process
+     * @returns {Promise<void>} Promise that resolves when submission is complete
      */
     async processSubmission(component: any, contact: Contact): Promise<void> {
         if (component.imageMarkedForDeletion && component.contactToEdit?.imageKey) {
@@ -237,12 +248,13 @@ export class ContactFormService {
     }
 
     /**
-      * Updates an existing contact.
-      * Handles contact update workflow including image management.
-      * 
-      * @param component - The contact form component instance
-      * @param contact - The contact object with updated data
-      */
+     * Updates an existing contact.
+     * Handles contact update workflow including image management.
+     * 
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object with updated data
+     * @returns {void}
+     */
     updateExistingContact(component: any, contact: Contact): void {
         component.contactToEdit = contact;
         if (component.imgData?.imageKey && component.imgData?.base64) {
@@ -255,8 +267,9 @@ export class ContactFormService {
      * Processes contact update operations based on contact state.
      * Handles image deletion or contact update based on imageKey status.
      * 
-     * @param contact - The contact object to update
      * @private
+     * @param {Contact} contact - The contact object to update
+     * @returns {void}
      */
     private processContactUpdate(contact: Contact): void {
         if (contact.imageKey === '') {
@@ -270,10 +283,10 @@ export class ContactFormService {
      * Adds a new contact and emits it if successful.
      * Handles new contact creation workflow with image saving.
      * 
-     * @param component - The contact form component instance
-     * @param contact - The new contact object to create
-     * @returns Promise that resolves when contact is added
      * @private
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The new contact object to create
+     * @returns {Promise<void>} Promise that resolves when contact is added
      */
     private async addNewContact(component: any, contact: Contact): Promise<void> {
         if (component.imgData?.imageKey && component.imgData?.base64) {
@@ -289,7 +302,8 @@ export class ContactFormService {
      * Handles contact deletion including image cleanup.
      * Removes contact from storage and cleans up associated images.
      * 
-     * @param contact - The contact object to delete
+     * @param {Contact} contact - The contact object to delete
+     * @returns {void}
      */
     handleContactDeletion(contact: Contact): void {
         if (contact.id) {

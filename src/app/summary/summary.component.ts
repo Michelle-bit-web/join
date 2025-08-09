@@ -11,7 +11,15 @@ import {
   animate,
 } from '@angular/animations';
 
+/**
+ * Interface for Firestore timestamp objects that can be converted to Date.
+ * @interface FirestoreTimestamp
+ */
 interface FirestoreTimestamp {
+  /**
+   * Converts the Firestore timestamp to a JavaScript Date object.
+   * @returns {Date} The converted Date object
+   */
   toDate(): Date;
 }
 
@@ -30,19 +38,84 @@ interface FirestoreTimestamp {
 })
 
 export class SummaryComponent implements OnInit {
+  /**
+   * Array containing all tasks loaded from the task service.
+   * @type {Task[]}
+   */
   taskList: Task[] = [];
+  
+  /**
+   * Display name of the current user for personalized greeting.
+   * @type {string}
+   */
   userName: string = '';
+  
+  /**
+   * Current state of the greeting animation ('start' or 'moved').
+   * @type {'start' | 'moved'}
+   */
   greetingState: 'start' | 'moved' = 'start';
+  
+  /**
+   * Flag controlling the visibility of the greeting message.
+   * @type {boolean}
+   */
   showGreeting = true;
+  
+  /**
+   * Flag indicating if the current device is mobile (width < 1000px).
+   * @type {boolean}
+   */
   isMobile = false;
+  
+  /**
+   * The next upcoming deadline date across all tasks.
+   * @type {Date | null}
+   */
   nextDeadlineDate: Date | null = null;
+  
+  /**
+   * Count of tasks with 'urgent' priority.
+   * @type {number}
+   */
   nextDeadlineCount: number = 0;
+  
+  /**
+   * Time-based greeting message (e.g., "Good morning,").
+   * @type {string}
+   */
   greeting: string = '';
+  
+  /**
+   * Count of tasks with 'to-do' status.
+   * @type {number}
+   */
   todoCount = 0;
+  
+  /**
+   * Count of tasks with 'done' status.
+   * @type {number}
+   */
   doneCount = 0;
+  
+  /**
+   * Count of tasks with 'in-progress' status.
+   * @type {number}
+   */
   inProgressCount = 0;
+  
+  /**
+   * Count of tasks with 'await-feedback' status.
+   * @type {number}
+   */
   awaitingFeedbackCount = 0;
 
+  /**
+   * Creates an instance of SummaryComponent.
+   * @param {TaskService} taskService - Service for task-related operations and data access
+   * @param {Router} router - Angular Router service for navigation
+   * @param {AuthService} authService - Service for authentication and user data
+   */
   constructor(
     private taskService: TaskService,
     private router: Router,
@@ -107,6 +180,7 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Navigates to the board view.
+   * @returns {void}
    */
   goToBoard() {
     this.router.navigate(['/board']);
@@ -115,6 +189,7 @@ export class SummaryComponent implements OnInit {
   /**
    * Initializes the component by determining device type,
    * loading user greeting, and loading tasks with statistics.
+   * @returns {void}
    */
   ngOnInit() {
     this.isMobile = window.innerWidth < 1000;
@@ -126,6 +201,8 @@ export class SummaryComponent implements OnInit {
    * Loads current user data and sets a personalized greeting.
    * If on mobile and greeting hasn't been shown in this session,
    * triggers an animated greeting display.
+   * @private
+   * @returns {void}
    */
   private loadUserGreeting(): void {
     this.authService.getCurrentUserData().then((userData) => {
@@ -145,6 +222,8 @@ export class SummaryComponent implements OnInit {
   /**
    * Animates a greeting sequence for mobile devices.
    * Hides the greeting after the animation and stores the display state in sessionStorage.
+   * @private
+   * @returns {void}
    */
   private showAnimatedGreeting(): void {
     this.showGreeting = true;
@@ -160,6 +239,8 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Subscribes to task data and processes statistics and deadline information.
+   * @private
+   * @returns {void}
    */
   private loadAndProcessTasks(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) => {
@@ -171,8 +252,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Sets the count of tasks by specific statuses and urgency.
-   * 
-   * @param tasks - Array of task objects to be analyzed.
+   * @private
+   * @param {Task[]} tasks - Array of task objects to be analyzed
+   * @returns {void}
    */
   private setTaskCounts(tasks: Task[]): void {
     this.todoCount = this.countTasksByStatus(tasks, 'to-do');
@@ -185,10 +267,10 @@ export class SummaryComponent implements OnInit {
   /**
    * Filters tasks to only include those with a valid future date and not marked as 'done'.
    * Parses the date string into a Date object.
-   * 
-   * @param tasks - Array of task objects.
-   * @param parseDate - A function that parses a date string into a Date object.
-   * @returns An array of tasks with a valid future date, each including a `dateObj` field.
+   * @private
+   * @param {Task[]} tasks - Array of task objects
+   * @param {(date: string) => Date | null} parseDate - A function that parses a date string into a Date object
+   * @returns {(Task & { dateObj: Date })[]} An array of tasks with a valid future date, each including a `dateObj` field
    */
   private getFutureTasksWithDateObj(tasks: Task[], parseDate: (date: string) => Date | null): (Task & { dateObj: Date })[] {
     const now = new Date();
@@ -203,9 +285,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Returns the earliest date from an array of tasks with valid date objects.
-   * 
-   * @param tasks - Array of tasks containing a `dateObj` property.
-   * @returns The earliest Date object, or null if the array is empty.
+   * @private
+   * @param {(Task & { dateObj: Date })[]} tasks - Array of tasks containing a `dateObj` property
+   * @returns {Date | null} The earliest Date object, or null if the array is empty
    */
   private getEarliestDate(tasks: (Task & { dateObj: Date })[]): Date | null {
     if (tasks.length === 0) return null;
@@ -215,8 +297,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Determines and sets the next upcoming deadline from the list of tasks.
-   * 
-   * @param tasks - Array of task objects.
+   * @private
+   * @param {Task[]} tasks - Array of task objects
+   * @returns {void}
    */
   private setNextDeadline(tasks: Task[]): void {
     const futureTasks = this.getFutureTasksWithDateObj(tasks, this.parseDate.bind(this));
@@ -225,9 +308,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Converts a date value of various possible formats into a JavaScript Date object.
-   * 
-   * @param date - Date input which could be a string, number, Date, or Firestore timestamp.
-   * @returns A valid Date object or null if conversion is not possible.
+   * @private
+   * @param {any} date - Date input which could be a string, number, Date, or Firestore timestamp
+   * @returns {Date | null} A valid Date object or null if conversion is not possible
    */
   private parseDate(date: any): Date | null {
     if (date instanceof Date) return date;

@@ -13,17 +13,22 @@
   padding: clamp(16px, calc(2.86vw + 6.85px), 48px);
   position: relative;
   @include inter400-fs20();
+
   h1 {
     @include inter700-fs47();
     @include word-break;
     text-overflow: ellipsis;
   }
+
   .description {
     @include word-break;
   }
+
   @media (max-width: 550px) {
     width: 95%;
+
     h1,
+
     .description {
       width: 90%;
     }
@@ -58,6 +63,7 @@
   }
   scrollbar-width: none;
   gap: 16px;
+
   p {
     @include word-break;
   }
@@ -89,9 +95,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+
   p {
     @include flex-center();
   }
+
   .img-user {
     background-color: var(--background-default-light);
     border-radius: 50%;
@@ -142,6 +150,7 @@
   align-items: flex-start;
   gap: 16px;
   @include word-break;
+
   .checkbox {
     margin: 4px;
     position: absolute;
@@ -173,6 +182,7 @@
   width: 26px;
   height: 26px;
   padding: 0;
+
   &:hover {
     background-color: var(--background-default-light);
     border-radius: 50%;
@@ -186,16 +196,20 @@
   border: unset;
   background-color: transparent;
   gap: 8px;
+
   svg {
     width: 22px;
     height: 22px;
+
     path {
       fill: var(--background-dark);
     }
   }
+
   &:hover {
     color: var(--accent-primary-color);
     border-radius: 50%;
+    
     svg path {
       fill: var(--accent-primary-color);
     }

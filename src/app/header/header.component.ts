@@ -44,6 +44,7 @@ import { AuthService } from '../services/auth.service';
     ]),
   ],
 })
+
 export class HeaderComponent {
   /**
    * Tracks whether the mobile menu is currently open.
@@ -129,9 +130,7 @@ export class HeaderComponent {
     const user = this.authService.getCurrentUser();
     const email = user?.email?.toLowerCase() || '';
     const name = user?.displayName?.toLowerCase() || '';
-    if (email === 'guest@join.com' || name === 'guest user') {
-      return 'G';
-    }
+    if (email === 'guest@join.com' || name === 'guest user') {return 'G';}
     if (user?.displayName) {
       const parts = user.displayName.trim().split(' ');
       if (parts.length >= 2) {

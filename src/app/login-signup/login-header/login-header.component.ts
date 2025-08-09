@@ -11,13 +11,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate
-} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login-header',

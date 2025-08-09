@@ -1,16 +1,16 @@
-<main class="signup-content">
+<main class="signup-content" role="main">
   <div class="upper-content">
     <div class="dark-logo-wrapper">
-      <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo" />
+      <img src="./assets/img/logo/favicon.png" alt="Join Logo" />
     </div>
-    <section class="signup-frame">
+    <section class="signup-frame" role="form" aria-labelledby="signup-heading">
       <div class="signup-header">
-        <a class="btn-back" (click)="onBackToLogin()">
-          <img src="assets/img/icons/arrow-back.png" alt="Back Icon" />
-        </a>
-        <h2>Sign up</h2>
+        <button class="btn-back" (click)="onBackToLogin()" type="button" aria-label="Go back to login page">
+          <img src="assets/img/icons/arrow-back.png" alt="" aria-hidden="true" />
+        </button>
+        <h2 id="signup-heading">Sign up</h2>
       </div>
-      <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signupform" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group-wrapper">
           <div>
             <div
@@ -21,26 +21,31 @@
                   signupform.get('name')?.touched
               }"
             >
-              <label for="name"></label>
+              <label for="name" class="sr-only">Full Name</label>
               <input
                 id="name"
                 type="text"
                 placeholder="Name"
                 formControlName="name"
+                aria-describedby="name-error"
+                [attr.aria-invalid]="signupform.get('name')?.invalid && signupform.get('name')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/person.png"
-                alt="Person Icon"
+                alt=""
+                aria-hidden="true"
               />
             </div>
             <p
+              id="name-error"
               class="error-message"
               *ngIf="
                 signupform.get('name')?.invalid &&
                 signupform.get('name')?.touched
               "
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("name") }}
             </p>
@@ -56,26 +61,31 @@
                   signupform.get('email')?.touched
               }"
             >
-              <label for="email"></label>
+              <label for="email" class="sr-only">Email Address</label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 placeholder="Email"
                 formControlName="email"
+                aria-describedby="email-error"
+                [attr.aria-invalid]="signupform.get('email')?.invalid && signupform.get('email')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/mail.png"
-                alt="Mail Icon"
+                alt=""
+                aria-hidden="true"
               />
             </div>
             <p
+              id="email-error"
               class="error-message"
               *ngIf="
                 signupform.get('email')?.invalid &&
                 signupform.get('email')?.touched
               "
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("email") }}
             </p>
@@ -91,38 +101,50 @@
                   signupform.get('password')?.touched
               }"
             >
-              <label for="password"></label>
+              <label for="password" class="sr-only">Password</label>
               <input
                 id="password"
                 [type]="showPassword ? 'text' : 'password'"
                 placeholder="Password"
                 formControlName="password"
+                aria-describedby="password-error"
+                [attr.aria-invalid]="signupform.get('password')?.invalid && signupform.get('password')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/lock.png"
-                alt="Lock Icon"
+                alt=""
+                aria-hidden="true"
                 *ngIf="!signupform.get('password')?.value"
               />
-              <img
+              <button
+                type="button"
                 class="input-icon toggle-eye"
-                [src]="
-                  showPassword
-                    ? 'assets/img/icons/visibility.png'
-                    : 'assets/img/icons/visibility-off.png'
-                "
-                alt="Toggle Password Visibility"
                 *ngIf="signupform.get('password')?.value"
                 (click)="showPassword = !showPassword"
-              />
+                [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+                [attr.aria-pressed]="showPassword"
+              >
+                <img
+                  [src]="
+                    showPassword
+                      ? 'assets/img/icons/visibility.png'
+                      : 'assets/img/icons/visibility-off.png'
+                  "
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
             </div>
             <p
+              id="password-error"
               class="error-message"
               *ngIf="
                 signupform.get('password')?.invalid &&
                 signupform.get('password')?.touched
               "
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("password") }}
             </p>
@@ -138,35 +160,47 @@
                   signupform.get('confirmPassword')?.touched
               }"
             >
-              <label for="confirmPassword"></label>
+              <label for="confirmPassword" class="sr-only">Confirm Password</label>
               <input
                 id="confirmPassword"
                 [type]="showConfirmPassword ? 'text' : 'password'"
                 placeholder="Confirm Password"
                 formControlName="confirmPassword"
+                aria-describedby="confirm-password-error"
+                [attr.aria-invalid]="signupform.get('confirmPassword')?.invalid && signupform.get('confirmPassword')?.touched"
               />
               <img
                 class="input-icon"
                 src="assets/img/icons/lock.png"
-                alt="Lock Icon"
+                alt=""
+                aria-hidden="true"
                 *ngIf="!signupform.get('confirmPassword')?.value"
               />
-              <img
+              <button
+                type="button"
                 class="input-icon toggle-eye"
-                [src]="
-                  showConfirmPassword
-                    ? 'assets/img/icons/visibility.png'
-                    : 'assets/img/icons/visibility-off.png'
-                "
-                alt="Toggle Confirm Password Visibility"
                 *ngIf="signupform.get('confirmPassword')?.value"
                 (click)="showConfirmPassword = !showConfirmPassword"
-              />
+                [attr.aria-label]="showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'"
+                [attr.aria-pressed]="showConfirmPassword"
+              >
+                <img
+                  [src]="
+                    showConfirmPassword
+                      ? 'assets/img/icons/visibility.png'
+                      : 'assets/img/icons/visibility-off.png'
+                  "
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
             </div>
             <p
+              id="confirm-password-error"
               class="error-message"
               *ngIf="getValidationMessage('confirmPassword')"
               aria-live="polite"
+              role="alert"
             >
               {{ getValidationMessage("confirmPassword") }}
             </p>
@@ -178,9 +212,10 @@
               id="accept-privacy-checkbox"
               type="checkbox"
               formControlName="privacyPolicy"
+              aria-describedby="privacy-policy-text"
             />
-            I accept the
-            <a routerLink="/privacy-policy" class="highlight">Privacy policy</a>
+            <span id="privacy-policy-text">I accept the
+            <a routerLink="/privacy-policy" class="highlight" aria-label="Read privacy policy (opens in new page)">Privacy policy</a></span>
           </label>
         </div>
         <div class="btn-wrapper">
@@ -188,18 +223,19 @@
             class="btn-signup"
             type="submit"
             [disabled]="signupform.invalid || isLoading"
+            [attr.aria-busy]="isLoading"
           >
             <ng-container *ngIf="!isLoading">Sign Up</ng-container>
             <ng-container *ngIf="isLoading">
-              <span class="spinner"></span>
+              <span class="spinner" aria-hidden="true"></span>
               Signing up...
             </ng-container>
           </button>
         </div>
-        <p class="success-message" *ngIf="successMessage" aria-live="polite">
+        <p class="success-message" *ngIf="successMessage" aria-live="polite" role="status">
           {{ successMessage }}
         </p>
-        <p class="error-message" *ngIf="errorMessage" aria-live="polite">
+        <p class="error-message" *ngIf="errorMessage" aria-live="polite" role="alert">
           {{ errorMessage }}
         </p>
       </form>

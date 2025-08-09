@@ -11,18 +11,64 @@ import { Subscription } from 'rxjs';
 })
 
 export class TaskListManager {
+  /**
+   * Complete list of all tasks loaded from the service.
+   * @private
+   * @type {Task[]}
+   */
   private taskList: Task[] = [];
+  
+  /**
+   * Lookup table storing subtasks organized by their parent task ID.
+   * @private
+   * @type {{ [taskId: string]: Subtask[] }}
+   */
   private subtasksByTaskId: { [taskId: string]: Subtask[] } = {};
+  
+  /**
+   * Subscription to the task service observable for cleanup purposes.
+   * @private
+   * @type {Subscription}
+   */
   private unsubTask!: Subscription;
+  
+  /**
+   * Array of tasks with 'to-do' status.
+   * @private
+   * @type {Task[]}
+   */
   private todo: Task[] = [];
+  
+  /**
+   * Array of tasks with 'in-progress' status.
+   * @private
+   * @type {Task[]}
+   */
   private inprogress: Task[] = [];
+  
+  /**
+   * Array of tasks with 'await-feedback' status.
+   * @private
+   * @type {Task[]}
+   */
   private awaitfeedback: Task[] = [];
+  
+  /**
+   * Array of tasks with 'done' status.
+   * @private
+   * @type {Task[]}
+   */
   private done: Task[] = [];
 
+  /**
+   * Creates an instance of TaskListManager.
+   * @param {TaskService} taskService - Service for task-related operations and data access
+   */
   constructor(private taskService: TaskService) { }
 
   /**
    * Gets all tasks
+   * @returns {Task[]} Complete array of all loaded tasks
    */
   getTaskList(): Task[] {
     return this.taskList;
@@ -30,25 +76,39 @@ export class TaskListManager {
 
   /**
    * Gets task lists by status
+   * @returns {Task[]} Array of tasks with 'to-do' status
    */
   getTodoTasks(): Task[] {
     return this.todo;
   }
   
+  /**
+   * Gets tasks with 'in-progress' status.
+   * @returns {Task[]} Array of tasks with 'in-progress' status
+   */
   getInProgressTasks(): Task[] {
     return this.inprogress;
   }
 
+  /**
+   * Gets tasks with 'await-feedback' status.
+   * @returns {Task[]} Array of tasks with 'await-feedback' status
+   */
   getAwaitFeedbackTasks(): Task[] {
     return this.awaitfeedback;
   }
 
+  /**
+   * Gets tasks with 'done' status.
+   * @returns {Task[]} Array of tasks with 'done' status
+   */
   getDoneTasks(): Task[] {
     return this.done;
   }
 
   /**
    * Gets subtasks by task ID
+   * @returns {{ [taskId: string]: Subtask[] }} Lookup object with task IDs as keys and subtask arrays as values
    */
   getSubtasksByTaskId(): { [taskId: string]: Subtask[] } {
     return this.subtasksByTaskId;
@@ -56,10 +116,9 @@ export class TaskListManager {
 
   /**
    * Filters tasks by given status and search term (case-insensitive).
-   *
-   * @param status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done').
-   * @param searchTerm - Search term to filter by.
-   * @returns Filtered list of tasks.
+   * @param {string} status - Task status to filter by ('to-do', 'in-progress', 'await-feedback', 'done')
+   * @param {string} searchTerm - Search term to filter by
+   * @returns {Task[]} Filtered list of tasks
    */
     getFilteredTasks(status: string, searchTerm: string): Task[] {
       const tasksForStatus = this.getTasksByStatus(status);
@@ -68,9 +127,9 @@ export class TaskListManager {
 
   /**
    * Returns tasks from the internal status arrays based on status key.
-   *
-   * @param status - Status key.
-   * @returns Array of tasks matching the given status.
+   * @private
+   * @param {string} status - Status key
+   * @returns {Task[]} Array of tasks matching the given status
    */
   private getTasksByStatus(status: string): Task[] {
     const statusArrayMap: Record<string, Task[]> = {
@@ -84,10 +143,10 @@ export class TaskListManager {
 
   /**
    * Filters a list of tasks by the provided search term (case-insensitive).
-   *
-   * @param tasks - The array of tasks to filter.
-   * @param searchTerm - The term to filter by.
-   * @returns Filtered tasks array.
+   * @private
+   * @param {Task[]} tasks - The array of tasks to filter
+   * @param {string} searchTerm - The term to filter by
+   * @returns {Task[]} Filtered tasks array
    */
   private filterTasksBySearchTerm(tasks: Task[], searchTerm: string): Task[] {
     const trimmed = searchTerm.trim().toLowerCase();
@@ -100,10 +159,9 @@ export class TaskListManager {
 
   /**
    * Sorts a list of tasks by their due date.
-   *
-   * @param tasks - Array of tasks to be sorted.
-   * @param ascending - Whether to sort in ascending order (default: true).
-   * @returns Sorted task array.
+   * @param {Task[]} tasks - Array of tasks to be sorted
+   * @param {boolean} ascending - Whether to sort in ascending order (default: true)
+   * @returns {Task[]} Sorted task array
    */
   sortTasksByDueDate(tasks: Task[], ascending: boolean = true): Task[] {
     return [...tasks].sort((a, b) =>
@@ -115,9 +173,9 @@ export class TaskListManager {
 
   /**
    * Converts different date formats (Date, Firestore Timestamp, string) into a timestamp.
-   *
-   * @param date - Date input to convert.
-   * @returns Numeric timestamp, or Number.MAX_SAFE_INTEGER if invalid.
+   * @private
+   * @param {Date | any} date - Date input to convert
+   * @returns {number} Numeric timestamp, or Number.MAX_SAFE_INTEGER if invalid
    */
   private getDateValue(date: Date | any): number {
     if (date?.toDate instanceof Function) {
@@ -132,10 +190,9 @@ export class TaskListManager {
 
   /**
    * TrackBy function for use with ngFor to optimize rendering of tasks.
-   *
-   * @param index - The index of the item in the array.
-   * @param task - The task object.
-   * @returns The unique task ID.
+   * @param {number} index - The index of the item in the array
+   * @param {Task} task - The task object
+   * @returns {string | undefined} The unique task ID
    */
   trackByTaskId(index: number, task: Task): string | undefined {
     return task.id;
@@ -144,8 +201,7 @@ export class TaskListManager {
   /**
    * Loads tasks from the task service and distributes them into status-based lists.
    * Also sorts tasks by due date and loads their subtasks.
-   *
-   * @returns A function to unsubscribe from the task observable.
+   * @returns {() => void} A function to unsubscribe from the task observable
    */
   loadTasks(): () => void {
     this.unsubTask = this.taskService.getTasks().subscribe((tasks) => {
@@ -159,8 +215,9 @@ export class TaskListManager {
 
   /**
    * Clears all status arrays and distributes tasks into the appropriate lists.
-   *
-   * @param tasks - The full list of tasks to distribute.
+   * @private
+   * @param {Task[]} tasks - The full list of tasks to distribute
+   * @returns {void}
    */
   private distributeTasksByStatus(tasks: Task[]): void {
     this.emptyArrays();
@@ -178,6 +235,8 @@ export class TaskListManager {
 
   /**
    * Sorts all status-based task arrays by due date.
+   * @private
+   * @returns {void}
    */
   private sortAllStatusArrays(): void {
     this.todo = this.sortTasksByDueDate(this.todo);
@@ -188,6 +247,8 @@ export class TaskListManager {
 
   /**
    * Empties all task lists (to-do, in-progress, await-feedback, done).
+   * @private
+   * @returns {void}
    */
   private emptyArrays(): void {
     this.todo = [];
@@ -198,6 +259,8 @@ export class TaskListManager {
 
   /**
    * Loads subtasks for each task and stores them in a lookup table by task ID.
+   * @private
+   * @returns {void}
    */
   private loadSubtasks(): void {
     for (const task of this.taskList) {
@@ -211,9 +274,8 @@ export class TaskListManager {
 
   /**
    * Returns the subtasks for a given task ID.
-   *
-   * @param taskId - The ID of the task to retrieve subtasks for.
-   * @returns Array of subtasks, or an empty array if none exist.
+   * @param {string | undefined} taskId - The ID of the task to retrieve subtasks for
+   * @returns {Subtask[]} Array of subtasks, or an empty array if none exist
    */
   getSubtasksForTask(taskId: string | undefined): Subtask[] {
     if (!taskId) {
@@ -224,9 +286,8 @@ export class TaskListManager {
 
   /**
    * Returns the subtasks assigned to the currently selected task.
-   *
-   * @param selectedTask - The currently selected task.
-   * @returns Array of subtasks, or an empty array if none are found.
+   * @param {Task | undefined} selectedTask - The currently selected task
+   * @returns {Subtask[]} Array of subtasks, or an empty array if none are found
    */
   getSubtasksForSelectedTask(selectedTask: Task | undefined): Subtask[] {
     if (selectedTask?.id) {
@@ -237,6 +298,7 @@ export class TaskListManager {
 
   /**
    * Updates task lists after status changes
+   * @returns {void}
    */
   updateTaskLists(): void {
     this.todo = this.sortTasksByDueDate(this.todo);
@@ -247,6 +309,7 @@ export class TaskListManager {
 
   /**
    * Clears all data and unsubscribes
+   * @returns {void}
    */
   destroy(): void {
     if (this.unsubTask) {

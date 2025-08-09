@@ -51,19 +51,26 @@
   justify-content: flex-end;
   align-items: center;
 
-  a {
-    @include flex-center();
-
-    img {
-      width: 40px;
-      height: 40px;
-    }
+  button {
+    border-radius: 50%;
+    border: transparent;
+    cursor: pointer;
+    background-color: transparent;
 
     &:hover {
       scale: 1.09;
       border-radius: 50%;
       background-color: var(--background-default-light);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  a {
+    @include flex-center();
+
+    img {
+      width: 40px;
+      height: 40px;
     }
   }
 }

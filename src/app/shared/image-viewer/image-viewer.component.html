@@ -2,6 +2,9 @@
   class="image-viewer-overlay"
   [class.backgroundVisible]="backgroundVisible"
   *ngIf="isVisible"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="image-viewer-title"
 >
   <main
     class="image-viewer-content"
@@ -12,11 +15,16 @@
   >
     <header class="image-viewer-header">
       <div class="headline-wrapper">
-        <h3>{{ getImageName() || "Image" }}</h3>
+        <h3 id="image-viewer-title">{{ getImageName() || "Image" }}</h3>
         <h4>{{ getImageType() }} ( {{ getImageSize() }} )</h4>
       </div>
       <div class="viewer-actions-wrapper">
-        <button type="button" class="btn-download" (click)="downloadImage()">
+        <button
+          type="button"
+          class="btn-download"
+          (click)="downloadImage()"
+          aria-label="Download current image"
+        >
           <svg
             width="24"
             height="24"
@@ -43,7 +51,12 @@
             </g>
           </svg>
         </button>
-        <button type="button" class="btn-close" (click)="onClose($event)">
+        <button
+          type="button"
+          class="btn-close"
+          (click)="onClose($event)"
+          aria-label="Close image viewer"
+        >
           <svg
             width="24"
             height="24"
@@ -67,6 +80,8 @@
         (click)="previousImage()"
         [disabled]="currentIndex === 0"
         *ngIf="images.length > 1"
+        aria-label="View previous image"
+        [attr.aria-disabled]="currentIndex === 0"
       >
         <svg
           width="24"
@@ -85,8 +100,9 @@
       <div class="image-wrapper">
         <img
           [src]="currentImage"
-          [alt]="'Image ' + (currentIndex + 1)"
+          [alt]="'Image ' + (currentIndex + 1) + ' of ' + images.length + (getImageName() ? ': ' + getImageName() : '')"
           class="viewer-image"
+          role="img"
         />
       </div>
 
@@ -96,6 +112,8 @@
         (click)="nextImage()"
         [disabled]="currentIndex === images.length - 1"
         *ngIf="images.length > 1"
+        aria-label="View next image"
+        [attr.aria-disabled]="currentIndex === images.length - 1"
       >
         <svg
           width="24"
@@ -118,6 +136,8 @@
           (click)="previousImage()"
           [disabled]="currentIndex === 0"
           *ngIf="images.length > 1"
+          aria-label="View previous image"
+          [attr.aria-disabled]="currentIndex === 0"
         >
           <svg
             width="24"
@@ -138,6 +158,8 @@
           (click)="nextImage()"
           [disabled]="currentIndex === images.length - 1"
           *ngIf="images.length > 1"
+          aria-label="View next image"
+          [attr.aria-disabled]="currentIndex === images.length - 1"
         >
           <svg
             width="24"
@@ -156,7 +178,13 @@
     </div>
 
     <footer class="image-controls">
-      <div class="image-counter" *ngIf="images.length > 1">
+      <div
+        class="image-counter"
+        *ngIf="images.length > 1"
+        role="status"
+        aria-live="polite"
+        aria-label="Image {{ currentIndex + 1 }} of {{ images.length }}"
+      >
         {{ currentIndex + 1 }} / {{ images.length }}
       </div>
       <button
@@ -164,6 +192,7 @@
         class="btn-delete"
         (click)="onDeleteImage()"
         *ngIf="allowDelete"
+        aria-label="Delete current image"
       >
         <svg
           width="25"

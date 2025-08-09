@@ -88,14 +88,7 @@ export class TaskDataService {
    * @param id - Optional existing task ID for updates
    * @returns Complete Task object ready for storage
    */
-  buildTask(
-    formData: FormData,
-    status: string,
-    priorityManager: PriorityManager,
-    contactManager: ContactManager,
-    categoryManager: CategoryManager,
-    id?: string
-  ): Task {
+  buildTask(formData: FormData, status: string, priorityManager: PriorityManager, contactManager: ContactManager, categoryManager: CategoryManager, id?: string): Task {
     const uniqueContactIds = this.getUniqueAssignedContactIds(contactManager);
     const task: any = {
       title: formData.title.trim(),
@@ -107,9 +100,7 @@ export class TaskDataService {
       category: categoryManager.getSelectedCategory() as 'technical' | 'user story',
       imageKey: formData.images || [],
     };
-    if (id) {
-      task.id = id;
-    }
+    if (id) {task.id = id}
     return task as Task;
   }
 

@@ -52,19 +52,54 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
 })
 
 export class ContactService {
-  /** Currently selected contact (for viewing or interaction) */
+  /**
+   * BehaviorSubject holding the currently selected contact for viewing or interaction.
+   * @private
+   * @type {BehaviorSubject<Contact | null>}
+   */
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
-  /** Observable for the selected contact */
+  
+  /**
+   * Observable stream of the currently selected contact.
+   * @public
+   * @type {Observable<Contact | null>}
+   */
   public selectedContact$ = this.selectedContactSubject.asObservable();
-  /** Whether the contact form should be displayed */
+  
+  /**
+   * BehaviorSubject controlling the visibility of the contact form.
+   * @private
+   * @type {BehaviorSubject<boolean>}
+   */
   private showFormSubject = new BehaviorSubject<boolean>(false);
-  /** Observable for contact form visibility */
+  
+  /**
+   * Observable stream for contact form visibility state.
+   * @public
+   * @type {Observable<boolean>}
+   */
   public showForm$ = this.showFormSubject.asObservable();
-  /** Currently selected contact to be edited */
+  
+  /**
+   * BehaviorSubject holding the contact currently being edited.
+   * @private
+   * @type {BehaviorSubject<Contact | null>}
+   */
   private editContactSubject = new BehaviorSubject<Contact | null>(null);
-  /** Observable for the contact being edited */
+  
+  /**
+   * Observable stream for the contact being edited.
+   * @public
+   * @type {Observable<Contact | null>}
+   */
   public editContact$ = this.editContactSubject.asObservable();
-  /** Preset avatar colors for visual identification */
+  
+  /**
+   * Predefined array of hexadecimal colors used for contact avatar backgrounds.
+   * Colors are selected based on contact name hash for consistency.
+   * @private
+   * @type {string[]}
+   */
   private avatarColors = [
     '#9C27B0', '#2196F3', '#FF9800', '#4CAF50', '#F44336', '#00BCD4',
     '#c44314ff', '#5191daff', '#E91E63', '#3F51B5', '#b3c511ff',
@@ -73,10 +108,15 @@ export class ContactService {
     '#FFA000', '#084c6bff', '#6bb604ff'
   ];
 
+  /**
+   * Creates an instance of ContactService.
+   * @param {Firestore} firestore - Firebase Firestore database service for contact data persistence
+   */
   constructor(private firestore: Firestore) { }
 
   /**
    * Returns a Firestore reference to the `contacts` collection.
+   * @returns {CollectionReference} Firestore collection reference for contacts
    */
   getContactsRef() {
     return collection(this.firestore, 'contacts');
@@ -84,8 +124,8 @@ export class ContactService {
 
   /**
    * Returns a Firestore reference to a single contact document.
-   *
-   * @param docId - The ID of the contact document.
+   * @param {string} docId - The ID of the contact document
+   * @returns {DocumentReference} Firestore document reference for the specific contact
    */
   getSingleContactsRef(docId: string) {
     return doc(this.getContactsRef(), docId);
@@ -148,9 +188,8 @@ export class ContactService {
   /**
    * Returns a plain JSON object with only the allowed contact fields.
    * This is used to avoid including undefined or extra properties when updating Firestore.
-   *
-   * @param updatedContact - The contact object to sanitize.
-   * @returns A JSON object containing name, email, and phone.
+   * @param {Contact} updatedContact - The contact object to sanitize
+   * @returns {Partial<Contact>} A JSON object containing only valid contact fields
    */
   getCleanJson(updatedContact: Contact): Partial<Contact> {
     const contact: Contact = {
@@ -167,8 +206,8 @@ export class ContactService {
   /**
    * Emits a contact to the selected contact observable.
    * Used to show the contact details in the UI.
-   *
-   * @param contact - The contact to select.
+   * @param {Contact} contact - The contact to select
+   * @returns {void}
    */
   selectContact(contact: Contact): void {
     this.selectedContactSubject.next(contact);
@@ -176,6 +215,7 @@ export class ContactService {
 
   /**
    * Clears the currently selected contact.
+   * @returns {void}
    */
   clearSelection(): void {
     this.selectedContactSubject.next(null);
@@ -183,6 +223,7 @@ export class ContactService {
 
   /**
    * Triggers the display of the add contact form.
+   * @returns {void}
    */
   showAddForm(): void {
     this.showFormSubject.next(true);
@@ -190,8 +231,8 @@ export class ContactService {
 
   /**
    * Triggers the display of the edit contact form with a prefilled contact.
-   *
-   * @param contact - The contact to edit.
+   * @param {Contact} contact - The contact to edit
+   * @returns {void}
    */
   showEditForm(contact: Contact): void {
     this.editContactSubject.next(contact);
@@ -200,6 +241,7 @@ export class ContactService {
 
   /**
    * Hides the contact form and clears the edit state.
+   * @returns {void}
    */
   hideForm(): void {
     this.showFormSubject.next(false);
@@ -208,8 +250,8 @@ export class ContactService {
 
   /**
    * Deletes the imageKey field from Firestore.
-   *
-   * @param contactToEdit - The contact to delete the imageKey from.
+   * @param {Contact} contactToEdit - The contact to delete the imageKey from
+   * @returns {void}
    */
   deleteImageFromContact(contactToEdit: Contact): void {
     if (!contactToEdit.id) {
@@ -219,8 +261,6 @@ export class ContactService {
     const contactRef = this.getSingleContactsRef(contactToEdit.id);
     updateDoc(contactRef, {
       imageKey: deleteField()
-    }).then(() => {
-      console.log('Image field deleted from contact:', contactToEdit.id);
     }).catch((err) => {
       console.error('Failed to delete image from contact:', err);
     });
@@ -228,12 +268,12 @@ export class ContactService {
 
   /**
    * Deletes a contact from Firestore.
-   *
-   * @param docId - The Firestore document ID of the contact to delete.
+   * @param {string} docId - The Firestore document ID of the contact to delete
+   * @returns {Promise<void>} Promise that resolves when contact is deleted
    */
   async deleteContact(docId: string): Promise<void> {
     await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
-      console.log(err);
+      console.error('Failed to delete contact:', err);
     });
   }
 

@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 import { CommonModule } from '@angular/common';
 import { ContactService, Contact, notOnlyWhitespace } from '../../services/contact.service';
 import { Subscription } from 'rxjs';
-import { UploadedImage, UploadService } from '../../services/upload.service';
+import { UploadedImage } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 import { ImageManager } from './image-manager';
 import { ContactFormService } from './contact-form.service';
@@ -41,33 +41,93 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   contactToEdit?: Contact;
 
+  /**
+   * Data for the uploaded image including metadata.
+   * @type {UploadedImage | undefined}
+   */
   imgData?: UploadedImage;
+  
+  /**
+   * Unique key identifier for the uploaded image.
+   * @type {string | undefined}
+   */
   uploadedImageKey?: string;
+  
+  /**
+   * Base64 encoded string representation of the image for display.
+   * @type {string | null}
+   */
   imageBase64: string | null = null;
 
   /**
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
+  
+  /**
+   * Array of uploaded image URLs for display purposes.
+   * @type {string[]}
+   */
   uploadedUrls: string[] = [];
+  
+  /**
+   * Array of uploaded image objects with metadata.
+   * @type {UploadedImage[]}
+   */
   uploadedImages: UploadedImage[] = [];
+  
+  /**
+   * Reference to the file input element for image selection.
+   * @type {ElementRef<HTMLInputElement>}
+   */
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
+  
+  /**
+   * Controls the visibility of the image viewer modal.
+   * @type {boolean}
+   */
   showImageViewer = false;
+  
+  /**
+   * Array of contact image URLs for display.
+   * @type {string[]}
+   */
   contactImages: string[] = [];
+  
+  /**
+   * Array of contact image keys for backend reference.
+   * @type {string[]}
+   */
   contactImageKeys: string[] = [];
+  
+  /**
+   * Error message to display for validation or upload errors.
+   * @type {string}
+   */
   errorMessage: string = '';
+  
+  /**
+   * Flag indicating if the current image is marked for deletion.
+   * @type {boolean}
+   */
   imageMarkedForDeletion: boolean = false;
+  
+  /**
+   * Flag indicating if the form has been submitted to show validation errors.
+   * @type {boolean}
+   */
   formSubmitted: boolean = false;
 
   /**
    * Constructor injecting the form builder and contact service.
-   * @param form - Angular's FormBuilder for creating the form.
-   * @param contactService - Service that manages contact CRUD operations.
+   * @param {FormBuilder} form - Angular's FormBuilder for creating the form
+   * @param {ContactService} contactService - Service that manages contact CRUD operations
+   * @param {ImageManager} imageManager - Service for image processing and validation
+   * @param {ContactFormService} formService - Service for form-specific business logic
    */
   constructor(
     private form: FormBuilder,
     public contactService: ContactService,
-    private uploadService: UploadService,
     public imageManager: ImageManager,
     private formService: ContactFormService
   ) { }
@@ -81,6 +141,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.subscribeToEditContact();
   }
 
+  /**
+   * Initializes the reactive form with validation rules.
+   * @private
+   * @returns {void}
+   */
   private initializeForm(): void {
     this.contactForm = this.form.group({
       name: ['', [Validators.required, notOnlyWhitespace]],
@@ -89,6 +154,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Sets up subscription to listen for edit contact events.
+   * @private
+   * @returns {void}
+   */
   private subscribeToEditContact(): void {
     this.editContactSubscription = this.contactService.editContact$.subscribe(
       contact => this.getDataToEdit(contact)
@@ -117,6 +187,12 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     await this.processValidImage(file);
   }
 
+  /**
+   * Processes a valid image file by handling deletion and compression.
+   * @private
+   * @param {File} file - The validated image file to process
+   * @returns {Promise<void>} Promise that resolves when image processing is complete
+   */
   private async processValidImage(file: File): Promise<void> {
     await this.formService.deletePreviousImages(this.uploadedImageKey, this.contactToEdit?.imageKey);
     const imageKey = `${Date.now()}_${file.name}`;

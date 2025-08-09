@@ -6,14 +6,19 @@ import { Injectable } from '@angular/core';
 export interface UploadedImage {
   /** Unique identifier for the image */
   imageKey: string;
+
   /** Original filename of the uploaded image */
   filename: string;
+
   /** Type of the file */
   fileType: string;
+
   /** Size of the file in bytes */
   fileSize: number;
+
   /** Base64 encoded image data */
   base64: string;
+  
   /** Assignment target for the image */
   assignedTo: 'user' | 'task';
 }
@@ -27,20 +32,29 @@ export interface UploadedImage {
 })
 
 export class UploadService {
-  /** Key used for localStorage storage */
+  /**
+   * Key used for localStorage storage to persist images across sessions.
+   * @private
+   * @type {string}
+   */
   private storageKey = 'allImages';
   
-  /** In-memory array of images */
+  /**
+   * In-memory array of uploaded images for quick access during application runtime.
+   * @type {UploadedImage[]}
+   */
   images: UploadedImage[] = [];
 
   /**
    * Creates an instance of UploadService.
+   * Initializes the service for managing image uploads and storage operations.
    */
   constructor() { }
 
   /**
    * Saves a single image to localStorage.
-   * @param image - Image to save
+   * @param {UploadedImage} image - Image to save
+   * @returns {void}
    */
   saveImage(image: UploadedImage) {
     const current = this.getImages();
@@ -50,7 +64,8 @@ export class UploadService {
 
   /**
    * Saves multiple images to localStorage, avoiding duplicates.
-   * @param images - Array of images to save
+   * @param {UploadedImage[]} images - Array of images to save
+   * @returns {void}
    */
   saveImages(images: UploadedImage[]): void {
     const existing = this.getImages();
@@ -61,7 +76,8 @@ export class UploadService {
 
   /**
    * Sets the in-memory images array.
-   * @param images - Array of images to set
+   * @param {UploadedImage[]} images - Array of images to set
+   * @returns {void}
    */
   setImages(images: UploadedImage[]) {
     this.images = images;
@@ -69,7 +85,7 @@ export class UploadService {
 
   /**
    * Retrieves all images from localStorage.
-   * @returns Array of all stored images
+   * @returns {UploadedImage[]} Array of all stored images
    */
   getImages(): UploadedImage[] {
     const data = localStorage.getItem(this.storageKey);
@@ -78,8 +94,8 @@ export class UploadService {
 
   /**
    * Retrieves images by their keys.
-   * @param imageKeys - Array of image keys to retrieve
-   * @returns Array of matching images
+   * @param {string[]} imageKeys - Array of image keys to retrieve
+   * @returns {UploadedImage[]} Array of matching images
    */
   getImagesByKeys(imageKeys: string[]): UploadedImage[] {
     const allImages = this.getImages();
@@ -88,8 +104,8 @@ export class UploadService {
 
   /**
    * Retrieves a single image by its key.
-   * @param imageKey - Key of the image to retrieve
-   * @returns Image object or undefined if not found
+   * @param {string} imageKey - Key of the image to retrieve
+   * @returns {UploadedImage | undefined} Image object or undefined if not found
    */
   getImageByKey(imageKey: string): UploadedImage | undefined {
     const allImages = this.getImages();
@@ -98,8 +114,8 @@ export class UploadService {
 
   /**
    * Retrieves base64 data for an image by its key.
-   * @param imageKey - Key of the image
-   * @returns Base64 string or null if image not found
+   * @param {string} imageKey - Key of the image
+   * @returns {string | null} Base64 string or null if image not found
    */
   getBase64ByKey(imageKey: string): string | null {
     const image = this.getImageByKey(imageKey);
@@ -108,7 +124,8 @@ export class UploadService {
 
   /**
    * Deletes a single image by its key.
-   * @param imageKey - Key of the image to delete
+   * @param {string} imageKey - Key of the image to delete
+   * @returns {void}
    */
   deleteImage(imageKey: string) {
     const current = this.getImages();
@@ -118,7 +135,8 @@ export class UploadService {
 
   /**
    * Deletes multiple images by their keys.
-   * @param imageKeys - Array of image keys to delete
+   * @param {string[]} imageKeys - Array of image keys to delete
+   * @returns {void}
    */
   deleteImages(imageKeys: string[]) {
     const current = this.getImages();
@@ -128,6 +146,7 @@ export class UploadService {
 
   /**
    * Clears all images from localStorage.
+   * @returns {void}
    */
   clearImages() {
     localStorage.removeItem(this.storageKey);
@@ -135,8 +154,8 @@ export class UploadService {
 
   /**
    * Retrieves base64 data for task-related images.
-   * @param taskImageKeys - Array of task image keys
-   * @returns Array of base64 strings for existing images
+   * @param {string[]} taskImageKeys - Array of task image keys
+   * @returns {string[]} Array of base64 strings for existing images
    */
   getTaskImages(taskImageKeys: string[]): string[] {
     return taskImageKeys
@@ -146,8 +165,8 @@ export class UploadService {
 
   /**
    * Retrieves base64 data for a contact image.
-   * @param contactImageKey - Key of the contact image
-   * @returns Base64 string or null if image not found
+   * @param {string} contactImageKey - Key of the contact image
+   * @returns {string | null} Base64 string or null if image not found
    */
   getContactImage(contactImageKey: string): string | null {
     return this.getBase64ByKey(contactImageKey);

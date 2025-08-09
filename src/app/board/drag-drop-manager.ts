@@ -11,6 +11,8 @@ import { Task, TaskService } from '../services/task.service';
 })
 
 export class DragDropManager {
+  
+  /** A reference to the TaskService for task management */
   constructor(private taskService: TaskService) { }
 
   /**

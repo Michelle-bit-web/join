@@ -75,8 +75,9 @@
           </div>
           <div class="form-group">
             <label for="due-date"
-              >Due date<span class="required">*</span></label
-            >
+              >Due date
+              <span class="required">*</span>
+            </label>
             <input
               type="date"
               id="due-date"
@@ -249,15 +250,12 @@
                 <div
                   class="contact-item"
                   [class.selected]="contactManager.isContactSelected(contact)"
-                  *ngFor="let contact of contacts"
-                  (click)="contactManager.selectContact(contact)"
+                  *ngFor="let contact of contacts" (click)="contactManager.selectContact(contact)"
                 >
                   <div class="contact-info">
                     <div
                       class="contact-avatar"
-                      [style.background-color]="
-                        contactManager.getContactColor(contact)
-                      "
+                      [style.background-color]="contactManager.getContactColor(contact)"
                     >
                       {{ contactManager.getContactInitials(contact) }}
                     </div>
@@ -376,12 +374,7 @@
                         src="assets/img/icons/edit-single.png"
                         alt="Edit"
                         class="action-icon"
-                        (click)="
-                          subtaskManager.editSubtaskPrompt(
-                            subtask.id,
-                            subtask.text
-                          )
-                        "
+                        (click)="subtaskManager.editSubtaskPrompt(subtask.id,subtask.text)"
                       />
                       <img
                         src="assets/img/icons/delete.png"

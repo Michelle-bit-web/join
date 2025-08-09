@@ -226,21 +226,11 @@ export class SignupComponent implements OnInit {
    * @returns The corresponding validation message or an empty string.
    */
   private getFieldErrorMessage(control: AbstractControl): string {
-    if (control.errors?.['required']) {
-      return 'This field is required';
-    }
-    if (control.errors?.['email']) {
-      return 'Please enter a valid email address';
-    }
-    if (control.errors?.['minlength']) {
-      return `Minimum ${control.errors['minlength'].requiredLength} characters required`;
-    }
-    if (control.errors?.['pattern']) {
-      return 'Password must contain uppercase, numbers and special characters';
-    }
-    if (control.errors?.['requiredTrue']) {
-      return 'You must accept the privacy policy';
-    }
+    if (control.errors?.['required']) {return 'This field is required'};
+    if (control.errors?.['email']) {return 'Please enter a valid email address'};
+    if (control.errors?.['minlength']) {return `Minimum ${control.errors['minlength'].requiredLength} characters required`};
+    if (control.errors?.['pattern']) {return 'Password must contain uppercase, numbers and special characters'};
+    if (control.errors?.['requiredTrue']) {return 'You must accept the privacy policy'};
     return '';
   }
 }

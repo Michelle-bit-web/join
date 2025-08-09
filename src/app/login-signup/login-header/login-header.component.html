@@ -1,15 +1,17 @@
-<header class="login-header-wrapper">
+<header class="login-header-wrapper" role="banner">
   <div class="dark-logo-wrapper">
     <img
       src="./assets/img/logo/favicon.png"
-      alt="Dark Join Logo"
+      alt="Join Logo"
       [@fadeOut]="logoState"
     />
   </div>
-  <a routerLink="/signup" class="wanna-signup-wrapper">
-    <span>Not a Join user?</span>
-    <div class="btn-wrapper">
-      <button class="btn-signup">Sign up</button>
-    </div>
-  </a>
+  <nav role="navigation" aria-label="User registration">
+    <a routerLink="/signup" class="wanna-signup-wrapper" aria-label="Sign up for a new Join account">
+      <span aria-hidden="true">Not a Join user?</span>
+      <div class="btn-wrapper">
+        <button class="btn-signup">Sign up</button>
+      </div>
+    </a>
+  </nav>
 </header>

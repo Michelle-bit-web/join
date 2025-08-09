@@ -6,12 +6,14 @@
  * - Shows task information including title, description, due date, etc.
  * - Displays and manages assigned contacts
  * - Allows toggling and updating subtasks
+ * - Displays task images and allows viewing or downloading them
  * - Emits events to close, edit, or respond to changes in subtasks
  * - Supports task deletion and date formatting
  * 
  * Dependencies:
  * - TaskService for task and subtask management
  * - ContactService for fetching contact details
+ * - UploadService for handling task images
  * - Angular Router for navigation
  */
 import { CommonModule } from '@angular/common';
@@ -257,7 +259,7 @@ export class TaskDetailsComponent {
       this.task.imageKey = updatedImages;
       this.taskService.updateTask(this.task.id, this.task);
       this.loadTaskImages();
-    }
+    };
     this.closeImageViewer();
   }
 

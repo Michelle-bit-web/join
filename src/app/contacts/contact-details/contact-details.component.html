@@ -23,9 +23,7 @@
           class="user-logo"
           [style.background-color]="getContactColor(contact.name)"
         >
-          <ng-container
-            *ngIf="getContactImage(contact) as image; else initials"
-          >
+          <ng-container *ngIf="getContactImage(contact) as image; else initials">
             <img [src]="image" [alt]="contact.name" class="contact-image" />
           </ng-container>
 

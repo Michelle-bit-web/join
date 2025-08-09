@@ -18,14 +18,7 @@
 import { Component } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { LoginHeaderComponent } from '../login-header/login-header.component';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  group
-} from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';

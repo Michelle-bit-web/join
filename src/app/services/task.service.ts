@@ -280,7 +280,6 @@ export class TaskService {
 
   private updateTaskImage(taskRef: any): void {
     updateDoc(taskRef, { imageKey: deleteField() })
-      .then(() => console.log('Image field deleted from task'))
       .catch(err => console.error('Failed to delete image from task:', err));
   }
 

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
   trigger,
-  state,
   style,
   transition,
   animate,
@@ -98,7 +97,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
   
   /** Flag to track first load for animation purposes */
-  private firstLoad = true;
+  firstLoad = true;
 
   /** Event emitted when user wants to return to contact list */
   @Output() backToList = new EventEmitter<void>();

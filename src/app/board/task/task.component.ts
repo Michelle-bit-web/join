@@ -28,7 +28,7 @@ import { Contact } from '../../services/contact.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
-import { SimpleChanges, OnChanges } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 
 @Component({
@@ -235,8 +235,8 @@ export class TaskComponent {
   }
 
   /**
-  * Returns a unique list of contacts (removes duplicates based on ID)
-  */
+   * Returns a unique list of contacts (removes duplicates based on ID)
+   */
   getAllUniqueContacts(): Contact[] {
     if (!this.contactList || this.contactList.length === 0) {
       return [];

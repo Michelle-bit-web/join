@@ -1,34 +1,15 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { TaskComponent } from './task/task.component';
-import {
-  trigger,
-  style,
-  transition,
-  animate,
-  AnimationEvent,
-} from '@angular/animations';
+import { trigger, style, transition, animate, AnimationEvent } from '@angular/animations';
 import { TaskDetailsComponent } from './task-details/task-details.component';
-import {
-  CdkDragDrop,
-  CdkDrag,
-  CdkDropList,
-  CdkDragMove,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDrag, CdkDropList, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Task } from '../services/task.service';
-import { TaskService } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 import { Subtask } from '../services/task.service';
 import { Subscription } from 'rxjs';
-import { ContactService } from '../services/contact.service';
 import { Contact } from '../services/contact.service';
 import { FormsModule } from '@angular/forms';
 import { AddTaskComponent } from '../add-task/add-task.component';
-import { Router } from '@angular/router';
 import { TaskListManager } from './task-list-manager';
 import { DragDropManager } from './drag-drop-manager';
 import { OverlayManager } from './overlay-manager';
@@ -95,15 +76,33 @@ import { OverlayManager } from './overlay-manager';
  */
 
 export class BoardComponent {
+  /** Current search term entered by the user. */
   searchTerm: string = '';
+
+  /** Subscription for task data updates. */
   unsubTask!: Subscription;
+
+  /** Subscription for subtask data updates. */
   unsubSubtask!: Subscription;
+
+  /** Subscription for contact data updates. */
   unsubContact!: Subscription;
+
+  /** List of subtasks for the current view or task. */
   subtaskList: Subtask[] = [];
+
+  /** List of contacts available in the system. */
   contactList: Contact[] = [];
+
+  /** Current task status used when creating or updating a task. */
   setTaskStatus: string = 'to-do';
+
+  /** Whether the "Back to Top" button should be displayed. */
   showBackToTop = false;
+
+  /** ID of the task whose context menu is currently open, or null if none. */
   openedMenuTaskId: string | null = null;
+
 
   /**
    * Getter for overlay states from OverlayManager
@@ -241,8 +240,7 @@ export class BoardComponent {
   }
 
   /**
-   * Sets the animation direction based on screen width.
-   * Used for responsive slide-in overlays.
+   * Sets the animation direction based on screen width. Used for responsive slide-in overlays.
    *
    * @param width - Current screen width.
    */
@@ -268,6 +266,7 @@ export class BoardComponent {
   onOverlayAnimationDone(event: AnimationEvent) {
     this.overlayManager.onOverlayAnimationDone(event);
   }
+  
   /**
    * Returns the delay for starting a drag action based on screen width.
    * Prevents accidental drags on small screens.
@@ -330,11 +329,11 @@ export class BoardComponent {
   }
 
   /**
-  * Returns the subtasks for a given task ID.
-  *
-  * @param taskId - The ID of the task to retrieve subtasks for.
-  * @returns Array of subtasks, or an empty array if none exist.
-  */
+   * Returns the subtasks for a given task ID.
+   *
+   * @param taskId - The ID of the task to retrieve subtasks for.
+   * @returns Array of subtasks, or an empty array if none exist.
+   */
   getSubtasksForTask(taskId: string | undefined): Subtask[] {
     return this.taskListManager.getSubtasksForTask(taskId);
   }

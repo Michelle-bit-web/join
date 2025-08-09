@@ -12,13 +12,53 @@ import { Task, TaskService } from '../services/task.service';
 })
 
 export class OverlayManager {
+  /**
+   * Direction for overlay slide-in animation based on screen size.
+   * @private
+   * @type {'right' | 'bottom'}
+   */
   private animationDirection: 'right' | 'bottom' = 'right';
+  
+  /**
+   * Visibility state of the overlay background.
+   * @private
+   * @type {boolean}
+   */
   private backgroundVisible = false;
+  
+  /**
+   * Visibility state of the overlay container.
+   * @private
+   * @type {boolean}
+   */
   private overlayVisible = false;
+  
+  /**
+   * Visibility state of the task details overlay.
+   * @private
+   * @type {boolean}
+   */
   private showTaskDetails = false;
+  
+  /**
+   * Visibility state of the add or edit task overlay.
+   * @private
+   * @type {boolean}
+   */
   private showAddOrEditTask: boolean = false;
+  
+  /**
+   * Currently selected task for viewing or editing.
+   * @private
+   * @type {Task | undefined}
+   */
   private selectedTask?: Task;
 
+  /**
+   * Creates an instance of OverlayManager.
+   * @param {Router} router - Angular Router service for navigation
+   * @param {TaskService} taskService - Service for task-related operations
+   */
   constructor(
     private router: Router,
     private taskService: TaskService
