@@ -41,6 +41,9 @@ export class UploadsComponent implements OnInit {
   /** Flag to control image viewer visibility */
   showImageViewer = false;
 
+  /** The index of the currently viewed image */
+  currentImageIndex = 0;
+
   /** Reference to the file input element */
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
 
@@ -293,9 +296,8 @@ export class UploadsComponent implements OnInit {
   * @param index - Index of image to display initially
   */
   openImageViewer(index: number) {
-    const imageUrls = this.uploadedImages.map(img => img.base64);
     this.showImageViewer = true;
-    console.log('Open image viewer for index:', index, 'with images:', imageUrls);
+    this.currentImageIndex = index;
   }
 
   /**

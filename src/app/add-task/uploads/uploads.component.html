@@ -171,6 +171,7 @@
   *ngIf="showImageViewer"
   [images]="getAllImageBase64()"
   [imageKeys]="getAllImageKeys()"
+  [startIndex]="currentImageIndex"
   [allowDelete]="true"
   (close)="closeImageViewer($event)"
   (deleteImage)="onDeleteImage($event)"
