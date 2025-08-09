@@ -116,7 +116,7 @@
         type="button"
         class="deadline"
         (click)="goToBoard()"
-        aria-label="Go to board - {{ nextDeadlineCount }} urgent tasks, next deadline {{ nextDeadlineDate | date : 'MMMM d, y' }}"
+        aria-label="Go to board - urgent tasks, next deadline"
       >
         <div class="svg-container">
           <svg
@@ -154,7 +154,7 @@
           type="button"
           class="board-tasks"
           (click)="goToBoard()"
-          aria-label="Go to board - {{ totalTaskCount }} total tasks"
+          aria-label="Go to board - total tasks"
         >
           <div class="info-text">
             <p class="counter" aria-hidden="true">{{ totalTaskCount }}</p>
@@ -168,7 +168,7 @@
           aria-label="Go to board - tasks in progress"
         >
           <div class="info-text">
-            <p class="counter" aria-hidden="true"></p>
+            <p class="counter" aria-hidden="true">{{ inProgressCount }}</p>
             <p class="task-info" aria-hidden="true">Tasks in Progress</p>
           </div>
         </button>
@@ -176,7 +176,7 @@
           type="button"
           class="await-feedback"
           (click)="goToBoard()"
-          aria-label="Go to board - {{ awaitingFeedbackCount }} tasks awaiting feedback"
+          aria-label="Go to board - tasks awaiting feedback"
         >
           <div class="info-text">
             <p class="counter" aria-hidden="true">{{ awaitingFeedbackCount }}</p>
