@@ -123,8 +123,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Authentication service for handling user registration, login, logout,
-guest access, profile updates, account deletion, and state tracking.</p>
+                <p>Authentication service for handling user operations and state tracking.</p>
 
             </p>
 
@@ -171,6 +170,11 @@ guest access, profile updates, account deletion, and state tracking.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createGuestUser" >createGuestUser</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Async</span>
                                 <a href="#deleteAccount" >deleteAccount</a>
                             </li>
@@ -183,10 +187,15 @@ guest access, profile updates, account deletion, and state tracking.</p>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#getErrorMessage" >getErrorMessage</a>
+                                <a href="#initializeAuthListener" >initializeAuthListener</a>
                             </li>
                             <li>
                                 <a href="#isLoggedIn" >isLoggedIn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveUserData" >saveUserData</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -222,7 +231,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(auth: Auth, firestore: Firestore, router: Router)</code>
+<code>constructor(auth: Auth, firestore: Firestore, router: Router, authErrorService: <a href="../injectables/AuthErrorService.html" target="_self">AuthErrorService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -233,7 +242,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Initializes the AuthService and subscribes to authentication state changes.</p>
+                            <div class="io-description"><p>Creates an instance of AuthService.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -260,7 +269,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
                                                     
                                                         <td>
                                                                 <ul>
-<li>Firebase Auth instance</li>
+<li>Firebase Authentication service</li>
 </ul>
 
                                                         </td>
@@ -278,7 +287,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
                                                     
                                                         <td>
                                                                 <ul>
-<li>Firebase Firestore instance</li>
+<li>Firebase Firestore database service</li>
 </ul>
 
                                                         </td>
@@ -296,7 +305,25 @@ guest access, profile updates, account deletion, and state tracking.</p>
                                                     
                                                         <td>
                                                                 <ul>
-<li>Angular Router for navigation</li>
+<li>Angular Router service for navigation</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>authErrorService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthErrorService.html" target="_self" >AuthErrorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for handling authentication error messages</li>
 </ul>
 
                                                         </td>
@@ -319,6 +346,52 @@ guest access, profile updates, account deletion, and state tracking.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createGuestUser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createGuestUser</b></span>
+                        <a href="#createGuestUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createGuestUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/services/auth.service.ts:153</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new guest user account with predefined credentials.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Result object indicating success/failure and optional error message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="deleteAccount"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -337,8 +410,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/services/auth.service.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/services/auth.service.ts:206</a></div>
                         </td>
                     </tr>
 
@@ -353,7 +426,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>A success status and optional error message</p>
+                                <p>Result object indicating success/failure and optional error message</p>
 
                             </div>
                 </td>
@@ -380,8 +453,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">src/app/services/auth.service.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/services/auth.service.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -396,7 +469,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The current user or null if not logged in</p>
+                                <p>Current Firebase user object or null if not authenticated</p>
 
                             </div>
                 </td>
@@ -425,8 +498,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/services/auth.service.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/services/auth.service.ts:179</a></div>
                         </td>
                     </tr>
 
@@ -441,7 +514,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The user&#39;s Firestore data or null if not found</p>
+                                <p>User data from Firestore or null if user not found</p>
 
                             </div>
                 </td>
@@ -452,76 +525,42 @@ guest access, profile updates, account deletion, and state tracking.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getErrorMessage"></a>
+                    <a name="initializeAuthListener"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>getErrorMessage</b></span>
-                        <a href="#getErrorMessage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>initializeAuthListener</b></span>
+                        <a href="#initializeAuthListener"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getErrorMessage(errorCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>initializeAuthListener()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="183"
-                                    class="link-to-prism">src/app/services/auth.service.ts:183</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/services/auth.service.ts:76</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Maps Firebase Auth error codes to human-readable error messages.</p>
+                        <div class="io-description"><p>Initializes the Firebase authentication state listener.
+Updates the current user subject when authentication state changes.</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>errorCode</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Firebase Auth error code</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>A string describing the error</p>
-
+                                
                             </div>
                 </td>
             </tr>
@@ -547,8 +586,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="166"
-                                    class="link-to-prism">src/app/services/auth.service.ts:166</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/services/auth.service.ts:190</a></div>
                         </td>
                     </tr>
 
@@ -563,7 +602,105 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>True if a user is signed in, otherwise false</p>
+                                <p>True if user is logged in, false otherwise</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveUserData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>saveUserData</b></span>
+                        <a href="#saveUserData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveUserData(user: User, displayName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/services/auth.service.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves user data to Firestore after successful registration.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                        <code>User</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Firebase user object</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>displayName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The user&#39;s display name</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when user data is saved</p>
 
                             </div>
                 </td>
@@ -592,8 +729,8 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/services/auth.service.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/services/auth.service.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -629,7 +766,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                                             <td>
                                                     <ul>
-<li>User&#39;s email</li>
+<li>User&#39;s email address</li>
 </ul>
 
                                             </td>
@@ -660,7 +797,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>A success status and optional error message</p>
+                                <p>Result object indicating success/failure and optional error message</p>
 
                             </div>
                 </td>
@@ -689,15 +826,16 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/services/auth.service.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/services/auth.service.ts:139</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Signs in as a guest user. If guest user does not exist, it will be created.</p>
+                        <div class="io-description"><p>Signs in as a guest user.
+Attempts to sign in with predefined guest credentials, creates guest account if it doesn&#39;t exist.</p>
 </div>
 
                         <div class="io-description">
@@ -705,7 +843,7 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>A success status and optional error message</p>
+                                <p>Result object indicating success/failure and optional error message</p>
 
                             </div>
                 </td>
@@ -734,21 +872,26 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/services/auth.service.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/services/auth.service.ts:170</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Signs out the currently authenticated user and redirects to the login page.</p>
+                        <div class="io-description"><p>Signs out the currently authenticated user.
+Redirects to login page after successful sign out.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when user is signed out</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -775,16 +918,15 @@ guest access, profile updates, account deletion, and state tracking.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/services/auth.service.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/services/auth.service.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Registers a new user with email, password, and display name.
-Stores user data in Firestore.</p>
+                        <div class="io-description"><p>Registers a new user with email, password, and display name.</p>
 </div>
 
                             <div class="io-description">
@@ -862,7 +1004,7 @@ Stores user data in Firestore.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>A success status and optional error message</p>
+                                <p>Result object indicating success/failure and optional error message</p>
 
                             </div>
                 </td>
@@ -894,10 +1036,16 @@ Stores user data in Firestore.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/auth.service.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/auth.service.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>BehaviorSubject that tracks whether authentication has been initialized.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -932,7 +1080,7 @@ Stores user data in Firestore.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable that emits true once Firebase Auth has finished initializing.</p>
+                    <div class="io-description"><p>Observable stream indicating whether authentication has been initialized.</p>
 </div>
                 </td>
             </tr>
@@ -964,13 +1112,13 @@ Stores user data in Firestore.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/services/auth.service.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/services/auth.service.ts:45</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable emitting the current authenticated Firebase user.</p>
+                    <div class="io-description"><p>Observable stream of the current authenticated user.</p>
 </div>
                 </td>
             </tr>
@@ -996,10 +1144,16 @@ Stores user data in Firestore.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/auth.service.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/services/auth.service.ts:31</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>BehaviorSubject that holds the current authenticated user state.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1010,25 +1164,11 @@ Stores user data in Firestore.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { 
-  Auth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  User,
-  onAuthStateChanged,
-  updateProfile,
-  deleteUser
-} from &#x27;@angular/fire/auth&#x27;;
-import { 
-  Firestore, 
-  doc, 
-  setDoc, 
-  getDoc, 
-  DocumentData 
-} from &#x27;@angular/fire/firestore&#x27;;
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User, onAuthStateChanged, updateProfile, deleteUser } from &#x27;@angular/fire/auth&#x27;;
+import { Firestore, doc, setDoc, getDoc } from &#x27;@angular/fire/firestore&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { AuthErrorService } from &#x27;./auth-error.service&#x27;;
 
 /**
  * Interface for user data stored in Firestore.
@@ -1041,38 +1181,64 @@ export interface UserData {
 }
 
 /**
- * Authentication service for handling user registration, login, logout,
- * guest access, profile updates, account deletion, and state tracking.
+ * Authentication service for handling user operations and state tracking.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
 export class AuthService {
-  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
-  private authInitialized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-
   /**
-   * Observable emitting the current authenticated Firebase user.
+   * BehaviorSubject that holds the current authenticated user state.
+   * @private
+   * @type {BehaviorSubject&lt;User | null&gt;}
+   */
+  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
+  
+  /**
+   * BehaviorSubject that tracks whether authentication has been initialized.
+   * @private
+   * @type {BehaviorSubject&lt;boolean&gt;}
+   */
+  private authInitialized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+  
+  /**
+   * Observable stream of the current authenticated user.
+   * @public
+   * @type {Observable&lt;User | null&gt;}
    */
   public currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
   
   /**
-   * Observable that emits true once Firebase Auth has finished initializing.
+   * Observable stream indicating whether authentication has been initialized.
+   * @public
+   * @type {Observable&lt;boolean&gt;}
    */
   public authInitialized$: Observable&lt;boolean&gt; &#x3D; this.authInitialized.asObservable();
 
   /**
-   * Initializes the AuthService and subscribes to authentication state changes.
-   * @param auth - Firebase Auth instance
-   * @param firestore - Firebase Firestore instance
-   * @param router - Angular Router for navigation
+   * Creates an instance of AuthService.
+   * @param {Auth} auth - Firebase Authentication service
+   * @param {Firestore} firestore - Firebase Firestore database service
+   * @param {Router} router - Angular Router service for navigation
+   * @param {AuthErrorService} authErrorService - Service for handling authentication error messages
    */
   constructor(
     private auth: Auth,
     private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private authErrorService: AuthErrorService
   ) {
+    this.initializeAuthListener();
+  }
+
+  /**
+   * Initializes the Firebase authentication state listener.
+   * Updates the current user subject when authentication state changes.
+   * @private
+   * @returns {void}
+   */
+  private initializeAuthListener(): void {
     onAuthStateChanged(this.auth, (user) &#x3D;&gt; {
       this.currentUserSubject.next(user);
       if (!this.authInitialized.value) {
@@ -1083,76 +1249,88 @@ export class AuthService {
 
   /**
    * Registers a new user with email, password, and display name.
-   * Stores user data in Firestore.
-   * @param email - User&#x27;s email address
-   * @param password - User&#x27;s password
-   * @param displayName - User&#x27;s display name
-   * @returns A success status and optional error message
+   * @param {string} email - User&#x27;s email address
+   * @param {string} password - User&#x27;s password
+   * @param {string} displayName - User&#x27;s display name
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signUp(email: string, password: string, displayName: string): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
       const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, email, password);
       const user &#x3D; userCredential.user;
       await updateProfile(user, { displayName });
-      const userData: UserData &#x3D; {
-        uid: user.uid,
-        email: user.email!,
-        displayName: displayName,
-        createdAt: new Date()
-      };
-      await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
+      await this.saveUserData(user, displayName);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
 
   /**
+   * Saves user data to Firestore after successful registration.
+   * @private
+   * @param {User} user - The Firebase user object
+   * @param {string} displayName - The user&#x27;s display name
+   * @returns {Promise&lt;void&gt;} Promise that resolves when user data is saved
+   */
+  private async saveUserData(user: User, displayName: string): Promise&lt;void&gt; {
+    const userData: UserData &#x3D; {
+      uid: user.uid, email: user.email!,
+      displayName: displayName, createdAt: new Date()
+    };
+    await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
+  }
+
+  /**
    * Signs in a user with email and password.
-   * @param email - User&#x27;s email
-   * @param password - User&#x27;s password
-   * @returns A success status and optional error message
+   * @param {string} email - User&#x27;s email address
+   * @param {string} password - User&#x27;s password
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signIn(email: string, password: string): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
 
   /**
-   * Signs in as a guest user. If guest user does not exist, it will be created.
-   * @returns A success status and optional error message
+   * Signs in as a guest user.
+   * Attempts to sign in with predefined guest credentials, creates guest account if it doesn&#x27;t exist.
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signInAsGuest(): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
-      const guestEmail &#x3D; &#x27;guest@join.com&#x27;;
-      const guestPassword &#x3D; &#x27;Guest123!&#x27;;
-      await signInWithEmailAndPassword(this.auth, guestEmail, guestPassword);
+      await signInWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
       return { success: true };
     } catch (error: any) {
-      try {
-        const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
-        const user &#x3D; userCredential.user;
-        await updateProfile(user, { displayName: &#x27;Guest User&#x27; });
-        const userData: UserData &#x3D; {
-          uid: user.uid,
-          email: user.email!,
-          displayName: &#x27;Guest User&#x27;,
-          createdAt: new Date()
-        };
-        await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
-        return { success: true };
-      } catch (createError: any) {
-        return { success: false, message: this.getErrorMessage(createError.code) };
-      }
+      return await this.createGuestUser();
     }
   }
 
   /**
-   * Signs out the currently authenticated user and redirects to the login page.
+   * Creates a new guest user account with predefined credentials.
+   * @private
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
+   */
+  private async createGuestUser(): Promise&lt;{ success: boolean; message?: string }&gt; {
+    try {
+      const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
+      const user &#x3D; userCredential.user;
+      await updateProfile(user, { displayName: &#x27;Guest User&#x27; });
+      await this.saveUserData(user, &#x27;Guest User&#x27;);
+      return { success: true };
+    } catch (createError: any) {
+      return { success: false, message: this.authErrorService.getErrorMessage(createError.code) };
+    }
+  }
+
+  /**
+   * Signs out the currently authenticated user.
+   * Redirects to login page after successful sign out.
+   * @returns {Promise&lt;void&gt;} Promise that resolves when user is signed out
    */
   async signOutUser(): Promise&lt;void&gt; {
     await signOut(this.auth);
@@ -1161,7 +1339,7 @@ export class AuthService {
 
   /**
    * Retrieves the current user&#x27;s data from Firestore.
-   * @returns The user&#x27;s Firestore data or null if not found
+   * @returns {Promise&lt;UserData | null&gt;} User data from Firestore or null if user not found
    */
   async getCurrentUserData(): Promise&lt;UserData | null&gt; {
     const currentUser &#x3D; this.auth.currentUser;
@@ -1172,7 +1350,7 @@ export class AuthService {
 
   /**
    * Checks whether a user is currently authenticated.
-   * @returns True if a user is signed in, otherwise false
+   * @returns {boolean} True if user is logged in, false otherwise
    */
   isLoggedIn(): boolean {
     return this.auth.currentUser !&#x3D;&#x3D; null;
@@ -1180,43 +1358,15 @@ export class AuthService {
 
   /**
    * Gets the current authenticated Firebase user.
-   * @returns The current user or null if not logged in
+   * @returns {User | null} Current Firebase user object or null if not authenticated
    */
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
 
   /**
-   * Maps Firebase Auth error codes to human-readable error messages.
-   * @param errorCode - Firebase Auth error code
-   * @returns A string describing the error
-   */
-  private getErrorMessage(errorCode: string): string {
-    switch (errorCode) {
-      case &#x27;auth/user-not-found&#x27;:
-        return &#x27;User not found.&#x27;;
-      case &#x27;auth/wrong-password&#x27;:
-        return &#x27;Wrong password.&#x27;;
-      case &#x27;auth/email-already-in-use&#x27;:
-        return &#x27;Email address is already in use.&#x27;;
-      case &#x27;auth/weak-password&#x27;:
-        return &#x27;Password is too weak.&#x27;;
-      case &#x27;auth/invalid-email&#x27;:
-        return &#x27;Invalid email address.&#x27;;
-      case &#x27;auth/user-disabled&#x27;:
-        return &#x27;User account has been disabled.&#x27;;
-      case &#x27;auth/too-many-requests&#x27;:
-        return &#x27;Too many login attempts. Please try again later.&#x27;;
-      case &#x27;auth/network-request-failed&#x27;:
-        return &#x27;Network error. Please check your internet connection.&#x27;;
-      default:
-        return &#x27;An error occurred. Please try again.&#x27;;
-    }
-  }
-
-  /**
    * Deletes the currently authenticated user account.
-   * @returns A success status and optional error message
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async deleteAccount(): Promise&lt;{ success: boolean; message?: string }&gt; {
     const user &#x3D; this.auth.currentUser;
@@ -1227,11 +1377,10 @@ export class AuthService {
       await deleteUser(user);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

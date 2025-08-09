@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >TaskService</li>
+  <li class="breadcrumb-item" >AddTaskService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/task.service.ts</code>
+            <code>src/app/add-task/add-task.service.ts</code>
         </p>
 
 
@@ -123,8 +123,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service responsible for managing tasks and subtasks
-stored in Firestore.</p>
+                <p>Service for handling complex AddTask component operations.</p>
 
             </p>
 
@@ -134,21 +133,6 @@ stored in Firestore.</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#editingTask" >editingTask</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -159,75 +143,78 @@ stored in Firestore.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#addSubtask" >addSubtask</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#addTask" >addTask</a>
+                                <a href="#addNewTask" >addNewTask</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#buildSubtaskJson" >buildSubtaskJson</a>
+                                <a href="#buildNewTask" >buildNewTask</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#buildTaskJson" >buildTaskJson</a>
+                                <a href="#buildUpdatedTask" >buildUpdatedTask</a>
                             </li>
                             <li>
-                                <a href="#capitalize" >capitalize</a>
+                                <a href="#cleanupOnClose" >cleanupOnClose</a>
                             </li>
                             <li>
-                                <a href="#clearEditingTask" >clearEditingTask</a>
+                                <a href="#clearUploadedImages" >clearUploadedImages</a>
                             </li>
                             <li>
-                                <a href="#convertDate" >convertDate</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#enterEditMode" >enterEditMode</a>
                             </li>
                             <li>
-                                <a href="#deleteImageFromTask" >deleteImageFromTask</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleImageUpdates" >handleImageUpdates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadImagesIfAvailable" >loadImagesIfAvailable</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#populateFormWithTaskData" >populateFormWithTaskData</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteSubtask" >deleteSubtask</a>
+                                <a href="#processTaskCreation" >processTaskCreation</a>
+                            </li>
+                            <li>
+                                <a href="#resetFormData" >resetFormData</a>
+                            </li>
+                            <li>
+                                <a href="#resetManagers" >resetManagers</a>
+                            </li>
+                            <li>
+                                <a href="#resetTaskState" >resetTaskState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveTask" >saveTask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveTaskWithSuccessFeedback" >saveTaskWithSuccessFeedback</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveUploadedImages" >saveUploadedImages</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteTask" >deleteTask</a>
+                                <a href="#setupEditMode" >setupEditMode</a>
                             </li>
                             <li>
-                                <a href="#formatDate" >formatDate</a>
-                            </li>
-                            <li>
-                                <a href="#getCleanJson" >getCleanJson</a>
-                            </li>
-                            <li>
-                                <a href="#getEditingTask" >getEditingTask</a>
-                            </li>
-                            <li>
-                                <a href="#getSingleTaskRef" >getSingleTaskRef</a>
-                            </li>
-                            <li>
-                                <a href="#getSubtasks" >getSubtasks</a>
-                            </li>
-                            <li>
-                                <a href="#getSubtasksRef" >getSubtasksRef</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#getTaskById" >getTaskById</a>
-                            </li>
-                            <li>
-                                <a href="#getTasks" >getTasks</a>
-                            </li>
-                            <li>
-                                <a href="#getTasksRef" >getTasksRef</a>
-                            </li>
-                            <li>
-                                <a href="#setEditingTask" >setEditingTask</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updateSubtask" >updateSubtask</a>
+                                <a href="#updateSubtasks" >updateSubtasks</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -235,7 +222,11 @@ stored in Firestore.</p>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#updateTaskImage" >updateTaskImage</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateTaskData" >updateTaskData</a>
+                            </li>
+                            <li>
+                                <a href="#validateForm" >validateForm</a>
                             </li>
                         </ul>
                     </td>
@@ -255,17 +246,19 @@ stored in Firestore.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(firestore: Firestore)</code>
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>, formValidator: <a href="../injectables/FormValidatorService.html" target="_self">FormValidatorService</a>, taskDataService: <a href="../injectables/TaskDataService.html" target="_self">TaskDataService</a>, router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/add-task/add-task.service.ts:14</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of AddTaskService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -274,20 +267,99 @@ stored in Firestore.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>firestore</td>
+                                                        <td>taskService</td>
                                                   
                                                         <td>
-                                                                    <code>Firestore</code>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Service for task-related operations and data access</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for handling image uploads and storage</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>formValidator</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormValidatorService.html" target="_self" >FormValidatorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for validating form data</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>taskDataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskDataService.html" target="_self" >TaskDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for building and populating task objects</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Angular Router service for navigation</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -307,616 +379,34 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addSubtask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>addSubtask</b></span>
-                        <a href="#addSubtask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addSubtask(ColId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtask: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/services/task.service.ts:178</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Adds a subtask to a specific task&#39;s subcollection.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>ColId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>subtask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The subtask to add.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;Subtask | null&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The created subtask with ID, or null on failure.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="addTask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>addTask</b></span>
-                        <a href="#addTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addTask(newTask: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/services/task.service.ts:160</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Adds a new task to Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>newTask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The task to be added.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Promise&lt;Task | null&gt;</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The created task including its generated ID, or null on failure.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="buildSubtaskJson"></a>
+                    <a name="addNewTask"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>buildSubtaskJson</b></span>
-                        <a href="#buildSubtaskJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildSubtaskJson(updated: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="259"
-                                    class="link-to-prism">src/app/services/task.service.ts:259</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="buildTaskJson"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>buildTaskJson</b></span>
-                        <a href="#buildTaskJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildTaskJson(updated: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="246"
-                                    class="link-to-prism">src/app/services/task.service.ts:246</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="capitalize"></a>
-                    <span class="name">
-                        <span ><b>capitalize</b></span>
-                        <a href="#capitalize"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>capitalize(text: string | undefined)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="342"
-                                    class="link-to-prism">src/app/services/task.service.ts:342</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Capitalizes the first letter of a string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>text</td>
-                                            <td>
-                                                        <code>string | undefined</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The string to capitalize.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Capitalized string or empty string if undefined.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="clearEditingTask"></a>
-                    <span class="name">
-                        <span ><b>clearEditingTask</b></span>
-                        <a href="#clearEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>clearEditingTask()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="332"
-                                    class="link-to-prism">src/app/services/task.service.ts:332</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Clears the currently edited task.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="convertDate"></a>
-                    <span class="name">
-                        <span ><b>convertDate</b></span>
-                        <a href="#convertDate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>convertDate(date: Timestamp | Date)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="292"
-                                    class="link-to-prism">src/app/services/task.service.ts:292</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Converts a Firestore Timestamp or Date object to a formatted string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>date</td>
-                                            <td>
-                                                        <code>Timestamp | Date</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The Timestamp or Date to convert.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>A formatted date string (<code>dd/mm/yyyy</code>).</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteImageFromTask"></a>
-                    <span class="name">
-                        <span ><b>deleteImageFromTask</b></span>
-                        <a href="#deleteImageFromTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>deleteImageFromTask(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/services/task.service.ts:272</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Deletes the imageKey field from Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>task</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to delete the imageKey from.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteSubtask"></a>
-                    <span class="name">
                             <span class="modifier">Async</span>
-                        <span ><b>deleteSubtask</b></span>
-                        <a href="#deleteSubtask"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>addNewTask</b></span>
+                        <a href="#addNewTask"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteSubtask(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtaskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>addNewTask(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/services/task.service.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:203</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deletes a subtask from a task&#39;s subcollection.</p>
+                        <div class="io-description"><p>Creates and saves a new task with subtasks.</p>
 </div>
 
                             <div class="io-description">
@@ -933,9 +423,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskId</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -945,25 +435,7 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The parent task ID.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>subtaskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The subtask ID to delete.</li>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
@@ -976,7 +448,8 @@ stored in Firestore.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Promise that resolves when new task is created</p>
+
                             </div>
                 </td>
             </tr>
@@ -986,33 +459,33 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteTask"></a>
+                    <a name="buildNewTask"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>deleteTask</b></span>
-                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>buildNewTask</b></span>
+                        <a href="#buildNewTask"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteTask(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>buildNewTask(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/services/task.service.ts:228</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:235</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deletes a task from Firestore.</p>
+                        <div class="io-description"><p>Builds a new task object from component data.</p>
 </div>
 
                             <div class="io-description">
@@ -1029,9 +502,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>docId</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -1041,7 +514,7 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The ID of the task to delete.</li>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
@@ -1050,11 +523,12 @@ stored in Firestore.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The newly built task object</p>
+
                             </div>
                 </td>
             </tr>
@@ -1064,452 +538,33 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="formatDate"></a>
+                    <a name="buildUpdatedTask"></a>
                     <span class="name">
-                        <span ><b>formatDate</b></span>
-                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>formatDate(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/services/task.service.ts:306</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Formats a Date object into a <code>dd/mm/yyyy</code> string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>date</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The Date to format.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCleanJson"></a>
-                    <span class="name">
-                        <span ><b>getCleanJson</b></span>
-                        <a href="#getCleanJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCleanJson(updated: Task | Subtask)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="237"
-                                    class="link-to-prism">src/app/services/task.service.ts:237</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a plain object representation of a Task or Subtask for Firestore updates.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                        <code>Task | Subtask</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The object to clean.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getEditingTask"></a>
-                    <span class="name">
-                        <span ><b>getEditingTask</b></span>
-                        <a href="#getEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getEditingTask()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="325"
-                                    class="link-to-prism">src/app/services/task.service.ts:325</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the task currently being edited.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task | null</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSingleTaskRef"></a>
-                    <span class="name">
-                        <span ><b>getSingleTaskRef</b></span>
-                        <a href="#getSingleTaskRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSingleTaskRef(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/services/task.service.ts:93</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a document reference for a specific task by ID.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>docId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The document ID of the task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSubtasks"></a>
-                    <span class="name">
-                        <span ><b>getSubtasks</b></span>
-                        <a href="#getSubtasks"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSubtasks(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/services/task.service.ts:141</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Observes the subtasks of a given task in real-time.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;Subtask[]&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSubtasksRef"></a>
-                    <span class="name">
-                        <span ><b>getSubtasksRef</b></span>
-                        <a href="#getSubtasksRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSubtasksRef(subColId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/services/task.service.ts:84</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a reference to the &#39;subtasks&#39; subcollection for a given task.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>subColId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The document ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTaskById"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>getTaskById</b></span>
-                        <a href="#getTaskById"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>buildUpdatedTask</b></span>
+                        <a href="#buildUpdatedTask"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getTaskById(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>buildUpdatedTask(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/services/task.service.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:293</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets a single task by ID from Firestore.</p>
+                        <div class="io-description"><p>Builds an updated task object for existing task modification.</p>
 </div>
 
                             <div class="io-description">
@@ -1526,9 +581,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskId</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -1538,7 +593,7 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The ID of the task to retrieve.</li>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
@@ -1547,11 +602,11 @@ stored in Firestore.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Promise&lt;Task | null&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Promise resolving to the task or null if not found.</p>
+                                <p>The updated task object</p>
 
                             </div>
                 </td>
@@ -1562,94 +617,16 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getTasks"></a>
+                    <a name="cleanupOnClose"></a>
                     <span class="name">
-                        <span ><b>getTasks</b></span>
-                        <a href="#getTasks"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>cleanupOnClose</b></span>
+                        <a href="#cleanupOnClose"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getTasks()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/services/task.service.ts:100</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Observes all tasks in Firestore and emits updates in real-time.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Observable&lt;Task[]&gt;</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTasksRef"></a>
-                    <span class="name">
-                        <span ><b>getTasksRef</b></span>
-                        <a href="#getTasksRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getTasksRef()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/services/task.service.ts:75</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a reference to the &#39;tasks&#39; Firestore collection.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setEditingTask"></a>
-                    <span class="name">
-                        <span ><b>setEditingTask</b></span>
-                        <a href="#setEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setEditingTask(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+<code>cleanupOnClose(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
@@ -1657,14 +634,14 @@ stored in Firestore.</p>
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/services/task.service.ts:318</a></div>
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:318</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the currently edited task.</p>
+                        <div class="io-description"><p>Cleans up resources when closing overlay.</p>
 </div>
 
                             <div class="io-description">
@@ -1681,9 +658,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>task</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -1693,7 +670,7 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The task being edited.</li>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
@@ -1716,33 +693,31 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateSubtask"></a>
+                    <a name="clearUploadedImages"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>updateSubtask</b></span>
-                        <a href="#updateSubtask"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>clearUploadedImages</b></span>
+                        <a href="#clearUploadedImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateSubtask(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtaskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updatedSubtask: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
+<code>clearUploadedImages(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/services/task.service.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:128</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates a subtask document in Firestore.</p>
+                        <div class="io-description"><p>Clears uploaded images from task and component.</p>
 </div>
 
                             <div class="io-description">
@@ -1759,9 +734,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskId</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -1771,15 +746,93 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The parent task ID.</li>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enterEditMode"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>enterEditMode</b></span>
+                        <a href="#enterEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>enterEditMode(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Enters edit mode by setting component flags and task reference.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                                <td>subtaskId</td>
+                                                <td>task</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
                                             </td>
 
                                             <td>
@@ -1789,15 +842,94 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The subtask document ID.</li>
+<li>The task being edited</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleImageUpdates"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>handleImageUpdates</b></span>
+                        <a href="#handleImageUpdates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleImageUpdates(previousKeys: string[], currentImages: any[], currentKeys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles adding new images and removing deleted images.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>previousKeys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of previous image keys</li>
 </ul>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                                <td>updatedSubtask</td>
+                                                <td>currentImages</td>
                                             <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
+                                                        <code>any[]</code>
                                             </td>
 
                                             <td>
@@ -1807,7 +939,25 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The updated subtask data.</li>
+<li>Array of current image objects</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>currentKeys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of current image keys</li>
 </ul>
 
                                             </td>
@@ -1820,7 +970,926 @@ stored in Firestore.</p>
 
                         </div>
                             <div class="io-description">
+                                <p>Promise that resolves when image updates are complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadImagesIfAvailable"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadImagesIfAvailable</b></span>
+                        <a href="#loadImagesIfAvailable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadImagesIfAvailable(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads images if the task has associated image keys.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
                                 
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task that may contain images</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateFormWithTaskData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>populateFormWithTaskData</b></span>
+                        <a href="#populateFormWithTaskData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateFormWithTaskData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Populates the form with existing task data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task data to populate from</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when form is populated</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processTaskCreation"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>processTaskCreation</b></span>
+                        <a href="#processTaskCreation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processTaskCreation(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Processes task creation with error handling.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when task processing is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetFormData"></a>
+                    <span class="name">
+                        <span ><b>resetFormData</b></span>
+                        <a href="#resetFormData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetFormData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resets form data to default state.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetManagers"></a>
+                    <span class="name">
+                        <span ><b>resetManagers</b></span>
+                        <a href="#resetManagers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetManagers(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears all manager selections.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetTaskState"></a>
+                    <span class="name">
+                        <span ><b>resetTaskState</b></span>
+                        <a href="#resetTaskState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetTaskState(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resets task-related flags and IDs.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveTask"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>saveTask</b></span>
+                        <a href="#saveTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveTask(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines whether to update existing task or create new one.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when task is saved</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveTaskWithSuccessFeedback"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>saveTaskWithSuccessFeedback</b></span>
+                        <a href="#saveTaskWithSuccessFeedback"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveTaskWithSuccessFeedback(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves task and provides success feedback to user.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when task is saved and feedback shown</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveUploadedImages"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>saveUploadedImages</b></span>
+                        <a href="#saveUploadedImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveUploadedImages(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves all uploaded images to the upload service.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when all images are saved</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setupEditMode"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>setupEditMode</b></span>
+                        <a href="#setupEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setupEditMode(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets up edit mode with task data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task to edit</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when setup is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateSubtasks"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateSubtasks</b></span>
+                        <a href="#updateSubtasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateSubtasks(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="306"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:306</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Synchronizes subtasks by deleting removed ones and updating existing ones.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when subtasks are synchronized</p>
+
                             </div>
                 </td>
             </tr>
@@ -1841,22 +1910,22 @@ stored in Firestore.</p>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTask(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updatedTask: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                    <code>updateTask(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/services/task.service.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:247</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates a task document in Firestore.</p>
+                        <div class="io-description"><p>Updates an existing task with new data and handles image changes.</p>
 </div>
 
                             <div class="io-description">
@@ -1873,9 +1942,9 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>docId</td>
+                                                <td>component</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -1885,25 +1954,7 @@ stored in Firestore.</p>
 
                                             <td>
                                                     <ul>
-<li>The ID of the task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>updatedTask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The updated task data.</li>
+<li>The AddTask component instance</li>
 </ul>
 
                                             </td>
@@ -1916,7 +1967,8 @@ stored in Firestore.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Promise that resolves when task is updated</p>
+
                             </div>
                 </td>
             </tr>
@@ -1926,32 +1978,35 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateTaskImage"></a>
+                    <a name="updateTaskData"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>updateTaskImage</b></span>
-                        <a href="#updateTaskImage"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateTaskData</b></span>
+                        <a href="#updateTaskData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTaskImage(taskRef: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    <code>updateTaskData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, currentImageKeys: string[])</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="281"
-                                    class="link-to-prism">src/app/services/task.service.ts:281</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:278</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates task data with new information and image keys.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1962,11 +2017,12 @@ stored in Firestore.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskRef</td>
+                                                <td>component</td>
                                             <td>
                                                             <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
@@ -1976,63 +2032,121 @@ stored in Firestore.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>currentImageKeys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of current image keys</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Promise that resolves when task data is updated</p>
+
                             </div>
                 </td>
             </tr>
         </tbody>
     </table>
-</section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="editingTask"></a>
+                    <a name="validateForm"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>editingTask</b></span>
-                        <a href="#editingTask"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>validateForm</b></span>
+                        <a href="#validateForm"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Task.html" target="_self" >Task | null</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
-                        </td>
-                    </tr>
-
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>A task marked as being edited</p>
-</div>
+<code>validateForm(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:140</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validates form and sets validation errors.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The AddTask component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if validation errors exist, false otherwise</p>
+
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -2042,349 +2156,328 @@ stored in Firestore.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, Timestamp } from &#x27;@angular/fire/firestore&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Task, TaskService } from &#x27;../services/task.service&#x27;;
+import { UploadService } from &#x27;../services/upload.service&#x27;;
+import { FormValidatorService } from &#x27;./form-validator.service&#x27;;
+import { TaskDataService } from &#x27;./task-data.service&#x27;;
 
 /**
- * Represents a task in the system.
- */
-export interface Task {
-  /** Firestore-generated ID (optional when creating a task) */
-  id?: string;
-
-  /** Title of the task */
-  title: string;
-
-  /** Optional description */
-  description?: string;
-
-  /**
-   * Date of the task; may be a native Date object or Firestore Timestamp.
-   * Firestore stores it as a Timestamp and it needs conversion after reading.
-   */
-  date: Date | Timestamp;
-
-  /** Priority level of the task */
-  priority: &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;;
-
-  /** Current status of the task */
-  status: string;
-
-  /** Optional list of user IDs assigned to the task */
-  assignedTo?: string[];
-
-  /** Task category */
-  category: &#x27;technical&#x27; | &#x27;user story&#x27;;
-
-  /** Optional array of subtasks (retrieved separately as subcollection) */
-  subtask?: Subtask[];
-
-  /** Optional array of imageKeys */
-  imageKey?: string[];
-}
-
-/**
- * Represents a subtask belonging to a task.
- */
-export interface Subtask {
-  /** Firestore-generated ID (optional when creating) */
-  id?: string;
-
-  /** Title or label of the subtask */
-  title: string;
-
-  /** Completion status */
-  isCompleted: boolean;
-}
-
-/**
- * Service responsible for managing tasks and subtasks
- * stored in Firestore.
+ * Service for handling complex AddTask component operations.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-
-export class TaskService {
-
-  /** A task marked as being edited */
-  private editingTask: Task | null &#x3D; null;
-
-  constructor(private firestore: Firestore) { }
+export class AddTaskService {
 
   /**
-   * Returns a reference to the &#x27;tasks&#x27; Firestore collection.
+   * Creates an instance of AddTaskService.
+   * @param {TaskService} taskService - Service for task-related operations and data access
+   * @param {UploadService} uploadService - Service for handling image uploads and storage
+   * @param {FormValidatorService} formValidator - Service for validating form data
+   * @param {TaskDataService} taskDataService - Service for building and populating task objects
+   * @param {Router} router - Angular Router service for navigation
    */
-  getTasksRef() {
-    return collection(this.firestore, &#x27;tasks&#x27;);
+  constructor(
+    private taskService: TaskService,
+    private uploadService: UploadService,
+    private formValidator: FormValidatorService,
+    private taskDataService: TaskDataService,
+    private router: Router
+  ) { }
+
+  /**
+   * Sets up edit mode with task data.
+   * @param {any} component - The AddTask component instance
+   * @param {Task} task - The task to edit
+   * @returns {Promise&lt;void&gt;} Promise that resolves when setup is complete
+   */
+  async setupEditMode(component: any, task: Task): Promise&lt;void&gt; {
+    this.enterEditMode(component, task);
+    await this.populateFormWithTaskData(component, task);
+    this.loadImagesIfAvailable(component, task);
+    this.taskService.clearEditingTask();
   }
 
   /**
-   * Returns a reference to the &#x27;subtasks&#x27; subcollection for a given task.
-   * 
-   * @param subColId - The document ID of the parent task.
+   * Enters edit mode by setting component flags and task reference.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @param {Task} task - The task being edited
+   * @returns {void}
    */
-  getSubtasksRef(subColId: string) {
-    return collection(this.getTasksRef(), subColId, &#x27;subtasks&#x27;);
+  private enterEditMode(component: any, task: Task): void {
+    component.isEditingMode &#x3D; true;
+    component.editingTaskId &#x3D; task.id;
+    component.editingTask &#x3D; task;
   }
 
   /**
-   * Returns a document reference for a specific task by ID.
-   * 
-   * @param docId - The document ID of the task.
+   * Populates the form with existing task data.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @param {Task} task - The task data to populate from
+   * @returns {Promise&lt;void&gt;} Promise that resolves when form is populated
    */
-  getSingleTaskRef(docId: string) {
-    return doc(collection(this.firestore, &#x27;tasks&#x27;), docId);
+  private async populateFormWithTaskData(component: any, task: Task): Promise&lt;void&gt; {
+    component.originalTaskStatus &#x3D; await this.taskDataService.populateFromTask(
+      task, component.formData, component.priorityManager,
+      component.contactManager, component.subtaskManager, component.contacts
+    ) as &#x27;to-do&#x27; | &#x27;in-progress&#x27; | &#x27;await-feedback&#x27; | &#x27;done&#x27;;
+    if (task.category) {
+      component.categoryManager.setSelectedCategory(task.category);
+    }
   }
 
   /**
-   * Observes all tasks in Firestore and emits updates in real-time.
+   * Loads images if the task has associated image keys.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @param {Task} task - The task that may contain images
+   * @returns {void}
    */
-  getTasks(): Observable&lt;Task[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getTasksRef(), snapshot &#x3D;&gt; {
-        const tasks: Task[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          tasks.push({ id: doc.id, ...doc.data() } as Task);
-        });
-        observer.next(tasks);
-      }, error &#x3D;&gt; observer.error(error));
-      return () &#x3D;&gt; unsubscribe();
-    });
+  private loadImagesIfAvailable(component: any, task: Task): void {
+    if (task.imageKey &amp;&amp; task.imageKey.length &gt; 0) {
+      component.loadImages();
+    }
   }
 
   /**
-   * Gets a single task by ID from Firestore.
-   * 
-   * @param taskId - The ID of the task to retrieve.
-   * @returns Promise resolving to the task or null if not found.
+   * Resets form data to default state.
+   * @param {any} component - The AddTask component instance
+   * @returns {void}
    */
-  async getTaskById(taskId: string): Promise&lt;Task | null&gt; {
+  resetFormData(component: any): void {
+    component.formData &#x3D; { title: &#x27;&#x27;, description: &#x27;&#x27;, dueDate: &#x27;&#x27; };
+    component.priorityManager.selectedPriority &#x3D; &#x27;medium&#x27;;
+    component.showSuccessMessage &#x3D; false;
+  }
+
+  /**
+   * Resets task-related flags and IDs.
+   * @param {any} component - The AddTask component instance
+   * @returns {void}
+   */
+  resetTaskState(component: any): void {
+    component.isCreatingTask &#x3D; false;
+    component.isEditingMode &#x3D; false;
+    component.editingTaskId &#x3D; undefined;
+    component.originalTaskStatus &#x3D; &#x27;to-do&#x27;;
+    component.subtaskManager.originalSubtasks &#x3D; [];
+  }
+
+  /**
+   * Clears all manager selections.
+   * @param {any} component - The AddTask component instance
+   * @returns {void}
+   */
+  resetManagers(component: any): void {
+    component.contactManager.clearAll();
+    component.categoryManager.clearAll();
+    component.subtaskManager.clearAll();
+  }
+
+  /**
+   * Clears uploaded images from task and component.
+   * @param {any} component - The AddTask component instance
+   * @returns {void}
+   */
+  clearUploadedImages(component: any): void {
+    component.taskImages &#x3D; [];
+    if (component.uploadsComponent) {
+      component.uploadsComponent.clearImages();
+    }
+  }
+
+  /**
+   * Validates form and sets validation errors.
+   * @param {any} component - The AddTask component instance
+   * @returns {boolean} True if validation errors exist, false otherwise
+   */
+  validateForm(component: any): boolean {
+    if (this.formValidator.hasFormErrors(component.formData, component.categoryManager)) {
+      component.validationErrors &#x3D; this.formValidator.validateForm(
+        component.formData, component.categoryManager
+      );
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Processes task creation with error handling.
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when task processing is complete
+   */
+  async processTaskCreation(component: any): Promise&lt;void&gt; {
+    component.isCreatingTask &#x3D; true;
     try {
-      const docRef &#x3D; this.getSingleTaskRef(taskId);
-      const docSnap &#x3D; await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() } as Task;
-      } else {
-        console.warn(&#x60;Task with ID ${taskId} not found&#x60;);
-        return null;
-      }
+      component.taskImages &#x3D; component.uploadsComponent.getImageKeys();
+      await this.saveTaskWithSuccessFeedback(component);
     } catch (error) {
-      console.error(&#x27;Error getting task by ID:&#x27;, error);
-      return null;
+      console.error(&#x27;Error while creating/updating task:&#x27;, error);
+    } finally {
+      component.isCreatingTask &#x3D; false;
     }
   }
 
   /**
-   * Observes the subtasks of a given task in real-time.
-   * 
-   * @param taskId - The ID of the parent task.
+   * Saves task and provides success feedback to user.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when task is saved and feedback shown
    */
-  getSubtasks(taskId: string): Observable&lt;Subtask[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getSubtasksRef(taskId), snapshot &#x3D;&gt; {
-        const subtasks: Subtask[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          subtasks.push({ id: doc.id, ...doc.data() } as Subtask);
-        });
-        observer.next(subtasks);
-      }, error &#x3D;&gt; observer.error(error));
-      return () &#x3D;&gt; unsubscribe();
-    });
+  private async saveTaskWithSuccessFeedback(component: any): Promise&lt;void&gt; {
+    await this.saveTask(component);
+    component.taskAdded.emit(&#x27;added&#x27;);
+    component.showSuccessMessage &#x3D; true;
+    setTimeout(() &#x3D;&gt; {
+      component.clearForm();
+      this.router.navigate([&#x27;/board&#x27;]);
+    }, 2000);
   }
 
   /**
-   * Adds a new task to Firestore.
-   * 
-   * @param newTask - The task to be added.
-   * @returns The created task including its generated ID, or null on failure.
+   * Determines whether to update existing task or create new one.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when task is saved
    */
-  async addTask(newTask: Task): Promise&lt;Task | null&gt; {
-    try {
-      const tasksRef &#x3D; this.getTasksRef();
-      const docRef &#x3D; await addDoc(tasksRef, this.getCleanJson(newTask));
-      return { id: docRef.id, ...newTask };
-    } catch (err) {
-      console.error(&#x27;Error adding task:&#x27;, err);
-      return null;
+  private async saveTask(component: any): Promise&lt;void&gt; {
+    if (component.isEditingMode &amp;&amp; component.editingTaskId) {
+      await this.updateTask(component);
+    } else {
+      await this.addNewTask(component);
     }
   }
 
   /**
-   * Adds a subtask to a specific task&#x27;s subcollection.
-   * 
-   * @param ColId - The ID of the parent task.
-   * @param subtask - The subtask to add.
-   * @returns The created subtask with ID, or null on failure.
+   * Creates and saves a new task with subtasks.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when new task is created
    */
-  async addSubtask(ColId: string, subtask: Subtask): Promise&lt;Subtask | null&gt; {
-    try {
-      const subtasksRef &#x3D; this.getSubtasksRef(ColId);
-      const docRef &#x3D; await addDoc(subtasksRef, subtask);
-      return { id: docRef.id, ...subtask };
-    } catch (error) {
-      console.error(&#x27;Error adding subtask:&#x27;, error);
-      return null;
+  private async addNewTask(component: any): Promise&lt;void&gt; {
+    if (!component.defaultStatus) component.defaultStatus &#x3D; &#x27;to-do&#x27;;
+    (component.formData as any).images &#x3D; component.taskImages;
+    await this.saveUploadedImages(component);
+    const newTask: Task &#x3D; this.buildNewTask(component);
+    const savedTask &#x3D; await this.taskService.addTask(newTask);
+    if (savedTask?.id) {
+      await component.subtaskManager.saveAllSubtasks(
+        savedTask.id, component.subtaskManager.getSubtasks()
+      );
     }
   }
 
   /**
-   * Updates a task document in Firestore.
-   * 
-   * @param docId - The ID of the task.
-   * @param updatedTask - The updated task data.
+   * Saves all uploaded images to the upload service.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when all images are saved
    */
-  async updateTask(docId: string, updatedTask: Task): Promise&lt;void&gt; {
-    const docRef &#x3D; this.getSingleTaskRef(docId);
-    await updateDoc(docRef, this.getCleanJson(updatedTask)).catch(console.error);
-  }
-
-  /**
-   * Updates a subtask document in Firestore.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask document ID.
-   * @param updatedSubtask - The updated subtask data.
-   */
-  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask): Promise&lt;void&gt; {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await updateDoc(docRef, this.getCleanJson(updatedSubtask)).catch(console.error);
-  }
-
-  /**
-   * Deletes a subtask from a task&#x27;s subcollection.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask ID to delete.
-   */
-  async deleteSubtask(taskId: string, subtaskId: string): Promise&lt;void&gt; {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await deleteDoc(docRef).catch(err &#x3D;&gt; console.error(&#x27;Error deleting subtask:&#x27;, err));
-  }
-
-  /**
-   * Deletes a task from Firestore.
-   * 
-   * @param docId - The ID of the task to delete.
-   */
-  async deleteTask(docId: string): Promise&lt;void&gt; {
-    await deleteDoc(this.getSingleTaskRef(docId)).catch(console.error);
-  }
-
-  /**
-   * Returns a plain object representation of a Task or Subtask for Firestore updates.
-   * 
-   * @param updated - The object to clean.
-   */
-  getCleanJson(updated: Task | Subtask): any {
-    if (&#x27;category&#x27; in updated) {
-      return this.buildTaskJson(updated);
-    } else if (&#x27;isCompleted&#x27; in updated) {
-      return this.buildSubtaskJson(updated);
+  private async saveUploadedImages(component: any): Promise&lt;void&gt; {
+    for (const img of component.uploadsComponent.uploadedImages) {
+      await this.uploadService.saveImage(img);
     }
-    return {};
+    component.uploadsComponent.uploadedImages &#x3D; [];
   }
 
-  private buildTaskJson(updated: Task): any {
-    const clean: any &#x3D; {
-      title: updated.title, description: updated.description,
-      date: updated.date, priority: updated.priority,
-      status: updated.status, assignedTo: updated.assignedTo,
-      category: updated.category
-    };
-    if (Array.isArray(updated.imageKey)) {
-      clean.imageKey &#x3D; updated.imageKey;
+  /**
+   * Builds a new task object from component data.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Task} The newly built task object
+   */
+  private buildNewTask(component: any): Task {
+    return this.taskDataService.buildTask(
+      component.formData, component.defaultStatus, component.priorityManager,
+      component.contactManager, component.categoryManager, undefined
+    );
+  }
+
+  /**
+   * Updates an existing task with new data and handles image changes.
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when task is updated
+   */
+  async updateTask(component: any): Promise&lt;void&gt; {
+    const previousImageKeys &#x3D; component.editingTask?.imageKey ?? [];
+    const currentImages &#x3D; component.uploadsComponent.allImages();
+    const currentImageKeys &#x3D; currentImages.map((img: any) &#x3D;&gt; img.imageKey);
+    await this.handleImageUpdates(previousImageKeys, currentImages, currentImageKeys);
+    await this.updateTaskData(component, currentImageKeys);
+  }
+
+  /**
+   * Handles adding new images and removing deleted images.
+   * @private
+   * @param {string[]} previousKeys - Array of previous image keys
+   * @param {any[]} currentImages - Array of current image objects
+   * @param {string[]} currentKeys - Array of current image keys
+   * @returns {Promise&lt;void&gt;} Promise that resolves when image updates are complete
+   */
+  private async handleImageUpdates(previousKeys: string[], currentImages: any[], currentKeys: string[]): Promise&lt;void&gt; {
+    const removedKeys &#x3D; previousKeys.filter(key &#x3D;&gt; !currentKeys.includes(key));
+    if (removedKeys.length &gt; 0) {
+      this.uploadService.deleteImages(removedKeys);
     }
-    return clean;
-  }
-
-  private buildSubtaskJson(updated: Subtask): any {
-    return {
-      title: updated.title,
-      isCompleted: updated.isCompleted
-    };
+    this.uploadService.saveImages(currentImages);
   }
 
   /**
-   * Deletes the imageKey field from Firestore.
-   *
-   * @param task - The contact to delete the imageKey from.
+   * Updates task data with new information and image keys.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @param {string[]} currentImageKeys - Array of current image keys
+   * @returns {Promise&lt;void&gt;} Promise that resolves when task data is updated
    */
+  private async updateTaskData(component: any, currentImageKeys: string[]): Promise&lt;void&gt; {
+    (component.formData as any).images &#x3D; currentImageKeys;
+    component.taskImages &#x3D; currentImageKeys;
+    const updatedTask &#x3D; this.buildUpdatedTask(component);
+    await this.taskService.updateTask(component.editingTask!.id!, updatedTask);
+    await this.updateSubtasks(component);
+    this.taskService.clearEditingTask();
+  }
 
-  deleteImageFromTask(task: Task): void {
-    if (!task.id) {
-      console.error(&#x27;Task id is undefined. Cannot delete image.&#x27;);
-      return;
+  /**
+   * Builds an updated task object for existing task modification.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Task} The updated task object
+   */
+  private buildUpdatedTask(component: any): Task {
+    return this.taskDataService.buildTask(
+      component.formData, component.originalTaskStatus, component.priorityManager,
+      component.contactManager, component.categoryManager, component.editingTaskId
+    );
+  }
+
+  /**
+   * Synchronizes subtasks by deleting removed ones and updating existing ones.
+   * @private
+   * @param {any} component - The AddTask component instance
+   * @returns {Promise&lt;void&gt;} Promise that resolves when subtasks are synchronized
+   */
+  private async updateSubtasks(component: any): Promise&lt;void&gt; {
+    const currentSubtasks &#x3D; component.subtaskManager.getSubtasks();
+    const deleted &#x3D; component.subtaskManager.getDeletedSubtasks(currentSubtasks);
+    await component.subtaskManager.deleteSubtasks(component.editingTaskId!, deleted);
+    await component.subtaskManager.syncSubtasks(component.editingTaskId!, currentSubtasks);
+  }
+
+  /**
+   * Cleans up resources when closing overlay.
+   * @param {any} component - The AddTask component instance
+   * @returns {void}
+   */
+  cleanupOnClose(component: any): void {
+    if (component.uploadsComponent) {
+      component.uploadsComponent.uploadedImages.forEach((image: any) &#x3D;&gt; {
+        this.uploadService.deleteImage(image.imageKey);
+      });
     }
-    const taskRef &#x3D; this.getSingleTaskRef(task.id);
-    this.updateTaskImage(taskRef);
-  }
-
-  private updateTaskImage(taskRef: any): void {
-    updateDoc(taskRef, { imageKey: deleteField() })
-      .catch(err &#x3D;&gt; console.error(&#x27;Failed to delete image from task:&#x27;, err));
-  }
-
-  /**
-   * Converts a Firestore Timestamp or Date object to a formatted string.
-   * 
-   * @param date - The Timestamp or Date to convert.
-   * @returns A formatted date string (&#x60;dd/mm/yyyy&#x60;).
-   */
-  convertDate(date: Timestamp | Date): string {
-    if (date instanceof Timestamp) {
-      return this.formatDate(date.toDate());
-    } else if (date instanceof Date) {
-      return this.formatDate(date);
-    }
-    return &#x27;&#x27;;
-  }
-
-  /**
-   * Formats a Date object into a &#x60;dd/mm/yyyy&#x60; string.
-   * 
-   * @param date - The Date to format.
-   */
-  formatDate(date: Date): string {
-    const day &#x3D; String(date.getDate()).padStart(2, &#x27;0&#x27;);
-    const month &#x3D; String(date.getMonth() + 1).padStart(2, &#x27;0&#x27;);
-    const year &#x3D; date.getFullYear();
-    return &#x60;${day}/${month}/${year}&#x60;;
-  }
-
-  /**
-   * Sets the currently edited task.
-   * 
-   * @param task - The task being edited.
-   */
-  setEditingTask(task: Task): void {
-    this.editingTask &#x3D; task;
-  }
-
-  /**
-   * Returns the task currently being edited.
-   */
-  getEditingTask(): Task | null {
-    return this.editingTask;
-  }
-
-  /**
-   * Clears the currently edited task.
-   */
-  clearEditingTask(): void {
-    this.editingTask &#x3D; null;
-  }
-
-  /**
-   * Capitalizes the first letter of a string.
-   * 
-   * @param text - The string to capitalize.
-   * @returns Capitalized string or empty string if undefined.
-   */
-  capitalize(text: string | undefined): string {
-    if (!text) return &#x27;&#x27;;
-    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 }</code></pre>
     </div>
@@ -2429,7 +2522,7 @@ export class TaskService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'TaskService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AddTaskService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

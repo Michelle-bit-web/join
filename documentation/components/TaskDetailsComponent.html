@@ -151,6 +151,7 @@
                 <td class="col-md-9">
                             <code>CommonModule</code>
                             <code>FormsModule</code>
+                                <code><a href="../components/ImageViewerComponent.html" target="_self" >ImageViewerComponent</a></code>
                 </td>
             </tr>
 
@@ -190,14 +191,32 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#contactList" >contactList</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#contactService" >contactService</a>
+                            </li>
+                            <li>
+                                <a href="#currentImageIndex" >currentImageIndex</a>
                             </li>
                             <li>
                                 <a href="#showContent" >showContent</a>
                             </li>
                             <li>
+                                <a href="#showImageViewer" >showImageViewer</a>
+                            </li>
+                            <li>
                                 <a href="#subtasks" >subtasks</a>
+                            </li>
+                            <li>
+                                <a href="#taskImageBase64" >taskImageBase64</a>
+                            </li>
+                            <li>
+                                <a href="#taskImageKeys" >taskImageKeys</a>
+                            </li>
+                            <li>
+                                <a href="#taskImages" >taskImages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -216,10 +235,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#closeImageViewer" >closeImageViewer</a>
+                            </li>
+                            <li>
                                 <a href="#convertDate" >convertDate</a>
                             </li>
                             <li>
                                 <a href="#deleteTask" >deleteTask</a>
+                            </li>
+                            <li>
+                                <a href="#downloadImage" >downloadImage</a>
+                            </li>
+                            <li>
+                                <a href="#getContactImage" >getContactImage</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -229,16 +257,25 @@
                                 <a href="#loadSubtasks" >loadSubtasks</a>
                             </li>
                             <li>
+                                <a href="#loadTaskImages" >loadTaskImages</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#onClose" >onClose</a>
                             </li>
                             <li>
+                                <a href="#onDeleteImage" >onDeleteImage</a>
+                            </li>
+                            <li>
                                 <a href="#onSubtaskToggle" >onSubtaskToggle</a>
                             </li>
                             <li>
                                 <a href="#openEditTask" >openEditTask</a>
+                            </li>
+                            <li>
+                                <a href="#openImageViewer" >openImageViewer</a>
                             </li>
                         </ul>
                     </td>
@@ -252,9 +289,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                <a href="#contactList" >contactList</a>
-                            </li>
                             <li>
                                 <a href="#task" >task</a>
                             </li>
@@ -295,12 +329,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, router: Router)</code>
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, router: Router, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/board/task-details/task-details.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/board/task-details/task-details.component.ts:102</a></div>
                             </td>
                         </tr>
 
@@ -368,6 +402,22 @@
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for handling image uploads and storage.</p>
+
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -379,38 +429,6 @@
 
     <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="contactList"></a>
-                        <b>contactList</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/board/task-details/task-details.component.ts:61</a></div>
-                            </td>
-                        </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The list of contacts assigned to this task.</p>
-</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -427,7 +445,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/board/task-details/task-details.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/board/task-details/task-details.component.ts:62</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -457,7 +475,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/board/task-details/task-details.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/board/task-details/task-details.component.ts:47</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -484,7 +502,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/board/task-details/task-details.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/board/task-details/task-details.component.ts:52</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -511,7 +529,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/board/task-details/task-details.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/board/task-details/task-details.component.ts:57</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -534,6 +552,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="closeImageViewer"></a>
+                    <span class="name">
+                        <span ><b>closeImageViewer</b></span>
+                        <a href="#closeImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeImageViewer()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the image viewer.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="convertDate"></a>
                     <span class="name">
                         <span ><b>convertDate</b></span>
@@ -550,8 +607,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:142</a></div>
                         </td>
                     </tr>
 
@@ -625,8 +682,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:165</a></div>
                         </td>
                     </tr>
 
@@ -683,6 +740,204 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="downloadImage"></a>
+                    <span class="name">
+                        <span ><b>downloadImage</b></span>
+                        <a href="#downloadImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>downloadImage(event: Event, currentIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, currentImage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filename?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:273</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Downloads the image at the given index, triggering a browser download.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The event that triggered the download.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>currentIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The index of the current image.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>currentImage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The URL of the current image.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>filename</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactImage"></a>
+                    <span class="name">
+                        <span ><b>getContactImage</b></span>
+                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:291</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the contact&#39;s profile image from localStorage using their imageKey.
+Returns null if no image is associated with the contact.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object containing the imageKey</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Base64 encoded image string or null if no image exists</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="loadAssignedContacts"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -701,8 +956,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:208</a></div>
                         </td>
                     </tr>
 
@@ -741,8 +996,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:196</a></div>
                         </td>
                     </tr>
 
@@ -750,6 +1005,45 @@ and updates the contactList accordingly.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Loads subtasks associated with the current task from the database.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadTaskImages"></a>
+                    <span class="name">
+                        <span ><b>loadTaskImages</b></span>
+                        <a href="#loadTaskImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadTaskImages()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:223</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads task images from localStorage using the image keys stored in the task.</p>
 </div>
 
                         <div class="io-description">
@@ -780,8 +1074,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -819,8 +1113,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -834,6 +1128,75 @@ and updates the contactList accordingly.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteImage"></a>
+                    <span class="name">
+                        <span ><b>onDeleteImage</b></span>
+                        <a href="#onDeleteImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteImage(event: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:255</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles image deletion from the image viewer.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -858,8 +1221,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:182</a></div>
                         </td>
                     </tr>
 
@@ -933,8 +1296,8 @@ Emits the updated list of subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -987,12 +1350,123 @@ Emits the updated list of subtasks.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openImageViewer"></a>
+                    <span class="name">
+                        <span ><b>openImageViewer</b></span>
+                        <a href="#openImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openImageViewer(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="240"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:240</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the image viewer with the specified image index.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The index of the image to view.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactList"></a>
+                    <span class="name">
+                        <span ><b>contactList</b></span>
+                        <a href="#contactList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/board/task-details/task-details.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of contacts assigned to this task.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -1013,13 +1487,50 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/board/task-details/task-details.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/board/task-details/task-details.component.ts:114</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description">Service for fetching contacts.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentImageIndex"></a>
+                    <span class="name">
+                        <span ><b>currentImageIndex</b></span>
+                        <a href="#currentImageIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/board/task-details/task-details.component.ts:102</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The index of the currently viewed image.</p>
+</div>
                 </td>
             </tr>
 
@@ -1043,13 +1554,44 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/board/task-details/task-details.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/board/task-details/task-details.component.ts:72</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Controls whether the detail view content is shown.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showImageViewer"></a>
+                    <span class="name">
+                        <span ><b>showImageViewer</b></span>
+                        <a href="#showImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/board/task-details/task-details.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls whether the image viewer is shown.</p>
 </div>
                 </td>
             </tr>
@@ -1080,13 +1622,124 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/board/task-details/task-details.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/board/task-details/task-details.component.ts:77</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>The list of subtasks associated with the task.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskImageBase64"></a>
+                    <span class="name">
+                        <span ><b>taskImageBase64</b></span>
+                        <a href="#taskImageBase64"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/board/task-details/task-details.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of task image keys for deletion.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskImageKeys"></a>
+                    <span class="name">
+                        <span ><b>taskImageKeys</b></span>
+                        <a href="#taskImageKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/board/task-details/task-details.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of task image keys for deletion.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskImages"></a>
+                    <span class="name">
+                        <span ><b>taskImages</b></span>
+                        <a href="#taskImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/board/task-details/task-details.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of task images loaded from localStorage.</p>
 </div>
                 </td>
             </tr>
@@ -1113,7 +1766,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/board/task-details/task-details.component.ts:81</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/board/task-details/task-details.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -1132,7 +1785,7 @@ Emits the updated list of subtasks.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Component, EventEmitter, Output, Input } from &#x27;@angular/core&#x27;;
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { Task, TaskService } from &#x27;../../services/task.service&#x27;;
 import { Subtask } from &#x27;../../services/task.service&#x27;;
 import { Timestamp } from &#x27;@angular/fire/firestore&#x27;;
@@ -1140,18 +1793,22 @@ import { ContactService } from &#x27;../../services/contact.service&#x27;;
 import { Contact } from &#x27;../../services/contact.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { UploadedImage, UploadService } from &#x27;../../services/upload.service&#x27;;
+import { ImageViewerComponent } from &#x27;../../shared/image-viewer/image-viewer.component&#x27;;
 
 @Component({
   selector: &#x27;app-task-details&#x27;,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ImageViewerComponent
   ],
   templateUrl: &#x27;./task-details.component.html&#x27;,
   styleUrl: &#x27;./task-details.component.scss&#x27;
 })
 
 export class TaskDetailsComponent {
+
   /**
    * Emits an event when the task detail view should be closed.
    */
@@ -1175,7 +1832,7 @@ export class TaskDetailsComponent {
   /**
    * The list of contacts assigned to this task.
    */
-  @Input() contactList: Contact[] &#x3D; [];
+  contactList: Contact[] &#x3D; [];
 
   /**
    * Controls whether the detail view content is shown.
@@ -1188,17 +1845,44 @@ export class TaskDetailsComponent {
   subtasks: Subtask[] &#x3D; [];
 
   /**
+   * The list of task images loaded from localStorage.
+   */
+  taskImages: UploadedImage[] &#x3D; [];
+
+  /**
+ * The list of task image keys for deletion.
+ */
+  taskImageKeys: string[] &#x3D; [];
+
+  /**
+ * The list of task image keys for deletion.
+ */
+  taskImageBase64: string[] &#x3D; [];
+
+  /**
+   * Controls whether the image viewer is shown.
+   */
+  showImageViewer &#x3D; false;
+
+  /**
+   * The index of the currently viewed image.
+   */
+  currentImageIndex &#x3D; 0;
+
+  /**
    * Constructor injects task and contact services, and the Angular Router.
    * 
    * @param taskService Service for handling tasks and subtasks.
    * @param contactService Service for fetching contacts.
    * @param router Angular Router for navigation (currently unused).
+   * @param uploadService Service for handling image uploads and storage.
    */
   constructor(
     public taskService: TaskService,
     public contactService: ContactService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private uploadService: UploadService
+  ) { }
 
   /**
    * Lifecycle hook to load assigned contacts and subtasks on component initialization.
@@ -1206,6 +1890,7 @@ export class TaskDetailsComponent {
   ngOnInit(): void {
     this.loadAssignedContacts();
     this.loadSubtasks();
+    this.loadTaskImages();
   }
 
   /**
@@ -1289,8 +1974,8 @@ export class TaskDetailsComponent {
    * and updates the contactList accordingly.
    */
   async loadAssignedContacts() {
-    this.contactList &#x3D; [];
     if (this.task?.assignedTo?.length) {
+      this.contactList &#x3D; [];
       for (let contactId of this.task.assignedTo) {
         const contact &#x3D; await this.contactService.getContactById(contactId);
         if (contact) {
@@ -1299,97 +1984,344 @@ export class TaskDetailsComponent {
       }
     }
   }
+
+  /**
+   * Loads task images from localStorage using the image keys stored in the task.
+   */
+  loadTaskImages() {
+    if (this.task?.imageKey &amp;&amp; this.task.imageKey.length &gt; 0) {
+      this.taskImages &#x3D; this.uploadService.getImagesByKeys(this.task.imageKey);
+      this.taskImageKeys &#x3D; this.task.imageKey;
+      this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
+    } else {
+      this.taskImages &#x3D; [];
+      this.taskImageKeys &#x3D; [];
+      this.taskImageBase64 &#x3D; [];
+    }
+  }
+
+  /**
+   * Opens the image viewer with the specified image index.
+   * 
+   * @param index The index of the image to view.
+   */
+  openImageViewer(index: number) {
+    this.currentImageIndex &#x3D; index;
+    this.showImageViewer &#x3D; true;
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer() {
+    this.showImageViewer &#x3D; false;
+  }
+
+  /**
+   * Handles image deletion from the image viewer.
+   */
+  onDeleteImage(event: { index: number, imageKey?: string }) {
+    if (event.imageKey &amp;&amp; this.task.id) {
+      this.uploadService.deleteImage(event.imageKey);
+      const updatedImages &#x3D; this.task.imageKey?.filter(key &#x3D;&gt; key !&#x3D;&#x3D; event.imageKey) || [];
+      this.task.imageKey &#x3D; updatedImages;
+      this.taskService.updateTask(this.task.id, this.task);
+      this.loadTaskImages();
+    };
+    this.closeImageViewer();
+  }
+
+  /**
+   * Downloads the image at the given index, triggering a browser download.
+   * 
+   * @param event The event that triggered the download.
+   * @param currentIndex The index of the current image.
+   * @param currentImage The URL of the current image.
+   */
+  downloadImage(event: Event, currentIndex: number, currentImage: string, filename?: string) {
+    event.stopPropagation();
+    event.preventDefault();
+    const link &#x3D; document.createElement(&#x27;a&#x27;);
+    link.href &#x3D; currentImage;
+    link.download &#x3D; &#x60;join_image_${filename || currentIndex + 1}.jpg&#x60;;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /**
+   * Gets the contact&#x27;s profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
+  }
 }</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content-wrapper&quot; *ngIf&#x3D;&quot;showContent&quot;&gt;
-    &lt;div class&#x3D;&quot;wrapper-top&quot;&gt;
-        &lt;p class&#x3D;&quot;category-flag&quot; [style.background-color]&#x3D;&quot;task.category &#x3D;&#x3D; &#x27;user story&#x27; ? &#x27;#0038ff&#x27;: &#x27;#1fd7c1&#x27;&quot;&gt;{{taskService.capitalize(task.category)}}&lt;/p&gt;
-        &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot; &gt;
-            &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-                &lt;mask id&#x3D;&quot;mask0_331509_883&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
-                    &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content-wrapper&quot; *ngIf&#x3D;&quot;showContent&quot; role&#x3D;&quot;dialog&quot; aria-modal&#x3D;&quot;true&quot; [attr.aria-label]&#x3D;&quot;&#x27;Task details for: &#x27; + task.title&quot;&gt;
+  &lt;div class&#x3D;&quot;wrapper-top&quot;&gt;
+    &lt;p
+      class&#x3D;&quot;category-flag&quot;
+      [style.background-color]&#x3D;&quot;
+        task.category &#x3D;&#x3D; &#x27;user story&#x27; ? &#x27;#0038ff&#x27; : &#x27;#1fd7c1&#x27;
+      &quot;
+      role&#x3D;&quot;badge&quot;
+      [attr.aria-label]&#x3D;&quot;&#x27;Category: &#x27; + taskService.capitalize(task.category)&quot;
+    &gt;
+      {{ taskService.capitalize(task.category) }}
+    &lt;/p&gt;
+    &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot; aria-label&#x3D;&quot;Close task details&quot;&gt;
+      &lt;svg
+        width&#x3D;&quot;24&quot;
+        height&#x3D;&quot;24&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+        fill&#x3D;&quot;none&quot;
+        xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+      &gt;
+        &lt;mask
+          id&#x3D;&quot;mask0_331509_883&quot;
+          style&#x3D;&quot;mask-type: alpha&quot;
+          maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+          x&#x3D;&quot;0&quot;
+          y&#x3D;&quot;0&quot;
+          width&#x3D;&quot;24&quot;
+          height&#x3D;&quot;24&quot;
+        &gt;
+          &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
+        &lt;/mask&gt;
+        &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
+          &lt;path
+            d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot;
+            fill&#x3D;&quot;#2A3647&quot;
+          /&gt;
+        &lt;/g&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;task-content&quot;&gt;
+    &lt;h1 role&#x3D;&quot;heading&quot; aria-level&#x3D;&quot;2&quot;&gt;{{ taskService.capitalize(task.title) }}&lt;/h1&gt;
+    &lt;p class&#x3D;&quot;description&quot;&gt;{{ taskService.capitalize(task.description) }}&lt;/p&gt;
+    &lt;div class&#x3D;&quot;date-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Task due date&quot;&gt;
+      &lt;span class&#x3D;&quot;row-title&quot;&gt;Due date:&lt;/span&gt;
+      &lt;span&gt;{{ convertDate(task.date) }}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;priority-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Task priority&quot;&gt;
+      &lt;span class&#x3D;&quot;row-title&quot;&gt;Priority:&lt;/span&gt;
+      &lt;span&gt;{{ task.priority }}&lt;/span&gt;
+      &lt;div&gt;
+        &lt;img
+          src&#x3D;&quot;assets/img/icons/prio-high.png&quot;
+          alt&#x3D;&quot;Priority High Icon&quot;
+          *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;urgent&#x27;&quot;
+        /&gt;
+        &lt;img
+          src&#x3D;&quot;assets/img/icons/prio-medium.png&quot;
+          alt&#x3D;&quot;Priorit Medium Icon&quot;
+          *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;&quot;
+        /&gt;
+        &lt;img
+          src&#x3D;&quot;assets/img/icons/prio-low.png&quot;
+          alt&#x3D;&quot;Priority Low Icon&quot;
+          *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;low&#x27;&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;assigned-to-row&quot;&gt;
+      &lt;span class&#x3D;&quot;row-title&quot;&gt;Assigned To:&lt;/span&gt;
+      &lt;span *ngIf&#x3D;&quot;contactList.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot; role&#x3D;&quot;status&quot;
+        &gt;No contact selected&lt;/span
+      &gt;
+      &lt;div class&#x3D;&quot;contact-list&quot; role&#x3D;&quot;list&quot; aria-label&#x3D;&quot;Assigned team members&quot;&gt;
+        @for (contact of contactList; track $index) {
+        &lt;div class&#x3D;&quot;contact-item&quot; role&#x3D;&quot;listitem&quot;&gt;
+          &lt;div class&#x3D;&quot;img-user-wrapper&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;img-user&quot;
+              [style.background-color]&#x3D;&quot;
+                contactService.getContactColor(contact.name)
+              &quot;
+            &gt;
+              &lt;img
+                *ngIf&#x3D;&quot;getContactImage(contact)&quot;
+                [src]&#x3D;&quot;getContactImage(contact)&quot;
+                [alt]&#x3D;&quot;contact.name&quot;
+                class&#x3D;&quot;contact-image&quot;
+              /&gt;
+              &lt;p
+                *ngIf&#x3D;&quot;!getContactImage(contact)&quot;
+                class&#x3D;&quot;contact-initials&quot;
+              &gt;
+                {{ contactService.getInitials(contact.name) }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;contact-name&quot;&gt;{{ contact.name }}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;subtask-row&quot;&gt;
+      &lt;span class&#x3D;&quot;row-title&quot;&gt;Subtasks:&lt;/span&gt;
+      &lt;span *ngIf&#x3D;&quot;subtasks.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot; role&#x3D;&quot;status&quot;
+        &gt;No subtasks defined&lt;/span
+      &gt;
+      &lt;div class&#x3D;&quot;subtask-list&quot; role&#x3D;&quot;list&quot; aria-label&#x3D;&quot;Task subtasks&quot;&gt;
+        @for (subtask of subtasks; track $index) {
+        &lt;div class&#x3D;&quot;subtask-item&quot; role&#x3D;&quot;listitem&quot;&gt;
+          &lt;input
+            class&#x3D;&quot;checkbox&quot;
+            [id]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot;
+            type&#x3D;&quot;checkbox&quot;
+            (change)&#x3D;&quot;onSubtaskToggle(subtask)&quot;
+            [(ngModel)]&#x3D;&quot;subtask.isCompleted&quot;
+            [attr.aria-label]&#x3D;&quot;&#x27;Mark subtask as &#x27; + (subtask.isCompleted ? &#x27;incomplete&#x27; : &#x27;complete&#x27;) + &#x27;: &#x27; + subtask.title&quot;
+          /&gt;
+          &lt;label class&#x3D;&quot;checkbox-label&quot; [for]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot;&gt;&lt;/label&gt;
+          &lt;span&gt;{{ subtask.title }}&lt;/span&gt;
+        &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;task-images&quot; *ngIf&#x3D;&quot;taskImages.length &gt; 0&quot;&gt;
+      &lt;span class&#x3D;&quot;row-title&quot;&gt;Images:&lt;/span&gt;
+      &lt;div class&#x3D;&quot;image-grid&quot; role&#x3D;&quot;grid&quot; aria-label&#x3D;&quot;Task images&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;image-item&quot;
+          *ngFor&#x3D;&quot;let image of taskImages; let i &#x3D; index&quot;
+          (click)&#x3D;&quot;openImageViewer(i)&quot;
+          role&#x3D;&quot;gridcell&quot;
+          tabindex&#x3D;&quot;0&quot;
+          [attr.aria-label]&#x3D;&quot;&#x27;Image &#x27; + (i + 1) + &#x27; of &#x27; + taskImages.length + &#x27;: &#x27; + image.filename&quot;
+        &gt;
+          &lt;img
+            [src]&#x3D;&quot;image.base64&quot;
+            [alt]&#x3D;&quot;image.filename + &#x27; (&#x27; + (i + 1) + &#x27;)&#x27;&quot;
+            class&#x3D;&quot;task-image&quot;
+          /&gt;
+          &lt;p class&#x3D;&quot;image-filename&quot;&gt;{{ image.filename }} test&lt;/p&gt;
+          &lt;div class&#x3D;&quot;image-overlay&quot;&gt;
+            &lt;button
+              class&#x3D;&quot;btn-download&quot;
+              (click)&#x3D;&quot;downloadImage($event, i, image.base64, image.filename)&quot;
+            &gt;
+              &lt;svg
+                width&#x3D;&quot;24&quot;
+                height&#x3D;&quot;24&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+                fill&#x3D;&quot;none&quot;
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;mask
+                  id&#x3D;&quot;mask0_264018_1332&quot;
+                  style&#x3D;&quot;mask-type: alpha&quot;
+                  maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+                  x&#x3D;&quot;-1&quot;
+                  y&#x3D;&quot;0&quot;
+                  width&#x3D;&quot;25&quot;
+                  height&#x3D;&quot;24&quot;
+                &gt;
+                  &lt;rect x&#x3D;&quot;-0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
                 &lt;/mask&gt;
-                &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
-                    &lt;path d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
+                &lt;g mask&#x3D;&quot;url(#mask0_264018_1332)&quot;&gt;
+                  &lt;path
+                    d&#x3D;&quot;M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z&quot;
+                    fill&#x3D;&quot;white&quot;
+                  /&gt;
                 &lt;/g&gt;
-            &lt;/svg&gt;
-        &lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;task-content&quot;&gt;
-        &lt;h1&gt;{{ taskService.capitalize(task.title) }}&lt;/h1&gt;
-        &lt;p class&#x3D;&quot;description&quot;&gt;{{ taskService.capitalize(task.description) }}&lt;/p&gt;
-        &lt;div class&#x3D;&quot;date-row&quot;&gt;
-            &lt;span class&#x3D;&quot;row-title&quot;&gt;Due date:&lt;/span&gt;
-            &lt;span&gt;{{ convertDate(task.date) }}&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;priority-row&quot;&gt;
-            &lt;span class&#x3D;&quot;row-title&quot;&gt;Priority:&lt;/span&gt;
-            &lt;span&gt;{{ task.priority }}&lt;/span&gt;
-            &lt;div&gt;
-                &lt;img src&#x3D;&quot;assets/img/icons/prio-high.png&quot; alt&#x3D;&quot;Priority High Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;urgent&#x27;&quot;&gt;
-                &lt;img src&#x3D;&quot;assets/img/icons/prio-medium.png&quot; alt&#x3D;&quot;Priorit Medium Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;medium&#x27;&quot;&gt;
-                &lt;img src&#x3D;&quot;assets/img/icons/prio-low.png&quot; alt&#x3D;&quot;Priority Low Icon&quot; *ngIf&#x3D;&quot;task.priority &#x3D;&#x3D;&#x3D; &#x27;low&#x27;&quot;&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;assigned-to-row&quot;&gt;
-            &lt;span class&#x3D;&quot;row-title&quot;&gt;Assigned To:&lt;/span&gt;
-            &lt;span *ngIf&#x3D;&quot;contactList.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot;&gt;No contact selected&lt;/span&gt;
-            &lt;div class&#x3D;&quot;contact-list&quot;&gt;
-                @for (contact of contactList; track $index) {
-                    &lt;div class&#x3D;&quot;contact-item&quot;&gt;
-                        &lt;div class&#x3D;&quot;img-user-wrapper&quot;&gt;
-                            &lt;div class&#x3D;&quot;img-user&quot; [style.background-color]&#x3D;&quot;contactService.getContactColor(contact.name)&quot;&gt;
-                                &lt;p class&#x3D;&quot;contact-initials&quot;&gt;{{ contactService.getInitials(contact.name) }}&lt;/p&gt;
-                            &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;contact-name&quot;&gt;{{ contact.name }}&lt;/p&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                }
-            &lt;/div&gt;
-        &lt;/div&gt;
-       &lt;div class&#x3D;&quot;subtask-row&quot;&gt;
-            &lt;span class&#x3D;&quot;row-title&quot;&gt;Subtasks:&lt;/span&gt;
-            &lt;span *ngIf&#x3D;&quot;subtasks.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot;&gt;No subtasks defined&lt;/span&gt;
-            &lt;div class&#x3D;&quot;subtask-list&quot;&gt;
-                @for (subtask of subtasks; track $index) {
-                    &lt;div class&#x3D;&quot;subtask-item&quot;&gt;
-                        &lt;input class&#x3D;&quot;checkbox&quot; [id]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot; type&#x3D;&quot;checkbox&quot;  (change)&#x3D;&quot;onSubtaskToggle(subtask)&quot; [(ngModel)]&#x3D;&quot;subtask.isCompleted&quot;&gt;
-                        &lt;label class&#x3D;&quot;checkbox-label&quot; [for]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot;&gt;&lt;/label&gt;
-                        &lt;span&gt;{{ subtask.title }}&lt;/span&gt;
-                    &lt;/div&gt;
-                }
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-            &lt;button class&#x3D;&quot;btn-delete&quot; (click)&#x3D;&quot;deleteTask($event)&quot;&gt;
-                &lt;svg width&#x3D;&quot;25&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 25 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-                    &lt;mask id&#x3D;&quot;mask0_75592_9951&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;25&quot; height&#x3D;&quot;24&quot;&gt;
-                    &lt;rect x&#x3D;&quot;0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
-                    &lt;/mask&gt;
-                    &lt;g mask&#x3D;&quot;url(#mask0_75592_9951)&quot;&gt;
-                    &lt;path d&#x3D;&quot;M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
-                    &lt;/g&gt;
-                &lt;/svg&gt;
-                Delete
+              &lt;/svg&gt;
             &lt;/button&gt;
-            &lt;div class&#x3D;&quot;separator&quot;&gt;&lt;/div&gt;
-            &lt;button class&#x3D;&quot;btn-edit&quot; (click)&#x3D;&quot;openEditTask($event)&quot;&gt;
-                &lt;svg width&#x3D;&quot;33&quot; height&#x3D;&quot;33&quot; viewBox&#x3D;&quot;0 0 33 33&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-                    &lt;mask id&#x3D;&quot;mask0_75592_8413&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;33&quot; height&#x3D;&quot;33&quot;&gt;
-                    &lt;rect x&#x3D;&quot;0.394531&quot; y&#x3D;&quot;0.80835&quot; width&#x3D;&quot;32&quot; height&#x3D;&quot;32&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
-                    &lt;/mask&gt;
-                    &lt;g mask&#x3D;&quot;url(#mask0_75592_8413)&quot;&gt;
-                    &lt;path d&#x3D;&quot;M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
-                    &lt;/g&gt;
-                &lt;/svg&gt;
-                Edit
-            &lt;/button&gt;
+            &lt;span class&#x3D;&quot;image-count&quot; *ngIf&#x3D;&quot;taskImages.length &gt; 1&quot;
+              &gt;{{ i + 1 }}/{{ taskImages.length }}&lt;/span
+            &gt;
+          &lt;/div&gt;
         &lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+    &lt;div class&#x3D;&quot;btn-wrapper&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Task actions&quot;&gt;
+      &lt;button class&#x3D;&quot;btn-delete&quot; (click)&#x3D;&quot;deleteTask($event)&quot; aria-label&#x3D;&quot;Delete this task&quot;&gt;
+        &lt;svg
+          width&#x3D;&quot;25&quot;
+          height&#x3D;&quot;24&quot;
+          viewBox&#x3D;&quot;0 0 25 24&quot;
+          fill&#x3D;&quot;none&quot;
+          xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        &gt;
+          &lt;mask
+            id&#x3D;&quot;mask0_75592_9951&quot;
+            style&#x3D;&quot;mask-type: alpha&quot;
+            maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+            x&#x3D;&quot;0&quot;
+            y&#x3D;&quot;0&quot;
+            width&#x3D;&quot;25&quot;
+            height&#x3D;&quot;24&quot;
+          &gt;
+            &lt;rect x&#x3D;&quot;0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
+          &lt;/mask&gt;
+          &lt;g mask&#x3D;&quot;url(#mask0_75592_9951)&quot;&gt;
+            &lt;path
+              d&#x3D;&quot;M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/g&gt;
+        &lt;/svg&gt;
+        Delete
+      &lt;/button&gt;
+      &lt;div class&#x3D;&quot;separator&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/div&gt;
+      &lt;button class&#x3D;&quot;btn-edit&quot; (click)&#x3D;&quot;openEditTask($event)&quot; aria-label&#x3D;&quot;Edit this task&quot;&gt;
+        &lt;svg
+          width&#x3D;&quot;33&quot;
+          height&#x3D;&quot;33&quot;
+          viewBox&#x3D;&quot;0 0 33 33&quot;
+          fill&#x3D;&quot;none&quot;
+          xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        &gt;
+          &lt;mask
+            id&#x3D;&quot;mask0_75592_8413&quot;
+            style&#x3D;&quot;mask-type: alpha&quot;
+            maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+            x&#x3D;&quot;0&quot;
+            y&#x3D;&quot;0&quot;
+            width&#x3D;&quot;33&quot;
+            height&#x3D;&quot;33&quot;
+          &gt;
+            &lt;rect
+              x&#x3D;&quot;0.394531&quot;
+              y&#x3D;&quot;0.80835&quot;
+              width&#x3D;&quot;32&quot;
+              height&#x3D;&quot;32&quot;
+              fill&#x3D;&quot;#D9D9D9&quot;
+            /&gt;
+          &lt;/mask&gt;
+          &lt;g mask&#x3D;&quot;url(#mask0_75592_8413)&quot;&gt;
+            &lt;path
+              d&#x3D;&quot;M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/g&gt;
+        &lt;/svg&gt;
+        Edit
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;app-image-viewer
+    *ngIf&#x3D;&quot;showImageViewer&quot;
+    [images]&#x3D;&quot;taskImageBase64&quot;
+    [imageKeys]&#x3D;&quot;taskImageKeys&quot;
+    [startIndex]&#x3D;&quot;currentImageIndex&quot;
+    [allowDelete]&#x3D;&quot;true&quot;
+    (close)&#x3D;&quot;closeImageViewer()&quot;
+    (deleteImage)&#x3D;&quot;onDeleteImage($event)&quot;
+  &gt;
+  &lt;/app-image-viewer&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
 
@@ -1418,8 +2350,8 @@ export class TaskDetailsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="content-wrapper" *ngIf="showContent">    <div class="wrapper-top">        <p class="category-flag" [style.background-color]="task.category == \'user story\' ? \'#0038ff\': \'#1fd7c1\'">{{taskService.capitalize(task.category)}}</p>        <button class="btn-close" (click)="onClose()" >            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">                    <rect width="24" height="24" fill="#D9D9D9"/>                </mask>                <g mask="url(#mask0_331509_883)">                    <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>                </g>            </svg>        </button>    </div>    <div class="task-content">        <h1>{{ taskService.capitalize(task.title) }}</h1>        <p class="description">{{ taskService.capitalize(task.description) }}</p>        <div class="date-row">            <span class="row-title">Due date:</span>            <span>{{ convertDate(task.date) }}</span>        </div>        <div class="priority-row">            <span class="row-title">Priority:</span>            <span>{{ task.priority }}</span>            <div>                <img src="assets/img/icons/prio-high.png" alt="Priority High Icon" *ngIf="task.priority === \'urgent\'">                <img src="assets/img/icons/prio-medium.png" alt="Priorit Medium Icon" *ngIf="task.priority === \'medium\'">                <img src="assets/img/icons/prio-low.png" alt="Priority Low Icon" *ngIf="task.priority === \'low\'">            </div>        </div>        <div class="assigned-to-row">            <span class="row-title">Assigned To:</span>            <span *ngIf="contactList.length <= 0" class="info-no-selection">No contact selected</span>            <div class="contact-list">                @for (contact of contactList; track $index) {                    <div class="contact-item">                        <div class="img-user-wrapper">                            <div class="img-user" [style.background-color]="contactService.getContactColor(contact.name)">                                <p class="contact-initials">{{ contactService.getInitials(contact.name) }}</p>                            </div>                            <p class="contact-name">{{ contact.name }}</p>                        </div>                    </div>                }            </div>        </div>       <div class="subtask-row">            <span class="row-title">Subtasks:</span>            <span *ngIf="subtasks.length <= 0" class="info-no-selection">No subtasks defined</span>            <div class="subtask-list">                @for (subtask of subtasks; track $index) {                    <div class="subtask-item">                        <input class="checkbox" [id]="\'subtask-cb\' + $index" type="checkbox"  (change)="onSubtaskToggle(subtask)" [(ngModel)]="subtask.isCompleted">                        <label class="checkbox-label" [for]="\'subtask-cb\' + $index"></label>                        <span>{{ subtask.title }}</span>                    </div>                }            </div>        </div>        <div class="btn-wrapper">            <button class="btn-delete" (click)="deleteTask($event)">                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">                    <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">                    <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>                    </mask>                    <g mask="url(#mask0_75592_9951)">                    <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z" fill="#2A3647"/>                    </g>                </svg>                Delete            </button>            <div class="separator"></div>            <button class="btn-edit" (click)="openEditTask($event)">                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">                    <mask id="mask0_75592_8413" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="33" height="33">                    <rect x="0.394531" y="0.80835" width="32" height="32" fill="#D9D9D9"/>                    </mask>                    <g mask="url(#mask0_75592_8413)">                    <path d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z" fill="#2A3647"/>                    </g>                </svg>                Edit            </button>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><div class="content-wrapper" *ngIf="showContent" role="dialog" aria-modal="true" [attr.aria-label]="\'Task details for: \' + task.title">  <div class="wrapper-top">    <p      class="category-flag"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "      role="badge"      [attr.aria-label]="\'Category: \' + taskService.capitalize(task.category)"    >      {{ taskService.capitalize(task.category) }}    </p>    <button class="btn-close" (click)="onClose()" aria-label="Close task details">      <svg        width="24"        height="24"        viewBox="0 0 24 24"        fill="none"        xmlns="http://www.w3.org/2000/svg"      >        <mask          id="mask0_331509_883"          style="mask-type: alpha"          maskUnits="userSpaceOnUse"          x="0"          y="0"          width="24"          height="24"        >          <rect width="24" height="24" fill="#D9D9D9" />        </mask>        <g mask="url(#mask0_331509_883)">          <path            d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"            fill="#2A3647"          />        </g>      </svg>    </button>  </div>  <div class="task-content">    <h1 role="heading" aria-level="2">{{ taskService.capitalize(task.title) }}</h1>    <p class="description">{{ taskService.capitalize(task.description) }}</p>    <div class="date-row" role="group" aria-label="Task due date">      <span class="row-title">Due date:</span>      <span>{{ convertDate(task.date) }}</span>    </div>    <div class="priority-row" role="group" aria-label="Task priority">      <span class="row-title">Priority:</span>      <span>{{ task.priority }}</span>      <div>        <img          src="assets/img/icons/prio-high.png"          alt="Priority High Icon"          *ngIf="task.priority === \'urgent\'"        />        <img          src="assets/img/icons/prio-medium.png"          alt="Priorit Medium Icon"          *ngIf="task.priority === \'medium\'"        />        <img          src="assets/img/icons/prio-low.png"          alt="Priority Low Icon"          *ngIf="task.priority === \'low\'"        />      </div>    </div>    <div class="assigned-to-row">      <span class="row-title">Assigned To:</span>      <span *ngIf="contactList.length <= 0" class="info-no-selection" role="status"        >No contact selected</span      >      <div class="contact-list" role="list" aria-label="Assigned team members">        @for (contact of contactList; track $index) {        <div class="contact-item" role="listitem">          <div class="img-user-wrapper">            <div              class="img-user"              [style.background-color]="                contactService.getContactColor(contact.name)              "            >              <img                *ngIf="getContactImage(contact)"                [src]="getContactImage(contact)"                [alt]="contact.name"                class="contact-image"              />              <p                *ngIf="!getContactImage(contact)"                class="contact-initials"              >                {{ contactService.getInitials(contact.name) }}              </p>            </div>            <p class="contact-name">{{ contact.name }}</p>          </div>        </div>        }      </div>    </div>    <div class="subtask-row">      <span class="row-title">Subtasks:</span>      <span *ngIf="subtasks.length <= 0" class="info-no-selection" role="status"        >No subtasks defined</span      >      <div class="subtask-list" role="list" aria-label="Task subtasks">        @for (subtask of subtasks; track $index) {        <div class="subtask-item" role="listitem">          <input            class="checkbox"            [id]="\'subtask-cb\' + $index"            type="checkbox"            (change)="onSubtaskToggle(subtask)"            [(ngModel)]="subtask.isCompleted"            [attr.aria-label]="\'Mark subtask as \' + (subtask.isCompleted ? \'incomplete\' : \'complete\') + \': \' + subtask.title"          />          <label class="checkbox-label" [for]="\'subtask-cb\' + $index"></label>          <span>{{ subtask.title }}</span>        </div>        }      </div>    </div>    <div class="task-images" *ngIf="taskImages.length > 0">      <span class="row-title">Images:</span>      <div class="image-grid" role="grid" aria-label="Task images">        <div          class="image-item"          *ngFor="let image of taskImages; let i = index"          (click)="openImageViewer(i)"          role="gridcell"          tabindex="0"          [attr.aria-label]="\'Image \' + (i + 1) + \' of \' + taskImages.length + \': \' + image.filename"        >          <img            [src]="image.base64"            [alt]="image.filename + \' (\' + (i + 1) + \')\'"            class="task-image"          />          <p class="image-filename">{{ image.filename }} test</p>          <div class="image-overlay">            <button              class="btn-download"              (click)="downloadImage($event, i, image.base64, image.filename)"            >              <svg                width="24"                height="24"                viewBox="0 0 24 24"                fill="none"                xmlns="http://www.w3.org/2000/svg"              >                <mask                  id="mask0_264018_1332"                  style="mask-type: alpha"                  maskUnits="userSpaceOnUse"                  x="-1"                  y="0"                  width="25"                  height="24"                >                  <rect x="-0.144531" width="24" height="24" fill="#D9D9D9" />                </mask>                <g mask="url(#mask0_264018_1332)">                  <path                    d="M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z"                    fill="white"                  />                </g>              </svg>            </button>            <span class="image-count" *ngIf="taskImages.length > 1"              >{{ i + 1 }}/{{ taskImages.length }}</span            >          </div>        </div>      </div>    </div>    <div class="btn-wrapper" role="group" aria-label="Task actions">      <button class="btn-delete" (click)="deleteTask($event)" aria-label="Delete this task">        <svg          width="25"          height="24"          viewBox="0 0 25 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_9951"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="25"            height="24"          >            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />          </mask>          <g mask="url(#mask0_75592_9951)">            <path              d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"              fill="#2A3647"            />          </g>        </svg>        Delete      </button>      <div class="separator" aria-hidden="true"></div>      <button class="btn-edit" (click)="openEditTask($event)" aria-label="Edit this task">        <svg          width="33"          height="33"          viewBox="0 0 33 33"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_8413"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="33"            height="33"          >            <rect              x="0.394531"              y="0.80835"              width="32"              height="32"              fill="#D9D9D9"            />          </mask>          <g mask="url(#mask0_75592_8413)">            <path              d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z"              fill="#2A3647"            />          </g>        </svg>        Edit      </button>    </div>  </div>  <app-image-viewer    *ngIf="showImageViewer"    [images]="taskImageBase64"    [imageKeys]="taskImageKeys"    [startIndex]="currentImageIndex"    [allowDelete]="true"    (close)="closeImageViewer()"    (deleteImage)="onDeleteImage($event)"  >  </app-image-viewer></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TaskDetailsComponent'};
 </script>

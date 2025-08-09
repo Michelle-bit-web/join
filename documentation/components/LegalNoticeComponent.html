@@ -347,93 +347,101 @@ export class LegalNoticeComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;legal-notice-page&quot;&gt;
-  &lt;div&gt;
+  &lt;header&gt;
      &lt;h1&gt;Legal Notice&lt;/h1&gt;
-     &lt;div class&#x3D;&quot;back-btn-wrapper&quot;&gt;
-        &lt;a (click)&#x3D;&quot;goBack()&quot;&gt;
-            &lt;img src&#x3D;&quot;assets/img/icons/arrow-left-line.png&quot; alt&#x3D;&quot;Arrow back to main page&quot;&gt;
-        &lt;/a&gt;
-     &lt;/div&gt;
-  &lt;/div&gt;
+     &lt;nav aria-label&#x3D;&quot;Legal notice navigation&quot;&gt;
+       &lt;div class&#x3D;&quot;back-btn-wrapper&quot;&gt;
+          &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;goBack()&quot; aria-label&#x3D;&quot;Go back to previous page&quot;&gt;
+              &lt;img src&#x3D;&quot;assets/img/icons/arrow-left-line.png&quot; alt&#x3D;&quot;&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+          &lt;/button&gt;
+       &lt;/div&gt;
+     &lt;/nav&gt;
+  &lt;/header&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Imprint&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Dr. Michelle Puschkarow&lt;/strong&gt;&lt;/p&gt;
-    &lt;p&gt;Waldingstraße 6&lt;/p&gt;
-    &lt;p&gt;22391 Hamburg&lt;/p&gt;
-    &lt;p&gt;&lt;a href&#x3D;&quot;mailto:info@michelle-puschkarow.de&quot;&gt;info&amp;#64;michelle-puschkarow.de&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;Represented by:&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Marco Palummieri&lt;/strong&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Viktor Naumann&lt;/strong&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Jenny Domsgen&lt;/strong&gt;&lt;/p&gt;
-  &lt;/section&gt;
+  &lt;main role&#x3D;&quot;main&quot;&gt;
+    &lt;section aria-labelledby&#x3D;&quot;imprint&quot;&gt;
+      &lt;h2 id&#x3D;&quot;imprint&quot;&gt;Imprint&lt;/h2&gt;
+      &lt;address&gt;
+        &lt;p&gt;&lt;strong&gt;Dr. Michelle Puschkarow&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;Waldingstraße 6&lt;/p&gt;
+        &lt;p&gt;22391 Hamburg&lt;/p&gt;
+        &lt;p&gt;&lt;a href&#x3D;&quot;mailto:info@michelle-puschkarow.de&quot; aria-label&#x3D;&quot;Send email to info@michelle-puschkarow.de&quot;&gt;info&amp;#64;michelle-puschkarow.de&lt;/a&gt;&lt;/p&gt;
+      &lt;/address&gt;
+      &lt;p&gt;Represented by:&lt;/p&gt;
+      &lt;ul role&#x3D;&quot;list&quot;&gt;
+        &lt;li role&#x3D;&quot;listitem&quot;&gt;&lt;strong&gt;Marco Palummieri&lt;/strong&gt;&lt;/li&gt;
+        &lt;li role&#x3D;&quot;listitem&quot;&gt;&lt;strong&gt;Viktor Naumann&lt;/strong&gt;&lt;/li&gt;
+        &lt;li role&#x3D;&quot;listitem&quot;&gt;&lt;strong&gt;Jenny Domsgen&lt;/strong&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Acceptance of Terms&lt;/h2&gt;
-    &lt;p&gt;
-      By accessing and using &lt;strong&gt;Join&lt;/strong&gt; (Product), you acknowledge and agree to the following terms and
-      conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time.
-      We, the listed students, may update or change the terms and conditions from time to time without notice.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;acceptance-terms&quot;&gt;
+      &lt;h2 id&#x3D;&quot;acceptance-terms&quot;&gt;Acceptance of Terms&lt;/h2&gt;
+      &lt;p&gt;
+        By accessing and using &lt;strong&gt;Join&lt;/strong&gt; (Product), you acknowledge and agree to the following terms and
+        conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time.
+        We, the listed students, may update or change the terms and conditions from time to time without notice.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Scope and Ownership of the Product&lt;/h2&gt;
-    &lt;p&gt;
-      Join has been developed as part of a student group project in a web development bootcamp at the Developer
-      Akademie GmbH. It has an educational purpose and is not intended for extensive personal &amp;amp; business usage. As
-      such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality
-      regarding this Product.
-    &lt;/p&gt;
-    &lt;p&gt;
-      The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification,
-      distribution, or replication of the design is strictly prohibited.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;scope-ownership&quot;&gt;
+      &lt;h2 id&#x3D;&quot;scope-ownership&quot;&gt;Scope and Ownership of the Product&lt;/h2&gt;
+      &lt;p&gt;
+        Join has been developed as part of a student group project in a web development bootcamp at the Developer
+        Akademie GmbH. It has an educational purpose and is not intended for extensive personal &amp;amp; business usage. As
+        such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality
+        regarding this Product.
+      &lt;/p&gt;
+      &lt;p&gt;
+        The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification,
+        distribution, or replication of the design is strictly prohibited.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Proprietary Right&lt;/h2&gt;
-    &lt;p&gt;
-      Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in
-      Join, including any associated copyrighted material, trademarks,
-      and other proprietary information.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;proprietary-rights&quot;&gt;
+      &lt;h2 id&#x3D;&quot;proprietary-rights&quot;&gt;Proprietary Right&lt;/h2&gt;
+      &lt;p&gt;
+        Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in
+        Join, including any associated copyrighted material, trademarks,
+        and other proprietary information.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Use of the Product&lt;/h2&gt;
-    &lt;p&gt;
-      Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations.
-      Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly
-      prohibited. You are solely responsible for your interactions with other users of Join.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;use-product&quot;&gt;
+      &lt;h2 id&#x3D;&quot;use-product&quot;&gt;Use of the Product&lt;/h2&gt;
+      &lt;p&gt;
+        Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations.
+        Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly
+        prohibited. You are solely responsible for your interactions with other users of Join.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Disclaimer of Warranties and Limitation of Liability&lt;/h2&gt;
-    &lt;p&gt;
-      Join is provided &quot;as is&quot; without warranty of any kind, whether express or implied, including but not limited to
-      the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
-    &lt;/p&gt;
-    &lt;p&gt;
-      In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,
-      incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of
-      profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such
-      damages, arising out of or in connection with the use or performance of Join.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;disclaimer-liability&quot;&gt;
+      &lt;h2 id&#x3D;&quot;disclaimer-liability&quot;&gt;Disclaimer of Warranties and Limitation of Liability&lt;/h2&gt;
+      &lt;p&gt;
+        Join is provided &quot;as is&quot; without warranty of any kind, whether express or implied, including but not limited to
+        the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+      &lt;/p&gt;
+      &lt;p&gt;
+        In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,
+        incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of
+        profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such
+        damages, arising out of or in connection with the use or performance of Join.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;section&gt;
-    &lt;h2&gt;Indemnity&lt;/h2&gt;
-    &lt;p&gt;
-      You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our
-      affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,
-      damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join
-      and/or your breach of this Legal Notice.
-    &lt;/p&gt;
-  &lt;/section&gt;
+    &lt;section aria-labelledby&#x3D;&quot;indemnity&quot;&gt;
+      &lt;h2 id&#x3D;&quot;indemnity&quot;&gt;Indemnity&lt;/h2&gt;
+      &lt;p&gt;
+        You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our
+        affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,
+        damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join
+        and/or your breach of this Legal Notice.
+      &lt;/p&gt;
+    &lt;/section&gt;
 
-  &lt;p class&#x3D;&quot;legal-date&quot;&gt;Date: July 17, 2025&lt;/p&gt;
+    &lt;p class&#x3D;&quot;legal-date&quot;&gt;&lt;time datetime&#x3D;&quot;2025-07-17&quot;&gt;Date: July 17, 2025&lt;/time&gt;&lt;/p&gt;
+  &lt;/main&gt;
 &lt;/div&gt;
 
 </code></pre>
@@ -465,8 +473,8 @@ export class LegalNoticeComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="legal-notice-page">  <div>     <h1>Legal Notice</h1>     <div class="back-btn-wrapper">        <a (click)="goBack()">            <img src="assets/img/icons/arrow-left-line.png" alt="Arrow back to main page">        </a>     </div>  </div>  <section>    <h2>Imprint</h2>    <p><strong>Dr. Michelle Puschkarow</strong></p>    <p>Waldingstraße 6</p>    <p>22391 Hamburg</p>    <p><a href="mailto:info@michelle-puschkarow.de">info&#64;michelle-puschkarow.de</a></p>    <p>Represented by:</p>    <p><strong>Marco Palummieri</strong></p>    <p><strong>Viktor Naumann</strong></p>    <p><strong>Jenny Domsgen</strong></p>  </section>  <section>    <h2>Acceptance of Terms</h2>    <p>      By accessing and using <strong>Join</strong> (Product), you acknowledge and agree to the following terms and      conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time.      We, the listed students, may update or change the terms and conditions from time to time without notice.    </p>  </section>  <section>    <h2>Scope and Ownership of the Product</h2>    <p>      Join has been developed as part of a student group project in a web development bootcamp at the Developer      Akademie GmbH. It has an educational purpose and is not intended for extensive personal &amp; business usage. As      such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality      regarding this Product.    </p>    <p>      The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification,      distribution, or replication of the design is strictly prohibited.    </p>  </section>  <section>    <h2>Proprietary Right</h2>    <p>      Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in      Join, including any associated copyrighted material, trademarks,      and other proprietary information.    </p>  </section>  <section>    <h2>Use of the Product</h2>    <p>      Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations.      Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly      prohibited. You are solely responsible for your interactions with other users of Join.    </p>  </section>  <section>    <h2>Disclaimer of Warranties and Limitation of Liability</h2>    <p>      Join is provided "as is" without warranty of any kind, whether express or implied, including but not limited to      the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.    </p>    <p>      In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,      incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of      profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such      damages, arising out of or in connection with the use or performance of Join.    </p>  </section>  <section>    <h2>Indemnity</h2>    <p>      You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our      affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,      damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join      and/or your breach of this Legal Notice.    </p>  </section>  <p class="legal-date">Date: July 17, 2025</p></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><div class="legal-notice-page">  <header>     <h1>Legal Notice</h1>     <nav aria-label="Legal notice navigation">       <div class="back-btn-wrapper">          <button type="button" (click)="goBack()" aria-label="Go back to previous page">              <img src="assets/img/icons/arrow-left-line.png" alt="" aria-hidden="true">          </button>       </div>     </nav>  </header>  <main role="main">    <section aria-labelledby="imprint">      <h2 id="imprint">Imprint</h2>      <address>        <p><strong>Dr. Michelle Puschkarow</strong></p>        <p>Waldingstraße 6</p>        <p>22391 Hamburg</p>        <p><a href="mailto:info@michelle-puschkarow.de" aria-label="Send email to info@michelle-puschkarow.de">info&#64;michelle-puschkarow.de</a></p>      </address>      <p>Represented by:</p>      <ul role="list">        <li role="listitem"><strong>Marco Palummieri</strong></li>        <li role="listitem"><strong>Viktor Naumann</strong></li>        <li role="listitem"><strong>Jenny Domsgen</strong></li>      </ul>    </section>    <section aria-labelledby="acceptance-terms">      <h2 id="acceptance-terms">Acceptance of Terms</h2>      <p>        By accessing and using <strong>Join</strong> (Product), you acknowledge and agree to the following terms and        conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time.        We, the listed students, may update or change the terms and conditions from time to time without notice.      </p>    </section>    <section aria-labelledby="scope-ownership">      <h2 id="scope-ownership">Scope and Ownership of the Product</h2>      <p>        Join has been developed as part of a student group project in a web development bootcamp at the Developer        Akademie GmbH. It has an educational purpose and is not intended for extensive personal &amp; business usage. As        such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality        regarding this Product.      </p>      <p>        The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification,        distribution, or replication of the design is strictly prohibited.      </p>    </section>    <section aria-labelledby="proprietary-rights">      <h2 id="proprietary-rights">Proprietary Right</h2>      <p>        Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in        Join, including any associated copyrighted material, trademarks,        and other proprietary information.      </p>    </section>    <section aria-labelledby="use-product">      <h2 id="use-product">Use of the Product</h2>      <p>        Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations.        Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly        prohibited. You are solely responsible for your interactions with other users of Join.      </p>    </section>    <section aria-labelledby="disclaimer-liability">      <h2 id="disclaimer-liability">Disclaimer of Warranties and Limitation of Liability</h2>      <p>        Join is provided "as is" without warranty of any kind, whether express or implied, including but not limited to        the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.      </p>      <p>        In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,        incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of        profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such        damages, arising out of or in connection with the use or performance of Join.      </p>    </section>    <section aria-labelledby="indemnity">      <h2 id="indemnity">Indemnity</h2>      <p>        You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our        affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,        damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of Join        and/or your breach of this Legal Notice.      </p>    </section>    <p class="legal-date"><time datetime="2025-07-17">Date: July 17, 2025</time></p>  </main></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LegalNoticeComponent'};
 </script>

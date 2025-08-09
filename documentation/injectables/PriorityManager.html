@@ -124,7 +124,13 @@
             </p>
             <p class="comment">
                 <p>PriorityManager handles all priority-related operations for the AddTaskComponent.
-This includes setting priority management.</p>
+Manages priority selection and provides integration with category management.
+Supports three priority levels: low, medium, and urgent.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Inject in component
+constructor(private priorityManager: PriorityManager) {}</code></pre></div><p>// Set priority
+this.priorityManager.setPriority(&#39;urgent&#39;);</p>
+<p>// Access selected priority
+const priority = this.priorityManager.selectedPriority;</p>
 
             </p>
 
@@ -191,12 +197,14 @@ This includes setting priority management.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/add-task/priority-manager.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/add-task/priority-manager.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of PriorityManager.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -205,6 +213,7 @@ This includes setting priority management.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -219,6 +228,12 @@ This includes setting priority management.</p>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Category manager for coordinated operations</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -254,15 +269,16 @@ This includes setting priority management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/add-task/priority-manager.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/add-task/priority-manager.ts:41</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the task priority.</p>
+                        <div class="io-description"><p>Sets the task priority level.
+Updates the currently selected priority for the task.</p>
 </div>
 
                             <div class="io-description">
@@ -291,7 +307,7 @@ This includes setting priority management.</p>
 
                                             <td>
                                                     <ul>
-<li>The priority level to set (&#39;low&#39;, &#39;medium&#39;, &#39;urgent&#39;).</li>
+<li>The priority level to set (&#39;low&#39;, &#39;medium&#39;, &#39;urgent&#39;)</li>
 </ul>
 
                                             </td>
@@ -332,15 +348,17 @@ This includes setting priority management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/add-task/priority-manager.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/add-task/priority-manager.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the selected priority and category in their respective managers.</p>
+                        <div class="io-description"><p>Sets the selected priority and category from a task object.
+Used when editing existing tasks to populate both priority and category.
+Coordinates with category manager to ensure consistent state.</p>
 </div>
 
                             <div class="io-description">
@@ -369,7 +387,7 @@ This includes setting priority management.</p>
 
                                             <td>
                                                     <ul>
-<li>The task object.</li>
+<li>The task object containing priority and category data</li>
 </ul>
 
                                             </td>
@@ -414,10 +432,15 @@ This includes setting priority management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/add-task/priority-manager.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/add-task/priority-manager.ts:32</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Category manager for coordinated operations</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -445,10 +468,16 @@ This includes setting priority management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/add-task/priority-manager.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/add-task/priority-manager.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Currently selected priority level, defaults to medium</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -463,39 +492,57 @@ import { CategoryManager } from &#x27;./category-manager&#x27;;
 
 /**
  * PriorityManager handles all priority-related operations for the AddTaskComponent.
- * This includes setting priority management.
+ * Manages priority selection and provides integration with category management.
+ * Supports three priority levels: low, medium, and urgent.
+ * 
+ * @example
+ * // Inject in component
+ * constructor(private priorityManager: PriorityManager) {}
+ * 
+ * // Set priority
+ * this.priorityManager.setPriority(&#x27;urgent&#x27;);
+ * 
+ * // Access selected priority
+ * const priority &#x3D; this.priorityManager.selectedPriority;
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
 export class PriorityManager {
+  /** Currently selected priority level, defaults to medium */
   selectedPriority: string &#x3D; &#x27;medium&#x27;;
 
+  /**
+   * Creates an instance of PriorityManager.
+   * @param categoryManager - Category manager for coordinated operations
+   */
   constructor(
     public categoryManager: CategoryManager
   ) { }
 
-   /**
-   * Sets the task priority.
-   * @param priority - The priority level to set (&#x27;low&#x27;, &#x27;medium&#x27;, &#x27;urgent&#x27;).
+  /**
+   * Sets the task priority level.
+   * Updates the currently selected priority for the task.
+   * 
+   * @param priority - The priority level to set (&#x27;low&#x27;, &#x27;medium&#x27;, &#x27;urgent&#x27;)
    */
   setPriority(priority: string) {
     this.selectedPriority &#x3D; priority;
   }
   
   /**
-   * Sets the selected priority and category in their respective managers.
+   * Sets the selected priority and category from a task object.
+   * Used when editing existing tasks to populate both priority and category.
+   * Coordinates with category manager to ensure consistent state.
    *
-   * @param task - The task object.
+   * @param task - The task object containing priority and category data
    */
   public setPriorityAndCategory(task: any): void {
     this.selectedPriority &#x3D; task.priority || &#x27;medium&#x27;;
-    this.categoryManager.setSelectedCategory(task.category || &#x27;&#x27;);
+    this.categoryManager.setSelectedCategory(task.category);
   }
-
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

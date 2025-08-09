@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content guard">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -89,11 +89,9 @@
 
 
 
-
-
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">Guards</li>
-    <li class="breadcrumb-item" >AuthGuard</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >AuthErrorService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -112,34 +110,26 @@
 </ul>
 
 <div class="tab-content">
-        <div class="tab-pane fade active in" id="info">
-            <p class="comment">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
             <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/auth-error.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
             </p>
             <p class="comment">
-                <code>src/app/services/auth.guard.ts</code>
+                <p>Service for handling authentication error messages.</p>
+
             </p>
 
 
-                <p class="comment">
-                <h3>Description</h3>
-                </p>
-                <p class="comment">
-                    <p>Route guard that prevents access to certain routes
-unless the user is authenticated.
-Waits for Firebase Auth to initialize before making routing decisions.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// In routing configuration
-{
-  path: &#39;dashboard&#39;,
-  component: DashboardComponent,
-  canActivate: [AuthGuard]
-}</code></pre></div>
-                </p>
 
-
-
-
-                <section data-compodoc="block-index">
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -153,7 +143,11 @@ Waits for Firebase Auth to initialize before making routing decisions.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#canActivate" >canActivate</a>
+                                <a href="#getErrorMessage" >getErrorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getErrorMessageMap" >getErrorMessageMap</a>
                             </li>
                         </ul>
                     </td>
@@ -167,83 +161,26 @@ Waits for Firebase Auth to initialize before making routing decisions.</p>
     </table>
 </section>
 
-                <section data-compodoc="block-constructor">
+            <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/auth.guard.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/services/auth-error.service.ts:9</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Constructs the AuthGuard with required dependencies.</p>
-</div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>authService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <ul>
-<li>Service to check the user&#39;s authentication status</li>
-</ul>
-
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <ul>
-<li>Angular Router used for navigation to login page</li>
-</ul>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
 
-                <section data-compodoc="block-methods">
+            <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -252,115 +189,165 @@ Waits for Firebase Auth to initialize before making routing decisions.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="canActivate"></a>
+                    <a name="getErrorMessage"></a>
                     <span class="name">
-                        <span ><b>canActivate</b></span>
-                        <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getErrorMessage</b></span>
+                        <a href="#getErrorMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>canActivate()</code>
+<code>getErrorMessage(errorCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/services/auth.guard.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/app/services/auth-error.service.ts:18</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Determines whether a route can be activated based on authentication status.
-Waits for Firebase Auth to initialize before making the decision to ensure
-accurate authentication state. If user is not authenticated, redirects to login.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">     false if not (after redirecting to login)</code></pre></div></div>
+                        <div class="io-description"><p>Maps Firebase Auth error codes to human-readable error messages.</p>
+</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>errorCode</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Firebase Auth error code</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable<boolean> that resolves to true if user is logged in,
-false if not (after redirecting to login)</p>
+                                <p>A string describing the error</p>
 
                             </div>
                 </td>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getErrorMessageMap"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getErrorMessageMap</b></span>
+                        <a href="#getErrorMessageMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getErrorMessageMap()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/services/auth-error.service.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>literal type</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-        </div>
+
+    </div>
 
 
-        <div class="tab-pane fade  tab-source-code" id="source">
-            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { CanActivate, Router } from &#x27;@angular/router&#x27;;
-import { AuthService } from &#x27;./auth.service&#x27;;
-import { Observable, combineLatest, map, filter, take } from &#x27;rxjs&#x27;;
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
 /**
- * Route guard that prevents access to certain routes
- * unless the user is authenticated.
- * Waits for Firebase Auth to initialize before making routing decisions.
- * 
- * @example
- * // In routing configuration
- * {
- *   path: &#x27;dashboard&#x27;,
- *   component: DashboardComponent,
- *   canActivate: [AuthGuard]
- * }
+ * Service for handling authentication error messages.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
+export class AuthErrorService {
 
-export class AuthGuard implements CanActivate {
-
-  /**
-   * Constructs the AuthGuard with required dependencies.
-   * @param authService - Service to check the user&#x27;s authentication status
-   * @param router - Angular Router used for navigation to login page
-   */
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor() { }
 
   /**
-   * Determines whether a route can be activated based on authentication status.
-   * Waits for Firebase Auth to initialize before making the decision to ensure
-   * accurate authentication state. If user is not authenticated, redirects to login.
-   * 
-   * @returns Observable&lt;boolean&gt; that resolves to true if user is logged in,
-   *          false if not (after redirecting to login)
+   * Maps Firebase Auth error codes to human-readable error messages.
+   * @param errorCode - Firebase Auth error code
+   * @returns A string describing the error
    */
-  canActivate(): Observable&lt;boolean&gt; {
-    return combineLatest([
-      this.authService.currentUser$,
-      this.authService.authInitialized$
-    ]).pipe(
-      filter(([user, initialized]) &#x3D;&gt; initialized),
-      take(1),
-      map(([user, initialized]) &#x3D;&gt; {
-        if (user) {
-          return true;
-        } else {
-          this.router.navigate([&#x27;/login&#x27;]);
-          return false;
-        }
-      })
-    );
-  };
-}</code></pre>
-        </div>
+  getErrorMessage(errorCode: string): string {
+    const errorMessages &#x3D; this.getErrorMessageMap();
+    return errorMessages[errorCode] || &#x27;An error occurred. Please try again.&#x27;;
+  }
+
+  private getErrorMessageMap(): { [key: string]: string } {
+    return {
+      &#x27;auth/user-not-found&#x27;: &#x27;User not found.&#x27;,
+      &#x27;auth/wrong-password&#x27;: &#x27;Wrong password.&#x27;,
+      &#x27;auth/email-already-in-use&#x27;: &#x27;Email address is already in use.&#x27;,
+      &#x27;auth/weak-password&#x27;: &#x27;Password is too weak.&#x27;,
+      &#x27;auth/invalid-email&#x27;: &#x27;Invalid email address.&#x27;,
+      &#x27;auth/user-disabled&#x27;: &#x27;User account has been disabled.&#x27;,
+      &#x27;auth/too-many-requests&#x27;: &#x27;Too many login attempts. Please try again later.&#x27;,
+      &#x27;auth/network-request-failed&#x27;: &#x27;Network error. Please check your internet connection.&#x27;
+    };
+  }
+}
+</code></pre>
+    </div>
+
 </div>
+
+
 
 
 
@@ -397,8 +384,8 @@ export class AuthGuard implements CanActivate {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthGuard.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthErrorService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

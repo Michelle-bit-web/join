@@ -124,7 +124,13 @@
             </p>
             <p class="comment">
                 <p>CategoryManager handles all category-related operations for the AddTaskComponent.
-This includes category selection, display, and dropdown management.</p>
+Manages category selection, display, dropdown state, and provides category metadata.
+Supports two predefined categories: Technical Task and User Story.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Inject and use in component
+constructor(private categoryManager: CategoryManager) {}</code></pre></div><p>// Select a category
+this.categoryManager.selectCategory(category);</p>
+<p>// Check if category is selected
+if (this.categoryManager.hasSelectedCategory()) { ... }</p>
 
             </p>
 
@@ -243,15 +249,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:149</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Clears the selected category and resets dropdown state.</p>
+                        <div class="io-description"><p>Clears the selected category and resets dropdown state to defaults.
+Used when resetting the form or clearing all selections.</p>
 </div>
 
                         <div class="io-description">
@@ -282,21 +289,25 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:86</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets all available categories</p>
+                        <div class="io-description"><p>Gets all available categories for selection.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Category.html" target="_self" >Category[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Array of category objects with value, label, and color properties</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -321,15 +332,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:127</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns the color for the selected category.</p>
+                        <div class="io-description"><p>Returns the color associated with the currently selected category.
+Used for visual styling and category identification.</p>
 </div>
 
                         <div class="io-description">
@@ -337,7 +349,7 @@ This includes category selection, display, and dropdown management.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The category color or default color.</p>
+                                <p>Hex color code for selected category, or default gray if none selected</p>
 
                             </div>
                 </td>
@@ -364,15 +376,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:113</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns the text to display for the selected category.</p>
+                        <div class="io-description"><p>Returns the appropriate display text for the category selector.
+Shows category label if selected, placeholder text if none selected.</p>
 </div>
 
                         <div class="io-description">
@@ -380,7 +393,7 @@ This includes category selection, display, and dropdown management.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The category label or default text.</p>
+                                <p>The category label or default placeholder text</p>
 
                             </div>
                 </td>
@@ -407,21 +420,25 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:54</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets the currently selected category</p>
+                        <div class="io-description"><p>Gets the currently selected category value.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The selected category value or empty string if none selected</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -446,21 +463,25 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:70</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets the category dropdown visibility state</p>
+                        <div class="io-description"><p>Gets the current category dropdown visibility state.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>True if dropdown is visible, false otherwise</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -485,15 +506,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if a category is currently selected.</p>
+                        <div class="io-description"><p>Checks if any category is currently selected.
+Useful for form validation and conditional display logic.</p>
 </div>
 
                         <div class="io-description">
@@ -501,7 +523,7 @@ This includes category selection, display, and dropdown management.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>True if a category is selected, false otherwise.</p>
+                                <p>True if a category is selected, false otherwise</p>
 
                             </div>
                 </td>
@@ -528,15 +550,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:158</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles category selection and clears error state.</p>
+                        <div class="io-description"><p>Handles category selection and clears any existing error state.
+Called after successful category selection to remove validation errors.</p>
 </div>
 
                         <div class="io-description">
@@ -567,15 +590,15 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Selects a category and closes the dropdown.</p>
+                        <div class="io-description"><p>Selects a category and automatically closes the dropdown.</p>
 </div>
 
                             <div class="io-description">
@@ -604,7 +627,7 @@ This includes category selection, display, and dropdown management.</p>
 
                                             <td>
                                                     <ul>
-<li>The category to select.</li>
+<li>The category object to select</li>
 </ul>
 
                                             </td>
@@ -643,15 +666,15 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the selected category</p>
+                        <div class="io-description"><p>Sets the selected category value.</p>
 </div>
 
                             <div class="io-description">
@@ -663,6 +686,7 @@ This includes category selection, display, and dropdown management.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -677,6 +701,12 @@ This includes category selection, display, and dropdown management.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The category value to set as selected</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -712,15 +742,15 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:78</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the category dropdown visibility state</p>
+                        <div class="io-description"><p>Sets the category dropdown visibility state.</p>
 </div>
 
                             <div class="io-description">
@@ -732,6 +762,7 @@ This includes category selection, display, and dropdown management.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -746,6 +777,12 @@ This includes category selection, display, and dropdown management.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>True to show dropdown, false to hide it</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -781,15 +818,16 @@ This includes category selection, display, and dropdown management.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">src/app/add-task/category-manager.ts:64</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/add-task/category-manager.ts:94</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the category dropdown visibility.</p>
+                        <div class="io-description"><p>Toggles the category dropdown visibility state.
+Opens dropdown if closed, closes if open.</p>
 </div>
 
                         <div class="io-description">
@@ -834,10 +872,16 @@ This includes category selection, display, and dropdown management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/add-task/category-manager.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/add-task/category-manager.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Predefined categories available for task assignment</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -866,10 +910,16 @@ This includes category selection, display, and dropdown management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/add-task/category-manager.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/add-task/category-manager.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Currently selected category value</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -898,10 +948,16 @@ This includes category selection, display, and dropdown management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/add-task/category-manager.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/add-task/category-manager.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current state of the category dropdown visibility</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -929,10 +985,16 @@ This includes category selection, display, and dropdown management.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/add-task/category-manager.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/add-task/category-manager.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating whether to show category validation error</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -944,74 +1006,104 @@ This includes category selection, display, and dropdown management.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/**
+ * Interface representing a task category with display properties.
+ */
 export interface Category {
+  /** The internal value used for form submission and data storage */
   value: string;
+  /** The user-friendly label displayed in the UI */
   label: string;
+  /** The color associated with this category for visual distinction */
   color: string;
 }
 
 /**
  * CategoryManager handles all category-related operations for the AddTaskComponent.
- * This includes category selection, display, and dropdown management.
+ * Manages category selection, display, dropdown state, and provides category metadata.
+ * Supports two predefined categories: Technical Task and User Story.
+ * 
+ * @example
+ * // Inject and use in component
+ * constructor(private categoryManager: CategoryManager) {}
+ * 
+ * // Select a category
+ * this.categoryManager.selectCategory(category);
+ * 
+ * // Check if category is selected
+ * if (this.categoryManager.hasSelectedCategory()) { ... }
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
 export class CategoryManager {
+  /** Flag indicating whether to show category validation error */
   showCategoryError: boolean &#x3D; false;
+  
+  /** Currently selected category value */
   private selectedCategory: string &#x3D; &#x27;&#x27;;
+  
+  /** Current state of the category dropdown visibility */
   private showCategoryDropdown: boolean &#x3D; false;
+  
+  /** Predefined categories available for task assignment */
   private categories: Category[] &#x3D; [
     { value: &#x27;technical&#x27;, label: &#x27;Technical Task&#x27;, color: &#x27;#1FD7C1&#x27; },
     { value: &#x27;user story&#x27;, label: &#x27;User Story&#x27;, color: &#x27;#0038FF&#x27; }
   ];
 
   /**
-   * Gets the currently selected category
+   * Gets the currently selected category value.
+   * @returns The selected category value or empty string if none selected
    */
   getSelectedCategory(): string {
     return this.selectedCategory;
   }
 
   /**
-   * Sets the selected category
+   * Sets the selected category value.
+   * @param category - The category value to set as selected
    */
   setSelectedCategory(category: string): void {
     this.selectedCategory &#x3D; category;
   }
 
   /**
-   * Gets the category dropdown visibility state
+   * Gets the current category dropdown visibility state.
+   * @returns True if dropdown is visible, false otherwise
    */
   getShowCategoryDropdown(): boolean {
     return this.showCategoryDropdown;
   }
 
   /**
-   * Sets the category dropdown visibility state
+   * Sets the category dropdown visibility state.
+   * @param value - True to show dropdown, false to hide it
    */
   setShowCategoryDropdown(value: boolean): void {
     this.showCategoryDropdown &#x3D; value;
   }
 
   /**
-   * Gets all available categories
+   * Gets all available categories for selection.
+   * @returns Array of category objects with value, label, and color properties
    */
   getCategories(): Category[] {
     return this.categories;
   }
 
   /**
-   * Toggles the category dropdown visibility.
+   * Toggles the category dropdown visibility state.
+   * Opens dropdown if closed, closes if open.
    */
   toggleCategoryDropdown(): void {
     this.showCategoryDropdown &#x3D; !this.showCategoryDropdown;
   }
 
   /**
-   * Selects a category and closes the dropdown.
-   * @param category - The category to select.
+   * Selects a category and automatically closes the dropdown.
+   * @param category - The category object to select
    */
   selectCategory(category: Category): void {
     this.selectedCategory &#x3D; category.value;
@@ -1019,8 +1111,10 @@ export class CategoryManager {
   }
 
   /**
-   * Returns the text to display for the selected category.
-   * @returns The category label or default text.
+   * Returns the appropriate display text for the category selector.
+   * Shows category label if selected, placeholder text if none selected.
+   * 
+   * @returns The category label or default placeholder text
    */
   getCategoryText(): string {
     if (!this.selectedCategory) {
@@ -1031,8 +1125,10 @@ export class CategoryManager {
   }
 
   /**
-   * Returns the color for the selected category.
-   * @returns The category color or default color.
+   * Returns the color associated with the currently selected category.
+   * Used for visual styling and category identification.
+   * 
+   * @returns Hex color code for selected category, or default gray if none selected
    */
   getCategoryColor(): string {
     if (!this.selectedCategory) {
@@ -1043,31 +1139,34 @@ export class CategoryManager {
   }
 
   /**
-   * Checks if a category is currently selected.
-   * @returns True if a category is selected, false otherwise.
+   * Checks if any category is currently selected.
+   * Useful for form validation and conditional display logic.
+   * 
+   * @returns True if a category is selected, false otherwise
    */
   hasSelectedCategory(): boolean {
     return !!this.selectedCategory;
   }
 
   /**
-   * Clears the selected category and resets dropdown state.
+   * Clears the selected category and resets dropdown state to defaults.
+   * Used when resetting the form or clearing all selections.
    */
   clearAll(): void {
     this.selectedCategory &#x3D; &#x27;&#x27;;
     this.showCategoryDropdown &#x3D; false;
   }
 
-   /**
-   * Handles category selection and clears error state.
+  /**
+   * Handles category selection and clears any existing error state.
+   * Called after successful category selection to remove validation errors.
    */
   onCategorySelect() {
     if (this.hasSelectedCategory()) {
       this.showCategoryError &#x3D; false;
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

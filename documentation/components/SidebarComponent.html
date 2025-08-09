@@ -362,63 +362,61 @@ export class SidebarComponent {
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;sidebar&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;aside class&#x3D;&quot;sidebar&quot; role&#x3D;&quot;navigation&quot; aria-label&#x3D;&quot;Main navigation&quot;&gt;
   &lt;div class&#x3D;&quot;logo-section&quot;&gt;
     &lt;img src&#x3D;&quot;assets/img/logo/logo.png&quot; alt&#x3D;&quot;Join Logo&quot; class&#x3D;&quot;logo&quot; /&gt;
   &lt;/div&gt;
-  &lt;nav class&#x3D;&quot;navigation&quot; *ngIf&#x3D;&quot;isLoggedIn()&quot;&gt;
-    &lt;ul&gt;
-      &lt;li routerLinkActive&#x3D;&quot;active&quot;&gt;
-        &lt;a routerLink&#x3D;&quot;/summary&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/icons/summary-light.png&quot; alt&#x3D;&quot;Summary Icon&quot; /&gt;
+  &lt;nav class&#x3D;&quot;navigation&quot; *ngIf&#x3D;&quot;isLoggedIn()&quot; role&#x3D;&quot;navigation&quot; aria-label&#x3D;&quot;Primary navigation&quot;&gt;
+    &lt;ul role&#x3D;&quot;list&quot;&gt;
+      &lt;li routerLinkActive&#x3D;&quot;active&quot; role&#x3D;&quot;listitem&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/summary&quot; aria-label&#x3D;&quot;Go to Summary page&quot;&gt;
+          &lt;img src&#x3D;&quot;assets/img/icons/summary-light.png&quot; alt&#x3D;&quot;Icon to Summary page&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
           &lt;span&gt;Summary&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
-      &lt;li routerLinkActive&#x3D;&quot;active&quot;&gt;
-        &lt;a routerLink&#x3D;&quot;/board&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/icons/board.png&quot; alt&#x3D;&quot;Board Icon&quot; /&gt;
+      &lt;li routerLinkActive&#x3D;&quot;active&quot; role&#x3D;&quot;listitem&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/board&quot; aria-label&#x3D;&quot;Go to Board page&quot;&gt;
+          &lt;img src&#x3D;&quot;assets/img/icons/board.png&quot; alt&#x3D;&quot;Icon to&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
           &lt;span&gt;Board&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
-      &lt;li routerLinkActive&#x3D;&quot;active&quot;&gt;
-        &lt;a routerLink&#x3D;&quot;/add-task&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/icons/add-task.png&quot; alt&#x3D;&quot;Add Task Icon&quot; /&gt;
+      &lt;li routerLinkActive&#x3D;&quot;active&quot; role&#x3D;&quot;listitem&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/add-task&quot; aria-label&#x3D;&quot;Go to Add Task page&quot;&gt;
+          &lt;img src&#x3D;&quot;assets/img/icons/add-task.png&quot; alt&#x3D;&quot;Icon to Add Task page&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
           &lt;span&gt;Add Task&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
-      &lt;li routerLinkActive&#x3D;&quot;active&quot;&gt;
-        &lt;a routerLink&#x3D;&quot;/contacts&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/icons/contacts.png&quot; alt&#x3D;&quot;Contacts Icon&quot; /&gt;
+      &lt;li routerLinkActive&#x3D;&quot;active&quot; role&#x3D;&quot;listitem&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/contacts&quot; aria-label&#x3D;&quot;Go to Contacts page&quot;&gt;
+          &lt;img src&#x3D;&quot;assets/img/icons/contacts.png&quot; alt&#x3D;&quot;Icon to Contacts page&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
           &lt;span&gt;Contacts&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/nav&gt;
-  &lt;nav class&#x3D;&quot;login-navigation&quot; *ngIf&#x3D;&quot;!isLoggedIn()&quot;&gt;
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;a routerLink&#x3D;&quot;/login&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/svg/log-in.svg&quot; alt&#x3D;&quot;Log In Icon&quot; /&gt;
+  &lt;nav class&#x3D;&quot;login-navigation&quot; *ngIf&#x3D;&quot;!isLoggedIn()&quot; role&#x3D;&quot;navigation&quot; aria-label&#x3D;&quot;Login navigation&quot;&gt;
+    &lt;ul role&#x3D;&quot;list&quot;&gt;
+      &lt;li role&#x3D;&quot;listitem&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/login&quot; aria-label&#x3D;&quot;Go to Login page&quot;&gt;
+          &lt;img src&#x3D;&quot;assets/img/svg/log-in.svg&quot; alt&#x3D;&quot;Icon to Login page&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
           &lt;span&gt;Log In&lt;/span&gt;
         &lt;/a&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
-    &lt;div class&#x3D;&quot;login-legal-links&quot;&gt;
-      &lt;a routerLink&#x3D;&quot;/privacy-policy&quot;&gt;Privacy Policy&lt;/a&gt;
-      &lt;a routerLink&#x3D;&quot;/legal-notice&quot;&gt;Legal notice&lt;/a&gt;
+    &lt;div class&#x3D;&quot;login-legal-links&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Legal links&quot;&gt;
+      &lt;a routerLink&#x3D;&quot;/privacy-policy&quot; aria-label&#x3D;&quot;Read Privacy Policy&quot;&gt;Privacy Policy&lt;/a&gt;
+      &lt;a routerLink&#x3D;&quot;/legal-notice&quot; aria-label&#x3D;&quot;Read Legal Notice&quot;&gt;Legal notice&lt;/a&gt;
     &lt;/div&gt;
   &lt;/nav&gt;
-  &lt;div class&#x3D;&quot;legal-links&quot;&gt;
-    &lt;a routerLink&#x3D;&quot;/privacy-policy&quot;&gt;Privacy Policy&lt;/a&gt;
-    &lt;a routerLink&#x3D;&quot;/legal-notice&quot;&gt;Legal notice&lt;/a&gt;
+  &lt;div class&#x3D;&quot;legal-links&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Legal information&quot;&gt;
+    &lt;a routerLink&#x3D;&quot;/privacy-policy&quot; aria-label&#x3D;&quot;Read Privacy Policy&quot;&gt;Privacy Policy&lt;/a&gt;
+    &lt;a routerLink&#x3D;&quot;/legal-notice&quot; aria-label&#x3D;&quot;Read Legal Notice&quot;&gt;Legal notice&lt;/a&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+&lt;/aside&gt;</code></pre>
     </div>
 
 
@@ -447,8 +445,8 @@ export class SidebarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="sidebar">  <div class="logo-section">    <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo" />  </div>  <nav class="navigation" *ngIf="isLoggedIn()">    <ul>      <li routerLinkActive="active">        <a routerLink="/summary">          <img src="assets/img/icons/summary-light.png" alt="Summary Icon" />          <span>Summary</span>        </a>      </li>      <li routerLinkActive="active">        <a routerLink="/board">          <img src="assets/img/icons/board.png" alt="Board Icon" />          <span>Board</span>        </a>      </li>      <li routerLinkActive="active">        <a routerLink="/add-task">          <img src="assets/img/icons/add-task.png" alt="Add Task Icon" />          <span>Add Task</span>        </a>      </li>      <li routerLinkActive="active">        <a routerLink="/contacts">          <img src="assets/img/icons/contacts.png" alt="Contacts Icon" />          <span>Contacts</span>        </a>      </li>    </ul>  </nav>  <nav class="login-navigation" *ngIf="!isLoggedIn()">    <ul>      <li>        <a routerLink="/login">          <img src="assets/img/svg/log-in.svg" alt="Log In Icon" />          <span>Log In</span>        </a>      </li>    </ul>    <div class="login-legal-links">      <a routerLink="/privacy-policy">Privacy Policy</a>      <a routerLink="/legal-notice">Legal notice</a>    </div>  </nav>  <div class="legal-links">    <a routerLink="/privacy-policy">Privacy Policy</a>    <a routerLink="/legal-notice">Legal notice</a>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><aside class="sidebar" role="navigation" aria-label="Main navigation">  <div class="logo-section">    <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo" />  </div>  <nav class="navigation" *ngIf="isLoggedIn()" role="navigation" aria-label="Primary navigation">    <ul role="list">      <li routerLinkActive="active" role="listitem">        <a routerLink="/summary" aria-label="Go to Summary page">          <img src="assets/img/icons/summary-light.png" alt="Icon to Summary page" aria-hidden="true" />          <span>Summary</span>        </a>      </li>      <li routerLinkActive="active" role="listitem">        <a routerLink="/board" aria-label="Go to Board page">          <img src="assets/img/icons/board.png" alt="Icon to" aria-hidden="true" />          <span>Board</span>        </a>      </li>      <li routerLinkActive="active" role="listitem">        <a routerLink="/add-task" aria-label="Go to Add Task page">          <img src="assets/img/icons/add-task.png" alt="Icon to Add Task page" aria-hidden="true" />          <span>Add Task</span>        </a>      </li>      <li routerLinkActive="active" role="listitem">        <a routerLink="/contacts" aria-label="Go to Contacts page">          <img src="assets/img/icons/contacts.png" alt="Icon to Contacts page" aria-hidden="true" />          <span>Contacts</span>        </a>      </li>    </ul>  </nav>  <nav class="login-navigation" *ngIf="!isLoggedIn()" role="navigation" aria-label="Login navigation">    <ul role="list">      <li role="listitem">        <a routerLink="/login" aria-label="Go to Login page">          <img src="assets/img/svg/log-in.svg" alt="Icon to Login page" aria-hidden="true" />          <span>Log In</span>        </a>      </li>    </ul>    <div class="login-legal-links" role="group" aria-label="Legal links">      <a routerLink="/privacy-policy" aria-label="Read Privacy Policy">Privacy Policy</a>      <a routerLink="/legal-notice" aria-label="Read Legal Notice">Legal notice</a>    </div>  </nav>  <div class="legal-links" role="group" aria-label="Legal information">    <a routerLink="/privacy-policy" aria-label="Read Privacy Policy">Privacy Policy</a>    <a routerLink="/legal-notice" aria-label="Read Legal Notice">Legal notice</a>  </div></aside></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SidebarComponent'};
 </script>

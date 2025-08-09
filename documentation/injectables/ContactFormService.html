@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >TaskService</li>
+  <li class="breadcrumb-item" >ContactFormService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/task.service.ts</code>
+            <code>src/app/contacts/contact-form/contact-form.service.ts</code>
         </p>
 
 
@@ -123,9 +123,14 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service responsible for managing tasks and subtasks
-stored in Firestore.</p>
-
+                <p>Service for handling contact form operations and business logic.
+Manages image operations, form data manipulation, and contact CRUD operations.
+Provides helper methods for contact form component to maintain separation of concerns.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+// Inject in component constructor
+constructor(private formService: ContactFormService) {}</code></pre></div><p>// Use service methods
+await this.formService.processSubmission(this, contact);</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div>
             </p>
 
 
@@ -134,21 +139,6 @@ stored in Firestore.</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#editingTask" >editingTask</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -159,83 +149,64 @@ stored in Firestore.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#addSubtask" >addSubtask</a>
+                                <a href="#addNewContact" >addNewContact</a>
+                            </li>
+                            <li>
+                                <a href="#buildContactFromForm" >buildContactFromForm</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#addTask" >addTask</a>
+                                <a href="#deletePreviousImages" >deletePreviousImages</a>
+                            </li>
+                            <li>
+                                <a href="#fillContactForm" >fillContactForm</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#buildSubtaskJson" >buildSubtaskJson</a>
+                                <a href="#getImageKeys" >getImageKeys</a>
+                            </li>
+                            <li>
+                                <a href="#handleContactDeletion" >handleContactDeletion</a>
+                            </li>
+                            <li>
+                                <a href="#handleFormClose" >handleFormClose</a>
+                            </li>
+                            <li>
+                                <a href="#loadContactImage" >loadContactImage</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#buildTaskJson" >buildTaskJson</a>
-                            </li>
-                            <li>
-                                <a href="#capitalize" >capitalize</a>
-                            </li>
-                            <li>
-                                <a href="#clearEditingTask" >clearEditingTask</a>
-                            </li>
-                            <li>
-                                <a href="#convertDate" >convertDate</a>
-                            </li>
-                            <li>
-                                <a href="#deleteImageFromTask" >deleteImageFromTask</a>
+                                <a href="#processContactUpdate" >processContactUpdate</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteSubtask" >deleteSubtask</a>
+                                <a href="#processSubmission" >processSubmission</a>
                             </li>
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#deleteTask" >deleteTask</a>
-                            </li>
-                            <li>
-                                <a href="#formatDate" >formatDate</a>
-                            </li>
-                            <li>
-                                <a href="#getCleanJson" >getCleanJson</a>
-                            </li>
-                            <li>
-                                <a href="#getEditingTask" >getEditingTask</a>
-                            </li>
-                            <li>
-                                <a href="#getSingleTaskRef" >getSingleTaskRef</a>
-                            </li>
-                            <li>
-                                <a href="#getSubtasks" >getSubtasks</a>
-                            </li>
-                            <li>
-                                <a href="#getSubtasksRef" >getSubtasksRef</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#getTaskById" >getTaskById</a>
-                            </li>
-                            <li>
-                                <a href="#getTasks" >getTasks</a>
-                            </li>
-                            <li>
-                                <a href="#getTasksRef" >getTasksRef</a>
-                            </li>
-                            <li>
-                                <a href="#setEditingTask" >setEditingTask</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updateSubtask" >updateSubtask</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updateTask" >updateTask</a>
+                                <a href="#resetImageState" >resetImageState</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#updateTaskImage" >updateTaskImage</a>
+                                <a href="#setContactImageData" >setContactImageData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setContactImageKey" >setContactImageKey</a>
+                            </li>
+                            <li>
+                                <a href="#setImageState" >setImageState</a>
+                            </li>
+                            <li>
+                                <a href="#setupImageViewer" >setupImageViewer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#shouldDeleteUnsavedImage" >shouldDeleteUnsavedImage</a>
+                            </li>
+                            <li>
+                                <a href="#updateExistingContact" >updateExistingContact</a>
                             </li>
                         </ul>
                     </td>
@@ -255,17 +226,19 @@ stored in Firestore.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(firestore: Firestore)</code>
+<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:24</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ContactFormService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -274,20 +247,45 @@ stored in Firestore.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>firestore</td>
+                                                        <td>contactService</td>
                                                   
                                                         <td>
-                                                                    <code>Firestore</code>
+                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Service for contact CRUD operations</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for image upload and storage operations</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -307,616 +305,35 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addSubtask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>addSubtask</b></span>
-                        <a href="#addSubtask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addSubtask(ColId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtask: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/services/task.service.ts:178</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Adds a subtask to a specific task&#39;s subcollection.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>ColId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>subtask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The subtask to add.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;Subtask | null&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The created subtask with ID, or null on failure.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="addTask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>addTask</b></span>
-                        <a href="#addTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addTask(newTask: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/services/task.service.ts:160</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Adds a new task to Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>newTask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The task to be added.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Promise&lt;Task | null&gt;</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The created task including its generated ID, or null on failure.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="buildSubtaskJson"></a>
+                    <a name="addNewContact"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>buildSubtaskJson</b></span>
-                        <a href="#buildSubtaskJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildSubtaskJson(updated: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="259"
-                                    class="link-to-prism">src/app/services/task.service.ts:259</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="buildTaskJson"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>buildTaskJson</b></span>
-                        <a href="#buildTaskJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildTaskJson(updated: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="246"
-                                    class="link-to-prism">src/app/services/task.service.ts:246</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="capitalize"></a>
-                    <span class="name">
-                        <span ><b>capitalize</b></span>
-                        <a href="#capitalize"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>capitalize(text: string | undefined)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="342"
-                                    class="link-to-prism">src/app/services/task.service.ts:342</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Capitalizes the first letter of a string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>text</td>
-                                            <td>
-                                                        <code>string | undefined</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The string to capitalize.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Capitalized string or empty string if undefined.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="clearEditingTask"></a>
-                    <span class="name">
-                        <span ><b>clearEditingTask</b></span>
-                        <a href="#clearEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>clearEditingTask()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="332"
-                                    class="link-to-prism">src/app/services/task.service.ts:332</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Clears the currently edited task.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="convertDate"></a>
-                    <span class="name">
-                        <span ><b>convertDate</b></span>
-                        <a href="#convertDate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>convertDate(date: Timestamp | Date)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="292"
-                                    class="link-to-prism">src/app/services/task.service.ts:292</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Converts a Firestore Timestamp or Date object to a formatted string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>date</td>
-                                            <td>
-                                                        <code>Timestamp | Date</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The Timestamp or Date to convert.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>A formatted date string (<code>dd/mm/yyyy</code>).</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteImageFromTask"></a>
-                    <span class="name">
-                        <span ><b>deleteImageFromTask</b></span>
-                        <a href="#deleteImageFromTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>deleteImageFromTask(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/services/task.service.ts:272</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Deletes the imageKey field from Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>task</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to delete the imageKey from.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteSubtask"></a>
-                    <span class="name">
                             <span class="modifier">Async</span>
-                        <span ><b>deleteSubtask</b></span>
-                        <a href="#deleteSubtask"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>addNewContact</b></span>
+                        <a href="#addNewContact"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteSubtask(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtaskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>addNewContact(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/services/task.service.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:291</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deletes a subtask from a task&#39;s subcollection.</p>
+                        <div class="io-description"><p>Adds a new contact and emits it if successful.
+Handles new contact creation workflow with image saving.</p>
 </div>
 
                             <div class="io-description">
@@ -933,1040 +350,7 @@ stored in Firestore.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>taskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The parent task ID.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>subtaskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The subtask ID to delete.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteTask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>deleteTask</b></span>
-                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteTask(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/services/task.service.ts:228</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Deletes a task from Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>docId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the task to delete.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="formatDate"></a>
-                    <span class="name">
-                        <span ><b>formatDate</b></span>
-                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>formatDate(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/services/task.service.ts:306</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Formats a Date object into a <code>dd/mm/yyyy</code> string.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>date</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The Date to format.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getCleanJson"></a>
-                    <span class="name">
-                        <span ><b>getCleanJson</b></span>
-                        <a href="#getCleanJson"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getCleanJson(updated: Task | Subtask)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="237"
-                                    class="link-to-prism">src/app/services/task.service.ts:237</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a plain object representation of a Task or Subtask for Firestore updates.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>updated</td>
-                                            <td>
-                                                        <code>Task | Subtask</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The object to clean.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getEditingTask"></a>
-                    <span class="name">
-                        <span ><b>getEditingTask</b></span>
-                        <a href="#getEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getEditingTask()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="325"
-                                    class="link-to-prism">src/app/services/task.service.ts:325</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the task currently being edited.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Task | null</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSingleTaskRef"></a>
-                    <span class="name">
-                        <span ><b>getSingleTaskRef</b></span>
-                        <a href="#getSingleTaskRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSingleTaskRef(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/services/task.service.ts:93</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a document reference for a specific task by ID.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>docId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The document ID of the task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSubtasks"></a>
-                    <span class="name">
-                        <span ><b>getSubtasks</b></span>
-                        <a href="#getSubtasks"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSubtasks(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/services/task.service.ts:141</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Observes the subtasks of a given task in real-time.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;Subtask[]&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSubtasksRef"></a>
-                    <span class="name">
-                        <span ><b>getSubtasksRef</b></span>
-                        <a href="#getSubtasksRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSubtasksRef(subColId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/services/task.service.ts:84</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a reference to the &#39;subtasks&#39; subcollection for a given task.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>subColId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The document ID of the parent task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTaskById"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>getTaskById</b></span>
-                        <a href="#getTaskById"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getTaskById(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/services/task.service.ts:119</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Gets a single task by ID from Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the task to retrieve.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Promise&lt;Task | null&gt;</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Promise resolving to the task or null if not found.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTasks"></a>
-                    <span class="name">
-                        <span ><b>getTasks</b></span>
-                        <a href="#getTasks"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getTasks()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/services/task.service.ts:100</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Observes all tasks in Firestore and emits updates in real-time.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Task.html" target="_self" >Observable&lt;Task[]&gt;</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getTasksRef"></a>
-                    <span class="name">
-                        <span ><b>getTasksRef</b></span>
-                        <a href="#getTasksRef"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getTasksRef()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/services/task.service.ts:75</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns a reference to the &#39;tasks&#39; Firestore collection.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setEditingTask"></a>
-                    <span class="name">
-                        <span ><b>setEditingTask</b></span>
-                        <a href="#setEditingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setEditingTask(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/services/task.service.ts:318</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Sets the currently edited task.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>task</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The task being edited.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateSubtask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>updateSubtask</b></span>
-                        <a href="#updateSubtask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateSubtask(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, subtaskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updatedSubtask: <a href="../interfaces/Subtask.html" target="_self">Subtask</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/services/task.service.ts:207</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Updates a subtask document in Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The parent task ID.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>subtaskId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The subtask document ID.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>updatedSubtask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Subtask.html" target="_self" >Subtask</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The updated subtask data.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateTask"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>updateTask</b></span>
-                        <a href="#updateTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTask(docId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updatedTask: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/services/task.service.ts:195</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Updates a task document in Firestore.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>docId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The ID of the task.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>updatedTask</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The updated task data.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateTaskImage"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateTaskImage</b></span>
-                        <a href="#updateTaskImage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTaskImage(taskRef: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="281"
-                                    class="link-to-prism">src/app/services/task.service.ts:281</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskRef</td>
+                                                <td>component</td>
                                             <td>
                                                             <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
@@ -1976,6 +360,1462 @@ stored in Firestore.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The new contact object to create</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when contact is added</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildContactFromForm"></a>
+                    <span class="name">
+                        <span ><b>buildContactFromForm</b></span>
+                        <a href="#buildContactFromForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>buildContactFromForm(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Builds a trimmed Contact object from form values.
+Creates contact object with cleaned form data and appropriate image key.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Contact object built from form data</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deletePreviousImages"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deletePreviousImages</b></span>
+                        <a href="#deletePreviousImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deletePreviousImages(uploadedKey?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, contactKey?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes any previously uploaded or assigned images from storage.
+Cleans up orphaned images to prevent storage bloat.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>uploadedKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Key of uploaded image to delete</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contactKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Key of contact&#39;s existing image to delete</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when deletion is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fillContactForm"></a>
+                    <span class="name">
+                        <span ><b>fillContactForm</b></span>
+                        <a href="#fillContactForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fillContactForm(form: FormGroup, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fills the contact form fields with the selected contact&#39;s data.
+Populates form controls with existing contact information for editing.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>form</td>
+                                            <td>
+                                                        <code>FormGroup</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The reactive form group to populate</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object containing data to fill</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageKeys"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getImageKeys</b></span>
+                        <a href="#getImageKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getImageKeys(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets image keys for the image viewer based on component state.
+Returns appropriate image keys for editing vs. new contact scenarios.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of image keys for the viewer</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleContactDeletion"></a>
+                    <span class="name">
+                        <span ><b>handleContactDeletion</b></span>
+                        <a href="#handleContactDeletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleContactDeletion(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="308"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:308</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles contact deletion including image cleanup.
+Removes contact from storage and cleans up associated images.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object to delete</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleFormClose"></a>
+                    <span class="name">
+                        <span ><b>handleFormClose</b></span>
+                        <a href="#handleFormClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleFormClose(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles form close operations including cleanup.
+Performs necessary cleanup when form is closed without saving.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadContactImage"></a>
+                    <span class="name">
+                        <span ><b>loadContactImage</b></span>
+                        <a href="#loadContactImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadContactImage(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads the contact image into the upload preview.
+Retrieves and displays existing contact image if available.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object with potential imageKey</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processContactUpdate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processContactUpdate</b></span>
+                        <a href="#processContactUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processContactUpdate(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:274</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Processes contact update operations based on contact state.
+Handles image deletion or contact update based on imageKey status.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object to update</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processSubmission"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>processSubmission</b></span>
+                        <a href="#processSubmission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processSubmission(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:238</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Processes form submission based on edit mode.
+Handles both new contact creation and existing contact updates.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object to process</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when submission is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetImageState"></a>
+                    <span class="name">
+                        <span ><b>resetImageState</b></span>
+                        <a href="#resetImageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetImageState(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resets contact image data to clear state.
+Clears all image-related properties in the component.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setContactImageData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setContactImageData</b></span>
+                        <a href="#setContactImageData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setContactImageData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets contact image data from storage into component state.
+Helper method for loading existing contact images.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>imageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The image key to retrieve from storage</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setContactImageKey"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setContactImageKey</b></span>
+                        <a href="#setContactImageKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setContactImageKey(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the appropriate image key on the contact object.
+Determines correct image key based on component state and edit mode.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object to update with image key</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setImageState"></a>
+                    <span class="name">
+                        <span ><b>setImageState</b></span>
+                        <a href="#setImageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setImageState(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, file: File, imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, base64: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the local image state and prepares it for saving.
+Updates component&#39;s image-related properties with new image data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>file</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The uploaded image file</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>imageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Generated unique key for the image</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>base64</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Base64 encoded image data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setupImageViewer"></a>
+                    <span class="name">
+                        <span ><b>setupImageViewer</b></span>
+                        <a href="#setupImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setupImageViewer(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets up the image viewer with contact images.
+Configures image viewer component with current contact image data.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shouldDeleteUnsavedImage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>shouldDeleteUnsavedImage</b></span>
+                        <a href="#shouldDeleteUnsavedImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>shouldDeleteUnsavedImage(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines if an unsaved image should be deleted on form close.
+Checks conditions for cleaning up temporary images.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if image should be deleted, false otherwise</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateExistingContact"></a>
+                    <span class="name">
+                        <span ><b>updateExistingContact</b></span>
+                        <a href="#updateExistingContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateExistingContact(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="258"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:258</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing contact.
+Handles contact update workflow including image management.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>component</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact form component instance</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object with updated data</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1992,400 +1832,326 @@ stored in Firestore.</p>
         </tbody>
     </table>
 </section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="editingTask"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>editingTask</b></span>
-                        <a href="#editingTask"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Task.html" target="_self" >Task | null</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>A task marked as being edited</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, Timestamp } from &#x27;@angular/fire/firestore&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+import { FormGroup } from &#x27;@angular/forms&#x27;;
+import { Contact, ContactService } from &#x27;../../services/contact.service&#x27;;
+import { UploadService } from &#x27;../../services/upload.service&#x27;;
 
 /**
- * Represents a task in the system.
- */
-export interface Task {
-  /** Firestore-generated ID (optional when creating a task) */
-  id?: string;
-
-  /** Title of the task */
-  title: string;
-
-  /** Optional description */
-  description?: string;
-
-  /**
-   * Date of the task; may be a native Date object or Firestore Timestamp.
-   * Firestore stores it as a Timestamp and it needs conversion after reading.
-   */
-  date: Date | Timestamp;
-
-  /** Priority level of the task */
-  priority: &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;;
-
-  /** Current status of the task */
-  status: string;
-
-  /** Optional list of user IDs assigned to the task */
-  assignedTo?: string[];
-
-  /** Task category */
-  category: &#x27;technical&#x27; | &#x27;user story&#x27;;
-
-  /** Optional array of subtasks (retrieved separately as subcollection) */
-  subtask?: Subtask[];
-
-  /** Optional array of imageKeys */
-  imageKey?: string[];
-}
-
-/**
- * Represents a subtask belonging to a task.
- */
-export interface Subtask {
-  /** Firestore-generated ID (optional when creating) */
-  id?: string;
-
-  /** Title or label of the subtask */
-  title: string;
-
-  /** Completion status */
-  isCompleted: boolean;
-}
-
-/**
- * Service responsible for managing tasks and subtasks
- * stored in Firestore.
+ * Service for handling contact form operations and business logic.
+ * Manages image operations, form data manipulation, and contact CRUD operations.
+ * Provides helper methods for contact form component to maintain separation of concerns.
+ * 
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // Inject in component constructor
+ * constructor(private formService: ContactFormService) {}
+ * 
+ * // Use service methods
+ * await this.formService.processSubmission(this, contact);
+ * &#x60;&#x60;&#x60;
  */
 @Injectable({
-  providedIn: &#x27;root&#x27;
+    providedIn: &#x27;root&#x27;
 })
 
-export class TaskService {
+export class ContactFormService {
 
-  /** A task marked as being edited */
-  private editingTask: Task | null &#x3D; null;
+    /**
+     * Creates an instance of ContactFormService.
+     * @param {ContactService} contactService - Service for contact CRUD operations
+     * @param {UploadService} uploadService - Service for image upload and storage operations
+     */
+    constructor(
+        private contactService: ContactService,
+        private uploadService: UploadService
+    ) { }
 
-  constructor(private firestore: Firestore) { }
+    /**
+     * Deletes any previously uploaded or assigned images from storage.
+     * Cleans up orphaned images to prevent storage bloat.
+     * 
+     * @param {string} [uploadedKey] - Key of uploaded image to delete
+     * @param {string} [contactKey] - Key of contact&#x27;s existing image to delete
+     * @returns {Promise&lt;void&gt;} Promise that resolves when deletion is complete
+     */
+    async deletePreviousImages(uploadedKey?: string, contactKey?: string): Promise&lt;void&gt; {
+        if (uploadedKey) {
+            this.uploadService.deleteImage(uploadedKey);
+        }
+        if (contactKey) {
+            this.uploadService.deleteImage(contactKey);
+        }
+    }
 
-  /**
-   * Returns a reference to the &#x27;tasks&#x27; Firestore collection.
-   */
-  getTasksRef() {
-    return collection(this.firestore, &#x27;tasks&#x27;);
-  }
+    /**
+     * Sets the local image state and prepares it for saving.
+     * Updates component&#x27;s image-related properties with new image data.
+     * 
+     * @param {any} component - The contact form component instance
+     * @param {File} file - The uploaded image file
+     * @param {string} imageKey - Generated unique key for the image
+     * @param {string} base64 - Base64 encoded image data
+     * @returns {void}
+     */
+    setImageState(component: any, file: File, imageKey: string, base64: string): void {
+        component.uploadedImageKey &#x3D; imageKey;
+        component.imageBase64 &#x3D; base64;
+        component.imgData &#x3D; {
+            imageKey, filename: file.name, fileType: file.type,
+            fileSize: file.size, base64, assignedTo: &#x27;user&#x27;
+        };
+    }
 
-  /**
-   * Returns a reference to the &#x27;subtasks&#x27; subcollection for a given task.
-   * 
-   * @param subColId - The document ID of the parent task.
-   */
-  getSubtasksRef(subColId: string) {
-    return collection(this.getTasksRef(), subColId, &#x27;subtasks&#x27;);
-  }
-
-  /**
-   * Returns a document reference for a specific task by ID.
-   * 
-   * @param docId - The document ID of the task.
-   */
-  getSingleTaskRef(docId: string) {
-    return doc(collection(this.firestore, &#x27;tasks&#x27;), docId);
-  }
-
-  /**
-   * Observes all tasks in Firestore and emits updates in real-time.
-   */
-  getTasks(): Observable&lt;Task[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getTasksRef(), snapshot &#x3D;&gt; {
-        const tasks: Task[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          tasks.push({ id: doc.id, ...doc.data() } as Task);
+    /**
+     * Fills the contact form fields with the selected contact&#x27;s data.
+     * Populates form controls with existing contact information for editing.
+     * 
+     * @param {FormGroup} form - The reactive form group to populate
+     * @param {Contact} contact - The contact object containing data to fill
+     * @returns {void}
+     */
+    fillContactForm(form: FormGroup, contact: Contact): void {
+        form.patchValue({
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone
         });
-        observer.next(tasks);
-      }, error &#x3D;&gt; observer.error(error));
-      return () &#x3D;&gt; unsubscribe();
-    });
-  }
-
-  /**
-   * Gets a single task by ID from Firestore.
-   * 
-   * @param taskId - The ID of the task to retrieve.
-   * @returns Promise resolving to the task or null if not found.
-   */
-  async getTaskById(taskId: string): Promise&lt;Task | null&gt; {
-    try {
-      const docRef &#x3D; this.getSingleTaskRef(taskId);
-      const docSnap &#x3D; await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() } as Task;
-      } else {
-        console.warn(&#x60;Task with ID ${taskId} not found&#x60;);
-        return null;
-      }
-    } catch (error) {
-      console.error(&#x27;Error getting task by ID:&#x27;, error);
-      return null;
     }
-  }
 
-  /**
-   * Observes the subtasks of a given task in real-time.
-   * 
-   * @param taskId - The ID of the parent task.
-   */
-  getSubtasks(taskId: string): Observable&lt;Subtask[]&gt; {
-    return new Observable(observer &#x3D;&gt; {
-      const unsubscribe &#x3D; onSnapshot(this.getSubtasksRef(taskId), snapshot &#x3D;&gt; {
-        const subtasks: Subtask[] &#x3D; [];
-        snapshot.forEach(doc &#x3D;&gt; {
-          subtasks.push({ id: doc.id, ...doc.data() } as Subtask);
-        });
-        observer.next(subtasks);
-      }, error &#x3D;&gt; observer.error(error));
-      return () &#x3D;&gt; unsubscribe();
-    });
-  }
-
-  /**
-   * Adds a new task to Firestore.
-   * 
-   * @param newTask - The task to be added.
-   * @returns The created task including its generated ID, or null on failure.
-   */
-  async addTask(newTask: Task): Promise&lt;Task | null&gt; {
-    try {
-      const tasksRef &#x3D; this.getTasksRef();
-      const docRef &#x3D; await addDoc(tasksRef, this.getCleanJson(newTask));
-      return { id: docRef.id, ...newTask };
-    } catch (err) {
-      console.error(&#x27;Error adding task:&#x27;, err);
-      return null;
+    /**
+     * Loads the contact image into the upload preview.
+     * Retrieves and displays existing contact image if available.
+     * 
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object with potential imageKey
+     * @returns {void}
+     */
+    loadContactImage(component: any, contact: Contact): void {
+        const imageKey &#x3D; contact.imageKey;
+        if (!imageKey) {
+            component.imageBase64 &#x3D; null;
+            return;
+        }
+        this.setContactImageData(component, imageKey);
     }
-  }
 
-  /**
-   * Adds a subtask to a specific task&#x27;s subcollection.
-   * 
-   * @param ColId - The ID of the parent task.
-   * @param subtask - The subtask to add.
-   * @returns The created subtask with ID, or null on failure.
-   */
-  async addSubtask(ColId: string, subtask: Subtask): Promise&lt;Subtask | null&gt; {
-    try {
-      const subtasksRef &#x3D; this.getSubtasksRef(ColId);
-      const docRef &#x3D; await addDoc(subtasksRef, subtask);
-      return { id: docRef.id, ...subtask };
-    } catch (error) {
-      console.error(&#x27;Error adding subtask:&#x27;, error);
-      return null;
+    /**
+     * Sets contact image data from storage into component state.
+     * Helper method for loading existing contact images.
+     * 
+     * @private
+     * @param {any} component - The contact form component instance
+     * @param {string} imageKey - The image key to retrieve from storage
+     * @returns {void}
+     */
+    private setContactImageData(component: any, imageKey: string): void {
+        component.imageBase64 &#x3D; this.uploadService.getContactImage(imageKey);
+        const existingImage &#x3D; this.uploadService.getImageByKey(imageKey);
+        if (existingImage) {
+            this.uploadService.setImages([existingImage]);
+        }
     }
-  }
 
-  /**
-   * Updates a task document in Firestore.
-   * 
-   * @param docId - The ID of the task.
-   * @param updatedTask - The updated task data.
-   */
-  async updateTask(docId: string, updatedTask: Task): Promise&lt;void&gt; {
-    const docRef &#x3D; this.getSingleTaskRef(docId);
-    await updateDoc(docRef, this.getCleanJson(updatedTask)).catch(console.error);
-  }
-
-  /**
-   * Updates a subtask document in Firestore.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask document ID.
-   * @param updatedSubtask - The updated subtask data.
-   */
-  async updateSubtask(taskId: string, subtaskId: string, updatedSubtask: Subtask): Promise&lt;void&gt; {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await updateDoc(docRef, this.getCleanJson(updatedSubtask)).catch(console.error);
-  }
-
-  /**
-   * Deletes a subtask from a task&#x27;s subcollection.
-   * 
-   * @param taskId - The parent task ID.
-   * @param subtaskId - The subtask ID to delete.
-   */
-  async deleteSubtask(taskId: string, subtaskId: string): Promise&lt;void&gt; {
-    const docRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}/subtasks/${subtaskId}&#x60;);
-    await deleteDoc(docRef).catch(err &#x3D;&gt; console.error(&#x27;Error deleting subtask:&#x27;, err));
-  }
-
-  /**
-   * Deletes a task from Firestore.
-   * 
-   * @param docId - The ID of the task to delete.
-   */
-  async deleteTask(docId: string): Promise&lt;void&gt; {
-    await deleteDoc(this.getSingleTaskRef(docId)).catch(console.error);
-  }
-
-  /**
-   * Returns a plain object representation of a Task or Subtask for Firestore updates.
-   * 
-   * @param updated - The object to clean.
-   */
-  getCleanJson(updated: Task | Subtask): any {
-    if (&#x27;category&#x27; in updated) {
-      return this.buildTaskJson(updated);
-    } else if (&#x27;isCompleted&#x27; in updated) {
-      return this.buildSubtaskJson(updated);
+    /**
+     * Resets contact image data to clear state.
+     * Clears all image-related properties in the component.
+     * 
+     * @param {any} component - The contact form component instance
+     * @returns {void}
+     */
+    resetImageState(component: any): void {
+        component.uploadedImageKey &#x3D; undefined;
+        component.imgData &#x3D; undefined;
+        component.imageBase64 &#x3D; null;
     }
-    return {};
-  }
 
-  private buildTaskJson(updated: Task): any {
-    const clean: any &#x3D; {
-      title: updated.title, description: updated.description,
-      date: updated.date, priority: updated.priority,
-      status: updated.status, assignedTo: updated.assignedTo,
-      category: updated.category
-    };
-    if (Array.isArray(updated.imageKey)) {
-      clean.imageKey &#x3D; updated.imageKey;
+    /**
+     * Sets up the image viewer with contact images.
+     * Configures image viewer component with current contact image data.
+     * 
+     * @param {any} component - The contact form component instance
+     * @returns {void}
+     */
+    setupImageViewer(component: any): void {
+        component.contactImages &#x3D; [component.imageBase64];
+        component.contactImageKeys &#x3D; this.getImageKeys(component);
+        component.showImageViewer &#x3D; true;
     }
-    return clean;
-  }
 
-  private buildSubtaskJson(updated: Subtask): any {
-    return {
-      title: updated.title,
-      isCompleted: updated.isCompleted
-    };
-  }
-
-  /**
-   * Deletes the imageKey field from Firestore.
-   *
-   * @param task - The contact to delete the imageKey from.
-   */
-
-  deleteImageFromTask(task: Task): void {
-    if (!task.id) {
-      console.error(&#x27;Task id is undefined. Cannot delete image.&#x27;);
-      return;
+    /**
+     * Gets image keys for the image viewer based on component state.
+     * Returns appropriate image keys for editing vs. new contact scenarios.
+     * 
+     * @private
+     * @param {any} component - The contact form component instance
+     * @returns {string[]} Array of image keys for the viewer
+     */
+    private getImageKeys(component: any): string[] {
+        if (component.contactToEdit?.imageKey) {
+            return [component.contactToEdit.imageKey];
+        }
+        return component.uploadedImageKey ? [component.uploadedImageKey] : [];
     }
-    const taskRef &#x3D; this.getSingleTaskRef(task.id);
-    this.updateTaskImage(taskRef);
-  }
 
-  private updateTaskImage(taskRef: any): void {
-    updateDoc(taskRef, { imageKey: deleteField() })
-      .catch(err &#x3D;&gt; console.error(&#x27;Failed to delete image from task:&#x27;, err));
-  }
-
-  /**
-   * Converts a Firestore Timestamp or Date object to a formatted string.
-   * 
-   * @param date - The Timestamp or Date to convert.
-   * @returns A formatted date string (&#x60;dd/mm/yyyy&#x60;).
-   */
-  convertDate(date: Timestamp | Date): string {
-    if (date instanceof Timestamp) {
-      return this.formatDate(date.toDate());
-    } else if (date instanceof Date) {
-      return this.formatDate(date);
+    /**
+     * Handles form close operations including cleanup.
+     * Performs necessary cleanup when form is closed without saving.
+     * 
+     * @param {any} component - The contact form component instance
+     * @returns {void}
+     */
+    handleFormClose(component: any): void {
+        if (this.shouldDeleteUnsavedImage(component)) {
+            this.uploadService.deleteImage(component.uploadedImageKey);
+        }
+        component.contactForm.reset();
+        component.imageMarkedForDeletion &#x3D; false;
     }
-    return &#x27;&#x27;;
-  }
 
-  /**
-   * Formats a Date object into a &#x60;dd/mm/yyyy&#x60; string.
-   * 
-   * @param date - The Date to format.
-   */
-  formatDate(date: Date): string {
-    const day &#x3D; String(date.getDate()).padStart(2, &#x27;0&#x27;);
-    const month &#x3D; String(date.getMonth() + 1).padStart(2, &#x27;0&#x27;);
-    const year &#x3D; date.getFullYear();
-    return &#x60;${day}/${month}/${year}&#x60;;
-  }
+    /**
+     * Determines if an unsaved image should be deleted on form close.
+     * Checks conditions for cleaning up temporary images.
+     * 
+     * @private
+     * @param {any} component - The contact form component instance
+     * @returns {boolean} True if image should be deleted, false otherwise
+     */
+    private shouldDeleteUnsavedImage(component: any): boolean {
+        return component.uploadedImageKey &amp;&amp;
+            !component.contactToEdit &amp;&amp;
+            !component.formSubmitted;
+    }
 
-  /**
-   * Sets the currently edited task.
-   * 
-   * @param task - The task being edited.
-   */
-  setEditingTask(task: Task): void {
-    this.editingTask &#x3D; task;
-  }
+    /**
+     * Builds a trimmed Contact object from form values.
+     * Creates contact object with cleaned form data and appropriate image key.
+     * 
+     * @param {any} component - The contact form component instance
+     * @returns {Contact} Contact object built from form data
+     */
+    buildContactFromForm(component: any): Contact {
+        const { name, email, phone } &#x3D; component.contactForm.value;
+        const contact: Contact &#x3D; {
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim()
+        };
+        this.setContactImageKey(component, contact);
+        if (component.contactToEdit?.id) {
+            contact.id &#x3D; component.contactToEdit.id;
+        }
+        return contact;
+    }
 
-  /**
-   * Returns the task currently being edited.
-   */
-  getEditingTask(): Task | null {
-    return this.editingTask;
-  }
+    /**
+     * Sets the appropriate image key on the contact object.
+     * Determines correct image key based on component state and edit mode.
+     * 
+     * @private
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object to update with image key
+     * @returns {void}
+     */
+    private setContactImageKey(component: any, contact: Contact): void {
+        if (component.uploadedImageKey) {
+            contact.imageKey &#x3D; component.uploadedImageKey;
+        } else if (component.contactToEdit?.imageKey &amp;&amp; !component.imageMarkedForDeletion) {
+            contact.imageKey &#x3D; component.contactToEdit.imageKey;
+        }
+    }
 
-  /**
-   * Clears the currently edited task.
-   */
-  clearEditingTask(): void {
-    this.editingTask &#x3D; null;
-  }
+    /**
+     * Processes form submission based on edit mode.
+     * Handles both new contact creation and existing contact updates.
+     * 
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object to process
+     * @returns {Promise&lt;void&gt;} Promise that resolves when submission is complete
+     */
+    async processSubmission(component: any, contact: Contact): Promise&lt;void&gt; {
+        if (component.imageMarkedForDeletion &amp;&amp; component.contactToEdit?.imageKey) {
+            await this.uploadService.deleteImage(component.contactToEdit.imageKey);
+            contact.imageKey &#x3D; &#x27;&#x27;;
+        }
+        if (component.isEditMode()) {
+            this.updateExistingContact(component, contact);
+        } else {
+            await this.addNewContact(component, contact);
+        }
+    }
 
-  /**
-   * Capitalizes the first letter of a string.
-   * 
-   * @param text - The string to capitalize.
-   * @returns Capitalized string or empty string if undefined.
-   */
-  capitalize(text: string | undefined): string {
-    if (!text) return &#x27;&#x27;;
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
+    /**
+     * Updates an existing contact.
+     * Handles contact update workflow including image management.
+     * 
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The contact object with updated data
+     * @returns {void}
+     */
+    updateExistingContact(component: any, contact: Contact): void {
+        component.contactToEdit &#x3D; contact;
+        if (component.imgData?.imageKey &amp;&amp; component.imgData?.base64) {
+            this.uploadService.saveImage(component.imgData);
+        }
+        this.processContactUpdate(contact);
+    }
+
+    /**
+     * Processes contact update operations based on contact state.
+     * Handles image deletion or contact update based on imageKey status.
+     * 
+     * @private
+     * @param {Contact} contact - The contact object to update
+     * @returns {void}
+     */
+    private processContactUpdate(contact: Contact): void {
+        if (contact.imageKey &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+            this.contactService.deleteImageFromContact(contact);
+        } else if (contact.id) {
+            this.contactService.updateContact(contact.id, contact);
+        }
+    }
+
+    /**
+     * Adds a new contact and emits it if successful.
+     * Handles new contact creation workflow with image saving.
+     * 
+     * @private
+     * @param {any} component - The contact form component instance
+     * @param {Contact} contact - The new contact object to create
+     * @returns {Promise&lt;void&gt;} Promise that resolves when contact is added
+     */
+    private async addNewContact(component: any, contact: Contact): Promise&lt;void&gt; {
+        if (component.imgData?.imageKey &amp;&amp; component.imgData?.base64) {
+            this.uploadService.saveImage(component.imgData);
+        }
+        const newContact &#x3D; await this.contactService.addContact(contact);
+        if (newContact) {
+            component.addedContact.emit(newContact);
+        }
+    }
+
+    /**
+     * Handles contact deletion including image cleanup.
+     * Removes contact from storage and cleans up associated images.
+     * 
+     * @param {Contact} contact - The contact object to delete
+     * @returns {void}
+     */
+    handleContactDeletion(contact: Contact): void {
+        if (contact.id) {
+            this.contactService.deleteContact(contact.id);
+            if (contact.imageKey) {
+                localStorage.removeItem(contact.imageKey);
+            }
+        }
+    }
 }</code></pre>
     </div>
 
@@ -2429,7 +2195,7 @@ export class TaskService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'TaskService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ContactFormService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

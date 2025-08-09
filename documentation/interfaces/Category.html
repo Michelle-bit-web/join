@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing a task category with display properties.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -200,6 +207,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The color associated with this category for visual distinction</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -233,6 +246,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The user-friendly label displayed in the UI</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -266,6 +285,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The internal value used for form submission and data storage</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -275,74 +300,104 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/**
+ * Interface representing a task category with display properties.
+ */
 export interface Category {
+  /** The internal value used for form submission and data storage */
   value: string;
+  /** The user-friendly label displayed in the UI */
   label: string;
+  /** The color associated with this category for visual distinction */
   color: string;
 }
 
 /**
  * CategoryManager handles all category-related operations for the AddTaskComponent.
- * This includes category selection, display, and dropdown management.
+ * Manages category selection, display, dropdown state, and provides category metadata.
+ * Supports two predefined categories: Technical Task and User Story.
+ * 
+ * @example
+ * // Inject and use in component
+ * constructor(private categoryManager: CategoryManager) {}
+ * 
+ * // Select a category
+ * this.categoryManager.selectCategory(category);
+ * 
+ * // Check if category is selected
+ * if (this.categoryManager.hasSelectedCategory()) { ... }
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
 export class CategoryManager {
+  /** Flag indicating whether to show category validation error */
   showCategoryError: boolean &#x3D; false;
+  
+  /** Currently selected category value */
   private selectedCategory: string &#x3D; &#x27;&#x27;;
+  
+  /** Current state of the category dropdown visibility */
   private showCategoryDropdown: boolean &#x3D; false;
+  
+  /** Predefined categories available for task assignment */
   private categories: Category[] &#x3D; [
     { value: &#x27;technical&#x27;, label: &#x27;Technical Task&#x27;, color: &#x27;#1FD7C1&#x27; },
     { value: &#x27;user story&#x27;, label: &#x27;User Story&#x27;, color: &#x27;#0038FF&#x27; }
   ];
 
   /**
-   * Gets the currently selected category
+   * Gets the currently selected category value.
+   * @returns The selected category value or empty string if none selected
    */
   getSelectedCategory(): string {
     return this.selectedCategory;
   }
 
   /**
-   * Sets the selected category
+   * Sets the selected category value.
+   * @param category - The category value to set as selected
    */
   setSelectedCategory(category: string): void {
     this.selectedCategory &#x3D; category;
   }
 
   /**
-   * Gets the category dropdown visibility state
+   * Gets the current category dropdown visibility state.
+   * @returns True if dropdown is visible, false otherwise
    */
   getShowCategoryDropdown(): boolean {
     return this.showCategoryDropdown;
   }
 
   /**
-   * Sets the category dropdown visibility state
+   * Sets the category dropdown visibility state.
+   * @param value - True to show dropdown, false to hide it
    */
   setShowCategoryDropdown(value: boolean): void {
     this.showCategoryDropdown &#x3D; value;
   }
 
   /**
-   * Gets all available categories
+   * Gets all available categories for selection.
+   * @returns Array of category objects with value, label, and color properties
    */
   getCategories(): Category[] {
     return this.categories;
   }
 
   /**
-   * Toggles the category dropdown visibility.
+   * Toggles the category dropdown visibility state.
+   * Opens dropdown if closed, closes if open.
    */
   toggleCategoryDropdown(): void {
     this.showCategoryDropdown &#x3D; !this.showCategoryDropdown;
   }
 
   /**
-   * Selects a category and closes the dropdown.
-   * @param category - The category to select.
+   * Selects a category and automatically closes the dropdown.
+   * @param category - The category object to select
    */
   selectCategory(category: Category): void {
     this.selectedCategory &#x3D; category.value;
@@ -350,8 +405,10 @@ export class CategoryManager {
   }
 
   /**
-   * Returns the text to display for the selected category.
-   * @returns The category label or default text.
+   * Returns the appropriate display text for the category selector.
+   * Shows category label if selected, placeholder text if none selected.
+   * 
+   * @returns The category label or default placeholder text
    */
   getCategoryText(): string {
     if (!this.selectedCategory) {
@@ -362,8 +419,10 @@ export class CategoryManager {
   }
 
   /**
-   * Returns the color for the selected category.
-   * @returns The category color or default color.
+   * Returns the color associated with the currently selected category.
+   * Used for visual styling and category identification.
+   * 
+   * @returns Hex color code for selected category, or default gray if none selected
    */
   getCategoryColor(): string {
     if (!this.selectedCategory) {
@@ -374,31 +433,34 @@ export class CategoryManager {
   }
 
   /**
-   * Checks if a category is currently selected.
-   * @returns True if a category is selected, false otherwise.
+   * Checks if any category is currently selected.
+   * Useful for form validation and conditional display logic.
+   * 
+   * @returns True if a category is selected, false otherwise
    */
   hasSelectedCategory(): boolean {
     return !!this.selectedCategory;
   }
 
   /**
-   * Clears the selected category and resets dropdown state.
+   * Clears the selected category and resets dropdown state to defaults.
+   * Used when resetting the form or clearing all selections.
    */
   clearAll(): void {
     this.selectedCategory &#x3D; &#x27;&#x27;;
     this.showCategoryDropdown &#x3D; false;
   }
 
-   /**
-   * Handles category selection and clears error state.
+  /**
+   * Handles category selection and clears any existing error state.
+   * Called after successful category selection to remove validation errors.
    */
   onCategorySelect() {
     if (this.hasSelectedCategory()) {
       this.showCategoryError &#x3D; false;
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

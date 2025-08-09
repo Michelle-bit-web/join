@@ -320,25 +320,11 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { 
-  Auth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  User,
-  onAuthStateChanged,
-  updateProfile,
-  deleteUser
-} from &#x27;@angular/fire/auth&#x27;;
-import { 
-  Firestore, 
-  doc, 
-  setDoc, 
-  getDoc, 
-  DocumentData 
-} from &#x27;@angular/fire/firestore&#x27;;
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User, onAuthStateChanged, updateProfile, deleteUser } from &#x27;@angular/fire/auth&#x27;;
+import { Firestore, doc, setDoc, getDoc } from &#x27;@angular/fire/firestore&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { AuthErrorService } from &#x27;./auth-error.service&#x27;;
 
 /**
  * Interface for user data stored in Firestore.
@@ -351,38 +337,64 @@ export interface UserData {
 }
 
 /**
- * Authentication service for handling user registration, login, logout,
- * guest access, profile updates, account deletion, and state tracking.
+ * Authentication service for handling user operations and state tracking.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
 export class AuthService {
-  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
-  private authInitialized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-
   /**
-   * Observable emitting the current authenticated Firebase user.
+   * BehaviorSubject that holds the current authenticated user state.
+   * @private
+   * @type {BehaviorSubject&lt;User | null&gt;}
+   */
+  private currentUserSubject &#x3D; new BehaviorSubject&lt;User | null&gt;(null);
+  
+  /**
+   * BehaviorSubject that tracks whether authentication has been initialized.
+   * @private
+   * @type {BehaviorSubject&lt;boolean&gt;}
+   */
+  private authInitialized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+  
+  /**
+   * Observable stream of the current authenticated user.
+   * @public
+   * @type {Observable&lt;User | null&gt;}
    */
   public currentUser$: Observable&lt;User | null&gt; &#x3D; this.currentUserSubject.asObservable();
   
   /**
-   * Observable that emits true once Firebase Auth has finished initializing.
+   * Observable stream indicating whether authentication has been initialized.
+   * @public
+   * @type {Observable&lt;boolean&gt;}
    */
   public authInitialized$: Observable&lt;boolean&gt; &#x3D; this.authInitialized.asObservable();
 
   /**
-   * Initializes the AuthService and subscribes to authentication state changes.
-   * @param auth - Firebase Auth instance
-   * @param firestore - Firebase Firestore instance
-   * @param router - Angular Router for navigation
+   * Creates an instance of AuthService.
+   * @param {Auth} auth - Firebase Authentication service
+   * @param {Firestore} firestore - Firebase Firestore database service
+   * @param {Router} router - Angular Router service for navigation
+   * @param {AuthErrorService} authErrorService - Service for handling authentication error messages
    */
   constructor(
     private auth: Auth,
     private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private authErrorService: AuthErrorService
   ) {
+    this.initializeAuthListener();
+  }
+
+  /**
+   * Initializes the Firebase authentication state listener.
+   * Updates the current user subject when authentication state changes.
+   * @private
+   * @returns {void}
+   */
+  private initializeAuthListener(): void {
     onAuthStateChanged(this.auth, (user) &#x3D;&gt; {
       this.currentUserSubject.next(user);
       if (!this.authInitialized.value) {
@@ -393,76 +405,88 @@ export class AuthService {
 
   /**
    * Registers a new user with email, password, and display name.
-   * Stores user data in Firestore.
-   * @param email - User&#x27;s email address
-   * @param password - User&#x27;s password
-   * @param displayName - User&#x27;s display name
-   * @returns A success status and optional error message
+   * @param {string} email - User&#x27;s email address
+   * @param {string} password - User&#x27;s password
+   * @param {string} displayName - User&#x27;s display name
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signUp(email: string, password: string, displayName: string): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
       const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, email, password);
       const user &#x3D; userCredential.user;
       await updateProfile(user, { displayName });
-      const userData: UserData &#x3D; {
-        uid: user.uid,
-        email: user.email!,
-        displayName: displayName,
-        createdAt: new Date()
-      };
-      await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
+      await this.saveUserData(user, displayName);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
 
   /**
+   * Saves user data to Firestore after successful registration.
+   * @private
+   * @param {User} user - The Firebase user object
+   * @param {string} displayName - The user&#x27;s display name
+   * @returns {Promise&lt;void&gt;} Promise that resolves when user data is saved
+   */
+  private async saveUserData(user: User, displayName: string): Promise&lt;void&gt; {
+    const userData: UserData &#x3D; {
+      uid: user.uid, email: user.email!,
+      displayName: displayName, createdAt: new Date()
+    };
+    await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
+  }
+
+  /**
    * Signs in a user with email and password.
-   * @param email - User&#x27;s email
-   * @param password - User&#x27;s password
-   * @returns A success status and optional error message
+   * @param {string} email - User&#x27;s email address
+   * @param {string} password - User&#x27;s password
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signIn(email: string, password: string): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
 
   /**
-   * Signs in as a guest user. If guest user does not exist, it will be created.
-   * @returns A success status and optional error message
+   * Signs in as a guest user.
+   * Attempts to sign in with predefined guest credentials, creates guest account if it doesn&#x27;t exist.
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async signInAsGuest(): Promise&lt;{ success: boolean; message?: string }&gt; {
     try {
-      const guestEmail &#x3D; &#x27;guest@join.com&#x27;;
-      const guestPassword &#x3D; &#x27;Guest123!&#x27;;
-      await signInWithEmailAndPassword(this.auth, guestEmail, guestPassword);
+      await signInWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
       return { success: true };
     } catch (error: any) {
-      try {
-        const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
-        const user &#x3D; userCredential.user;
-        await updateProfile(user, { displayName: &#x27;Guest User&#x27; });
-        const userData: UserData &#x3D; {
-          uid: user.uid,
-          email: user.email!,
-          displayName: &#x27;Guest User&#x27;,
-          createdAt: new Date()
-        };
-        await setDoc(doc(this.firestore, &#x27;users&#x27;, user.uid), userData);
-        return { success: true };
-      } catch (createError: any) {
-        return { success: false, message: this.getErrorMessage(createError.code) };
-      }
+      return await this.createGuestUser();
     }
   }
 
   /**
-   * Signs out the currently authenticated user and redirects to the login page.
+   * Creates a new guest user account with predefined credentials.
+   * @private
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
+   */
+  private async createGuestUser(): Promise&lt;{ success: boolean; message?: string }&gt; {
+    try {
+      const userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, &#x27;guest@join.com&#x27;, &#x27;Guest123!&#x27;);
+      const user &#x3D; userCredential.user;
+      await updateProfile(user, { displayName: &#x27;Guest User&#x27; });
+      await this.saveUserData(user, &#x27;Guest User&#x27;);
+      return { success: true };
+    } catch (createError: any) {
+      return { success: false, message: this.authErrorService.getErrorMessage(createError.code) };
+    }
+  }
+
+  /**
+   * Signs out the currently authenticated user.
+   * Redirects to login page after successful sign out.
+   * @returns {Promise&lt;void&gt;} Promise that resolves when user is signed out
    */
   async signOutUser(): Promise&lt;void&gt; {
     await signOut(this.auth);
@@ -471,7 +495,7 @@ export class AuthService {
 
   /**
    * Retrieves the current user&#x27;s data from Firestore.
-   * @returns The user&#x27;s Firestore data or null if not found
+   * @returns {Promise&lt;UserData | null&gt;} User data from Firestore or null if user not found
    */
   async getCurrentUserData(): Promise&lt;UserData | null&gt; {
     const currentUser &#x3D; this.auth.currentUser;
@@ -482,7 +506,7 @@ export class AuthService {
 
   /**
    * Checks whether a user is currently authenticated.
-   * @returns True if a user is signed in, otherwise false
+   * @returns {boolean} True if user is logged in, false otherwise
    */
   isLoggedIn(): boolean {
     return this.auth.currentUser !&#x3D;&#x3D; null;
@@ -490,43 +514,15 @@ export class AuthService {
 
   /**
    * Gets the current authenticated Firebase user.
-   * @returns The current user or null if not logged in
+   * @returns {User | null} Current Firebase user object or null if not authenticated
    */
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
 
   /**
-   * Maps Firebase Auth error codes to human-readable error messages.
-   * @param errorCode - Firebase Auth error code
-   * @returns A string describing the error
-   */
-  private getErrorMessage(errorCode: string): string {
-    switch (errorCode) {
-      case &#x27;auth/user-not-found&#x27;:
-        return &#x27;User not found.&#x27;;
-      case &#x27;auth/wrong-password&#x27;:
-        return &#x27;Wrong password.&#x27;;
-      case &#x27;auth/email-already-in-use&#x27;:
-        return &#x27;Email address is already in use.&#x27;;
-      case &#x27;auth/weak-password&#x27;:
-        return &#x27;Password is too weak.&#x27;;
-      case &#x27;auth/invalid-email&#x27;:
-        return &#x27;Invalid email address.&#x27;;
-      case &#x27;auth/user-disabled&#x27;:
-        return &#x27;User account has been disabled.&#x27;;
-      case &#x27;auth/too-many-requests&#x27;:
-        return &#x27;Too many login attempts. Please try again later.&#x27;;
-      case &#x27;auth/network-request-failed&#x27;:
-        return &#x27;Network error. Please check your internet connection.&#x27;;
-      default:
-        return &#x27;An error occurred. Please try again.&#x27;;
-    }
-  }
-
-  /**
    * Deletes the currently authenticated user account.
-   * @returns A success status and optional error message
+   * @returns {Promise&lt;{ success: boolean; message?: string }&gt;} Result object indicating success/failure and optional error message
    */
   async deleteAccount(): Promise&lt;{ success: boolean; message?: string }&gt; {
     const user &#x3D; this.auth.currentUser;
@@ -537,11 +533,10 @@ export class AuthService {
       await deleteUser(user);
       return { success: true };
     } catch (error: any) {
-      return { success: false, message: this.getErrorMessage(error.code) };
+      return { success: false, message: this.authErrorService.getErrorMessage(error.code) };
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

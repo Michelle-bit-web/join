@@ -120,6 +120,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>ContactDetailsComponent displays detailed information about a selected contact
+with smooth animations, mobile responsiveness, and edit/delete functionality.
+Features slide-in animations, mobile menu support, and contact image display.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-contact-details
+  (backToList)=&quot;handleBackToList()&quot;
+  (noContactVisible)=&quot;handleNoContact()&quot;&gt;
+&lt;/app-contact-details&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -210,7 +222,6 @@
                                 <a href="#contactVisible" >contactVisible</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
                                 <a href="#firstLoad" >firstLoad</a>
                             </li>
                             <li>
@@ -247,6 +258,9 @@
                             </li>
                             <li>
                                 <a href="#getContactColor" >getContactColor</a>
+                            </li>
+                            <li>
+                                <a href="#getContactImage" >getContactImage</a>
                             </li>
                             <li>
                                 <a href="#getInitials" >getInitials</a>
@@ -363,17 +377,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, elementRef: ElementRef)</code>
+<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, elementRef: ElementRef, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:75</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:106</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor injecting required services for contact management and DOM manipulation.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -382,6 +398,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -396,6 +413,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Service for managing contact data and operations</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>elementRef</td>
@@ -408,6 +431,30 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Reference to component&#39;s DOM element for menu detection</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for retrieving contact images</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -437,9 +484,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:74</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:103</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when user wants to return to contact list</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -458,9 +511,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:106</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when no contact is visible</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -491,16 +550,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:127</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Triggered when clicking outside the mobile menu.
-Closes the menu if it is open and the click occurred outside.</p>
+                        <div class="io-description"><p>Handles clicks outside the mobile menu to close it automatically.
+Prevents menu from staying open when user clicks elsewhere.</p>
 </div>
 
                             <div class="io-description">
@@ -525,7 +584,7 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                                             <td>
                                                     <ul>
-<li>The click event.</li>
+<li>The document click event</li>
 </ul>
 
                                             </td>
@@ -562,16 +621,16 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Triggered on window resize.
-Adjusts the mobile layout and menu accordingly.</p>
+                        <div class="io-description"><p>Handles window resize events to adjust mobile layout and menu behavior.
+Closes mobile menu when switching from mobile to desktop view.</p>
 </div>
 
                             <div class="io-description">
@@ -596,7 +655,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>The resize event.</li>
+<li>The window resize event</li>
 </ul>
 
                                             </td>
@@ -634,15 +693,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="278"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:278</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="326"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:326</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Closes the contact details view.</p>
+                        <div class="io-description"><p>Closes the contact details view with animation.
+Sets visibility flag to trigger exit animations.</p>
 </div>
 
                         <div class="io-description">
@@ -673,15 +733,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="270"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:270</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="317"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:317</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns the color for a contact.</p>
+                        <div class="io-description"><p>Gets the color associated with a contact&#39;s name for consistent theming.
+Uses contact service to ensure consistent colors across components.</p>
 </div>
 
                             <div class="io-description">
@@ -710,7 +771,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact&#39;s name.</li>
+<li>The contact&#39;s name for color generation</li>
 </ul>
 
                                             </td>
@@ -723,7 +784,85 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The corresponding color as a hex code.</p>
+                                <p>Hex color code string, defaults to gray if no name provided</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactImage"></a>
+                    <span class="name">
+                        <span ><b>getContactImage</b></span>
+                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="345"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:345</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves the contact&#39;s profile image from localStorage using their imageKey.
+Returns null if no image is associated with the contact.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object containing the imageKey</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Base64 encoded image string or null if no image exists</p>
 
                             </div>
                 </td>
@@ -750,15 +889,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="260"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:260</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="306"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:306</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns the initials of a name.</p>
+                        <div class="io-description"><p>Generates initials from a contact&#39;s name using the contact service.
+Provides consistent initial generation across the application.</p>
 </div>
 
                             <div class="io-description">
@@ -787,7 +927,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>The name from which to generate initials.</li>
+<li>The contact&#39;s full name</li>
 </ul>
 
                                             </td>
@@ -800,7 +940,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>The initials.</p>
+                                <p>String containing the person&#39;s initials</p>
 
                             </div>
                 </td>
@@ -829,15 +969,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:220</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles contact changes, visibility state, and animations.</p>
+                        <div class="io-description"><p>Handles contact changes, manages visibility state, and triggers animations.
+Coordinates the display logic when contacts are selected, changed, or cleared.</p>
 </div>
 
                             <div class="io-description">
@@ -866,7 +1007,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>The resolved contact to display, or null if none.</li>
+<li>The resolved contact to display, or null if none selected</li>
 </ul>
 
                                             </td>
@@ -905,16 +1046,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:268</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Called when the component is destroyed.
-Unsubscribes from the subscription to avoid memory leaks.</p>
+                        <div class="io-description"><p>Cleanup method called when the component is destroyed.
+Unsubscribes from all active subscriptions to prevent memory leaks.</p>
 </div>
 
                         <div class="io-description">
@@ -945,16 +1086,16 @@ Unsubscribes from the subscription to avoid memory leaks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:179</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Initializes the component, subscribes to selected and all contacts,
-and handles visibility and animation transitions.</p>
+                        <div class="io-description"><p>Initializes the component and sets up contact data subscriptions.
+Subscribes to both selected contact and full contact list for data consistency.</p>
 </div>
 
                         <div class="io-description">
@@ -985,15 +1126,16 @@ and handles visibility and animation transitions.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="285"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:285</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="334"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:334</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Emits the event to return to the contact list.</p>
+                        <div class="io-description"><p>Emits the event to return to the contact list view.
+Used for mobile navigation and parent component communication.</p>
 </div>
 
                         <div class="io-description">
@@ -1024,15 +1166,16 @@ and handles visibility and animation transitions.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="245"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:245</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:290</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deletes the current contact and clears the selection.</p>
+                        <div class="io-description"><p>Deletes the current contact and clears the selection state.
+Sets deleting flag to prevent animation conflicts during deletion.</p>
 </div>
 
                         <div class="io-description">
@@ -1072,16 +1215,16 @@ and handles visibility and animation transitions.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:127</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Triggered when clicking outside the mobile menu.
-Closes the menu if it is open and the click occurred outside.</p>
+                        <div class="io-description"><p>Handles clicks outside the mobile menu to close it automatically.
+Prevents menu from staying open when user clicks elsewhere.</p>
 </div>
 
                             <div class="io-description">
@@ -1110,7 +1253,7 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                                             <td>
                                                     <ul>
-<li>The click event.</li>
+<li>The document click event</li>
 </ul>
 
                                             </td>
@@ -1149,15 +1292,16 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="234"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:234</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:278</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Opens the edit form for the current contact.</p>
+                        <div class="io-description"><p>Opens the edit form for the currently displayed contact.
+Sets editing state and triggers the contact form service.</p>
 </div>
 
                         <div class="io-description">
@@ -1197,16 +1341,16 @@ Closes the menu if it is open and the click occurred outside.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Triggered on window resize.
-Adjusts the mobile layout and menu accordingly.</p>
+                        <div class="io-description"><p>Handles window resize events to adjust mobile layout and menu behavior.
+Closes mobile menu when switching from mobile to desktop view.</p>
 </div>
 
                             <div class="io-description">
@@ -1235,7 +1379,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>The resize event.</li>
+<li>The window resize event</li>
 </ul>
 
                                             </td>
@@ -1276,15 +1420,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="209"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:209</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:252</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Prepares animation and visibility transition when a new contact is selected.</p>
+                        <div class="io-description"><p>Prepares animation and visibility transition when a new contact is selected.
+Handles the smooth transition between different contacts or from empty state.</p>
 </div>
 
                             <div class="io-description">
@@ -1313,7 +1458,7 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                                             <td>
                                                     <ul>
-<li>Indicates if the previous contact was undefined.</li>
+<li>Indicates if the previous state had no contact selected</li>
 </ul>
 
                                             </td>
@@ -1354,15 +1499,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:237</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Resets state when no contact is selected and emits visibility change.</p>
+                        <div class="io-description"><p>Resets component state when no contact is selected.
+Clears flags and emits visibility change event with slight delay.</p>
 </div>
 
                         <div class="io-description">
@@ -1395,16 +1541,16 @@ Adjusts the mobile layout and menu accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="166"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:166</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:206</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Matches the selected contact with the full contact list to ensure it exists.
-Falls back to the selected contact if no match is found.</p>
+                        <div class="io-description"><p>Matches the selected contact with the full contact list to ensure it still exists.
+Handles cases where a contact might be deleted while being viewed.</p>
 </div>
 
                             <div class="io-description">
@@ -1433,7 +1579,7 @@ Falls back to the selected contact if no match is found.</p>
 
                                             <td>
                                                     <ul>
-<li>The selected contact object.</li>
+<li>The currently selected contact from the service</li>
 </ul>
 
                                             </td>
@@ -1451,7 +1597,7 @@ Falls back to the selected contact if no match is found.</p>
 
                                             <td>
                                                     <ul>
-<li>All available contacts.</li>
+<li>Array of all available contacts from the service</li>
 </ul>
 
                                             </td>
@@ -1464,7 +1610,7 @@ Falls back to the selected contact if no match is found.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>A resolved contact object or null.</p>
+                                <p>The resolved contact object or null if not found</p>
 
                             </div>
                 </td>
@@ -1493,8 +1639,8 @@ Falls back to the selected contact if no match is found.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="147"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:147</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:187</a></div>
                         </td>
                     </tr>
 
@@ -1502,7 +1648,7 @@ Falls back to the selected contact if no match is found.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Subscribes to changes in the selected contact and all contacts.
-Ensures synced data, updates animation state, and manages visibility.</p>
+Ensures contact data stays synced and handles visibility/animation transitions.</p>
 </div>
 
                         <div class="io-description">
@@ -1533,15 +1679,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:159</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Opens or closes the mobile menu when on a mobile device.</p>
+                        <div class="io-description"><p>Toggles the mobile menu visibility when on mobile devices.
+Only functions in mobile view to prevent desktop interference.</p>
 </div>
 
                         <div class="io-description">
@@ -1582,10 +1729,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:82</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Animation state counter for triggering enter animations</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1609,10 +1762,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:79</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The currently displayed contact object</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1634,10 +1793,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:76</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to control contact visibility with animations</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1647,7 +1812,6 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 <td class="col-md-4">
                     <a name="firstLoad"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
                         <span ><b>firstLoad</b></span>
                         <a href="#firstLoad"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -1660,10 +1824,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:100</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to track first load for animation purposes</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1685,10 +1855,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:85</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating if contact is being deleted</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1710,10 +1886,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:88</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating if contact is being edited</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1735,10 +1917,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:94</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag for mobile layout detection</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1760,10 +1948,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:91</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag for mobile menu visibility</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1788,10 +1982,16 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:97</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription to contact changes</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1817,12 +2017,13 @@ Ensures synced data, updates animation state, and manages visibility.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:131</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:171</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Returns whether animations are disabled (e.g., when deleting or editing).</p>
+                                <div class="io-description"><p>Determines if animations should be disabled during certain operations.
+Prevents animation conflicts during delete or edit operations.</p>
 </div>
 
                                 <div>
@@ -1844,7 +2045,6 @@ Ensures synced data, updates animation state, and manages visibility.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import {
   trigger,
-  state,
   style,
   transition,
   animate,
@@ -1861,7 +2061,19 @@ import {
 import { ContactService, Contact } from &#x27;../../services/contact.service&#x27;;
 import { Subscription, combineLatest } from &#x27;rxjs&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
+import { UploadService } from &#x27;../../services/upload.service&#x27;;
 
+/**
+ * ContactDetailsComponent displays detailed information about a selected contact
+ * with smooth animations, mobile responsiveness, and edit/delete functionality.
+ * Features slide-in animations, mobile menu support, and contact image display.
+ *
+ * @example
+ * &lt;app-contact-details
+ *   (backToList)&#x3D;&quot;handleBackToList()&quot;
+ *   (noContactVisible)&#x3D;&quot;handleNoContact()&quot;&gt;
+ * &lt;/app-contact-details&gt;
+ */
 @Component({
   selector: &#x27;app-contact-details&#x27;,
   standalone: true,
@@ -1904,29 +2116,56 @@ import { map } from &#x27;rxjs/operators&#x27;;
 })
 
 export class ContactDetailsComponent implements OnInit, OnDestroy {
+  /** Flag to control contact visibility with animations */
   contactVisible &#x3D; false;
+  
+  /** The currently displayed contact object */
   contact?: Contact;
+  
+  /** Animation state counter for triggering enter animations */
   animationState &#x3D; 0;
+  
+  /** Flag indicating if contact is being deleted */
   isDeleting &#x3D; false;
+  
+  /** Flag indicating if contact is being edited */
   isEditing &#x3D; false;
+  
+  /** Flag for mobile menu visibility */
   menuOpen &#x3D; false;
+  
+  /** Flag for mobile layout detection */
   isMobile &#x3D; window.innerWidth &lt; 768;
+  
+  /** Subscription to contact changes */
   private subscription?: Subscription;
-  private firstLoad &#x3D; true;
+  
+  /** Flag to track first load for animation purposes */
+  firstLoad &#x3D; true;
 
+  /** Event emitted when user wants to return to contact list */
   @Output() backToList &#x3D; new EventEmitter&lt;void&gt;();
+  
+  /** Event emitted when no contact is visible */
   @Output() noContactVisible &#x3D; new EventEmitter&lt;void&gt;();
 
+  /**
+   * Constructor injecting required services for contact management and DOM manipulation.
+   * @param contactService - Service for managing contact data and operations
+   * @param elementRef - Reference to component&#x27;s DOM element for menu detection
+   * @param uploadService - Service for retrieving contact images
+   */
   constructor(
     private contactService: ContactService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private uploadService: UploadService
   ) { }
 
   /**
-   * Triggered when clicking outside the mobile menu.
-   * Closes the menu if it is open and the click occurred outside.
+   * Handles clicks outside the mobile menu to close it automatically.
+   * Prevents menu from staying open when user clicks elsewhere.
    *
-   * @param {Event} event - The click event.
+   * @param event - The document click event
    */
   @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
   onDocumentClick(event: Event) {
@@ -1943,10 +2182,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Triggered on window resize.
-   * Adjusts the mobile layout and menu accordingly.
+   * Handles window resize events to adjust mobile layout and menu behavior.
+   * Closes mobile menu when switching from mobile to desktop view.
    *
-   * @param {Event} event - The resize event.
+   * @param event - The window resize event
    */
   @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
   onResize(event: Event) {
@@ -1958,7 +2197,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens or closes the mobile menu when on a mobile device.
+   * Toggles the mobile menu visibility when on mobile devices.
+   * Only functions in mobile view to prevent desktop interference.
    */
   toggleMobileMenu() {
     if (this.isMobile) {
@@ -1967,17 +2207,18 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Returns whether animations are disabled (e.g., when deleting or editing).
+   * Determines if animations should be disabled during certain operations.
+   * Prevents animation conflicts during delete or edit operations.
    *
-   * @returns {boolean} True if animations are disabled.
+   * @returns True if animations should be disabled
    */
   get isAnimationDisabled(): boolean {
     return this.isDeleting || this.isEditing;
   }
 
   /**
-   * Initializes the component, subscribes to selected and all contacts,
-   * and handles visibility and animation transitions.
+   * Initializes the component and sets up contact data subscriptions.
+   * Subscribes to both selected contact and full contact list for data consistency.
    */
   ngOnInit(): void {
     this.subscribeToSelectedContact();
@@ -1985,7 +2226,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   /**
    * Subscribes to changes in the selected contact and all contacts.
-   * Ensures synced data, updates animation state, and manages visibility.
+   * Ensures contact data stays synced and handles visibility/animation transitions.
    */
   private subscribeToSelectedContact(): void {
     this.subscription &#x3D; combineLatest([
@@ -1999,12 +2240,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Matches the selected contact with the full contact list to ensure it exists.
-   * Falls back to the selected contact if no match is found.
+   * Matches the selected contact with the full contact list to ensure it still exists.
+   * Handles cases where a contact might be deleted while being viewed.
    *
-   * @param selected - The selected contact object.
-   * @param all - All available contacts.
-   * @returns A resolved contact object or null.
+   * @param selected - The currently selected contact from the service
+   * @param all - Array of all available contacts from the service
+   * @returns The resolved contact object or null if not found
    */
   private resolveSelectedContact(
     selected: Contact | null,
@@ -2015,9 +2256,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles contact changes, visibility state, and animations.
+   * Handles contact changes, manages visibility state, and triggers animations.
+   * Coordinates the display logic when contacts are selected, changed, or cleared.
    *
-   * @param contact - The resolved contact to display, or null if none.
+   * @param contact - The resolved contact to display, or null if none selected
    */
   private handleContactChange(contact: Contact | null): void {
     const wasEmpty &#x3D; !this.contact;
@@ -2033,7 +2275,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Resets state when no contact is selected and emits visibility change.
+   * Resets component state when no contact is selected.
+   * Clears flags and emits visibility change event with slight delay.
    */
   private resetContactState(): void {
     this.isDeleting &#x3D; false;
@@ -2046,8 +2289,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   /**
    * Prepares animation and visibility transition when a new contact is selected.
+   * Handles the smooth transition between different contacts or from empty state.
    *
-   * @param wasEmpty - Indicates if the previous contact was undefined.
+   * @param wasEmpty - Indicates if the previous state had no contact selected
    */
   private prepareContactTransition(wasEmpty: boolean): void {
     this.isEditing &#x3D; false;
@@ -2062,8 +2306,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Called when the component is destroyed.
-   * Unsubscribes from the subscription to avoid memory leaks.
+   * Cleanup method called when the component is destroyed.
+   * Unsubscribes from all active subscriptions to prevent memory leaks.
    */
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -2072,7 +2316,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Opens the edit form for the current contact.
+   * Opens the edit form for the currently displayed contact.
+   * Sets editing state and triggers the contact form service.
    */
   onEditContact(): void {
     if (this.contact) {
@@ -2083,7 +2328,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Deletes the current contact and clears the selection.
+   * Deletes the current contact and clears the selection state.
+   * Sets deleting flag to prevent animation conflicts during deletion.
    */
   onDeleteContact(): void {
     if (this.contact?.id) {
@@ -2095,20 +2341,22 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Returns the initials of a name.
+   * Generates initials from a contact&#x27;s name using the contact service.
+   * Provides consistent initial generation across the application.
    *
-   * @param {string} [name] - The name from which to generate initials.
-   * @returns {string} The initials.
+   * @param name - The contact&#x27;s full name
+   * @returns String containing the person&#x27;s initials
    */
   getInitials(name?: string): string {
     return this.contactService.getInitials(name);
   }
 
   /**
-   * Returns the color for a contact.
+   * Gets the color associated with a contact&#x27;s name for consistent theming.
+   * Uses contact service to ensure consistent colors across components.
    *
-   * @param {string} [name] - The contact&#x27;s name.
-   * @returns {string} The corresponding color as a hex code.
+   * @param name - The contact&#x27;s name for color generation
+   * @returns Hex color code string, defaults to gray if no name provided
    */
   getContactColor(name?: string): string {
     if (!name) return &#x27;#9E9E9E&#x27;;
@@ -2116,20 +2364,35 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Closes the contact details view.
+   * Closes the contact details view with animation.
+   * Sets visibility flag to trigger exit animations.
    */
   closeContactDetails(): void {
     this.contactVisible &#x3D; false;
   }
 
   /**
-   * Emits the event to return to the contact list.
+   * Emits the event to return to the contact list view.
+   * Used for mobile navigation and parent component communication.
    */
   onBackToList() {
     this.backToList.emit();
   }
-}
-</code></pre>
+
+  /**
+   * Retrieves the contact&#x27;s profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   *
+   * @param contact - The contact object containing the imageKey
+   * @returns Base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -2140,7 +2403,10 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       &lt;div class&#x3D;&quot;header-divider&quot;&gt;&lt;/div&gt;
       &lt;p&gt;Better with a team&lt;/p&gt;
       &lt;div class&#x3D;&quot;mobile-back-btn&quot; (click)&#x3D;&quot;onBackToList()&quot;&gt;
-        &lt;img src&#x3D;&quot;assets/img/icons/arrow-left-line.png&quot; alt&#x3D;&quot;Zurück zur Kontaktliste&quot; /&gt;
+        &lt;img
+          src&#x3D;&quot;assets/img/icons/arrow-left-line.png&quot;
+          alt&#x3D;&quot;Zurück zur Kontaktliste&quot;
+        /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2155,7 +2421,15 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
           class&#x3D;&quot;user-logo&quot;
           [style.background-color]&#x3D;&quot;getContactColor(contact.name)&quot;
         &gt;
-          &lt;p&gt;{{ getInitials(contact.name) }}&lt;/p&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;getContactImage(contact) as image; else initials&quot;&gt;
+            &lt;img [src]&#x3D;&quot;image&quot; [alt]&#x3D;&quot;contact.name&quot; class&#x3D;&quot;contact-image&quot; /&gt;
+          &lt;/ng-container&gt;
+
+          &lt;ng-template #initials&gt;
+            &lt;p class&#x3D;&quot;contact-initials&quot;&gt;
+              {{ getInitials(contact.name) }}
+            &lt;/p&gt;
+          &lt;/ng-template&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;user-name&quot;&gt;
           &lt;p&gt;{{ contact.name || &quot;Unbekannt&quot; }}&lt;/p&gt;
@@ -2242,7 +2516,11 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;mobile-option-item&quot; (click)&#x3D;&quot;onDeleteContact()&quot;&gt;
-        &lt;img class&#x3D;&quot;default-icon&quot; src&#x3D;&quot;assets/img/icons/delete.png&quot; alt&#x3D;&quot;Kontakt löschen Icon&quot; /&gt;
+        &lt;img
+          class&#x3D;&quot;default-icon&quot;
+          src&#x3D;&quot;assets/img/icons/delete.png&quot;
+          alt&#x3D;&quot;Kontakt löschen Icon&quot;
+        /&gt;
         &lt;img
           class&#x3D;&quot;hover-icon&quot;
           src&#x3D;&quot;assets/img/icons/delete-hover.png&quot;
@@ -2252,8 +2530,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+&lt;/div&gt;</code></pre>
     </div>
 
 
@@ -2282,8 +2559,8 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="contact-detail-section">  <div class="contact-detail-content">    <div class="contact-header">      <h1>Contacts</h1>      <div class="header-divider"></div>      <p>Better with a team</p>      <div class="mobile-back-btn" (click)="onBackToList()">        <img src="assets/img/icons/arrow-left-line.png" alt="Zurück zur Kontaktliste" />      </div>    </div>    <div      class="contact-content"      *ngIf="contact && contactVisible"      [@slideInFromRight]="animationState"      [@.disabled]="isAnimationDisabled"    >      <div class="contact-container">        <div          class="user-logo"          [style.background-color]="getContactColor(contact.name)"        >          <p>{{ getInitials(contact.name) }}</p>        </div>        <div class="user-name">          <p>{{ contact.name || "Unbekannt" }}</p>          <div class="user-options">            <div class="option-item" (click)="onEditContact()">              <img                class="default-icon"                src="assets/img/icons/edit-single2.png"                alt="Kontakt bearbeiten Icon"              />              <img                class="hover-icon"                src="assets/img/icons/edit-single-hover.png"                alt="Kontakt bearbeiten Icon (Hover)"              />              <p>Edit</p>            </div>            <div class="option-item" (click)="onDeleteContact()">              <img                class="default-icon"                src="assets/img/icons/delete.png"                alt="Kontakt löschen Icon"              />              <img                class="hover-icon"                src="assets/img/icons/delete-hover.png"                alt="Kontakt löschen Icon (Hover)"              />              <p>Delete</p>            </div>          </div>        </div>      </div>      <div class="contact-info">        <h3>Contact Information</h3>        <div class="contact-item email-item">          <p class="contact-label">Email</p>          <p class="contact-value">{{ contact.email || "Keine E-Mail" }}</p>        </div>        <div class="contact-item">          <p class="contact-label">Phone</p>          <p class="contact-value">            {{ contact.phone || "Keine Telefonnummer" }}          </p>        </div>      </div>    </div>    <div      class="mobile-options-btn"      *ngIf="contact && contactVisible"      (click)="toggleMobileMenu()"    >      <img        class="default-icon"        src="assets/img/icons/contact-detail-menubtn.png"        alt="Kontaktoptionen öffnen"      />      <img        class="hover-icon"        src="assets/img/icons/contact-detail-menubtn-light.png"        alt="Kontaktoptionen öffnen (Hover)"      />    </div>    <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>      <div class="mobile-option-item" (click)="onEditContact()">        <img          class="default-icon"          src="assets/img/icons/edit-single2.png"          alt="Kontakt bearbeiten Icon"        />        <img          class="hover-icon"          src="assets/img/icons/edit-single-hover.png"          alt="Kontakt bearbeiten Icon (Hover)"        />        <p>Edit</p>      </div>      <div class="mobile-option-item" (click)="onDeleteContact()">        <img class="default-icon" src="assets/img/icons/delete.png" alt="Kontakt löschen Icon" />        <img          class="hover-icon"          src="assets/img/icons/delete-hover.png"          alt="Kontakt löschen Icon (Hover)"        />        <p>Delete</p>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><div class="contact-detail-section">  <div class="contact-detail-content">    <div class="contact-header">      <h1>Contacts</h1>      <div class="header-divider"></div>      <p>Better with a team</p>      <div class="mobile-back-btn" (click)="onBackToList()">        <img          src="assets/img/icons/arrow-left-line.png"          alt="Zurück zur Kontaktliste"        />      </div>    </div>    <div      class="contact-content"      *ngIf="contact && contactVisible"      [@slideInFromRight]="animationState"      [@.disabled]="isAnimationDisabled"    >      <div class="contact-container">        <div          class="user-logo"          [style.background-color]="getContactColor(contact.name)"        >          <ng-container *ngIf="getContactImage(contact) as image; else initials">            <img [src]="image" [alt]="contact.name" class="contact-image" />          </ng-container>          <ng-template #initials>            <p class="contact-initials">              {{ getInitials(contact.name) }}            </p>          </ng-template>        </div>        <div class="user-name">          <p>{{ contact.name || "Unbekannt" }}</p>          <div class="user-options">            <div class="option-item" (click)="onEditContact()">              <img                class="default-icon"                src="assets/img/icons/edit-single2.png"                alt="Kontakt bearbeiten Icon"              />              <img                class="hover-icon"                src="assets/img/icons/edit-single-hover.png"                alt="Kontakt bearbeiten Icon (Hover)"              />              <p>Edit</p>            </div>            <div class="option-item" (click)="onDeleteContact()">              <img                class="default-icon"                src="assets/img/icons/delete.png"                alt="Kontakt löschen Icon"              />              <img                class="hover-icon"                src="assets/img/icons/delete-hover.png"                alt="Kontakt löschen Icon (Hover)"              />              <p>Delete</p>            </div>          </div>        </div>      </div>      <div class="contact-info">        <h3>Contact Information</h3>        <div class="contact-item email-item">          <p class="contact-label">Email</p>          <p class="contact-value">{{ contact.email || "Keine E-Mail" }}</p>        </div>        <div class="contact-item">          <p class="contact-label">Phone</p>          <p class="contact-value">            {{ contact.phone || "Keine Telefonnummer" }}          </p>        </div>      </div>    </div>    <div      class="mobile-options-btn"      *ngIf="contact && contactVisible"      (click)="toggleMobileMenu()"    >      <img        class="default-icon"        src="assets/img/icons/contact-detail-menubtn.png"        alt="Kontaktoptionen öffnen"      />      <img        class="hover-icon"        src="assets/img/icons/contact-detail-menubtn-light.png"        alt="Kontaktoptionen öffnen (Hover)"      />    </div>    <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>      <div class="mobile-option-item" (click)="onEditContact()">        <img          class="default-icon"          src="assets/img/icons/edit-single2.png"          alt="Kontakt bearbeiten Icon"        />        <img          class="hover-icon"          src="assets/img/icons/edit-single-hover.png"          alt="Kontakt bearbeiten Icon (Hover)"        />        <p>Edit</p>      </div>      <div class="mobile-option-item" (click)="onDeleteContact()">        <img          class="default-icon"          src="assets/img/icons/delete.png"          alt="Kontakt löschen Icon"        />        <img          class="hover-icon"          src="assets/img/icons/delete-hover.png"          alt="Kontakt löschen Icon (Hover)"        />        <p>Delete</p>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactDetailsComponent'};
 </script>

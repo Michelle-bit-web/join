@@ -254,8 +254,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -294,8 +294,8 @@ Stores a flag in sessionStorage to prevent the animation from repeating.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -343,7 +343,7 @@ Stores a flag in sessionStorage to prevent the animation from repeating.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -381,7 +381,7 @@ Currently unused, but reserved for future enhancements.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/login-signup/login-header/login-header.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -406,13 +406,7 @@ Currently unused, but reserved for future enhancements.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate
-} from &#x27;@angular/animations&#x27;;
+import { trigger, state, style, transition, animate } from &#x27;@angular/animations&#x27;;
 
 @Component({
   selector: &#x27;app-login-header&#x27;,
@@ -473,18 +467,23 @@ export class LoginHeaderComponent {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;login-header-wrapper&quot;&gt;
-    &lt;div class&#x3D;&quot;dark-logo-wrapper&quot;&gt;
-        &lt;img src&#x3D;&quot;./assets/img/logo/favicon.png&quot; alt&#x3D;&quot;Dark Join Logo&quot; [@fadeOut]&#x3D;&quot;logoState&quot;&gt;
-    &lt;/div&gt;
-    &lt;a routerLink&#x3D;&quot;/signup&quot; class&#x3D;&quot;wanna-signup-wrapper&quot;&gt;
-        &lt;span&gt;Not a Join user?&lt;/span&gt;
-        &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-            &lt;button class&#x3D;&quot;btn-signup&quot;&gt;Sign up&lt;/button&gt;
-        &lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;login-header-wrapper&quot; role&#x3D;&quot;banner&quot;&gt;
+  &lt;div class&#x3D;&quot;dark-logo-wrapper&quot;&gt;
+    &lt;img
+      src&#x3D;&quot;./assets/img/logo/favicon.png&quot;
+      alt&#x3D;&quot;Join Logo&quot;
+      [@fadeOut]&#x3D;&quot;logoState&quot;
+    /&gt;
+  &lt;/div&gt;
+  &lt;nav role&#x3D;&quot;navigation&quot; aria-label&#x3D;&quot;User registration&quot;&gt;
+    &lt;a routerLink&#x3D;&quot;/signup&quot; class&#x3D;&quot;wanna-signup-wrapper&quot; aria-label&#x3D;&quot;Sign up for a new Join account&quot;&gt;
+      &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;Not a Join user?&lt;/span&gt;
+      &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+        &lt;button class&#x3D;&quot;btn-signup&quot;&gt;Sign up&lt;/button&gt;
+      &lt;/div&gt;
     &lt;/a&gt;
-&lt;/div&gt;
-</code></pre>
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
     </div>
 
 
@@ -513,8 +512,8 @@ export class LoginHeaderComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="login-header-wrapper">    <div class="dark-logo-wrapper">        <img src="./assets/img/logo/favicon.png" alt="Dark Join Logo" [@fadeOut]="logoState">    </div>    <a routerLink="/signup" class="wanna-signup-wrapper">        <span>Not a Join user?</span>        <div class="btn-wrapper">            <button class="btn-signup">Sign up</button>        </div>    </a></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><header class="login-header-wrapper" role="banner">  <div class="dark-logo-wrapper">    <img      src="./assets/img/logo/favicon.png"      alt="Join Logo"      [@fadeOut]="logoState"    />  </div>  <nav role="navigation" aria-label="User registration">    <a routerLink="/signup" class="wanna-signup-wrapper" aria-label="Sign up for a new Join account">      <span aria-hidden="true">Not a Join user?</span>      <div class="btn-wrapper">        <button class="btn-signup">Sign up</button>      </div>    </a>  </nav></header></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginHeaderComponent'};
 </script>

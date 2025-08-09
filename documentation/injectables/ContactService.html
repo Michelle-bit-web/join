@@ -194,6 +194,9 @@ Provides reactive streams for selected contact, form visibility, and editing sta
                                 <a href="#deleteContact" >deleteContact</a>
                             </li>
                             <li>
+                                <a href="#deleteImageFromContact" >deleteImageFromContact</a>
+                            </li>
+                            <li>
                                 <a href="#getCleanJson" >getCleanJson</a>
                             </li>
                             <li>
@@ -249,17 +252,19 @@ Provides reactive streams for selected contact, form visibility, and editing sta
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(firestore: Firestore, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(firestore: Firestore)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/services/contact.service.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/services/contact.service.ts:109</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ContactService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -268,6 +273,7 @@ Provides reactive streams for selected contact, form visibility, and editing sta
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -282,18 +288,12 @@ Provides reactive streams for selected contact, form visibility, and editing sta
                                                             No
                                                     </td>
                                                     
-                                                </tr>
-                                                <tr>
-                                                        <td>authService</td>
-                                                  
                                                         <td>
-                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                                <ul>
+<li>Firebase Firestore database service for contact data persistence</li>
+</ul>
+
                                                         </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -331,8 +331,8 @@ Provides reactive streams for selected contact, form visibility, and editing sta
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/services/contact.service.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/services/contact.service.ts:163</a></div>
                         </td>
                     </tr>
 
@@ -408,8 +408,8 @@ Provides reactive streams for selected contact, form visibility, and editing sta
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">src/app/services/contact.service.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/services/contact.service.ts:220</a></div>
                         </td>
                     </tr>
 
@@ -423,6 +423,9 @@ Provides reactive streams for selected contact, form visibility, and editing sta
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -449,8 +452,8 @@ Provides reactive streams for selected contact, form visibility, and editing sta
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="214"
-                                    class="link-to-prism">src/app/services/contact.service.ts:214</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/services/contact.service.ts:274</a></div>
                         </td>
                     </tr>
 
@@ -486,7 +489,7 @@ Provides reactive streams for selected contact, form visibility, and editing sta
 
                                             <td>
                                                     <ul>
-<li>The Firestore document ID of the contact to delete.</li>
+<li>The Firestore document ID of the contact to delete</li>
 </ul>
 
                                             </td>
@@ -496,6 +499,83 @@ Provides reactive streams for selected contact, form visibility, and editing sta
                             </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when contact is deleted</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteImageFromContact"></a>
+                    <span class="name">
+                        <span ><b>deleteImageFromContact</b></span>
+                        <a href="#deleteImageFromContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteImageFromContact(contactToEdit: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/services/contact.service.ts:256</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes the imageKey field from Firestore.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contactToEdit</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact to delete the imageKey from</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -525,8 +605,8 @@ Provides reactive streams for selected contact, form visibility, and editing sta
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="159"
-                                    class="link-to-prism">src/app/services/contact.service.ts:159</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/services/contact.service.ts:194</a></div>
                         </td>
                     </tr>
 
@@ -563,7 +643,7 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                                             <td>
                                                     <ul>
-<li>The contact object to sanitize.</li>
+<li>The contact object to sanitize</li>
 </ul>
 
                                             </td>
@@ -576,7 +656,7 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                         </div>
                             <div class="io-description">
-                                <p>A JSON object containing name, email, and phone.</p>
+                                <p>A JSON object containing only valid contact fields</p>
 
                             </div>
                 </td>
@@ -605,8 +685,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="253"
-                                    class="link-to-prism">src/app/services/contact.service.ts:253</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/services/contact.service.ts:313</a></div>
                         </td>
                     </tr>
 
@@ -682,8 +762,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="226"
-                                    class="link-to-prism">src/app/services/contact.service.ts:226</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/services/contact.service.ts:286</a></div>
                         </td>
                     </tr>
 
@@ -759,8 +839,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/app/services/contact.service.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/services/contact.service.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -802,8 +882,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/services/contact.service.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/services/contact.service.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -817,6 +897,10 @@ This is used to avoid including undefined or extra properties when updating Fire
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Firestore collection reference for contacts</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -841,8 +925,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="240"
-                                    class="link-to-prism">src/app/services/contact.service.ts:240</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="300"
+                                    class="link-to-prism">src/app/services/contact.service.ts:300</a></div>
                         </td>
                     </tr>
 
@@ -918,8 +1002,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/services/contact.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/services/contact.service.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -955,7 +1039,7 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                                             <td>
                                                     <ul>
-<li>The ID of the contact document.</li>
+<li>The ID of the contact document</li>
 </ul>
 
                                             </td>
@@ -968,7 +1052,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Firestore document reference for the specific contact</p>
+
                             </div>
                 </td>
             </tr>
@@ -994,8 +1079,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/services/contact.service.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/services/contact.service.ts:246</a></div>
                         </td>
                     </tr>
 
@@ -1009,6 +1094,9 @@ This is used to avoid including undefined or extra properties when updating Fire
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1033,8 +1121,8 @@ This is used to avoid including undefined or extra properties when updating Fire
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="173"
-                                    class="link-to-prism">src/app/services/contact.service.ts:173</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/services/contact.service.ts:212</a></div>
                         </td>
                     </tr>
 
@@ -1071,7 +1159,7 @@ Used to show the contact details in the UI.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact to select.</li>
+<li>The contact to select</li>
 </ul>
 
                                             </td>
@@ -1110,8 +1198,8 @@ Used to show the contact details in the UI.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="187"
-                                    class="link-to-prism">src/app/services/contact.service.ts:187</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="228"
+                                    class="link-to-prism">src/app/services/contact.service.ts:228</a></div>
                         </td>
                     </tr>
 
@@ -1125,6 +1213,9 @@ Used to show the contact details in the UI.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1149,8 +1240,8 @@ Used to show the contact details in the UI.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="196"
-                                    class="link-to-prism">src/app/services/contact.service.ts:196</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/services/contact.service.ts:237</a></div>
                         </td>
                     </tr>
 
@@ -1186,7 +1277,7 @@ Used to show the contact details in the UI.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact to edit.</li>
+<li>The contact to edit</li>
 </ul>
 
                                             </td>
@@ -1227,8 +1318,8 @@ Used to show the contact details in the UI.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/services/contact.service.ts:145</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/services/contact.service.ts:181</a></div>
                         </td>
                     </tr>
 
@@ -1338,13 +1429,14 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/services/contact.service.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/services/contact.service.ts:103</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Preset avatar colors for visual identification</p>
+                    <div class="io-description"><p>Predefined array of hexadecimal colors used for contact avatar backgrounds.
+Colors are selected based on contact name hash for consistency.</p>
 </div>
                 </td>
             </tr>
@@ -1370,13 +1462,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/services/contact.service.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/services/contact.service.ts:95</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable for the contact being edited</p>
+                    <div class="io-description"><p>Observable stream for the contact being edited.</p>
 </div>
                 </td>
             </tr>
@@ -1402,13 +1494,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/services/contact.service.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/services/contact.service.ts:88</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Currently selected contact to be edited</p>
+                    <div class="io-description"><p>BehaviorSubject holding the contact currently being edited.</p>
 </div>
                 </td>
             </tr>
@@ -1434,13 +1526,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/services/contact.service.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/services/contact.service.ts:67</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable for the selected contact</p>
+                    <div class="io-description"><p>Observable stream of the currently selected contact.</p>
 </div>
                 </td>
             </tr>
@@ -1466,13 +1558,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/services/contact.service.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/services/contact.service.ts:60</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Currently selected contact (for viewing or interaction)</p>
+                    <div class="io-description"><p>BehaviorSubject holding the currently selected contact for viewing or interaction.</p>
 </div>
                 </td>
             </tr>
@@ -1498,13 +1590,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/services/contact.service.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/services/contact.service.ts:81</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable for contact form visibility</p>
+                    <div class="io-description"><p>Observable stream for contact form visibility state.</p>
 </div>
                 </td>
             </tr>
@@ -1530,13 +1622,13 @@ Used to show the contact details in the UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/services/contact.service.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/services/contact.service.ts:74</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Whether the contact form should be displayed</p>
+                    <div class="io-description"><p>BehaviorSubject controlling the visibility of the contact form.</p>
 </div>
                 </td>
             </tr>
@@ -1551,6 +1643,7 @@ Used to show the contact details in the UI.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import {
+  deleteField,
   Firestore,
   collection,
   onSnapshot,
@@ -1558,12 +1651,10 @@ import {
   doc,
   updateDoc,
   deleteDoc,
-  getDoc,
-  getDocs,
+  getDoc
 } from &#x27;@angular/fire/firestore&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { AbstractControl, ValidationErrors } from &#x27;@angular/forms&#x27;;
-import { AuthService } from &#x27;./auth.service&#x27;;
 
 /**
  * Interface representing a contact.
@@ -1577,6 +1668,8 @@ export interface Contact {
   email: string;
   /** Optional phone number of the contact */
   phone?: string;
+  /** Optional avatar base64 for the contact */
+  imageKey?: string;
 }
 
 /**
@@ -1602,19 +1695,54 @@ export function notOnlyWhitespace(control: AbstractControl): ValidationErrors | 
 })
 
 export class ContactService {
-  /** Currently selected contact (for viewing or interaction) */
+  /**
+   * BehaviorSubject holding the currently selected contact for viewing or interaction.
+   * @private
+   * @type {BehaviorSubject&lt;Contact | null&gt;}
+   */
   private selectedContactSubject &#x3D; new BehaviorSubject&lt;Contact | null&gt;(null);
-  /** Observable for the selected contact */
+  
+  /**
+   * Observable stream of the currently selected contact.
+   * @public
+   * @type {Observable&lt;Contact | null&gt;}
+   */
   public selectedContact$ &#x3D; this.selectedContactSubject.asObservable();
-  /** Whether the contact form should be displayed */
+  
+  /**
+   * BehaviorSubject controlling the visibility of the contact form.
+   * @private
+   * @type {BehaviorSubject&lt;boolean&gt;}
+   */
   private showFormSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
-  /** Observable for contact form visibility */
+  
+  /**
+   * Observable stream for contact form visibility state.
+   * @public
+   * @type {Observable&lt;boolean&gt;}
+   */
   public showForm$ &#x3D; this.showFormSubject.asObservable();
-  /** Currently selected contact to be edited */
+  
+  /**
+   * BehaviorSubject holding the contact currently being edited.
+   * @private
+   * @type {BehaviorSubject&lt;Contact | null&gt;}
+   */
   private editContactSubject &#x3D; new BehaviorSubject&lt;Contact | null&gt;(null);
-  /** Observable for the contact being edited */
+  
+  /**
+   * Observable stream for the contact being edited.
+   * @public
+   * @type {Observable&lt;Contact | null&gt;}
+   */
   public editContact$ &#x3D; this.editContactSubject.asObservable();
-  /** Preset avatar colors for visual identification */
+  
+  /**
+   * Predefined array of hexadecimal colors used for contact avatar backgrounds.
+   * Colors are selected based on contact name hash for consistency.
+   * @private
+   * @type {string[]}
+   */
   private avatarColors &#x3D; [
     &#x27;#9C27B0&#x27;, &#x27;#2196F3&#x27;, &#x27;#FF9800&#x27;, &#x27;#4CAF50&#x27;, &#x27;#F44336&#x27;, &#x27;#00BCD4&#x27;,
     &#x27;#c44314ff&#x27;, &#x27;#5191daff&#x27;, &#x27;#E91E63&#x27;, &#x27;#3F51B5&#x27;, &#x27;#b3c511ff&#x27;,
@@ -1623,13 +1751,15 @@ export class ContactService {
     &#x27;#FFA000&#x27;, &#x27;#084c6bff&#x27;, &#x27;#6bb604ff&#x27;
   ];
 
-  constructor(
-    private firestore: Firestore,
-    private authService: AuthService
-  ) {}
+  /**
+   * Creates an instance of ContactService.
+   * @param {Firestore} firestore - Firebase Firestore database service for contact data persistence
+   */
+  constructor(private firestore: Firestore) { }
 
   /**
    * Returns a Firestore reference to the &#x60;contacts&#x60; collection.
+   * @returns {CollectionReference} Firestore collection reference for contacts
    */
   getContactsRef() {
     return collection(this.firestore, &#x27;contacts&#x27;);
@@ -1637,8 +1767,8 @@ export class ContactService {
 
   /**
    * Returns a Firestore reference to a single contact document.
-   *
-   * @param docId - The ID of the contact document.
+   * @param {string} docId - The ID of the contact document
+   * @returns {DocumentReference} Firestore document reference for the specific contact
    */
   getSingleContactsRef(docId: string) {
     return doc(this.getContactsRef(), docId);
@@ -1661,9 +1791,7 @@ export class ContactService {
           });
           observer.next(contacts);
         },
-        (error) &#x3D;&gt; {
-          observer.error(error);
-        }
+        (error) &#x3D;&gt; { observer.error(error); }
       );
       return () &#x3D;&gt; unsubscribe();
     });
@@ -1703,23 +1831,26 @@ export class ContactService {
   /**
    * Returns a plain JSON object with only the allowed contact fields.
    * This is used to avoid including undefined or extra properties when updating Firestore.
-   *
-   * @param updatedContact - The contact object to sanitize.
-   * @returns A JSON object containing name, email, and phone.
+   * @param {Contact} updatedContact - The contact object to sanitize
+   * @returns {Partial&lt;Contact&gt;} A JSON object containing only valid contact fields
    */
   getCleanJson(updatedContact: Contact): Partial&lt;Contact&gt; {
-    return {
+    const contact: Contact &#x3D; {
       name: updatedContact.name,
       email: updatedContact.email,
-      phone: updatedContact.phone,
+      phone: updatedContact.phone
     };
+    if (updatedContact.imageKey) {
+      contact.imageKey &#x3D; updatedContact.imageKey;
+    }
+    return contact;
   }
 
   /**
    * Emits a contact to the selected contact observable.
    * Used to show the contact details in the UI.
-   *
-   * @param contact - The contact to select.
+   * @param {Contact} contact - The contact to select
+   * @returns {void}
    */
   selectContact(contact: Contact): void {
     this.selectedContactSubject.next(contact);
@@ -1727,6 +1858,7 @@ export class ContactService {
 
   /**
    * Clears the currently selected contact.
+   * @returns {void}
    */
   clearSelection(): void {
     this.selectedContactSubject.next(null);
@@ -1734,6 +1866,7 @@ export class ContactService {
 
   /**
    * Triggers the display of the add contact form.
+   * @returns {void}
    */
   showAddForm(): void {
     this.showFormSubject.next(true);
@@ -1741,8 +1874,8 @@ export class ContactService {
 
   /**
    * Triggers the display of the edit contact form with a prefilled contact.
-   *
-   * @param contact - The contact to edit.
+   * @param {Contact} contact - The contact to edit
+   * @returns {void}
    */
   showEditForm(contact: Contact): void {
     this.editContactSubject.next(contact);
@@ -1751,6 +1884,7 @@ export class ContactService {
 
   /**
    * Hides the contact form and clears the edit state.
+   * @returns {void}
    */
   hideForm(): void {
     this.showFormSubject.next(false);
@@ -1758,13 +1892,31 @@ export class ContactService {
   }
 
   /**
+   * Deletes the imageKey field from Firestore.
+   * @param {Contact} contactToEdit - The contact to delete the imageKey from
+   * @returns {void}
+   */
+  deleteImageFromContact(contactToEdit: Contact): void {
+    if (!contactToEdit.id) {
+      console.error(&#x27;Contact id is undefined. Cannot delete image.&#x27;);
+      return;
+    }
+    const contactRef &#x3D; this.getSingleContactsRef(contactToEdit.id);
+    updateDoc(contactRef, {
+      imageKey: deleteField()
+    }).catch((err) &#x3D;&gt; {
+      console.error(&#x27;Failed to delete image from contact:&#x27;, err);
+    });
+  }
+
+  /**
    * Deletes a contact from Firestore.
-   *
-   * @param docId - The Firestore document ID of the contact to delete.
+   * @param {string} docId - The Firestore document ID of the contact to delete
+   * @returns {Promise&lt;void&gt;} Promise that resolves when contact is deleted
    */
   async deleteContact(docId: string): Promise&lt;void&gt; {
     await deleteDoc(this.getSingleContactsRef(docId)).catch((err) &#x3D;&gt; {
-      console.log(err);
+      console.error(&#x27;Failed to delete contact:&#x27;, err);
     });
   }
 

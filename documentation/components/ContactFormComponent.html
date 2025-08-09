@@ -159,6 +159,7 @@
                             <code>CommonModule</code>
                             <code>ReactiveFormsModule</code>
                             <code>FormsModule</code>
+                                <code><a href="../components/ImageViewerComponent.html" target="_self" >ImageViewerComponent</a></code>
                 </td>
             </tr>
 
@@ -201,6 +202,12 @@
                                 <a href="#contactForm" >contactForm</a>
                             </li>
                             <li>
+                                <a href="#contactImageKeys" >contactImageKeys</a>
+                            </li>
+                            <li>
+                                <a href="#contactImages" >contactImages</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#contactService" >contactService</a>
                             </li>
@@ -214,7 +221,41 @@
                                 <a href="#editContactSubscription" >editContactSubscription</a>
                             </li>
                             <li>
-                                <a href="#getDataToEdit" >getDataToEdit</a>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#filepickerRef" >filepickerRef</a>
+                            </li>
+                            <li>
+                                <a href="#formSubmitted" >formSubmitted</a>
+                            </li>
+                            <li>
+                                <a href="#imageBase64" >imageBase64</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#imageManager" >imageManager</a>
+                            </li>
+                            <li>
+                                <a href="#imageMarkedForDeletion" >imageMarkedForDeletion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#imgData" >imgData</a>
+                            </li>
+                            <li>
+                                <a href="#showImageViewer" >showImageViewer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#uploadedImageKey" >uploadedImageKey</a>
+                            </li>
+                            <li>
+                                <a href="#uploadedImages" >uploadedImages</a>
+                            </li>
+                            <li>
+                                <a href="#uploadedUrls" >uploadedUrls</a>
                             </li>
                         </ul>
                     </td>
@@ -229,16 +270,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#addNewContact" >addNewContact</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#buildContactFromForm" >buildContactFromForm</a>
-                            </li>
-                            <li>
                                 <a href="#clearInputs" >clearInputs</a>
+                            </li>
+                            <li>
+                                <a href="#closeImageViewer" >closeImageViewer</a>
                             </li>
                             <li>
                                 <a href="#deleteContact" >deleteContact</a>
@@ -248,7 +283,14 @@
                                 <a href="#finalizeSubmission" >finalizeSubmission</a>
                             </li>
                             <li>
+                                <a href="#getDataToEdit" >getDataToEdit</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
+                                <a href="#initializeForm" >initializeForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#isEditMode" >isEditMode</a>
                             </li>
                             <li>
@@ -262,10 +304,32 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#onContactImageChanged" >onContactImageChanged</a>
+                            </li>
+                            <li>
+                                <a href="#onDeleteImage" >onDeleteImage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#onSubmit" >onSubmit</a>
                             </li>
                             <li>
+                                <a href="#openContactImageViewer" >openContactImageViewer</a>
+                            </li>
+                            <li>
+                                <a href="#openFileDialog" >openFileDialog</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processValidImage" >processValidImage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToEditContact" >subscribeToEditContact</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#updateContact" >updateContact</a>
                             </li>
                         </ul>
@@ -303,12 +367,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(form: FormBuilder, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>)</code>
+<code>constructor(form: FormBuilder, contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, imageManager: <a href="../injectables/ImageManager.html" target="_self">ImageManager</a>, formService: <a href="../injectables/ContactFormService.html" target="_self">ContactFormService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:119</a></div>
                             </td>
                         </tr>
 
@@ -341,7 +405,7 @@
                                                     
                                                         <td>
                                                                 <ul>
-<li>Angular&#39;s FormBuilder for creating the form.</li>
+<li>Angular&#39;s FormBuilder for creating the form</li>
 </ul>
 
                                                         </td>
@@ -359,7 +423,43 @@
                                                     
                                                         <td>
                                                                 <ul>
-<li>Service that manages contact CRUD operations.</li>
+<li>Service that manages contact CRUD operations</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>imageManager</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ImageManager.html" target="_self" >ImageManager</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for image processing and validation</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>formService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContactFormService.html" target="_self" >ContactFormService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for form-specific business logic</li>
 </ul>
 
                                                         </td>
@@ -392,7 +492,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:26</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -419,7 +519,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:32</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -443,130 +543,6 @@ Emits the string &#39;closed&#39; as an identifier.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addNewContact"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>addNewContact</b></span>
-                        <a href="#addNewContact"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addNewContact(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="164"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:164</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Adds a new contact using the ContactService and emits it if successful.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The new contact data to be added.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="buildContactFromForm"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>buildContactFromForm</b></span>
-                        <a href="#buildContactFromForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildContactFromForm()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:130</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Builds a trimmed Contact object from form values.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>A Contact object based on form input.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="clearInputs"></a>
                     <span class="name">
                         <span ><b>clearInputs</b></span>
@@ -583,8 +559,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="182"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:182</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:281</a></div>
                         </td>
                     </tr>
 
@@ -592,6 +568,45 @@ Emits the string &#39;closed&#39; as an identifier.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Resets the form without closing the overlay.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeImageViewer"></a>
+                    <span class="name">
+                        <span ><b>closeImageViewer</b></span>
+                        <a href="#closeImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeImageViewer()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the image viewer.</p>
 </div>
 
                         <div class="io-description">
@@ -622,8 +637,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="189"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:189</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="288"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:288</a></div>
                         </td>
                     </tr>
 
@@ -663,8 +678,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:273</a></div>
                         </td>
                     </tr>
 
@@ -686,9 +701,129 @@ Emits the string &#39;closed&#39; as an identifier.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isEditMode"></a>
+                    <a name="getDataToEdit"></a>
+                    <span class="name">
+                        <span ><b>getDataToEdit</b></span>
+                        <a href="#getDataToEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDataToEdit(contact: <a href="../interfaces/Contact.html" target="_self">Contact | null</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Populates the form with the contact&#39;s data for editing.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact | null</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact to edit or null to clear the form.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeForm"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                        <span ><b>initializeForm</b></span>
+                        <a href="#initializeForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initializeForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Initializes the reactive form with validation rules.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditMode"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
                         <span ><b>isEditMode</b></span>
                         <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -704,8 +839,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="144"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:144</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="299"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:299</a></div>
                         </td>
                     </tr>
 
@@ -747,8 +882,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="244"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:244</a></div>
                         </td>
                     </tr>
 
@@ -786,8 +921,8 @@ Emits the string &#39;closed&#39; as an identifier.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -826,8 +961,8 @@ when editing an existing entry.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:251</a></div>
                         </td>
                     </tr>
 
@@ -841,6 +976,154 @@ when editing an existing entry.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onContactImageChanged"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onContactImageChanged</b></span>
+                        <a href="#onContactImageChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onContactImageChanged(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles a new image file selection for a contact.
+Validates the file, deletes old image, and compresses the new image.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The input change event.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteImage"></a>
+                    <span class="name">
+                        <span ><b>onDeleteImage</b></span>
+                        <a href="#onDeleteImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteImage(event: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles image deletion from the image viewer.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -867,8 +1150,8 @@ when editing an existing entry.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:114</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="262"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:262</a></div>
                         </td>
                     </tr>
 
@@ -892,9 +1175,211 @@ and closes the form.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateContact"></a>
+                    <a name="openContactImageViewer"></a>
+                    <span class="name">
+                        <span ><b>openContactImageViewer</b></span>
+                        <a href="#openContactImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openContactImageViewer()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:218</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the image viewer for the contact image.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openFileDialog"></a>
+                    <span class="name">
+                        <span ><b>openFileDialog</b></span>
+                        <a href="#openFileDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openFileDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the file dialog for image selection.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processValidImage"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>processValidImage</b></span>
+                        <a href="#processValidImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processValidImage(file: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:196</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Processes a valid image file by handling deletion and compression.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>file</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The validated image file to process</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise that resolves when image processing is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToEditContact"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscribeToEditContact</b></span>
+                        <a href="#subscribeToEditContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToEditContact()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets up subscription to listen for edit contact events.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateContact"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
                         <span ><b>updateContact</b></span>
                         <a href="#updateContact"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -910,8 +1395,8 @@ and closes the form.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="153"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:153</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="308"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:308</a></div>
                         </td>
                     </tr>
 
@@ -991,13 +1476,87 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:37</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>The reactive form group for the contact form.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactImageKeys"></a>
+                    <span class="name">
+                        <span ><b>contactImageKeys</b></span>
+                        <a href="#contactImageKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of contact image keys for backend reference.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactImages"></a>
+                    <span class="name">
+                        <span ><b>contactImages</b></span>
+                        <a href="#contactImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of contact image URLs for display.</p>
 </div>
                 </td>
             </tr>
@@ -1024,13 +1583,13 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:130</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description">- Service that manages contact CRUD operations.</div>
+                    <div class="io-description">- Service that manages contact CRUD operations</div>
                 </td>
             </tr>
 
@@ -1056,7 +1615,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -1090,7 +1649,7 @@ and closes the form.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -1107,57 +1666,393 @@ and closes the form.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getDataToEdit"></a>
+                    <a name="errorMessage"></a>
                     <span class="name">
-                        <span ><b>getDataToEdit</b></span>
-                        <a href="#getDataToEdit"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:107</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Receives a contact to be edited and pre-fills the form fields.</p>
+                    <div class="io-description"><p>Error message to display for validation or upload errors.</p>
 </div>
                 </td>
             </tr>
 
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filepickerRef"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>filepickerRef</b></span>
+                        <a href="#filepickerRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description">
-                                <b>Parameters :</b>
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <tr>
-                                                    <td>contact</td>
-                                                    <td>
-                                                            <code><ul>
-<li>The contact object or null to clear the form.</li>
-</ul>
-</code>
-                                                    </td>
-                                            </tr>
-                                    </tbody>
-                                </table>
-                        </div>
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;filepicker&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the file input element for image selection.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formSubmitted"></a>
+                    <span class="name">
+                        <span ><b>formSubmitted</b></span>
+                        <a href="#formSubmitted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating if the form has been submitted to show validation errors.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageBase64"></a>
+                    <span class="name">
+                        <span ><b>imageBase64</b></span>
+                        <a href="#imageBase64"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Base64 encoded string representation of the image for display.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageManager"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>imageManager</b></span>
+                        <a href="#imageManager"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ImageManager.html" target="_self" >ImageManager</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Service for image processing and validation</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageMarkedForDeletion"></a>
+                    <span class="name">
+                        <span ><b>imageMarkedForDeletion</b></span>
+                        <a href="#imageMarkedForDeletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating if the current image is marked for deletion.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imgData"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>imgData</b></span>
+                        <a href="#imgData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Data for the uploaded image including metadata.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showImageViewer"></a>
+                    <span class="name">
+                        <span ><b>showImageViewer</b></span>
+                        <a href="#showImageViewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls the visibility of the image viewer modal.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadedImageKey"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>uploadedImageKey</b></span>
+                        <a href="#uploadedImageKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique key identifier for the uploaded image.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadedImages"></a>
+                    <span class="name">
+                        <span ><b>uploadedImages</b></span>
+                        <a href="#uploadedImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of uploaded image objects with metadata.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadedUrls"></a>
+                    <span class="name">
+                        <span ><b>uploadedUrls</b></span>
+                        <a href="#uploadedUrls"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/contacts/contact-form/contact-form.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of uploaded image URLs for display purposes.</p>
+</div>
+                </td>
+            </tr>
+
         </tbody>
     </table>
 </section>
@@ -1166,25 +2061,25 @@ and closes the form.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from &#x27;@angular/core&#x27;;
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ContactService, Contact, notOnlyWhitespace } from &#x27;../../services/contact.service&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
+import { UploadedImage } from &#x27;../../services/upload.service&#x27;;
+import { ImageViewerComponent } from &#x27;../../shared/image-viewer/image-viewer.component&#x27;;
+import { ImageManager } from &#x27;./image-manager&#x27;;
+import { ContactFormService } from &#x27;./contact-form.service&#x27;;
 
 @Component({
   selector: &#x27;app-contact-form&#x27;,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ImageViewerComponent],
   templateUrl: &#x27;./contact-form.component.html&#x27;,
   styleUrl: &#x27;./contact-form.component.scss&#x27;,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class ContactFormComponent implements OnInit, OnDestroy {
-
   /**
    * Emits a newly created contact after successful form submission.
    */
@@ -1207,60 +2102,215 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   contactToEdit?: Contact;
 
   /**
+   * Data for the uploaded image including metadata.
+   * @type {UploadedImage | undefined}
+   */
+  imgData?: UploadedImage;
+  
+  /**
+   * Unique key identifier for the uploaded image.
+   * @type {string | undefined}
+   */
+  uploadedImageKey?: string;
+  
+  /**
+   * Base64 encoded string representation of the image for display.
+   * @type {string | null}
+   */
+  imageBase64: string | null &#x3D; null;
+
+  /**
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
+  
+  /**
+   * Array of uploaded image URLs for display purposes.
+   * @type {string[]}
+   */
+  uploadedUrls: string[] &#x3D; [];
+  
+  /**
+   * Array of uploaded image objects with metadata.
+   * @type {UploadedImage[]}
+   */
+  uploadedImages: UploadedImage[] &#x3D; [];
+  
+  /**
+   * Reference to the file input element for image selection.
+   * @type {ElementRef&lt;HTMLInputElement&gt;}
+   */
+  @ViewChild(&#x27;filepicker&#x27;) filepickerRef!: ElementRef&lt;HTMLInputElement&gt;;
+  
+  /**
+   * Controls the visibility of the image viewer modal.
+   * @type {boolean}
+   */
+  showImageViewer &#x3D; false;
+  
+  /**
+   * Array of contact image URLs for display.
+   * @type {string[]}
+   */
+  contactImages: string[] &#x3D; [];
+  
+  /**
+   * Array of contact image keys for backend reference.
+   * @type {string[]}
+   */
+  contactImageKeys: string[] &#x3D; [];
+  
+  /**
+   * Error message to display for validation or upload errors.
+   * @type {string}
+   */
+  errorMessage: string &#x3D; &#x27;&#x27;;
+  
+  /**
+   * Flag indicating if the current image is marked for deletion.
+   * @type {boolean}
+   */
+  imageMarkedForDeletion: boolean &#x3D; false;
+  
+  /**
+   * Flag indicating if the form has been submitted to show validation errors.
+   * @type {boolean}
+   */
+  formSubmitted: boolean &#x3D; false;
 
   /**
    * Constructor injecting the form builder and contact service.
-   * @param form - Angular&#x27;s FormBuilder for creating the form.
-   * @param contactService - Service that manages contact CRUD operations.
+   * @param {FormBuilder} form - Angular&#x27;s FormBuilder for creating the form
+   * @param {ContactService} contactService - Service that manages contact CRUD operations
+   * @param {ImageManager} imageManager - Service for image processing and validation
+   * @param {ContactFormService} formService - Service for form-specific business logic
    */
-  constructor(private form: FormBuilder, public contactService: ContactService) { }
+  constructor(
+    private form: FormBuilder,
+    public contactService: ContactService,
+    public imageManager: ImageManager,
+    private formService: ContactFormService
+  ) { }
 
   /**
    * Initializes the form and subscribes to editContact$ to load contact data
    * when editing an existing entry.
    */
   ngOnInit(): void {
+    this.initializeForm();
+    this.subscribeToEditContact();
+  }
+
+  /**
+   * Initializes the reactive form with validation rules.
+   * @private
+   * @returns {void}
+   */
+  private initializeForm(): void {
     this.contactForm &#x3D; this.form.group({
       name: [&#x27;&#x27;, [Validators.required, notOnlyWhitespace]],
       email: [&#x27;&#x27;, [Validators.required, Validators.email]],
       phone: [&#x27;&#x27;, [Validators.required, Validators.min(10), Validators.pattern(/^\d+$/)]]
     });
-    this.editContactSubscription &#x3D; this.contactService.editContact$.subscribe(this.getDataToEdit);
   }
 
   /**
-   * Receives a contact to be edited and pre-fills the form fields.
-   * @param contact - The contact object or null to clear the form.
+   * Sets up subscription to listen for edit contact events.
+   * @private
+   * @returns {void}
    */
-  getDataToEdit &#x3D; (contact: Contact | null) &#x3D;&gt; {
-    this.contactToEdit &#x3D; contact || undefined;
-    if (this.contactToEdit) {
-      this.contactForm.patchValue({
-        name: this.contactToEdit.name,
-        email: this.contactToEdit.email,
-        phone: this.contactToEdit.phone
-      });
+  private subscribeToEditContact(): void {
+    this.editContactSubscription &#x3D; this.contactService.editContact$.subscribe(
+      contact &#x3D;&gt; this.getDataToEdit(contact)
+    );
+  }
+
+  /**
+   * Opens the file dialog for image selection.
+   */
+  openFileDialog(): void {
+    this.filepickerRef.nativeElement.click();
+  }
+
+  /**
+   * Handles a new image file selection for a contact.
+   * Validates the file, deletes old image, and compresses the new image.
+   * @param event - The input change event.
+   */
+  async onContactImageChanged(event: Event): Promise&lt;void&gt; {
+    this.errorMessage &#x3D; &#x27;&#x27;;
+    const file &#x3D; this.imageManager.extractValidImageFile(event);
+    if (!file) {
+      this.errorMessage &#x3D; &#x27;Hoppla, please select an image file (max 3MB).&#x27;;
+      return;
     }
+    await this.processValidImage(file);
+  }
+
+  /**
+   * Processes a valid image file by handling deletion and compression.
+   * @private
+   * @param {File} file - The validated image file to process
+   * @returns {Promise&lt;void&gt;} Promise that resolves when image processing is complete
+   */
+  private async processValidImage(file: File): Promise&lt;void&gt; {
+    await this.formService.deletePreviousImages(this.uploadedImageKey, this.contactToEdit?.imageKey);
+    const imageKey &#x3D; &#x60;${Date.now()}_${file.name}&#x60;;
+    const base64 &#x3D; await this.imageManager.compressImage(file, 800, 800, 0.7);
+    this.formService.setImageState(this, file, imageKey, base64);
+    this.errorMessage &#x3D; &#x27;&#x27;;
+  }
+
+  /**
+   * Populates the form with the contact&#x27;s data for editing.
+   * @param contact - The contact to edit or null to clear the form.
+   */
+  getDataToEdit(contact: Contact | null): void {
+    this.contactToEdit &#x3D; contact || undefined;
+    if (!this.contactToEdit) return;
+    this.formService.fillContactForm(this.contactForm, this.contactToEdit);
+    this.formService.loadContactImage(this, this.contactToEdit);
+  }
+
+  /**
+   * Opens the image viewer for the contact image.
+   */
+  openContactImageViewer(): void {
+    if (!this.imageBase64) return;
+    this.formService.setupImageViewer(this);
+  }
+
+  /**
+   * Closes the image viewer.
+   */
+  closeImageViewer(): void {
+    this.showImageViewer &#x3D; false;
+  }
+
+  /**
+   * Handles image deletion from the image viewer.
+   */
+  onDeleteImage(event: { imageKey?: string }): void {
+    if (event.imageKey) {
+      this.imageMarkedForDeletion &#x3D; true;
+    }
+    this.formService.resetImageState(this);
+    this.closeImageViewer();
   }
 
   /**
    * Cleans up the subscription on component destruction to prevent memory leaks.
    */
   ngOnDestroy(): void {
-    if (this.editContactSubscription) {
-      this.editContactSubscription.unsubscribe();
-    }
+    this.editContactSubscription?.unsubscribe();
   }
 
   /**
    * Closes the contact form, resets its state, and emits a closing event.
    */
   onClose(): void {
+    this.formService.handleFormClose(this);
     this.contactService.hideForm();
-    this.contactForm.reset();
     this.closeOverlay.emit(&#x27;closed&#x27;);
   }
 
@@ -1271,59 +2321,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   async onSubmit(): Promise&lt;void&gt; {
     if (!this.contactForm.valid) return;
-    const contact &#x3D; this.buildContactFromForm();
-    if (this.isEditMode()) {
-      this.updateContact(contact);
-    } else {
-      await this.addNewContact(contact);
-    }
+    this.formSubmitted &#x3D; true;
+    const contact &#x3D; this.formService.buildContactFromForm(this);
+    await this.formService.processSubmission(this, contact);
     this.finalizeSubmission();
-  }
-
-  /**
-   * Builds a trimmed Contact object from form values.
-   * 
-   * @returns A Contact object based on form input.
-   */
-  private buildContactFromForm(): Contact {
-    const { name, email, phone } &#x3D; this.contactForm.value;
-    return {
-      name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-    };
-  }
-
-  /**
-   * Determines whether the form is in edit mode.
-   * 
-   * @returns True if editing an existing contact, false if creating a new one.
-   */
-  private isEditMode(): boolean {
-    return !!this.contactToEdit?.id;
-  }
-
-  /**
-   * Updates an existing contact using the ContactService.
-   * 
-   * @param contact - The contact data to be saved.
-   */
-  private updateContact(contact: Contact): void {
-    if (this.contactToEdit &amp;&amp; this.contactToEdit.id) {
-      this.contactService.updateContact(this.contactToEdit.id, contact);
-    }
-  }
-
-  /**
-   * Adds a new contact using the ContactService and emits it if successful.
-   * 
-   * @param contact - The new contact data to be added.
-   */
-  private async addNewContact(contact: Contact): Promise&lt;void&gt; {
-    const newContact &#x3D; await this.contactService.addContact(contact);
-    if (newContact) {
-      this.addedContact.emit(newContact);
-    }
   }
 
   /**
@@ -1337,105 +2338,361 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   /**
    * Resets the form without closing the overlay.
    */
-  clearInputs() {
+  clearInputs(): void {
     this.contactForm.reset();
   }
 
   /**
    * Deletes the contact being edited (if any) and closes the form.
    */
-  deleteContact() {
-    if (this.contactToEdit?.id) {
-      this.contactService.deleteContact(this.contactToEdit.id);
-      this.onClose();
-    }
+  deleteContact(): void {
+    if (!this.contactToEdit?.id) return;
+    this.formService.handleContactDeletion(this.contactToEdit);
+    this.onClose();
   }
-}
 
-</code></pre>
+  /**
+   * Determines whether the form is in edit mode.
+   * 
+   * @returns True if editing an existing contact, false if creating a new one.
+   */
+  public isEditMode(): boolean {
+    return !!this.contactToEdit?.id;
+  }
+
+  /**
+   * Updates an existing contact using the ContactService.
+   * 
+   * @param contact - The contact data to be saved.
+   */
+  public updateContact(contact: Contact): void {
+    this.formService.updateExistingContact(this, contact);
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;section&gt;
-    &lt;div class&#x3D;&quot;close-btn-wrapper&quot;&gt;
-        &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot;&gt;
-          &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-              &lt;mask id&#x3D;&quot;mask0_331509_883&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
-              &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+  &lt;div class&#x3D;&quot;close-btn-wrapper&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot;&gt;
+      &lt;svg
+        width&#x3D;&quot;24&quot;
+        height&#x3D;&quot;24&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+        fill&#x3D;&quot;none&quot;
+        xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+      &gt;
+        &lt;mask
+          id&#x3D;&quot;mask0_331509_883&quot;
+          style&#x3D;&quot;mask-type: alpha&quot;
+          maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+          x&#x3D;&quot;0&quot;
+          y&#x3D;&quot;0&quot;
+          width&#x3D;&quot;24&quot;
+          height&#x3D;&quot;24&quot;
+        &gt;
+          &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
+        &lt;/mask&gt;
+        &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
+          &lt;path
+            d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot;
+            fill&#x3D;&quot;#2A3647&quot;
+          /&gt;
+        &lt;/g&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;left-frame&quot;&gt;
+    &lt;img src&#x3D;&quot;assets/img/logo/logo.png&quot; alt&#x3D;&quot;Join Logo&quot; class&#x3D;&quot;logo&quot; /&gt;
+    &lt;h1 *ngIf&#x3D;&quot;!contactToEdit&quot;&gt;Add contact&lt;/h1&gt;
+    &lt;h1 *ngIf&#x3D;&quot;contactToEdit&quot;&gt;Edit contact&lt;/h1&gt;
+    &lt;p class&#x3D;&quot;sub-heading&quot; *ngIf&#x3D;&quot;!contactToEdit&quot;&gt;
+      Tasks are better with a team!
+    &lt;/p&gt;
+    &lt;div class&#x3D;&quot;separator&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;right-frame&quot;&gt;
+    &lt;div class&#x3D;&quot;form-wrapper&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;img-user-wrapper&quot;
+        [style.background-color]&#x3D;&quot;
+          contactToEdit
+            ? contactService.getContactColor(contactToEdit.name)
+            : &#x27;#d1d1d1&#x27;
+        &quot;
+      &gt;
+        &lt;img
+          class&#x3D;&quot;contact-image&quot;
+          [src]&#x3D;&quot;imageBase64&quot;
+          alt&#x3D;&quot;User Image&quot;
+          *ngIf&#x3D;&quot;imageBase64&quot;
+          (click)&#x3D;&quot;openContactImageViewer()&quot;
+        /&gt;
+        &lt;img
+          class&#x3D;&quot;img-user&quot;
+          src&#x3D;&quot;assets/img/svg/person.svg&quot;
+          alt&#x3D;&quot;User Image&quot;
+          *ngIf&#x3D;&quot;!imageBase64 &amp;&amp; !contactToEdit&quot;
+        /&gt;
+        &lt;p class&#x3D;&quot;contact-initials&quot; *ngIf&#x3D;&quot;!imageBase64 &amp;&amp; contactToEdit&quot;&gt;
+          {{ contactService.getInitials(contactToEdit.name) }}
+        &lt;/p&gt;
+        &lt;input
+          class&#x3D;&quot;file-picker&quot;
+          type&#x3D;&quot;file&quot;
+          id&#x3D;&quot;filepicker&quot;
+          name&#x3D;&quot;uploadInput&quot;
+          placeholder&#x3D;&quot;Upload files&quot;
+          accept&#x3D;&quot;image/*&quot;
+          [multiple]&#x3D;&quot;false&quot;
+          (change)&#x3D;&quot;onContactImageChanged($event)&quot;
+          #filepicker
+          hidden
+        /&gt;
+        &lt;button
+          (click)&#x3D;&quot;openFileDialog()&quot;
+          type&#x3D;&quot;button&quot;
+          aria-label&#x3D;&quot;Upload user image&quot;
+          class&#x3D;&quot;user-image-upload-button&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;image-upload-icon&quot;
+            width&#x3D;&quot;54&quot;
+            height&#x3D;&quot;54&quot;
+            viewBox&#x3D;&quot;0 0 54 54&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+          &gt;
+            &lt;g filter&#x3D;&quot;url(#filter0_d_261948_10950)&quot;&gt;
+              &lt;rect x&#x3D;&quot;4&quot; y&#x3D;&quot;4&quot; width&#x3D;&quot;46&quot; height&#x3D;&quot;46&quot; rx&#x3D;&quot;23&quot; fill&#x3D;&quot;white&quot; /&gt;
+              &lt;path
+                d&#x3D;&quot;M40.125 34.5C40.125 34.9973 39.9275 35.4742 39.5758 35.8258C39.2242 36.1775 38.7473 36.375 38.25 36.375H15.75C15.2527 36.375 14.7758 36.1775 14.4242 35.8258C14.0725 35.4742 13.875 34.9973 13.875 34.5V23.25C13.875 22.7527 14.0725 22.2758 14.4242 21.9242C14.7758 21.5725 15.2527 21.375 15.75 21.375H17.9475C19.4386 21.3742 20.8683 20.7814 21.9225 19.7269L23.4788 18.1744C23.8294 17.8236 24.3047 17.6261 24.8006 17.625H29.1956C29.6929 17.6251 30.1697 17.8227 30.5212 18.1744L32.0738 19.7269C32.5962 20.2495 33.2165 20.664 33.8992 20.9468C34.5818 21.2296 35.3136 21.3751 36.0525 21.375H38.25C38.7473 21.375 39.2242 21.5725 39.5758 21.9242C39.9275 22.2758 40.125 22.7527 40.125 23.25V34.5ZM15.75 19.5C14.7554 19.5 13.8016 19.8951 13.0983 20.5983C12.3951 21.3016 12 22.2554 12 23.25V34.5C12 35.4946 12.3951 36.4484 13.0983 37.1516C13.8016 37.8549 14.7554 38.25 15.75 38.25H38.25C39.2446 38.25 40.1984 37.8549 40.9016 37.1516C41.6049 36.4484 42 35.4946 42 34.5V23.25C42 22.2554 41.6049 21.3016 40.9016 20.5983C40.1984 19.8951 39.2446 19.5 38.25 19.5H36.0525C35.058 19.4998 34.1043 19.1046 33.4012 18.4013L31.8488 16.8487C31.1457 16.1454 30.192 15.7502 29.1975 15.75H24.8025C23.808 15.7502 22.8543 16.1454 22.1512 16.8487L20.5988 18.4013C19.8957 19.1046 18.942 19.4998 17.9475 19.5H15.75Z&quot;
+                fill&#x3D;&quot;#2A3647&quot;
+              /&gt;
+              &lt;path
+                d&#x3D;&quot;M27 32.625C25.7568 32.625 24.5645 32.1311 23.6854 31.2521C22.8064 30.373 22.3125 29.1807 22.3125 27.9375C22.3125 26.6943 22.8064 25.502 23.6854 24.6229C24.5645 23.7439 25.7568 23.25 27 23.25C28.2432 23.25 29.4355 23.7439 30.3146 24.6229C31.1936 25.502 31.6875 26.6943 31.6875 27.9375C31.6875 29.1807 31.1936 30.373 30.3146 31.2521C29.4355 32.1311 28.2432 32.625 27 32.625ZM27 34.5C28.7405 34.5 30.4097 33.8086 31.6404 32.5779C32.8711 31.3472 33.5625 29.678 33.5625 27.9375C33.5625 26.197 32.8711 24.5278 31.6404 23.2971C30.4097 22.0664 28.7405 21.375 27 21.375C25.2595 21.375 23.5903 22.0664 22.3596 23.2971C21.1289 24.5278 20.4375 26.197 20.4375 27.9375C20.4375 29.678 21.1289 31.3472 22.3596 32.5779C23.5903 33.8086 25.2595 34.5 27 34.5ZM17.625 24.1875C17.625 24.4361 17.5262 24.6746 17.3504 24.8504C17.1746 25.0262 16.9361 25.125 16.6875 25.125C16.4389 25.125 16.2004 25.0262 16.0246 24.8504C15.8488 24.6746 15.75 24.4361 15.75 24.1875C15.75 23.9389 15.8488 23.7004 16.0246 23.5246C16.2004 23.3488 16.4389 23.25 16.6875 23.25C16.9361 23.25 17.1746 23.3488 17.3504 23.5246C17.5262 23.7004 17.625 23.9389 17.625 24.1875Z&quot;
+                fill&#x3D;&quot;#2A3647&quot;
+              /&gt;
+            &lt;/g&gt;
+            &lt;defs&gt;
+              &lt;filter
+                id&#x3D;&quot;filter0_d_261948_10950&quot;
+                x&#x3D;&quot;0&quot;
+                y&#x3D;&quot;0&quot;
+                width&#x3D;&quot;54&quot;
+                height&#x3D;&quot;54&quot;
+                filterUnits&#x3D;&quot;userSpaceOnUse&quot;
+                color-interpolation-filters&#x3D;&quot;sRGB&quot;
+              &gt;
+                &lt;feFlood flood-opacity&#x3D;&quot;0&quot; result&#x3D;&quot;BackgroundImageFix&quot; /&gt;
+                &lt;feColorMatrix
+                  in&#x3D;&quot;SourceAlpha&quot;
+                  type&#x3D;&quot;matrix&quot;
+                  values&#x3D;&quot;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0&quot;
+                  result&#x3D;&quot;hardAlpha&quot;
+                /&gt;
+                &lt;feOffset /&gt;
+                &lt;feGaussianBlur stdDeviation&#x3D;&quot;2&quot; /&gt;
+                &lt;feColorMatrix
+                  type&#x3D;&quot;matrix&quot;
+                  values&#x3D;&quot;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0&quot;
+                /&gt;
+                &lt;feBlend
+                  mode&#x3D;&quot;normal&quot;
+                  in2&#x3D;&quot;BackgroundImageFix&quot;
+                  result&#x3D;&quot;effect1_dropShadow_261948_10950&quot;
+                /&gt;
+                &lt;feBlend
+                  mode&#x3D;&quot;normal&quot;
+                  in&#x3D;&quot;SourceGraphic&quot;
+                  in2&#x3D;&quot;effect1_dropShadow_261948_10950&quot;
+                  result&#x3D;&quot;shape&quot;
+                /&gt;
+              &lt;/filter&gt;
+            &lt;/defs&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;form [formGroup]&#x3D;&quot;contactForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+        &lt;p
+          class&#x3D;&quot;error-message invalid-image-upload&quot;
+          *ngIf&#x3D;&quot;errorMessage&quot;
+          aria-live&#x3D;&quot;polite&quot;
+        &gt;
+          {{ this.errorMessage }}
+        &lt;/p&gt;
+        &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;form-group&quot;
+            [ngClass]&#x3D;&quot;{
+              colorError:
+                contactForm.get(&#x27;name&#x27;)?.invalid &amp;&amp;
+                contactForm.get(&#x27;name&#x27;)?.touched
+            }&quot;
+          &gt;
+            &lt;label for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;name&quot;
+              type&#x3D;&quot;text&quot;
+              placeholder&#x3D;&quot;Name&quot;
+              formControlName&#x3D;&quot;name&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;input-icon&quot;
+              src&#x3D;&quot;assets/img/icons/person.png&quot;
+              alt&#x3D;&quot;Person Icon&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;p
+            class&#x3D;&quot;error-message&quot;
+            *ngIf&#x3D;&quot;
+              contactForm.get(&#x27;name&#x27;)?.invalid &amp;&amp;
+              contactForm.get(&#x27;name&#x27;)?.touched
+            &quot;
+            aria-live&#x3D;&quot;polite&quot;
+          &gt;
+            Oops! Please add a name.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;form-group&quot;
+            [ngClass]&#x3D;&quot;{
+              colorError:
+                contactForm.get(&#x27;email&#x27;)?.invalid &amp;&amp;
+                contactForm.get(&#x27;email&#x27;)?.touched
+            }&quot;
+          &gt;
+            &lt;label for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;email&quot;
+              type&#x3D;&quot;text&quot;
+              placeholder&#x3D;&quot;Email&quot;
+              formControlName&#x3D;&quot;email&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;input-icon&quot;
+              src&#x3D;&quot;assets/img/icons/mail.png&quot;
+              alt&#x3D;&quot;Mail Icon&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;p
+            class&#x3D;&quot;error-message&quot;
+            *ngIf&#x3D;&quot;
+              contactForm.get(&#x27;email&#x27;)?.invalid &amp;&amp;
+              contactForm.get(&#x27;email&#x27;)?.touched
+            &quot;
+            aria-live&#x3D;&quot;polite&quot;
+          &gt;
+            Oops! This email seems invalid or missing.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;form-group&quot;
+            [ngClass]&#x3D;&quot;{
+              colorError:
+                contactForm.get(&#x27;phone&#x27;)?.invalid &amp;&amp;
+                contactForm.get(&#x27;phone&#x27;)?.touched
+            }&quot;
+          &gt;
+            &lt;label for&#x3D;&quot;phone&quot;&gt;Phone&lt;/label&gt;
+            &lt;input
+              id&#x3D;&quot;phone&quot;
+              type&#x3D;&quot;text&quot;
+              placeholder&#x3D;&quot;Phone&quot;
+              formControlName&#x3D;&quot;phone&quot;
+            /&gt;
+            &lt;img
+              class&#x3D;&quot;input-icon&quot;
+              src&#x3D;&quot;assets/img/icons/phone.png&quot;
+              alt&#x3D;&quot;Phone Icon&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;p
+            class&#x3D;&quot;error-message&quot;
+            *ngIf&#x3D;&quot;
+              contactForm.get(&#x27;phone&#x27;)?.invalid &amp;&amp;
+              contactForm.get(&#x27;phone&#x27;)?.touched
+            &quot;
+            aria-live&#x3D;&quot;polite&quot;
+          &gt;
+            Oh! Don´t forget the phone number.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
+          &lt;button
+            class&#x3D;&quot;btn-cancel&quot;
+            type&#x3D;&quot;reset&quot;
+            *ngIf&#x3D;&quot;!contactToEdit&quot;
+            (click)&#x3D;&quot;onClose()&quot;
+          &gt;
+            Cancel
+            &lt;svg
+              width&#x3D;&quot;24&quot;
+              height&#x3D;&quot;24&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+              fill&#x3D;&quot;none&quot;
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            &gt;
+              &lt;mask
+                id&#x3D;&quot;mask0_331509_883&quot;
+                style&#x3D;&quot;mask-type: alpha&quot;
+                maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+                x&#x3D;&quot;0&quot;
+                y&#x3D;&quot;0&quot;
+                width&#x3D;&quot;24&quot;
+                height&#x3D;&quot;24&quot;
+              &gt;
+                &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
               &lt;/mask&gt;
               &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
-              &lt;path d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
-               &lt;/g&gt;
+                &lt;path
+                  d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot;
+                  fill&#x3D;&quot;#2A3647&quot;
+                /&gt;
+              &lt;/g&gt;
             &lt;/svg&gt;
-        &lt;/button&gt;
-     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;left-frame&quot;&gt;
-        &lt;img src&#x3D;&quot;assets/img/logo/logo.png&quot; alt&#x3D;&quot;Join Logo&quot; class&#x3D;&quot;logo&quot;&gt;
-        &lt;h1 *ngIf&#x3D;&quot;!contactToEdit&quot;&gt;Add contact&lt;/h1&gt;
-        &lt;h1 *ngIf&#x3D;&quot;contactToEdit&quot;&gt;Edit contact&lt;/h1&gt;
-        &lt;p class&#x3D;&quot;sub-heading&quot; *ngIf&#x3D;&quot;!contactToEdit&quot;&gt;Tasks are better with a team!&lt;/p&gt;
-        &lt;div class&#x3D;&quot;separator&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;right-frame&quot;&gt;
-        &lt;div class&#x3D;&quot;form-wrapper&quot;&gt;
-            &lt;div class&#x3D;&quot;img-user-wrapper&quot; [style.background-color]&#x3D;&quot;contactToEdit ? contactService.getContactColor(contactToEdit.name) : &#x27;#d1d1d1&#x27;&quot;&gt;
-                &lt;img class&#x3D;&quot;img-user&quot; src&#x3D;&quot;assets/img/svg/person.svg&quot; alt&#x3D;&quot;User Image&quot; *ngIf&#x3D;&quot;!contactToEdit&quot;&gt;
-                &lt;p class&#x3D;&quot;contact-initials&quot; *ngIf&#x3D;&quot;contactToEdit&quot;&gt;{{ contactService.getInitials(contactToEdit.name) }}&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;form [formGroup]&#x3D;&quot;contactForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: contactForm.get(&#x27;name&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;name&#x27;)?.touched}&quot;&gt;
-                        &lt;label for&#x3D;&quot;name&quot;&gt;&lt;/label&gt;
-                        &lt;input id&#x3D;&quot;name&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Name&quot; formControlName&#x3D;&quot;name&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/person.png&quot; alt&#x3D;&quot;Person Icon&quot;&gt;
-                    &lt;/div&gt;
-                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;contactForm.get(&#x27;name&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;name&#x27;)?.touched&quot;&gt;Oops! Please add a name.&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: contactForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;email&#x27;)?.touched}&quot;&gt;
-                        &lt;label for&#x3D;&quot;email&quot;&gt;&lt;/label&gt;
-                        &lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Email&quot; formControlName&#x3D;&quot;email&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/mail.png&quot; alt&#x3D;&quot;Mail Icon&quot;&gt;
-                    &lt;/div&gt;
-                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;contactForm.get(&#x27;email&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;email&#x27;)?.touched&quot;&gt;Oops! This email seems invalid or missing.&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;form-group-wrapper&quot;&gt;
-                    &lt;div class&#x3D;&quot;form-group&quot; [ngClass]&#x3D;&quot;{&#x27;colorError&#x27;: contactForm.get(&#x27;phone&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;phone&#x27;)?.touched}&quot;&gt;
-                        &lt;label for&#x3D;&quot;phone&quot;&gt;&lt;/label&gt;
-                        &lt;input id&#x3D;&quot;phone&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Phone&quot; formControlName&#x3D;&quot;phone&quot;&gt;
-                        &lt;img class&#x3D;&quot;input-icon&quot; src&#x3D;&quot;assets/img/icons/phone.png&quot; alt&#x3D;&quot;Phone Icon&quot;&gt;
-                    &lt;/div&gt;
-                    &lt;p class&#x3D;&quot;error-message&quot; *ngIf&#x3D;&quot;contactForm.get(&#x27;phone&#x27;)?.invalid &amp;&amp; contactForm.get(&#x27;phone&#x27;)?.touched&quot;&gt;Oh! Don´t forget the phone number.&lt;/p&gt;
-                &lt;/div&gt;                
-                 &lt;div class&#x3D;&quot;btn-wrapper&quot;&gt;
-                    &lt;button class&#x3D;&quot;btn-cancel&quot; type&#x3D;&quot;reset&quot; *ngIf&#x3D;&quot;!contactToEdit&quot; (click)&#x3D;&quot;onClose()&quot;&gt;
-                        Cancel
-                         &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-                            &lt;mask id&#x3D;&quot;mask0_331509_883&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
-                            &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
-                            &lt;/mask&gt;
-                            &lt;g mask&#x3D;&quot;url(#mask0_331509_883)&quot;&gt;
-                            &lt;path d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot; fill&#x3D;&quot;#2A3647&quot;/&gt;
-                            &lt;/g&gt;
-                        &lt;/svg&gt;
-                    &lt;/button&gt;
-                     &lt;button class&#x3D;&quot;btn-delete&quot; *ngIf&#x3D;&quot;contactToEdit&quot; (click)&#x3D;&quot;deleteContact()&quot;&gt;
-                        Delete
-                    &lt;/button&gt;
-                    &lt;button class&#x3D;&quot;btn-save&quot; type&#x3D;&quot;submit&quot; *ngIf&#x3D;&quot;!contactToEdit&quot; [disabled]&#x3D;&quot;contactForm.invalid&quot;&gt;
-                        Create contact
-                        &lt;img src&#x3D;&quot;assets/img/icons/check-light.png&quot; alt&#x3D;&quot;Checked Icon&quot;&gt;
-                    &lt;/button&gt;
-                    &lt;button class&#x3D;&quot;btn-edit&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;contactForm.invalid&quot; *ngIf&#x3D;&quot;contactToEdit&quot;&gt;
-                        Save
-                        &lt;img src&#x3D;&quot;assets/img/icons/check-light.png&quot; alt&#x3D;&quot;Checked Icon&quot;&gt;
-                    &lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/form&gt;
+          &lt;/button&gt;
+          &lt;button
+            class&#x3D;&quot;btn-delete&quot;
+            *ngIf&#x3D;&quot;contactToEdit&quot;
+            (click)&#x3D;&quot;deleteContact()&quot;
+          &gt;
+            Delete
+          &lt;/button&gt;
+          &lt;button
+            class&#x3D;&quot;btn-save&quot;
+            type&#x3D;&quot;submit&quot;
+            *ngIf&#x3D;&quot;!contactToEdit&quot;
+            [disabled]&#x3D;&quot;contactForm.invalid&quot;
+          &gt;
+            Create contact
+            &lt;img src&#x3D;&quot;assets/img/icons/check-light.png&quot; alt&#x3D;&quot;Checked Icon&quot; /&gt;
+          &lt;/button&gt;
+          &lt;button
+            class&#x3D;&quot;btn-edit&quot;
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;contactForm.invalid&quot;
+            *ngIf&#x3D;&quot;contactToEdit&quot;
+          &gt;
+            Save
+            &lt;img src&#x3D;&quot;assets/img/icons/check-light.png&quot; alt&#x3D;&quot;Checked Icon&quot; /&gt;
+          &lt;/button&gt;
         &lt;/div&gt;
+      &lt;/form&gt;
     &lt;/div&gt;
-&lt;/section&gt;
-</code></pre>
+  &lt;/div&gt;
+  &lt;app-image-viewer
+    *ngIf&#x3D;&quot;showImageViewer&quot;
+    [images]&#x3D;&quot;contactImages&quot;
+    [imageKeys]&#x3D;&quot;contactImageKeys&quot;
+    [allowDelete]&#x3D;&quot;true&quot;
+    (close)&#x3D;&quot;closeImageViewer()&quot;
+    (deleteImage)&#x3D;&quot;onDeleteImage($event)&quot;
+  &gt;
+  &lt;/app-image-viewer&gt;
+&lt;/section&gt;</code></pre>
     </div>
 
 
@@ -1464,8 +2721,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section>    <div class="close-btn-wrapper">        <button class="btn-close" (click)="onClose()">          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">              <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">              <rect width="24" height="24" fill="#D9D9D9"/>              </mask>              <g mask="url(#mask0_331509_883)">              <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>               </g>            </svg>        </button>     </div>    <div class="left-frame">        <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo">        <h1 *ngIf="!contactToEdit">Add contact</h1>        <h1 *ngIf="contactToEdit">Edit contact</h1>        <p class="sub-heading" *ngIf="!contactToEdit">Tasks are better with a team!</p>        <div class="separator"></div>    </div>    <div class="right-frame">        <div class="form-wrapper">            <div class="img-user-wrapper" [style.background-color]="contactToEdit ? contactService.getContactColor(contactToEdit.name) : \'#d1d1d1\'">                <img class="img-user" src="assets/img/svg/person.svg" alt="User Image" *ngIf="!contactToEdit">                <p class="contact-initials" *ngIf="contactToEdit">{{ contactService.getInitials(contactToEdit.name) }}</p>            </div>            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">                <div class="form-group-wrapper">                    <div class="form-group" [ngClass]="{\'colorError\': contactForm.get(\'name\')?.invalid && contactForm.get(\'name\')?.touched}">                        <label for="name"></label>                        <input id="name" type="text" placeholder="Name" formControlName="name">                        <img class="input-icon" src="assets/img/icons/person.png" alt="Person Icon">                    </div>                    <p class="error-message" *ngIf="contactForm.get(\'name\')?.invalid && contactForm.get(\'name\')?.touched">Oops! Please add a name.</p>                </div>                <div class="form-group-wrapper">                    <div class="form-group" [ngClass]="{\'colorError\': contactForm.get(\'email\')?.invalid && contactForm.get(\'email\')?.touched}">                        <label for="email"></label>                        <input id="email" type="text" placeholder="Email" formControlName="email">                        <img class="input-icon" src="assets/img/icons/mail.png" alt="Mail Icon">                    </div>                    <p class="error-message" *ngIf="contactForm.get(\'email\')?.invalid && contactForm.get(\'email\')?.touched">Oops! This email seems invalid or missing.</p>                </div>                <div class="form-group-wrapper">                    <div class="form-group" [ngClass]="{\'colorError\': contactForm.get(\'phone\')?.invalid && contactForm.get(\'phone\')?.touched}">                        <label for="phone"></label>                        <input id="phone" type="text" placeholder="Phone" formControlName="phone">                        <img class="input-icon" src="assets/img/icons/phone.png" alt="Phone Icon">                    </div>                    <p class="error-message" *ngIf="contactForm.get(\'phone\')?.invalid && contactForm.get(\'phone\')?.touched">Oh! Don´t forget the phone number.</p>                </div>                                 <div class="btn-wrapper">                    <button class="btn-cancel" type="reset" *ngIf="!contactToEdit" (click)="onClose()">                        Cancel                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                            <mask id="mask0_331509_883" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">                            <rect width="24" height="24" fill="#D9D9D9"/>                            </mask>                            <g mask="url(#mask0_331509_883)">                            <path d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z" fill="#2A3647"/>                            </g>                        </svg>                    </button>                     <button class="btn-delete" *ngIf="contactToEdit" (click)="deleteContact()">                        Delete                    </button>                    <button class="btn-save" type="submit" *ngIf="!contactToEdit" [disabled]="contactForm.invalid">                        Create contact                        <img src="assets/img/icons/check-light.png" alt="Checked Icon">                    </button>                    <button class="btn-edit" type="submit" [disabled]="contactForm.invalid" *ngIf="contactToEdit">                        Save                        <img src="assets/img/icons/check-light.png" alt="Checked Icon">                    </button>                </div>            </form>        </div>    </div></section></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><section>  <div class="close-btn-wrapper">    <button class="btn-close" (click)="onClose()">      <svg        width="24"        height="24"        viewBox="0 0 24 24"        fill="none"        xmlns="http://www.w3.org/2000/svg"      >        <mask          id="mask0_331509_883"          style="mask-type: alpha"          maskUnits="userSpaceOnUse"          x="0"          y="0"          width="24"          height="24"        >          <rect width="24" height="24" fill="#D9D9D9" />        </mask>        <g mask="url(#mask0_331509_883)">          <path            d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"            fill="#2A3647"          />        </g>      </svg>    </button>  </div>  <div class="left-frame">    <img src="assets/img/logo/logo.png" alt="Join Logo" class="logo" />    <h1 *ngIf="!contactToEdit">Add contact</h1>    <h1 *ngIf="contactToEdit">Edit contact</h1>    <p class="sub-heading" *ngIf="!contactToEdit">      Tasks are better with a team!    </p>    <div class="separator"></div>  </div>  <div class="right-frame">    <div class="form-wrapper">      <div        class="img-user-wrapper"        [style.background-color]="          contactToEdit            ? contactService.getContactColor(contactToEdit.name)            : \'#d1d1d1\'        "      >        <img          class="contact-image"          [src]="imageBase64"          alt="User Image"          *ngIf="imageBase64"          (click)="openContactImageViewer()"        />        <img          class="img-user"          src="assets/img/svg/person.svg"          alt="User Image"          *ngIf="!imageBase64 && !contactToEdit"        />        <p class="contact-initials" *ngIf="!imageBase64 && contactToEdit">          {{ contactService.getInitials(contactToEdit.name) }}        </p>        <input          class="file-picker"          type="file"          id="filepicker"          name="uploadInput"          placeholder="Upload files"          accept="image/*"          [multiple]="false"          (change)="onContactImageChanged($event)"          #filepicker          hidden        />        <button          (click)="openFileDialog()"          type="button"          aria-label="Upload user image"          class="user-image-upload-button"        >          <svg            class="image-upload-icon"            width="54"            height="54"            viewBox="0 0 54 54"            fill="none"            xmlns="http://www.w3.org/2000/svg"          >            <g filter="url(#filter0_d_261948_10950)">              <rect x="4" y="4" width="46" height="46" rx="23" fill="white" />              <path                d="M40.125 34.5C40.125 34.9973 39.9275 35.4742 39.5758 35.8258C39.2242 36.1775 38.7473 36.375 38.25 36.375H15.75C15.2527 36.375 14.7758 36.1775 14.4242 35.8258C14.0725 35.4742 13.875 34.9973 13.875 34.5V23.25C13.875 22.7527 14.0725 22.2758 14.4242 21.9242C14.7758 21.5725 15.2527 21.375 15.75 21.375H17.9475C19.4386 21.3742 20.8683 20.7814 21.9225 19.7269L23.4788 18.1744C23.8294 17.8236 24.3047 17.6261 24.8006 17.625H29.1956C29.6929 17.6251 30.1697 17.8227 30.5212 18.1744L32.0738 19.7269C32.5962 20.2495 33.2165 20.664 33.8992 20.9468C34.5818 21.2296 35.3136 21.3751 36.0525 21.375H38.25C38.7473 21.375 39.2242 21.5725 39.5758 21.9242C39.9275 22.2758 40.125 22.7527 40.125 23.25V34.5ZM15.75 19.5C14.7554 19.5 13.8016 19.8951 13.0983 20.5983C12.3951 21.3016 12 22.2554 12 23.25V34.5C12 35.4946 12.3951 36.4484 13.0983 37.1516C13.8016 37.8549 14.7554 38.25 15.75 38.25H38.25C39.2446 38.25 40.1984 37.8549 40.9016 37.1516C41.6049 36.4484 42 35.4946 42 34.5V23.25C42 22.2554 41.6049 21.3016 40.9016 20.5983C40.1984 19.8951 39.2446 19.5 38.25 19.5H36.0525C35.058 19.4998 34.1043 19.1046 33.4012 18.4013L31.8488 16.8487C31.1457 16.1454 30.192 15.7502 29.1975 15.75H24.8025C23.808 15.7502 22.8543 16.1454 22.1512 16.8487L20.5988 18.4013C19.8957 19.1046 18.942 19.4998 17.9475 19.5H15.75Z"                fill="#2A3647"              />              <path                d="M27 32.625C25.7568 32.625 24.5645 32.1311 23.6854 31.2521C22.8064 30.373 22.3125 29.1807 22.3125 27.9375C22.3125 26.6943 22.8064 25.502 23.6854 24.6229C24.5645 23.7439 25.7568 23.25 27 23.25C28.2432 23.25 29.4355 23.7439 30.3146 24.6229C31.1936 25.502 31.6875 26.6943 31.6875 27.9375C31.6875 29.1807 31.1936 30.373 30.3146 31.2521C29.4355 32.1311 28.2432 32.625 27 32.625ZM27 34.5C28.7405 34.5 30.4097 33.8086 31.6404 32.5779C32.8711 31.3472 33.5625 29.678 33.5625 27.9375C33.5625 26.197 32.8711 24.5278 31.6404 23.2971C30.4097 22.0664 28.7405 21.375 27 21.375C25.2595 21.375 23.5903 22.0664 22.3596 23.2971C21.1289 24.5278 20.4375 26.197 20.4375 27.9375C20.4375 29.678 21.1289 31.3472 22.3596 32.5779C23.5903 33.8086 25.2595 34.5 27 34.5ZM17.625 24.1875C17.625 24.4361 17.5262 24.6746 17.3504 24.8504C17.1746 25.0262 16.9361 25.125 16.6875 25.125C16.4389 25.125 16.2004 25.0262 16.0246 24.8504C15.8488 24.6746 15.75 24.4361 15.75 24.1875C15.75 23.9389 15.8488 23.7004 16.0246 23.5246C16.2004 23.3488 16.4389 23.25 16.6875 23.25C16.9361 23.25 17.1746 23.3488 17.3504 23.5246C17.5262 23.7004 17.625 23.9389 17.625 24.1875Z"                fill="#2A3647"              />            </g>            <defs>              <filter                id="filter0_d_261948_10950"                x="0"                y="0"                width="54"                height="54"                filterUnits="userSpaceOnUse"                color-interpolation-filters="sRGB"              >                <feFlood flood-opacity="0" result="BackgroundImageFix" />                <feColorMatrix                  in="SourceAlpha"                  type="matrix"                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"                  result="hardAlpha"                />                <feOffset />                <feGaussianBlur stdDeviation="2" />                <feColorMatrix                  type="matrix"                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"                />                <feBlend                  mode="normal"                  in2="BackgroundImageFix"                  result="effect1_dropShadow_261948_10950"                />                <feBlend                  mode="normal"                  in="SourceGraphic"                  in2="effect1_dropShadow_261948_10950"                  result="shape"                />              </filter>            </defs>          </svg>        </button>      </div>      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">        <p          class="error-message invalid-image-upload"          *ngIf="errorMessage"          aria-live="polite"        >          {{ this.errorMessage }}        </p>        <div class="form-group-wrapper">          <div            class="form-group"            [ngClass]="{              colorError:                contactForm.get(\'name\')?.invalid &&                contactForm.get(\'name\')?.touched            }"          >            <label for="name">Name</label>            <input              id="name"              type="text"              placeholder="Name"              formControlName="name"            />            <img              class="input-icon"              src="assets/img/icons/person.png"              alt="Person Icon"            />          </div>          <p            class="error-message"            *ngIf="              contactForm.get(\'name\')?.invalid &&              contactForm.get(\'name\')?.touched            "            aria-live="polite"          >            Oops! Please add a name.          </p>        </div>        <div class="form-group-wrapper">          <div            class="form-group"            [ngClass]="{              colorError:                contactForm.get(\'email\')?.invalid &&                contactForm.get(\'email\')?.touched            }"          >            <label for="email">Email</label>            <input              id="email"              type="text"              placeholder="Email"              formControlName="email"            />            <img              class="input-icon"              src="assets/img/icons/mail.png"              alt="Mail Icon"            />          </div>          <p            class="error-message"            *ngIf="              contactForm.get(\'email\')?.invalid &&              contactForm.get(\'email\')?.touched            "            aria-live="polite"          >            Oops! This email seems invalid or missing.          </p>        </div>        <div class="form-group-wrapper">          <div            class="form-group"            [ngClass]="{              colorError:                contactForm.get(\'phone\')?.invalid &&                contactForm.get(\'phone\')?.touched            }"          >            <label for="phone">Phone</label>            <input              id="phone"              type="text"              placeholder="Phone"              formControlName="phone"            />            <img              class="input-icon"              src="assets/img/icons/phone.png"              alt="Phone Icon"            />          </div>          <p            class="error-message"            *ngIf="              contactForm.get(\'phone\')?.invalid &&              contactForm.get(\'phone\')?.touched            "            aria-live="polite"          >            Oh! Don´t forget the phone number.          </p>        </div>        <div class="btn-wrapper">          <button            class="btn-cancel"            type="reset"            *ngIf="!contactToEdit"            (click)="onClose()"          >            Cancel            <svg              width="24"              height="24"              viewBox="0 0 24 24"              fill="none"              xmlns="http://www.w3.org/2000/svg"            >              <mask                id="mask0_331509_883"                style="mask-type: alpha"                maskUnits="userSpaceOnUse"                x="0"                y="0"                width="24"                height="24"              >                <rect width="24" height="24" fill="#D9D9D9" />              </mask>              <g mask="url(#mask0_331509_883)">                <path                  d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"                  fill="#2A3647"                />              </g>            </svg>          </button>          <button            class="btn-delete"            *ngIf="contactToEdit"            (click)="deleteContact()"          >            Delete          </button>          <button            class="btn-save"            type="submit"            *ngIf="!contactToEdit"            [disabled]="contactForm.invalid"          >            Create contact            <img src="assets/img/icons/check-light.png" alt="Checked Icon" />          </button>          <button            class="btn-edit"            type="submit"            [disabled]="contactForm.invalid"            *ngIf="contactToEdit"          >            Save            <img src="assets/img/icons/check-light.png" alt="Checked Icon" />          </button>        </div>      </form>    </div>  </div>  <app-image-viewer    *ngIf="showImageViewer"    [images]="contactImages"    [imageKeys]="contactImageKeys"    [allowDelete]="true"    (close)="closeImageViewer()"    (deleteImage)="onDeleteImage($event)"  >  </app-image-viewer></section></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactFormComponent'};
 </script>

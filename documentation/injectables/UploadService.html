@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >ContactManager</li>
+  <li class="breadcrumb-item" >UploadService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/add-task/contact-manager.ts</code>
+            <code>src/app/services/upload.service.ts</code>
         </p>
 
 
@@ -123,14 +123,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>ContactManager handles all contact-related operations for the AddTaskComponent.
-Manages contact selection, display, dropdown functionality, and provides contact utilities.
-Supports multiple contact selection with duplicate prevention and visual feedback.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Inject and use in component
-constructor(private contactManager: ContactManager) {}</code></pre></div><p>// Select/deselect a contact
-this.contactManager.selectContact(contact);</p>
-<p>// Check if contact is selected
-if (this.contactManager.isContactSelected(contact)) { ... }</p>
+                <p>Service for managing image uploads, storage, and retrieval using localStorage.
+Provides methods for saving, retrieving, and deleting images.</p>
 
             </p>
 
@@ -149,16 +143,11 @@ if (this.contactManager.isContactSelected(contact)) { ... }</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#categoryManager" >categoryManager</a>
+                                <a href="#images" >images</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#selectedContacts" >selectedContacts</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#showContactDropdown" >showContactDropdown</a>
+                                <a href="#storageKey" >storageKey</a>
                             </li>
                         </ul>
                     </td>
@@ -173,40 +162,40 @@ if (this.contactManager.isContactSelected(contact)) { ... }</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#clearAll" >clearAll</a>
+                                <a href="#clearImages" >clearImages</a>
                             </li>
                             <li>
-                                <a href="#getContactColor" >getContactColor</a>
+                                <a href="#deleteImage" >deleteImage</a>
                             </li>
                             <li>
-                                <a href="#getContactInitials" >getContactInitials</a>
+                                <a href="#deleteImages" >deleteImages</a>
                             </li>
                             <li>
-                                <a href="#getRemainingContactNames" >getRemainingContactNames</a>
+                                <a href="#getBase64ByKey" >getBase64ByKey</a>
                             </li>
                             <li>
-                                <a href="#getSelectedContacts" >getSelectedContacts</a>
+                                <a href="#getContactImage" >getContactImage</a>
                             </li>
                             <li>
-                                <a href="#getSelectedContactsText" >getSelectedContactsText</a>
+                                <a href="#getImageByKey" >getImageByKey</a>
                             </li>
                             <li>
-                                <a href="#getShowContactDropdown" >getShowContactDropdown</a>
+                                <a href="#getImages" >getImages</a>
                             </li>
                             <li>
-                                <a href="#isContactSelected" >isContactSelected</a>
+                                <a href="#getImagesByKeys" >getImagesByKeys</a>
                             </li>
                             <li>
-                                <a href="#selectContact" >selectContact</a>
+                                <a href="#getTaskImages" >getTaskImages</a>
                             </li>
                             <li>
-                                <a href="#setSelectedContacts" >setSelectedContacts</a>
+                                <a href="#saveImage" >saveImage</a>
                             </li>
                             <li>
-                                <a href="#setShowContactDropdown" >setShowContactDropdown</a>
+                                <a href="#saveImages" >saveImages</a>
                             </li>
                             <li>
-                                <a href="#toggleDropdown" >toggleDropdown</a>
+                                <a href="#setImages" >setImages</a>
                             </li>
                         </ul>
                     </td>
@@ -226,70 +215,20 @@ if (this.contactManager.isContactSelected(contact)) { ... }</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, categoryManager: <a href="../injectables/CategoryManager.html" target="_self">CategoryManager</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/add-task/contact-manager.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/services/upload.service.ts:46</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Constructor injecting required services for contact operations.</p>
+                            <div class="io-description"><p>Creates an instance of UploadService.
+Initializes the service for managing image uploads and storage operations.</p>
 </div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>contactService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <ul>
-<li>Service for contact data and utility functions</li>
-</ul>
-
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>categoryManager</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CategoryManager.html" target="_self" >CategoryManager</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <ul>
-<li>Category manager for coordinated dropdown behavior</li>
-</ul>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -305,212 +244,16 @@ if (this.contactManager.isContactSelected(contact)) { ... }</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="clearAll"></a>
+                    <a name="clearImages"></a>
                     <span class="name">
-                        <span ><b>clearAll</b></span>
-                        <a href="#clearAll"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>clearImages</b></span>
+                        <a href="#clearImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>clearAll()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="159"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:159</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Clears all selected contacts and resets dropdown state to defaults.
-Used when resetting the form or clearing all selections.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getContactColor"></a>
-                    <span class="name">
-                        <span ><b>getContactColor</b></span>
-                        <a href="#getContactColor"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getContactColor(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="140"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:140</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the color associated with a contact using the contact service.
-Provides consistent color theming for contact display.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to get color for</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Hex color code string for the contact</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getContactInitials"></a>
-                    <span class="name">
-                        <span ><b>getContactInitials</b></span>
-                        <a href="#getContactInitials"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getContactInitials(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:129</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the initials for a contact using the contact service.
-Ensures consistent initial generation across the application.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to generate initials for</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>String containing the contact&#39;s initials</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getRemainingContactNames"></a>
-                    <span class="name">
-                        <span ><b>getRemainingContactNames</b></span>
-                        <a href="#getRemainingContactNames"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getRemainingContactNames(remainingContacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+<code>clearImages()</code>
                 </td>
             </tr>
 
@@ -518,15 +261,56 @@ Ensures consistent initial generation across the application.</p>
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:151</a></div>
+                                    class="link-to-prism">src/app/services/upload.service.ts:151</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Formats remaining contact names into a comma-separated string.
-Used for displaying overflow contacts in a compact format.</p>
+                        <div class="io-description"><p>Clears all images from localStorage.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteImage"></a>
+                    <span class="name">
+                        <span ><b>deleteImage</b></span>
+                        <a href="#deleteImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteImage(imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/services/upload.service.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a single image by its key.</p>
 </div>
 
                             <div class="io-description">
@@ -543,9 +327,9 @@ Used for displaying overflow contacts in a compact format.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>remainingContacts</td>
+                                                <td>imageKey</td>
                                             <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -555,293 +339,7 @@ Used for displaying overflow contacts in a compact format.</p>
 
                                             <td>
                                                     <ul>
-<li>Array of contacts to format</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Comma-separated string of contact names</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSelectedContacts"></a>
-                    <span class="name">
-                        <span ><b>getSelectedContacts</b></span>
-                        <a href="#getSelectedContacts"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSelectedContacts()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:45</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Gets all currently selected contacts.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Array of selected contact objects</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getSelectedContactsText"></a>
-                    <span class="name">
-                        <span ><b>getSelectedContactsText</b></span>
-                        <a href="#getSelectedContactsText"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getSelectedContactsText()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:118</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the placeholder text to display in the contact selector.
-Provides consistent messaging for the contact selection UI.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Standard placeholder text for contact selection</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getShowContactDropdown"></a>
-                    <span class="name">
-                        <span ><b>getShowContactDropdown</b></span>
-                        <a href="#getShowContactDropdown"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getShowContactDropdown()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:66</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Gets the current contact dropdown visibility state.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>True if dropdown is visible, false otherwise</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isContactSelected"></a>
-                    <span class="name">
-                        <span ><b>isContactSelected</b></span>
-                        <a href="#isContactSelected"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>isContactSelected(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:108</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Checks if a specific contact is currently selected.
-Used for UI highlighting and selection state management.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to check selection status for</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>True if the contact is selected, false otherwise</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="selectContact"></a>
-                    <span class="name">
-                        <span ><b>selectContact</b></span>
-                        <a href="#selectContact"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>selectContact(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:92</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the selection state of a contact.
-Adds contact to selection if not selected, removes if already selected.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact to select or deselect</li>
+<li>Key of the image to delete</li>
 </ul>
 
                                             </td>
@@ -864,32 +362,31 @@ Adds contact to selection if not selected, removes if already selected.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="setSelectedContacts"></a>
+                    <a name="deleteImages"></a>
                     <span class="name">
-                        <span ><b>setSelectedContacts</b></span>
-                        <a href="#setSelectedContacts"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>deleteImages</b></span>
+                        <a href="#deleteImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>setSelectedContacts(contacts: <a href="../interfaces/Contact.html" target="_self">Contact[]</a>)</code>
+<code>deleteImages(imageKeys: string[])</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/services/upload.service.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the selected contacts array with duplicate filtering.
-Ensures no duplicate contacts based on ID comparison.</p>
+                        <div class="io-description"><p>Deletes multiple images by their keys.</p>
 </div>
 
                             <div class="io-description">
@@ -906,9 +403,9 @@ Ensures no duplicate contacts based on ID comparison.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>contacts</td>
+                                                <td>imageKeys</td>
                                             <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                                                        <code>string[]</code>
                                             </td>
 
                                             <td>
@@ -918,7 +415,7 @@ Ensures no duplicate contacts based on ID comparison.</p>
 
                                             <td>
                                                     <ul>
-<li>Array of contacts to set as selected</li>
+<li>Array of image keys to delete</li>
 </ul>
 
                                             </td>
@@ -941,31 +438,31 @@ Ensures no duplicate contacts based on ID comparison.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="setShowContactDropdown"></a>
+                    <a name="getBase64ByKey"></a>
                     <span class="name">
-                        <span ><b>setShowContactDropdown</b></span>
-                        <a href="#setShowContactDropdown"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getBase64ByKey</b></span>
+                        <a href="#getBase64ByKey"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>setShowContactDropdown(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+<code>getBase64ByKey(imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/services/upload.service.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets the contact dropdown visibility state.</p>
+                        <div class="io-description"><p>Retrieves base64 data for an image by its key.</p>
 </div>
 
                             <div class="io-description">
@@ -982,9 +479,9 @@ Ensures no duplicate contacts based on ID comparison.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>value</td>
+                                                <td>imageKey</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -994,7 +491,435 @@ Ensures no duplicate contacts based on ID comparison.</p>
 
                                             <td>
                                                     <ul>
-<li>True to show dropdown, false to hide it</li>
+<li>Key of the image</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Base64 string or null if image not found</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactImage"></a>
+                    <span class="name">
+                        <span ><b>getContactImage</b></span>
+                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getContactImage(contactImageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/services/upload.service.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves base64 data for a contact image.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contactImageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Key of the contact image</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Base64 string or null if image not found</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageByKey"></a>
+                    <span class="name">
+                        <span ><b>getImageByKey</b></span>
+                        <a href="#getImageByKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImageByKey(imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/services/upload.service.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a single image by its key.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Key of the image to retrieve</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage | undefined</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Image object or undefined if not found</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImages"></a>
+                    <span class="name">
+                        <span ><b>getImages</b></span>
+                        <a href="#getImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImages()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/services/upload.service.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all images from localStorage.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of all stored images</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImagesByKeys"></a>
+                    <span class="name">
+                        <span ><b>getImagesByKeys</b></span>
+                        <a href="#getImagesByKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImagesByKeys(imageKeys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/services/upload.service.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves images by their keys.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imageKeys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of image keys to retrieve</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of matching images</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTaskImages"></a>
+                    <span class="name">
+                        <span ><b>getTaskImages</b></span>
+                        <a href="#getTaskImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTaskImages(taskImageKeys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/services/upload.service.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves base64 data for task-related images.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>taskImageKeys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of task image keys</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of base64 strings for existing images</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveImage"></a>
+                    <span class="name">
+                        <span ><b>saveImage</b></span>
+                        <a href="#saveImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveImage(image: <a href="../interfaces/UploadedImage.html" target="_self">UploadedImage</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/services/upload.service.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves a single image to localStorage.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>image</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Image to save</li>
 </ul>
 
                                             </td>
@@ -1017,16 +942,92 @@ Ensures no duplicate contacts based on ID comparison.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="toggleDropdown"></a>
+                    <a name="saveImages"></a>
                     <span class="name">
-                        <span ><b>toggleDropdown</b></span>
-                        <a href="#toggleDropdown"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>saveImages</b></span>
+                        <a href="#saveImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>toggleDropdown()</code>
+<code>saveImages(images: <a href="../interfaces/UploadedImage.html" target="_self">UploadedImage[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/services/upload.service.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves multiple images to localStorage, avoiding duplicates.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>images</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of images to save</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setImages"></a>
+                    <span class="name">
+                        <span ><b>setImages</b></span>
+                        <a href="#setImages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setImages(images: <a href="../interfaces/UploadedImage.html" target="_self">UploadedImage[]</a>)</code>
                 </td>
             </tr>
 
@@ -1034,21 +1035,57 @@ Ensures no duplicate contacts based on ID comparison.</p>
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/add-task/contact-manager.ts:82</a></div>
+                                    class="link-to-prism">src/app/services/upload.service.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the contact dropdown visibility state.
-Opens dropdown if closed, closes if open.</p>
+                        <div class="io-description"><p>Sets the in-memory images array.</p>
 </div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>images</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of images to set</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1063,49 +1100,16 @@ Opens dropdown if closed, closes if open.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="categoryManager"></a>
+                    <a name="images"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>categoryManager</b></span>
-                        <a href="#categoryManager"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>images</b></span>
+                        <a href="#images"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/CategoryManager.html" target="_self" >CategoryManager</a></code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/add-task/contact-manager.ts:38</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description">- Category manager for coordinated dropdown behavior</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="selectedContacts"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>selectedContacts</b></span>
-                        <a href="#selectedContacts"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Contact.html" target="_self" >Contact[]</a></code>
+                        <i>Type : </i>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
 
                     </td>
                 </tr>
@@ -1116,13 +1120,13 @@ Opens dropdown if closed, closes if open.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/add-task/contact-manager.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/services/upload.service.ts:46</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Array of currently selected contacts for task assignment</p>
+                    <div class="io-description"><p>In-memory array of uploaded images for quick access during application runtime.</p>
 </div>
                 </td>
             </tr>
@@ -1133,34 +1137,34 @@ Opens dropdown if closed, closes if open.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="showContactDropdown"></a>
+                    <a name="storageKey"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>showContactDropdown</b></span>
-                        <a href="#showContactDropdown"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>storageKey</b></span>
+                        <a href="#storageKey"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
+                        <i>Default value : </i><code>&#x27;allImages&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/add-task/contact-manager.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/upload.service.ts:40</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Current state of the contact dropdown visibility</p>
+                    <div class="io-description"><p>Key used for localStorage storage to persist images across sessions.</p>
 </div>
                 </td>
             </tr>
@@ -1174,166 +1178,177 @@ Opens dropdown if closed, closes if open.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Contact, ContactService } from &#x27;../services/contact.service&#x27;;
-import { CategoryManager } from &#x27;./category-manager&#x27;;
 
 /**
- * ContactManager handles all contact-related operations for the AddTaskComponent.
- * Manages contact selection, display, dropdown functionality, and provides contact utilities.
- * Supports multiple contact selection with duplicate prevention and visual feedback.
- * 
- * @example
- * // Inject and use in component
- * constructor(private contactManager: ContactManager) {}
- * 
- * // Select/deselect a contact
- * this.contactManager.selectContact(contact);
- * 
- * // Check if contact is selected
- * if (this.contactManager.isContactSelected(contact)) { ... }
+ * Interface representing an uploaded image with metadata.
+ */
+export interface UploadedImage {
+  /** Unique identifier for the image */
+  imageKey: string;
+
+  /** Original filename of the uploaded image */
+  filename: string;
+
+  /** Type of the file */
+  fileType: string;
+
+  /** Size of the file in bytes */
+  fileSize: number;
+
+  /** Base64 encoded image data */
+  base64: string;
+  
+  /** Assignment target for the image */
+  assignedTo: &#x27;user&#x27; | &#x27;task&#x27;;
+}
+
+/**
+ * Service for managing image uploads, storage, and retrieval using localStorage.
+ * Provides methods for saving, retrieving, and deleting images.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
-export class ContactManager {
-  /** Array of currently selected contacts for task assignment */
-  private selectedContacts: Contact[] &#x3D; [];
+export class UploadService {
+  /**
+   * Key used for localStorage storage to persist images across sessions.
+   * @private
+   * @type {string}
+   */
+  private storageKey &#x3D; &#x27;allImages&#x27;;
   
-  /** Current state of the contact dropdown visibility */
-  private showContactDropdown: boolean &#x3D; false;
+  /**
+   * In-memory array of uploaded images for quick access during application runtime.
+   * @type {UploadedImage[]}
+   */
+  images: UploadedImage[] &#x3D; [];
 
   /**
-   * Constructor injecting required services for contact operations.
-   * @param contactService - Service for contact data and utility functions
-   * @param categoryManager - Category manager for coordinated dropdown behavior
+   * Creates an instance of UploadService.
+   * Initializes the service for managing image uploads and storage operations.
    */
-  constructor(
-    private contactService: ContactService,
-    public categoryManager: CategoryManager
-  ) {}
+  constructor() { }
 
   /**
-   * Gets all currently selected contacts.
-   * @returns Array of selected contact objects
+   * Saves a single image to localStorage.
+   * @param {UploadedImage} image - Image to save
+   * @returns {void}
    */
-  getSelectedContacts(): Contact[] {
-    return this.selectedContacts;
+  saveImage(image: UploadedImage) {
+    const current &#x3D; this.getImages();
+    current.push(image);
+    localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
   /**
-   * Sets the selected contacts array with duplicate filtering.
-   * Ensures no duplicate contacts based on ID comparison.
-   * 
-   * @param contacts - Array of contacts to set as selected
+   * Saves multiple images to localStorage, avoiding duplicates.
+   * @param {UploadedImage[]} images - Array of images to save
+   * @returns {void}
    */
-  setSelectedContacts(contacts: Contact[]): void {
-    const uniqueContacts &#x3D; contacts.filter((contact, index, self) &#x3D;&gt; 
-      index &#x3D;&#x3D;&#x3D; self.findIndex(c &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; contact.id)
-    );
-    this.selectedContacts &#x3D; uniqueContacts;
+  saveImages(images: UploadedImage[]): void {
+    const existing &#x3D; this.getImages();
+    const filtered &#x3D; existing.filter(img &#x3D;&gt; !images.some(newImg &#x3D;&gt; newImg.imageKey &#x3D;&#x3D;&#x3D; img.imageKey));
+    const merged &#x3D; [...filtered, ...images];
+    localStorage.setItem(this.storageKey, JSON.stringify(merged));
   }
 
   /**
-   * Gets the current contact dropdown visibility state.
-   * @returns True if dropdown is visible, false otherwise
+   * Sets the in-memory images array.
+   * @param {UploadedImage[]} images - Array of images to set
+   * @returns {void}
    */
-  getShowContactDropdown(): boolean {
-    return this.showContactDropdown;
+  setImages(images: UploadedImage[]) {
+    this.images &#x3D; images;
   }
 
   /**
-   * Sets the contact dropdown visibility state.
-   * @param value - True to show dropdown, false to hide it
+   * Retrieves all images from localStorage.
+   * @returns {UploadedImage[]} Array of all stored images
    */
-  setShowContactDropdown(value: boolean): void {
-    this.showContactDropdown &#x3D; value;
+  getImages(): UploadedImage[] {
+    const data &#x3D; localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
   }
 
   /**
-   * Toggles the contact dropdown visibility state.
-   * Opens dropdown if closed, closes if open.
+   * Retrieves images by their keys.
+   * @param {string[]} imageKeys - Array of image keys to retrieve
+   * @returns {UploadedImage[]} Array of matching images
    */
-  toggleDropdown(): void {
-    this.showContactDropdown &#x3D; !this.showContactDropdown;
+  getImagesByKeys(imageKeys: string[]): UploadedImage[] {
+    const allImages &#x3D; this.getImages();
+    return allImages.filter(img &#x3D;&gt; imageKeys.includes(img.imageKey));
   }
 
   /**
-   * Toggles the selection state of a contact.
-   * Adds contact to selection if not selected, removes if already selected.
-   * 
-   * @param contact - The contact to select or deselect
+   * Retrieves a single image by its key.
+   * @param {string} imageKey - Key of the image to retrieve
+   * @returns {UploadedImage | undefined} Image object or undefined if not found
    */
-  selectContact(contact: Contact): void {
-    const index &#x3D; this.selectedContacts.findIndex(c &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; contact.id);
-    if (index &#x3D;&#x3D;&#x3D; -1) {
-      this.selectedContacts.push(contact);
-    } else {
-      this.selectedContacts.splice(index, 1);
-    }
+  getImageByKey(imageKey: string): UploadedImage | undefined {
+    const allImages &#x3D; this.getImages();
+    return allImages.find(img &#x3D;&gt; img.imageKey &#x3D;&#x3D;&#x3D; imageKey);
   }
 
   /**
-   * Checks if a specific contact is currently selected.
-   * Used for UI highlighting and selection state management.
-   * 
-   * @param contact - The contact to check selection status for
-   * @returns True if the contact is selected, false otherwise
+   * Retrieves base64 data for an image by its key.
+   * @param {string} imageKey - Key of the image
+   * @returns {string | null} Base64 string or null if image not found
    */
-  isContactSelected(contact: Contact): boolean {
-    return this.selectedContacts.some(c &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; contact.id);
+  getBase64ByKey(imageKey: string): string | null {
+    const image &#x3D; this.getImageByKey(imageKey);
+    return image ? image.base64 : null;
   }
 
   /**
-   * Returns the placeholder text to display in the contact selector.
-   * Provides consistent messaging for the contact selection UI.
-   * 
-   * @returns Standard placeholder text for contact selection
+   * Deletes a single image by its key.
+   * @param {string} imageKey - Key of the image to delete
+   * @returns {void}
    */
-  getSelectedContactsText(): string {
-    return &#x27;Select contacts to assign&#x27;;
+  deleteImage(imageKey: string) {
+    const current &#x3D; this.getImages();
+    const updated &#x3D; current.filter(img &#x3D;&gt; img.imageKey !&#x3D;&#x3D; imageKey);
+    localStorage.setItem(this.storageKey, JSON.stringify(updated));
   }
 
   /**
-   * Returns the initials for a contact using the contact service.
-   * Ensures consistent initial generation across the application.
-   * 
-   * @param contact - The contact to generate initials for
-   * @returns String containing the contact&#x27;s initials
+   * Deletes multiple images by their keys.
+   * @param {string[]} imageKeys - Array of image keys to delete
+   * @returns {void}
    */
-  getContactInitials(contact: Contact): string {
-    return this.contactService.getInitials(contact.name);
+  deleteImages(imageKeys: string[]) {
+    const current &#x3D; this.getImages();
+    const updated &#x3D; current.filter(img &#x3D;&gt; !imageKeys.includes(img.imageKey));
+    localStorage.setItem(this.storageKey, JSON.stringify(updated));
   }
 
   /**
-   * Returns the color associated with a contact using the contact service.
-   * Provides consistent color theming for contact display.
-   * 
-   * @param contact - The contact to get color for
-   * @returns Hex color code string for the contact
+   * Clears all images from localStorage.
+   * @returns {void}
    */
-  getContactColor(contact: Contact): string {
-    return this.contactService.getContactColor(contact.name);
+  clearImages() {
+    localStorage.removeItem(this.storageKey);
   }
 
   /**
-   * Formats remaining contact names into a comma-separated string.
-   * Used for displaying overflow contacts in a compact format.
-   * 
-   * @param remainingContacts - Array of contacts to format
-   * @returns Comma-separated string of contact names
+   * Retrieves base64 data for task-related images.
+   * @param {string[]} taskImageKeys - Array of task image keys
+   * @returns {string[]} Array of base64 strings for existing images
    */
-  getRemainingContactNames(remainingContacts: Contact[]): string {
-    return remainingContacts.map((contact) &#x3D;&gt; contact.name).join(&#x27;, &#x27;);
+  getTaskImages(taskImageKeys: string[]): string[] {
+    return taskImageKeys
+      .map(key &#x3D;&gt; this.getBase64ByKey(key))
+      .filter(base64 &#x3D;&gt; base64 !&#x3D;&#x3D; null) as string[];
   }
 
   /**
-   * Clears all selected contacts and resets dropdown state to defaults.
-   * Used when resetting the form or clearing all selections.
+   * Retrieves base64 data for a contact image.
+   * @param {string} contactImageKey - Key of the contact image
+   * @returns {string | null} Base64 string or null if image not found
    */
-  clearAll(): void {
-    this.selectedContacts &#x3D; [];
-    this.showContactDropdown &#x3D; false;
+  getContactImage(contactImageKey: string): string | null {
+    return this.getBase64ByKey(contactImageKey);
   }
 }</code></pre>
     </div>
@@ -1378,7 +1393,7 @@ export class ContactManager {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'ContactManager.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UploadService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

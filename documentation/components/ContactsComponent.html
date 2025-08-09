@@ -1216,29 +1216,28 @@ export class ContactsComponent {
       this.showContactDetails &#x3D; false;
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;contacts-layout&quot;&gt;
-    &lt;div
-      class&#x3D;&quot;contact-list-container&quot;
-     [class.mobile-hidden]&#x3D;&quot;showContactDetails&quot;
-    &gt;
-     &lt;app-contact-list
-       (contactSelected)&#x3D;&quot;onContactSelected()&quot;
-     &gt;&lt;/app-contact-list&gt;
-    &lt;/div&gt;
-     &lt;div
-       class&#x3D;&quot;contact-details-wrapper&quot;
-       [class.mobile-visible]&#x3D;&quot;showContactDetails&quot;
-     &gt;
-      &lt;app-contact-details
-        (backToList)&#x3D;&quot;onBackToList()&quot;
-        (noContactVisible)&#x3D;&quot;onNoContactVisible()&quot;
-      &gt;&lt;/app-contact-details&gt;
-    &lt;/div&gt;
+  &lt;div
+    class&#x3D;&quot;contact-list-container&quot;
+    [class.mobile-hidden]&#x3D;&quot;showContactDetails&quot;
+  &gt;
+    &lt;app-contact-list
+      (contactSelected)&#x3D;&quot;onContactSelected()&quot;
+    &gt;&lt;/app-contact-list&gt;
+  &lt;/div&gt;
+  &lt;div
+    class&#x3D;&quot;contact-details-wrapper&quot;
+    [class.mobile-visible]&#x3D;&quot;showContactDetails&quot;
+  &gt;
+    &lt;app-contact-details
+      (backToList)&#x3D;&quot;onBackToList()&quot;
+      (noContactVisible)&#x3D;&quot;onNoContactVisible()&quot;
+    &gt;&lt;/app-contact-details&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div
@@ -1250,9 +1249,9 @@ export class ContactsComponent {
 &gt;
   &lt;div class&#x3D;&quot;max-width-container&quot;&gt;
     &lt;app-contact-form
-    (addedContact)&#x3D;&quot;onContactAdded($event)&quot;
-    (closeOverlay)&#x3D;&quot;removeBackground($event)&quot;
-  &gt;&lt;/app-contact-form&gt;
+      (addedContact)&#x3D;&quot;onContactAdded($event)&quot;
+      (closeOverlay)&#x3D;&quot;removeBackground($event)&quot;
+    &gt;&lt;/app-contact-form&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1260,6 +1259,7 @@ export class ContactsComponent {
   *ngIf&#x3D;&quot;toastMessageVisible&quot;
   class&#x3D;&quot;toast-message&quot;
   [@slideInOut]&#x3D;&quot;toastAnimationState&quot;
+  aria-live&#x3D;&quot;polite&quot;
 &gt;
   Contact successfully created
 &lt;/div&gt;</code></pre>
@@ -1291,8 +1291,8 @@ export class ContactsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="contacts-layout">    <div      class="contact-list-container"     [class.mobile-hidden]="showContactDetails"    >     <app-contact-list       (contactSelected)="onContactSelected()"     ></app-contact-list>    </div>     <div       class="contact-details-wrapper"       [class.mobile-visible]="showContactDetails"     >      <app-contact-details        (backToList)="onBackToList()"        (noContactVisible)="onNoContactVisible()"      ></app-contact-details>    </div></div><div  *ngIf="showForm$ | async"  class="contact-form-overlay"  [@slideInOut]="animationDirection"  (@slideInOut.done)="onOverlayAnimationDone($event)"  [class.backgroundVisible]="backgroundVisible">  <div class="max-width-container">    <app-contact-form    (addedContact)="onContactAdded($event)"    (closeOverlay)="removeBackground($event)"  ></app-contact-form>  </div></div><div  *ngIf="toastMessageVisible"  class="toast-message"  [@slideInOut]="toastAnimationState">  Contact successfully created</div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><div class="contacts-layout">  <div    class="contact-list-container"    [class.mobile-hidden]="showContactDetails"  >    <app-contact-list      (contactSelected)="onContactSelected()"    ></app-contact-list>  </div>  <div    class="contact-details-wrapper"    [class.mobile-visible]="showContactDetails"  >    <app-contact-details      (backToList)="onBackToList()"      (noContactVisible)="onNoContactVisible()"    ></app-contact-details>  </div></div><div  *ngIf="showForm$ | async"  class="contact-form-overlay"  [@slideInOut]="animationDirection"  (@slideInOut.done)="onOverlayAnimationDone($event)"  [class.backgroundVisible]="backgroundVisible">  <div class="max-width-container">    <app-contact-form      (addedContact)="onContactAdded($event)"      (closeOverlay)="removeBackground($event)"    ></app-contact-form>  </div></div><div  *ngIf="toastMessageVisible"  class="toast-message"  [@slideInOut]="toastAnimationState"  aria-live="polite">  Contact successfully created</div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactsComponent'};
 </script>

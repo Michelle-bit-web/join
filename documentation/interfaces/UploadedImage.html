@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  FormData</li>
+  UploadedImage</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/add-task/task-data.service.ts</code>
+            <code>src/app/services/upload.service.ts</code>
         </p>
 
 
@@ -130,7 +130,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Extended interface for form data including optional images array.</p>
+                <p>Interface representing an uploaded image with metadata.</p>
 
             </p>
 
@@ -148,28 +148,39 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#description" 
+                                        <a href="#assignedTo" 
 >
-                                            description
+                                            assignedTo
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#dueDate" 
+                                        <a href="#base64" 
 >
-                                            dueDate
+                                            base64
                                         </a>
                                 </li>
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#images" 
+                                        <a href="#filename" 
 >
-                                            images
+                                            filename
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#title" 
+                                        <a href="#fileSize" 
 >
-                                            title
+                                            fileSize
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fileType" 
+>
+                                            fileType
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imageKey" 
+>
+                                            imageKey
                                         </a>
                                 </li>
                             </ul>
@@ -187,9 +198,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="description"></a>
-                                        <span class="name "><b>description</b>
-                                            <a href="#description">
+                                        <a name="assignedTo"></a>
+                                        <span class="name "><b>assignedTo</b>
+                                            <a href="#assignedTo">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -197,7 +208,46 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>assignedTo:     <code>&quot;user&quot; | &quot;task&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;user&quot; | &quot;task&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Assignment target for the image</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="base64"></a>
+                                        <span class="name "><b>base64</b>
+                                            <a href="#base64">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>base64:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -216,7 +266,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Task description</p>
+                                    <div class="io-description"><p>Base64 encoded image data</p>
 </div>
                                 </td>
                             </tr>
@@ -226,9 +276,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="dueDate"></a>
-                                        <span class="name "><b>dueDate</b>
-                                            <a href="#dueDate">
+                                        <a name="filename"></a>
+                                        <span class="name "><b>filename</b>
+                                            <a href="#filename">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -236,7 +286,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>dueDate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>filename:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -255,7 +305,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Due date in string format</p>
+                                    <div class="io-description"><p>Original filename of the uploaded image</p>
 </div>
                                 </td>
                             </tr>
@@ -265,9 +315,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="images"></a>
-                                        <span class="name "><b>images</b>
-                                            <a href="#images">
+                                        <a name="fileSize"></a>
+                                        <span class="name "><b>fileSize</b>
+                                            <a href="#fileSize">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -275,7 +325,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>images:     <code>string[]</code>
+                                        <code>fileSize:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -283,23 +333,18 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>string[]</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Optional array of image keys</p>
+                                    <div class="io-description"><p>Size of the file in bytes</p>
 </div>
                                 </td>
                             </tr>
@@ -309,9 +354,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="title"></a>
-                                        <span class="name "><b>title</b>
-                                            <a href="#title">
+                                        <a name="fileType"></a>
+                                        <span class="name "><b>fileType</b>
+                                            <a href="#fileType">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -319,7 +364,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>title:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>fileType:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -338,7 +383,46 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Task title</p>
+                                    <div class="io-description"><p>Type of the file</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imageKey"></a>
+                                        <span class="name "><b>imageKey</b>
+                                            <a href="#imageKey">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imageKey:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier for the image</p>
 </div>
                                 </td>
                             </tr>
@@ -350,173 +434,177 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Contact } from &#x27;../services/contact.service&#x27;;
-import { Task } from &#x27;../services/task.service&#x27;;
-import { ContactManager } from &#x27;./contact-manager&#x27;;
-import { CategoryManager } from &#x27;./category-manager&#x27;;
-import { PriorityManager } from &#x27;./priority-manager&#x27;;
-import { SubtaskManager } from &#x27;./subtask-manager&#x27;;
 
 /**
- * Extended interface for form data including optional images array.
+ * Interface representing an uploaded image with metadata.
  */
-export interface FormData {
-  /** Task title */
-  title: string;
-  /** Task description */
-  description: string;
-  /** Due date in string format */
-  dueDate: string;
-  /** Optional array of image keys */
-  images?: string[];
+export interface UploadedImage {
+  /** Unique identifier for the image */
+  imageKey: string;
+
+  /** Original filename of the uploaded image */
+  filename: string;
+
+  /** Type of the file */
+  fileType: string;
+
+  /** Size of the file in bytes */
+  fileSize: number;
+
+  /** Base64 encoded image data */
+  base64: string;
+  
+  /** Assignment target for the image */
+  assignedTo: &#x27;user&#x27; | &#x27;task&#x27;;
 }
 
 /**
- * Service for managing task data operations and form population.
- * Handles conversion between form data and task objects, manages date formatting,
- * and coordinates with various manager services for complete task data handling.
- *
- * @example
- * // Inject in component
- * constructor(private taskDataService: TaskDataService) {}
- *
- * // Build task from form
- * const task &#x3D; this.taskDataService.buildTask(formData, status, managers...);
- *
- * // Populate form from task
- * await this.taskDataService.populateFromTask(task, formData, managers...);
+ * Service for managing image uploads, storage, and retrieval using localStorage.
+ * Provides methods for saving, retrieving, and deleting images.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 
-export class TaskDataService {
+export class UploadService {
+  /**
+   * Key used for localStorage storage to persist images across sessions.
+   * @private
+   * @type {string}
+   */
+  private storageKey &#x3D; &#x27;allImages&#x27;;
+  
+  /**
+   * In-memory array of uploaded images for quick access during application runtime.
+   * @type {UploadedImage[]}
+   */
+  images: UploadedImage[] &#x3D; [];
 
   /**
-   * Creates an instance of TaskDataService.
+   * Creates an instance of UploadService.
+   * Initializes the service for managing image uploads and storage operations.
    */
   constructor() { }
 
   /**
-   * Populates form and managers with data from an existing task.
-   * Converts task data to form-compatible format and updates all managers.
-   *
-   * @param task - The task object to populate from
-   * @param formData - The form data object to populate
-   * @param priorityManager - Manager for priority settings
-   * @param contactManager - Manager for assigned contacts
-   * @param subtaskManager - Manager for subtasks
-   * @param contacts - Array of all available contacts
-   * @returns Promise resolving to the original task status
+   * Saves a single image to localStorage.
+   * @param {UploadedImage} image - Image to save
+   * @returns {void}
    */
-  async populateFromTask(
-    task: any,
-    formData: FormData,
-    priorityManager: PriorityManager,
-    contactManager: ContactManager,
-    subtaskManager: SubtaskManager,
-    contacts: Contact[]
-  ): Promise&lt;string&gt; {
-    this.setBasicFormData(task, formData);
-    this.setDueDate(task.date, formData);
-    priorityManager.setPriorityAndCategory(task);
-    this.setAssignedContacts(task.assignedTo, contactManager, contacts);
-    if (task.id) {
-      subtaskManager.loadAndSetSubtasks(task.id);
-    }
-    return task.status || &#x27;to-do&#x27;;
+  saveImage(image: UploadedImage) {
+    const current &#x3D; this.getImages();
+    current.push(image);
+    localStorage.setItem(this.storageKey, JSON.stringify(current));
   }
 
   /**
-   * Builds a task object from current form and manager states.
-   * Creates a complete Task object with all necessary properties.
-   *
-   * @param formData - The current form data
-   * @param status - The task status
-   * @param priorityManager - Manager containing priority selection
-   * @param contactManager - Manager containing assigned contacts
-   * @param categoryManager - Manager containing category selection
-   * @param id - Optional existing task ID for updates
-   * @returns Complete Task object ready for storage
+   * Saves multiple images to localStorage, avoiding duplicates.
+   * @param {UploadedImage[]} images - Array of images to save
+   * @returns {void}
    */
-  buildTask(formData: FormData, status: string, priorityManager: PriorityManager, contactManager: ContactManager, categoryManager: CategoryManager, id?: string): Task {
-    const uniqueContactIds &#x3D; this.getUniqueAssignedContactIds(contactManager);
-    const task: any &#x3D; {
-      title: formData.title.trim(),
-      description: formData.description?.trim() || &#x27;&#x27;,
-      date: new Date(formData.dueDate),
-      priority: priorityManager.selectedPriority as &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;,
-      status,
-      assignedTo: uniqueContactIds,
-      category: categoryManager.getSelectedCategory() as &#x27;technical&#x27; | &#x27;user story&#x27;,
-      imageKey: formData.images || [],
-    };
-    if (id) {task.id &#x3D; id}
-    return task as Task;
+  saveImages(images: UploadedImage[]): void {
+    const existing &#x3D; this.getImages();
+    const filtered &#x3D; existing.filter(img &#x3D;&gt; !images.some(newImg &#x3D;&gt; newImg.imageKey &#x3D;&#x3D;&#x3D; img.imageKey));
+    const merged &#x3D; [...filtered, ...images];
+    localStorage.setItem(this.storageKey, JSON.stringify(merged));
   }
 
   /**
-   * Sets basic form data fields from task object.
-   * Populates title and description from task data.
-   *
-   * @param task - The task object containing basic data
-   * @param formData - The form data object to update
-   * @private
+   * Sets the in-memory images array.
+   * @param {UploadedImage[]} images - Array of images to set
+   * @returns {void}
    */
-  private setBasicFormData(task: any, formData: FormData): void {
-    formData.title &#x3D; task.title || &#x27;&#x27;;
-    formData.description &#x3D; task.description || &#x27;&#x27;;
+  setImages(images: UploadedImage[]) {
+    this.images &#x3D; images;
   }
 
   /**
-   * Sets the due date in form data from various date formats.
-   * Handles Firestore Timestamp, Date objects, and string dates.
-   *
-   * @param date - The date in various possible formats
-   * @param formData - The form data object to update
-   * @private
+   * Retrieves all images from localStorage.
+   * @returns {UploadedImage[]} Array of all stored images
    */
-  private setDueDate(date: any, formData: FormData): void {
-    if (!date) return;
-    let dateValue: Date;
-    if (date.toDate) {
-      dateValue &#x3D; date.toDate();
-    } else if (date instanceof Date) {
-      dateValue &#x3D; date;
-    } else {
-      dateValue &#x3D; new Date(date);
-    }
-    formData.dueDate &#x3D; dateValue.toISOString().split(&#x27;T&#x27;)[0];
+  getImages(): UploadedImage[] {
+    const data &#x3D; localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
   }
 
   /**
-   * Sets assigned contacts in the contact manager from task data.
-   * Filters and matches contact IDs with available contacts.
-   *
-   * @param assignedToIds - Array of contact IDs assigned to task
-   * @param contactManager - Manager to update with selected contacts
-   * @param contacts - Array of all available contacts
-   * @private
+   * Retrieves images by their keys.
+   * @param {string[]} imageKeys - Array of image keys to retrieve
+   * @returns {UploadedImage[]} Array of matching images
    */
-  private setAssignedContacts(assignedToIds: string[], contactManager: ContactManager, contacts: Contact[]): void {
-    if (!assignedToIds || assignedToIds.length &#x3D;&#x3D;&#x3D; 0) return;
-    const selectedContacts &#x3D; contacts
-      .filter(contact &#x3D;&gt; contact.id !&#x3D;&#x3D; undefined)
-      .filter(contact &#x3D;&gt; assignedToIds.includes(contact.id as string));
-    contactManager.setSelectedContacts(selectedContacts);
+  getImagesByKeys(imageKeys: string[]): UploadedImage[] {
+    const allImages &#x3D; this.getImages();
+    return allImages.filter(img &#x3D;&gt; imageKeys.includes(img.imageKey));
   }
 
   /**
-   * Gets unique contact IDs from the contact manager.
-   * Filters out undefined IDs and removes duplicates.
-   *
-   * @param contactManager - Manager containing selected contacts
-   * @returns Array of unique contact ID strings
-   * @private
+   * Retrieves a single image by its key.
+   * @param {string} imageKey - Key of the image to retrieve
+   * @returns {UploadedImage | undefined} Image object or undefined if not found
    */
-  private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
-    const contacts &#x3D; contactManager.getSelectedContacts();
-    return [...new Set(contacts.map(c &#x3D;&gt; c.id).filter(id &#x3D;&gt; id !&#x3D;&#x3D; undefined))] as string[];
+  getImageByKey(imageKey: string): UploadedImage | undefined {
+    const allImages &#x3D; this.getImages();
+    return allImages.find(img &#x3D;&gt; img.imageKey &#x3D;&#x3D;&#x3D; imageKey);
+  }
+
+  /**
+   * Retrieves base64 data for an image by its key.
+   * @param {string} imageKey - Key of the image
+   * @returns {string | null} Base64 string or null if image not found
+   */
+  getBase64ByKey(imageKey: string): string | null {
+    const image &#x3D; this.getImageByKey(imageKey);
+    return image ? image.base64 : null;
+  }
+
+  /**
+   * Deletes a single image by its key.
+   * @param {string} imageKey - Key of the image to delete
+   * @returns {void}
+   */
+  deleteImage(imageKey: string) {
+    const current &#x3D; this.getImages();
+    const updated &#x3D; current.filter(img &#x3D;&gt; img.imageKey !&#x3D;&#x3D; imageKey);
+    localStorage.setItem(this.storageKey, JSON.stringify(updated));
+  }
+
+  /**
+   * Deletes multiple images by their keys.
+   * @param {string[]} imageKeys - Array of image keys to delete
+   * @returns {void}
+   */
+  deleteImages(imageKeys: string[]) {
+    const current &#x3D; this.getImages();
+    const updated &#x3D; current.filter(img &#x3D;&gt; !imageKeys.includes(img.imageKey));
+    localStorage.setItem(this.storageKey, JSON.stringify(updated));
+  }
+
+  /**
+   * Clears all images from localStorage.
+   * @returns {void}
+   */
+  clearImages() {
+    localStorage.removeItem(this.storageKey);
+  }
+
+  /**
+   * Retrieves base64 data for task-related images.
+   * @param {string[]} taskImageKeys - Array of task image keys
+   * @returns {string[]} Array of base64 strings for existing images
+   */
+  getTaskImages(taskImageKeys: string[]): string[] {
+    return taskImageKeys
+      .map(key &#x3D;&gt; this.getBase64ByKey(key))
+      .filter(base64 &#x3D;&gt; base64 !&#x3D;&#x3D; null) as string[];
+  }
+
+  /**
+   * Retrieves base64 data for a contact image.
+   * @param {string} contactImageKey - Key of the contact image
+   * @returns {string | null} Base64 string or null if image not found
+   */
+  getContactImage(contactImageKey: string): string | null {
+    return this.getBase64ByKey(contactImageKey);
   }
 }</code></pre>
     </div>
@@ -555,7 +643,7 @@ export class TaskDataService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'FormData-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UploadedImage.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

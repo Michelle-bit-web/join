@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface for Firestore timestamp objects that can be converted to Date.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -178,19 +185,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/summary/summary.component.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/summary/summary.component.ts:23</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Converts the Firestore timestamp to a JavaScript Date object.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The converted Date object</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -214,7 +227,15 @@ import {
   animate,
 } from &#x27;@angular/animations&#x27;;
 
+/**
+ * Interface for Firestore timestamp objects that can be converted to Date.
+ * @interface FirestoreTimestamp
+ */
 interface FirestoreTimestamp {
+  /**
+   * Converts the Firestore timestamp to a JavaScript Date object.
+   * @returns {Date} The converted Date object
+   */
   toDate(): Date;
 }
 
@@ -233,19 +254,84 @@ interface FirestoreTimestamp {
 })
 
 export class SummaryComponent implements OnInit {
+  /**
+   * Array containing all tasks loaded from the task service.
+   * @type {Task[]}
+   */
   taskList: Task[] &#x3D; [];
+  
+  /**
+   * Display name of the current user for personalized greeting.
+   * @type {string}
+   */
   userName: string &#x3D; &#x27;&#x27;;
+  
+  /**
+   * Current state of the greeting animation (&#x27;start&#x27; or &#x27;moved&#x27;).
+   * @type {&#x27;start&#x27; | &#x27;moved&#x27;}
+   */
   greetingState: &#x27;start&#x27; | &#x27;moved&#x27; &#x3D; &#x27;start&#x27;;
+  
+  /**
+   * Flag controlling the visibility of the greeting message.
+   * @type {boolean}
+   */
   showGreeting &#x3D; true;
+  
+  /**
+   * Flag indicating if the current device is mobile (width &lt; 1000px).
+   * @type {boolean}
+   */
   isMobile &#x3D; false;
+  
+  /**
+   * The next upcoming deadline date across all tasks.
+   * @type {Date | null}
+   */
   nextDeadlineDate: Date | null &#x3D; null;
+  
+  /**
+   * Count of tasks with &#x27;urgent&#x27; priority.
+   * @type {number}
+   */
   nextDeadlineCount: number &#x3D; 0;
+  
+  /**
+   * Time-based greeting message (e.g., &quot;Good morning,&quot;).
+   * @type {string}
+   */
   greeting: string &#x3D; &#x27;&#x27;;
+  
+  /**
+   * Count of tasks with &#x27;to-do&#x27; status.
+   * @type {number}
+   */
   todoCount &#x3D; 0;
+  
+  /**
+   * Count of tasks with &#x27;done&#x27; status.
+   * @type {number}
+   */
   doneCount &#x3D; 0;
+  
+  /**
+   * Count of tasks with &#x27;in-progress&#x27; status.
+   * @type {number}
+   */
   inProgressCount &#x3D; 0;
+  
+  /**
+   * Count of tasks with &#x27;await-feedback&#x27; status.
+   * @type {number}
+   */
   awaitingFeedbackCount &#x3D; 0;
 
+  /**
+   * Creates an instance of SummaryComponent.
+   * @param {TaskService} taskService - Service for task-related operations and data access
+   * @param {Router} router - Angular Router service for navigation
+   * @param {AuthService} authService - Service for authentication and user data
+   */
   constructor(
     private taskService: TaskService,
     private router: Router,
@@ -310,6 +396,7 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Navigates to the board view.
+   * @returns {void}
    */
   goToBoard() {
     this.router.navigate([&#x27;/board&#x27;]);
@@ -318,6 +405,7 @@ export class SummaryComponent implements OnInit {
   /**
    * Initializes the component by determining device type,
    * loading user greeting, and loading tasks with statistics.
+   * @returns {void}
    */
   ngOnInit() {
     this.isMobile &#x3D; window.innerWidth &lt; 1000;
@@ -329,6 +417,8 @@ export class SummaryComponent implements OnInit {
    * Loads current user data and sets a personalized greeting.
    * If on mobile and greeting hasn&#x27;t been shown in this session,
    * triggers an animated greeting display.
+   * @private
+   * @returns {void}
    */
   private loadUserGreeting(): void {
     this.authService.getCurrentUserData().then((userData) &#x3D;&gt; {
@@ -348,6 +438,8 @@ export class SummaryComponent implements OnInit {
   /**
    * Animates a greeting sequence for mobile devices.
    * Hides the greeting after the animation and stores the display state in sessionStorage.
+   * @private
+   * @returns {void}
    */
   private showAnimatedGreeting(): void {
     this.showGreeting &#x3D; true;
@@ -363,6 +455,8 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Subscribes to task data and processes statistics and deadline information.
+   * @private
+   * @returns {void}
    */
   private loadAndProcessTasks(): void {
     this.taskService.getTasks().subscribe((tasks: Task[]) &#x3D;&gt; {
@@ -374,8 +468,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Sets the count of tasks by specific statuses and urgency.
-   * 
-   * @param tasks - Array of task objects to be analyzed.
+   * @private
+   * @param {Task[]} tasks - Array of task objects to be analyzed
+   * @returns {void}
    */
   private setTaskCounts(tasks: Task[]): void {
     this.todoCount &#x3D; this.countTasksByStatus(tasks, &#x27;to-do&#x27;);
@@ -388,10 +483,10 @@ export class SummaryComponent implements OnInit {
   /**
    * Filters tasks to only include those with a valid future date and not marked as &#x27;done&#x27;.
    * Parses the date string into a Date object.
-   * 
-   * @param tasks - Array of task objects.
-   * @param parseDate - A function that parses a date string into a Date object.
-   * @returns An array of tasks with a valid future date, each including a &#x60;dateObj&#x60; field.
+   * @private
+   * @param {Task[]} tasks - Array of task objects
+   * @param {(date: string) &#x3D;&gt; Date | null} parseDate - A function that parses a date string into a Date object
+   * @returns {(Task &amp; { dateObj: Date })[]} An array of tasks with a valid future date, each including a &#x60;dateObj&#x60; field
    */
   private getFutureTasksWithDateObj(tasks: Task[], parseDate: (date: string) &#x3D;&gt; Date | null): (Task &amp; { dateObj: Date })[] {
     const now &#x3D; new Date();
@@ -406,9 +501,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Returns the earliest date from an array of tasks with valid date objects.
-   * 
-   * @param tasks - Array of tasks containing a &#x60;dateObj&#x60; property.
-   * @returns The earliest Date object, or null if the array is empty.
+   * @private
+   * @param {(Task &amp; { dateObj: Date })[]} tasks - Array of tasks containing a &#x60;dateObj&#x60; property
+   * @returns {Date | null} The earliest Date object, or null if the array is empty
    */
   private getEarliestDate(tasks: (Task &amp; { dateObj: Date })[]): Date | null {
     if (tasks.length &#x3D;&#x3D;&#x3D; 0) return null;
@@ -418,8 +513,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Determines and sets the next upcoming deadline from the list of tasks.
-   * 
-   * @param tasks - Array of task objects.
+   * @private
+   * @param {Task[]} tasks - Array of task objects
+   * @returns {void}
    */
   private setNextDeadline(tasks: Task[]): void {
     const futureTasks &#x3D; this.getFutureTasksWithDateObj(tasks, this.parseDate.bind(this));
@@ -428,9 +524,9 @@ export class SummaryComponent implements OnInit {
 
   /**
    * Converts a date value of various possible formats into a JavaScript Date object.
-   * 
-   * @param date - Date input which could be a string, number, Date, or Firestore timestamp.
-   * @returns A valid Date object or null if conversion is not possible.
+   * @private
+   * @param {any} date - Date input which could be a string, number, Date, or Firestore timestamp
+   * @returns {Date | null} A valid Date object or null if conversion is not possible
    */
   private parseDate(date: any): Date | null {
     if (date instanceof Date) return date;

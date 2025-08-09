@@ -1,0 +1,1967 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>join documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">join documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ImageViewerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/image-viewer/image-viewer.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component for viewing images in a modal overlay with navigation and delete functionality.
+Supports touch devices, keyboard navigation, and slide-in/out animations.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-image-viewer</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./image-viewer.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./image-viewer.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animationState" >animationState</a>
+                            </li>
+                            <li>
+                                <a href="#backgroundVisible" >backgroundVisible</a>
+                            </li>
+                            <li>
+                                <a href="#currentIndex" >currentIndex</a>
+                            </li>
+                            <li>
+                                <a href="#isTouchDevice" >isTouchDevice</a>
+                            </li>
+                            <li>
+                                <a href="#isVisible" >isVisible</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#uploadService" >uploadService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkIfTouchDevice" >checkIfTouchDevice</a>
+                            </li>
+                            <li>
+                                <a href="#downloadImage" >downloadImage</a>
+                            </li>
+                            <li>
+                                <a href="#getImageName" >getImageName</a>
+                            </li>
+                            <li>
+                                <a href="#getImageSize" >getImageSize</a>
+                            </li>
+                            <li>
+                                <a href="#getImageType" >getImageType</a>
+                            </li>
+                            <li>
+                                <a href="#nextImage" >nextImage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onAnimationDone" >onAnimationDone</a>
+                            </li>
+                            <li>
+                                <a href="#onClose" >onClose</a>
+                            </li>
+                            <li>
+                                <a href="#onDeleteImage" >onDeleteImage</a>
+                            </li>
+                            <li>
+                                <a href="#previousImage" >previousImage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#allowDelete" >allowDelete</a>
+                            </li>
+                            <li>
+                                <a href="#imageKeys" >imageKeys</a>
+                            </li>
+                            <li>
+                                <a href="#images" >images</a>
+                            </li>
+                            <li>
+                                <a href="#startIndex" >startIndex</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#deleteImage" >deleteImage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#currentImage" >currentImage</a>
+                                </li>
+                                <li>
+                                    <a href="#currentImageKey" >currentImageKey</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:69</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ImageViewerComponent.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service for image operations</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="allowDelete"></a>
+                        <b>allowDelete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:48</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether delete functionality is enabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="imageKeys"></a>
+                        <b>imageKeys</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:45</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array of image keys corresponding to images</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="images"></a>
+                        <b>images</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:39</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Array of image URLs to display</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startIndex"></a>
+                        <b>startIndex</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:42</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Starting index for image display</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="close"></a>
+                        <b>close</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:51</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when viewer should be closed</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteImage"></a>
+                        <b>deleteImage</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:54</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when image should be deleted</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIfTouchDevice"></a>
+                    <span class="name">
+                        <span ><b>checkIfTouchDevice</b></span>
+                        <a href="#checkIfTouchDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkIfTouchDevice()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the current device supports touch input.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadImage"></a>
+                    <span class="name">
+                        <span ><b>downloadImage</b></span>
+                        <a href="#downloadImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>downloadImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Downloads the currently displayed image.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageName"></a>
+                    <span class="name">
+                        <span ><b>getImageName</b></span>
+                        <a href="#getImageName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImageName()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the filename of the current image.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Filename or undefined if not available</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageSize"></a>
+                    <span class="name">
+                        <span ><b>getImageSize</b></span>
+                        <a href="#getImageSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImageSize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the formatted file size of the current image.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Formatted file size string in KB or empty string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageType"></a>
+                    <span class="name">
+                        <span ><b>getImageType</b></span>
+                        <a href="#getImageType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImageType()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the file type of the current image.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>File type or undefined if not available</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextImage"></a>
+                    <span class="name">
+                        <span ><b>nextImage</b></span>
+                        <a href="#nextImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>nextImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navigates to the next image if available.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook - component initialization.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onAnimationDone"></a>
+                    <span class="name">
+                        <span ><b>onAnimationDone</b></span>
+                        <a href="#onAnimationDone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onAnimationDone(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles animation completion events.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Animation event</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClose"></a>
+                    <span class="name">
+                        <span ><b>onClose</b></span>
+                        <a href="#onClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClose(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles closing the image viewer with slide-out animation.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Close event</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteImage"></a>
+                    <span class="name">
+                        <span ><b>onDeleteImage</b></span>
+                        <a href="#onDeleteImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles image deletion if delete is allowed.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previousImage"></a>
+                    <span class="name">
+                        <span ><b>previousImage</b></span>
+                        <a href="#previousImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>previousImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navigates to the previous image if available.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animationState"></a>
+                    <span class="name">
+                        <span ><b>animationState</b></span>
+                        <a href="#animationState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;in&quot; | &quot;out&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;in&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Animation state for controlling slide transitions</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="backgroundVisible"></a>
+                    <span class="name">
+                        <span ><b>backgroundVisible</b></span>
+                        <a href="#backgroundVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to control background visibility during animation</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentIndex"></a>
+                    <span class="name">
+                        <span ><b>currentIndex</b></span>
+                        <a href="#currentIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current index of displayed image</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isTouchDevice"></a>
+                    <span class="name">
+                        <span ><b>isTouchDevice</b></span>
+                        <a href="#isTouchDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating if device supports touch</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isVisible"></a>
+                    <span class="name">
+                        <span ><b>isVisible</b></span>
+                        <a href="#isVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to control component visibility</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>uploadService</b></span>
+                        <a href="#uploadService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Service for image operations</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentImage"></a>
+                        <span class="name"><b>currentImage</b><a href="#currentImage"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>currentImage()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:92</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Gets the currently displayed image URL.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentImageKey"></a>
+                        <span class="name"><b>currentImageKey</b><a href="#currentImageKey"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>currentImageKey()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/shared/image-viewer/image-viewer.component.ts:100</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Gets the key of the currently displayed image.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>string | undefined</code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { UploadService } from &#x27;../../services/upload.service&#x27;;
+import { trigger, state, style, transition, animate } from &#x27;@angular/animations&#x27;;
+
+/**
+ * Component for viewing images in a modal overlay with navigation and delete functionality.
+ * Supports touch devices, keyboard navigation, and slide-in/out animations.
+ */
+@Component({
+  selector: &#x27;app-image-viewer&#x27;,
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: &#x27;./image-viewer.component.html&#x27;,
+  styleUrl: &#x27;./image-viewer.component.scss&#x27;,
+  animations: [
+    trigger(&#x27;slideInOut&#x27;, [
+      transition(&#x27;:enter&#x27;, [
+        style({ transform: &#x27;translateY(100%)&#x27;, opacity: 0 }),
+        animate(
+          &#x27;300ms ease-out&#x27;,
+          style({ transform: &#x27;translateY(0)&#x27;, opacity: 1 })
+        ),
+      ]),
+      transition(&#x27;:leave&#x27;, [
+        style({ transform: &#x27;translateY(0)&#x27;, opacity: 1 }),
+        animate(
+          &#x27;300ms ease-in&#x27;,
+          style({ transform: &#x27;translateY(100%)&#x27;, opacity: 0 })
+        ),
+      ]),
+    ]),
+  ],
+})
+
+export class ImageViewerComponent {
+
+  /** Array of image URLs to display */
+  @Input() images: string[] &#x3D; [];
+  
+  /** Starting index for image display */
+  @Input() startIndex: number &#x3D; 0;
+  
+  /** Array of image keys corresponding to images */
+  @Input() imageKeys: string[] &#x3D; [];
+  
+  /** Whether delete functionality is enabled */
+  @Input() allowDelete: boolean &#x3D; false;
+  
+  /** Event emitted when viewer should be closed */
+  @Output() close &#x3D; new EventEmitter&lt;Event&gt;();
+  
+  /** Event emitted when image should be deleted */
+  @Output() deleteImage &#x3D; new EventEmitter&lt;{ index: number, imageKey?: string }&gt;();
+
+  /** Current index of displayed image */
+  currentIndex: number &#x3D; 0;
+  
+  /** Flag indicating if device supports touch */
+  isTouchDevice: boolean &#x3D; false;
+
+  /** Animation state for controlling slide transitions */
+  animationState: &#x27;in&#x27; | &#x27;out&#x27; &#x3D; &#x27;in&#x27;;
+
+  /** Flag to control background visibility during animation */
+  backgroundVisible: boolean &#x3D; false;
+
+  /** Flag to control component visibility */
+  isVisible: boolean &#x3D; true;
+
+  /**
+   * Creates an instance of ImageViewerComponent.
+   * @param uploadService - Service for image operations
+   */
+  constructor(public uploadService: UploadService) { }
+
+  /**
+   * Angular lifecycle hook - component initialization.
+   */
+  ngOnInit() {
+    this.currentIndex &#x3D; this.startIndex;
+    this.checkIfTouchDevice();
+    setTimeout(() &#x3D;&gt; {
+      this.backgroundVisible &#x3D; true;
+    }, 280);
+  }
+
+  /**
+   * Gets the currently displayed image URL.
+   * @returns Current image URL or empty string
+   */
+  get currentImage(): string {
+    return this.images[this.currentIndex] || &#x27;&#x27;;
+  }
+
+  /**
+   * Gets the key of the currently displayed image.
+   * @returns Current image key or undefined
+   */
+  get currentImageKey(): string | undefined {
+    return this.imageKeys[this.currentIndex];
+  }
+
+  /**
+   * Checks if the current device supports touch input.
+   */
+  checkIfTouchDevice() {
+    this.isTouchDevice &#x3D; &#x27;ontouchstart&#x27; in window || navigator.maxTouchPoints &gt; 0;
+  }
+
+  /**
+   * Navigates to the previous image if available.
+   */
+  previousImage() {
+    if (this.currentIndex &gt; 0) {
+      this.currentIndex--;
+    }
+  }
+
+  /**
+   * Navigates to the next image if available.
+   */
+  nextImage() {
+    if (this.currentIndex &lt; this.images.length - 1) {
+      this.currentIndex++;
+    }
+  }
+
+  /**
+   * Gets the filename of the current image.
+   * @returns Filename or undefined if not available
+   */
+  getImageName(): string | undefined {
+    let imageName &#x3D; this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    return imageName?.filename;
+  }
+
+  /**
+   * Gets the file type of the current image.
+   * @returns File type or undefined if not available
+   */
+  getImageType(): string | undefined {
+    let imageType &#x3D; this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    return imageType?.fileType;
+  }
+
+  /**
+   * Gets the formatted file size of the current image.
+   * @returns Formatted file size string in KB or empty string
+   */
+  getImageSize(): string {
+    let imageSize &#x3D; this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
+    if (imageSize) {
+      return Math.round(imageSize.fileSize / 1000) + &#x27; KB&#x27;;
+    }
+    return &#x27;&#x27;;
+  }
+
+  /**
+   * Downloads the currently displayed image.
+   */
+  downloadImage() {
+    const link &#x3D; document.createElement(&#x27;a&#x27;);
+    link.href &#x3D; this.currentImage;
+    link.download &#x3D; &#x60;join_image_${this.getImageName() || this.currentImage + 1}.jpg&#x60;;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /**
+   * Handles image deletion if delete is allowed.
+   */
+  onDeleteImage() {
+    if (this.allowDelete) {
+      this.deleteImage.emit({
+        index: this.currentIndex,
+        imageKey: this.currentImageKey,
+      });
+      if (this.imageKeys.length &lt;&#x3D; 0) {
+        this.onClose(new Event(&#x27;close&#x27;));
+      }
+    }
+  }
+
+  /**
+   * Handles closing the image viewer with slide-out animation.
+   * @param event - Close event
+   */
+  onClose(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.animationState &#x3D; &#x27;out&#x27;;
+    this.backgroundVisible &#x3D; false;
+    // Delay the actual close emission to allow animation to complete
+      this.close.emit(event);
+  }
+
+  /**
+   * Handles animation completion events.
+   * @param event - Animation event
+   */
+  onAnimationDone(event: any) {
+    if (event.toState &#x3D;&#x3D;&#x3D; &#x27;void&#x27; &amp;&amp; event.fromState &#x3D;&#x3D;&#x3D; &#x27;in&#x27;) {
+      // Animation completed, component can be destroyed
+      this.isVisible &#x3D; false;
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;image-viewer-overlay&quot;
+  [class.backgroundVisible]&#x3D;&quot;backgroundVisible&quot;
+  *ngIf&#x3D;&quot;isVisible&quot;
+  role&#x3D;&quot;dialog&quot;
+  aria-modal&#x3D;&quot;true&quot;
+  aria-labelledby&#x3D;&quot;image-viewer-title&quot;
+&gt;
+  &lt;main
+    class&#x3D;&quot;image-viewer-content&quot;
+    (click)&#x3D;&quot;$event.stopPropagation()&quot;
+    [ngClass]&#x3D;&quot;{ &#x27;visible-on-touchDevice&#x27;: isTouchDevice }&quot;
+    [@slideInOut]&#x3D;&quot;animationState&quot;
+    (@slideInOut.done)&#x3D;&quot;onAnimationDone($event)&quot;
+  &gt;
+    &lt;header class&#x3D;&quot;image-viewer-header&quot;&gt;
+      &lt;div class&#x3D;&quot;headline-wrapper&quot;&gt;
+        &lt;h3 id&#x3D;&quot;image-viewer-title&quot;&gt;{{ getImageName() || &quot;Image&quot; }}&lt;/h3&gt;
+        &lt;h4&gt;{{ getImageType() }} ( {{ getImageSize() }} )&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;viewer-actions-wrapper&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;btn-download&quot;
+          (click)&#x3D;&quot;downloadImage()&quot;
+          aria-label&#x3D;&quot;Download current image&quot;
+        &gt;
+          &lt;svg
+            width&#x3D;&quot;24&quot;
+            height&#x3D;&quot;24&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+          &gt;
+            &lt;mask
+              id&#x3D;&quot;mask0_264018_1332&quot;
+              style&#x3D;&quot;mask-type: alpha&quot;
+              maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+              x&#x3D;&quot;-1&quot;
+              y&#x3D;&quot;0&quot;
+              width&#x3D;&quot;25&quot;
+              height&#x3D;&quot;24&quot;
+            &gt;
+              &lt;rect x&#x3D;&quot;-0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
+            &lt;/mask&gt;
+            &lt;g mask&#x3D;&quot;url(#mask0_264018_1332)&quot;&gt;
+              &lt;path
+                d&#x3D;&quot;M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z&quot;
+                fill&#x3D;&quot;white&quot;
+              /&gt;
+            &lt;/g&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;btn-close&quot;
+          (click)&#x3D;&quot;onClose($event)&quot;
+          aria-label&#x3D;&quot;Close image viewer&quot;
+        &gt;
+          &lt;svg
+            width&#x3D;&quot;24&quot;
+            height&#x3D;&quot;24&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+          &gt;
+            &lt;path
+              d&#x3D;&quot;M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;div class&#x3D;&quot;image-container&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        class&#x3D;&quot;nav-btn prev-btn&quot;
+        (click)&#x3D;&quot;previousImage()&quot;
+        [disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; 0&quot;
+        *ngIf&#x3D;&quot;images.length &gt; 1&quot;
+        aria-label&#x3D;&quot;View previous image&quot;
+        [attr.aria-disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; 0&quot;
+      &gt;
+        &lt;svg
+          width&#x3D;&quot;24&quot;
+          height&#x3D;&quot;24&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+          fill&#x3D;&quot;none&quot;
+          xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        &gt;
+          &lt;path
+            d&#x3D;&quot;M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z&quot;
+            fill&#x3D;&quot;#2A3647&quot;
+          /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;div class&#x3D;&quot;image-wrapper&quot;&gt;
+        &lt;img
+          [src]&#x3D;&quot;currentImage&quot;
+          [alt]&#x3D;&quot;&#x27;Image &#x27; + (currentIndex + 1) + &#x27; of &#x27; + images.length + (getImageName() ? &#x27;: &#x27; + getImageName() : &#x27;&#x27;)&quot;
+          class&#x3D;&quot;viewer-image&quot;
+          role&#x3D;&quot;img&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        class&#x3D;&quot;nav-btn next-btn&quot;
+        (click)&#x3D;&quot;nextImage()&quot;
+        [disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; images.length - 1&quot;
+        *ngIf&#x3D;&quot;images.length &gt; 1&quot;
+        aria-label&#x3D;&quot;View next image&quot;
+        [attr.aria-disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; images.length - 1&quot;
+      &gt;
+        &lt;svg
+          width&#x3D;&quot;24&quot;
+          height&#x3D;&quot;24&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+          fill&#x3D;&quot;none&quot;
+          xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        &gt;
+          &lt;path
+            d&#x3D;&quot;M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12L8.59 16.59Z&quot;
+            fill&#x3D;&quot;#2A3647&quot;
+          /&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+
+      &lt;div class&#x3D;&quot;nav-btn-wrapper-mobile&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;nav-btn-mobile prev-btn&quot;
+          (click)&#x3D;&quot;previousImage()&quot;
+          [disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; 0&quot;
+          *ngIf&#x3D;&quot;images.length &gt; 1&quot;
+          aria-label&#x3D;&quot;View previous image&quot;
+          [attr.aria-disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; 0&quot;
+        &gt;
+          &lt;svg
+            width&#x3D;&quot;24&quot;
+            height&#x3D;&quot;24&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+          &gt;
+            &lt;path
+              d&#x3D;&quot;M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;nav-btn-mobile next-btn&quot;
+          (click)&#x3D;&quot;nextImage()&quot;
+          [disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; images.length - 1&quot;
+          *ngIf&#x3D;&quot;images.length &gt; 1&quot;
+          aria-label&#x3D;&quot;View next image&quot;
+          [attr.aria-disabled]&#x3D;&quot;currentIndex &#x3D;&#x3D;&#x3D; images.length - 1&quot;
+        &gt;
+          &lt;svg
+            width&#x3D;&quot;24&quot;
+            height&#x3D;&quot;24&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            fill&#x3D;&quot;none&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+          &gt;
+            &lt;path
+              d&#x3D;&quot;M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12L8.59 16.59Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;footer class&#x3D;&quot;image-controls&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;image-counter&quot;
+        *ngIf&#x3D;&quot;images.length &gt; 1&quot;
+        role&#x3D;&quot;status&quot;
+        aria-live&#x3D;&quot;polite&quot;
+        aria-label&#x3D;&quot;Image {{ currentIndex + 1 }} of {{ images.length }}&quot;
+      &gt;
+        {{ currentIndex + 1 }} / {{ images.length }}
+      &lt;/div&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        class&#x3D;&quot;btn-delete&quot;
+        (click)&#x3D;&quot;onDeleteImage()&quot;
+        *ngIf&#x3D;&quot;allowDelete&quot;
+        aria-label&#x3D;&quot;Delete current image&quot;
+      &gt;
+        &lt;svg
+          width&#x3D;&quot;25&quot;
+          height&#x3D;&quot;24&quot;
+          viewBox&#x3D;&quot;0 0 25 24&quot;
+          fill&#x3D;&quot;none&quot;
+          xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        &gt;
+          &lt;mask
+            id&#x3D;&quot;mask0_75592_9951&quot;
+            style&#x3D;&quot;mask-type: alpha&quot;
+            maskUnits&#x3D;&quot;userSpaceOnUse&quot;
+            x&#x3D;&quot;0&quot;
+            y&#x3D;&quot;0&quot;
+            width&#x3D;&quot;25&quot;
+            height&#x3D;&quot;24&quot;
+          &gt;
+            &lt;rect x&#x3D;&quot;0.144531&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot; /&gt;
+          &lt;/mask&gt;
+          &lt;g mask&#x3D;&quot;url(#mask0_75592_9951)&quot;&gt;
+            &lt;path
+              d&#x3D;&quot;M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z&quot;
+              fill&#x3D;&quot;#2A3647&quot;
+            /&gt;
+          &lt;/g&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/footer&gt;
+  &lt;/main&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="image-viewer-overlay"  [class.backgroundVisible]="backgroundVisible"  *ngIf="isVisible"  role="dialog"  aria-modal="true"  aria-labelledby="image-viewer-title">  <main    class="image-viewer-content"    (click)="$event.stopPropagation()"    [ngClass]="{ \'visible-on-touchDevice\': isTouchDevice }"    [@slideInOut]="animationState"    (@slideInOut.done)="onAnimationDone($event)"  >    <header class="image-viewer-header">      <div class="headline-wrapper">        <h3 id="image-viewer-title">{{ getImageName() || "Image" }}</h3>        <h4>{{ getImageType() }} ( {{ getImageSize() }} )</h4>      </div>      <div class="viewer-actions-wrapper">        <button          type="button"          class="btn-download"          (click)="downloadImage()"          aria-label="Download current image"        >          <svg            width="24"            height="24"            viewBox="0 0 24 24"            fill="none"            xmlns="http://www.w3.org/2000/svg"          >            <mask              id="mask0_264018_1332"              style="mask-type: alpha"              maskUnits="userSpaceOnUse"              x="-1"              y="0"              width="25"              height="24"            >              <rect x="-0.144531" width="24" height="24" fill="#D9D9D9" />            </mask>            <g mask="url(#mask0_264018_1332)">              <path                d="M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z"                fill="white"              />            </g>          </svg>        </button>        <button          type="button"          class="btn-close"          (click)="onClose($event)"          aria-label="Close image viewer"        >          <svg            width="24"            height="24"            viewBox="0 0 24 24"            fill="none"            xmlns="http://www.w3.org/2000/svg"          >            <path              d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"              fill="#2A3647"            />          </svg>        </button>      </div>    </header>    <div class="image-container">      <button        type="button"        class="nav-btn prev-btn"        (click)="previousImage()"        [disabled]="currentIndex === 0"        *ngIf="images.length > 1"        aria-label="View previous image"        [attr.aria-disabled]="currentIndex === 0"      >        <svg          width="24"          height="24"          viewBox="0 0 24 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <path            d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"            fill="#2A3647"          />        </svg>      </button>      <div class="image-wrapper">        <img          [src]="currentImage"          [alt]="\'Image \' + (currentIndex + 1) + \' of \' + images.length + (getImageName() ? \': \' + getImageName() : \'\')"          class="viewer-image"          role="img"        />      </div>      <button        type="button"        class="nav-btn next-btn"        (click)="nextImage()"        [disabled]="currentIndex === images.length - 1"        *ngIf="images.length > 1"        aria-label="View next image"        [attr.aria-disabled]="currentIndex === images.length - 1"      >        <svg          width="24"          height="24"          viewBox="0 0 24 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <path            d="M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12L8.59 16.59Z"            fill="#2A3647"          />        </svg>      </button>      <div class="nav-btn-wrapper-mobile">        <button          type="button"          class="nav-btn-mobile prev-btn"          (click)="previousImage()"          [disabled]="currentIndex === 0"          *ngIf="images.length > 1"          aria-label="View previous image"          [attr.aria-disabled]="currentIndex === 0"        >          <svg            width="24"            height="24"            viewBox="0 0 24 24"            fill="none"            xmlns="http://www.w3.org/2000/svg"          >            <path              d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z"              fill="#2A3647"            />          </svg>        </button>        <button          type="button"          class="nav-btn-mobile next-btn"          (click)="nextImage()"          [disabled]="currentIndex === images.length - 1"          *ngIf="images.length > 1"          aria-label="View next image"          [attr.aria-disabled]="currentIndex === images.length - 1"        >          <svg            width="24"            height="24"            viewBox="0 0 24 24"            fill="none"            xmlns="http://www.w3.org/2000/svg"          >            <path              d="M8.59 16.59L10 18L16 12L10 6L8.59 7.41L13.17 12L8.59 16.59Z"              fill="#2A3647"            />          </svg>        </button>      </div>    </div>    <footer class="image-controls">      <div        class="image-counter"        *ngIf="images.length > 1"        role="status"        aria-live="polite"        aria-label="Image {{ currentIndex + 1 }} of {{ images.length }}"      >        {{ currentIndex + 1 }} / {{ images.length }}      </div>      <button        type="button"        class="btn-delete"        (click)="onDeleteImage()"        *ngIf="allowDelete"        aria-label="Delete current image"      >        <svg          width="25"          height="24"          viewBox="0 0 25 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_9951"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="25"            height="24"          >            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />          </mask>          <g mask="url(#mask0_75592_9951)">            <path              d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"              fill="#2A3647"            />          </g>        </svg>      </button>    </footer>  </main></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ImageViewerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ImageViewerComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

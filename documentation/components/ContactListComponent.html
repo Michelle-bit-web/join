@@ -243,6 +243,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getContactImage" >getContactImage</a>
+                            </li>
+                            <li>
                                 <a href="#getCurrentUser" >getCurrentUser</a>
                             </li>
                             <li>
@@ -313,18 +316,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(contactService: <a href="../injectables/ContactService.html" target="_self">ContactService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:108</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:64</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Constructor injecting required services.</p>
+                            <div class="io-description"><p>Constructor injecting required services for contact management and authentication.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -351,7 +354,7 @@
                                                     
                                                         <td>
                                                                 <ul>
-<li>Manages contact data and selection.</li>
+<li>Service that manages contact data and selection state</li>
 </ul>
 
                                                         </td>
@@ -369,7 +372,25 @@
                                                     
                                                         <td>
                                                                 <ul>
-<li>Provides the currently logged-in user&#39;s info.</li>
+<li>Service that provides current user authentication info</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>uploadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Service that manages image uploads and retrieval</li>
 </ul>
 
                                                         </td>
@@ -402,12 +423,12 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:64</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Emits an event when a contact is selected.</p>
+                        <div class="io-description"><p>Event emitted when a contact is selected from the list.</p>
 </div>
                     </td>
                 </tr>
@@ -421,6 +442,84 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContactImage"></a>
+                    <span class="name">
+                        <span ><b>getContactImage</b></span>
+                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="229"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:229</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the contact&#39;s profile image from localStorage using their imageKey.
+Returns null if no image is associated with the contact.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>contact</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The contact object containing the imageKey</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The base64 encoded image string or null if no image exists</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -441,15 +540,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Identifying the current user to directly select this user in the contact list.</p>
+                        <div class="io-description"><p>Identifies the current authenticated user to directly select them in the contact list.
+Also subscribes to contact selection changes to maintain selection state.</p>
 </div>
 
                         <div class="io-description">
@@ -480,15 +580,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="188"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:188</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:218</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns the initials of the given name using ContactService.</p>
+                        <div class="io-description"><p>Returns the initials of the given name using ContactService utility.
+Falls back to service method for consistent initial generation logic.</p>
 </div>
 
                             <div class="io-description">
@@ -517,7 +618,7 @@
 
                                             <td>
                                                     <ul>
-<li>The full name of the contact.</li>
+<li>The full name of the contact</li>
 </ul>
 
                                             </td>
@@ -530,7 +631,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Initials string.</p>
+                                <p>String containing the person&#39;s initials (e.g., &quot;JD&quot; for &quot;John Doe&quot;)</p>
 
                             </div>
                 </td>
@@ -557,15 +658,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:194</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Groups contacts alphabetically by the first character of their name.</p>
+                        <div class="io-description"><p>Groups contacts alphabetically by the first character of their name.
+Filters out invalid contacts and sorts contacts within each group.</p>
 </div>
 
                             <div class="io-description">
@@ -594,7 +696,7 @@
 
                                             <td>
                                                     <ul>
-<li>The list of contacts to group.</li>
+<li>The list of contacts to group by initial letter</li>
 </ul>
 
                                             </td>
@@ -607,7 +709,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>An object with initials as keys and arrays of contacts as values.</p>
+                                <p>An object with uppercase letters as keys and arrays of contacts as values</p>
 
                             </div>
                 </td>
@@ -636,15 +738,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:121</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles an error that occurred while loading contacts.</p>
+                        <div class="io-description"><p>Handles an error that occurred while loading contacts.
+Logs the error to console for debugging purposes.</p>
 </div>
 
                             <div class="io-description">
@@ -673,7 +776,7 @@
 
                                             <td>
                                                     <ul>
-<li>The error object returned from the subscription.</li>
+<li>The error object returned from the subscription</li>
 </ul>
 
                                             </td>
@@ -714,8 +817,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -752,7 +855,7 @@ and selecting the current user&#39;s contact if present.</p>
 
                                             <td>
                                                     <ul>
-<li>The array of contact objects.</li>
+<li>The array of contact objects loaded from the service</li>
 </ul>
 
                                             </td>
@@ -791,15 +894,16 @@ and selecting the current user&#39;s contact if present.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if the given contact matches the current logged-in user.</p>
+                        <div class="io-description"><p>Checks if the given contact matches the currently logged-in user.
+Used for highlighting the current user in the contact list.</p>
 </div>
 
                             <div class="io-description">
@@ -828,7 +932,7 @@ and selecting the current user&#39;s contact if present.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact to compare with the current user.</li>
+<li>The contact to compare with the current user</li>
 </ul>
 
                                             </td>
@@ -841,7 +945,7 @@ and selecting the current user&#39;s contact if present.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>True if the contact&#39;s email matches the user&#39;s email.</p>
+                                <p>True if the contact&#39;s email matches the authenticated user&#39;s email</p>
 
                             </div>
                 </td>
@@ -868,15 +972,15 @@ and selecting the current user&#39;s contact if present.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:151</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:175</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Determines if a contact is currently selected.</p>
+                        <div class="io-description"><p>Determines if a contact is currently selected for highlighting.</p>
 </div>
 
                             <div class="io-description">
@@ -905,7 +1009,7 @@ and selecting the current user&#39;s contact if present.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact to check.</li>
+<li>The contact to check selection status for</li>
 </ul>
 
                                             </td>
@@ -918,7 +1022,7 @@ and selecting the current user&#39;s contact if present.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>True if the contact is selected.</p>
+                                <p>True if the contact is currently selected</p>
 
                             </div>
                 </td>
@@ -945,15 +1049,16 @@ and selecting the current user&#39;s contact if present.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:142</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Unsubscribes from all subscriptions to avoid memory leaks.</p>
+                        <div class="io-description"><p>Unsubscribes from all active subscriptions to prevent memory leaks.
+Called automatically when the component is destroyed.</p>
 </div>
 
                         <div class="io-description">
@@ -984,8 +1089,8 @@ and selecting the current user&#39;s contact if present.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -1025,15 +1130,16 @@ and handling errors and contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="158"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:158</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:183</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Triggers the display of the &quot;add contact&quot; form via the ContactService.</p>
+                        <div class="io-description"><p>Triggers the display of the &quot;add contact&quot; form via the ContactService.
+Opens the contact creation overlay/modal.</p>
 </div>
 
                         <div class="io-description">
@@ -1064,15 +1170,16 @@ and handling errors and contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:164</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles selection of a contact.</p>
+                        <div class="io-description"><p>Handles selection of a contact from the list.
+Updates the selection state and emits the selection event.</p>
 </div>
 
                             <div class="io-description">
@@ -1101,7 +1208,7 @@ and handling errors and contact selection.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact to select.</li>
+<li>The contact that was selected</li>
 </ul>
 
                                             </td>
@@ -1142,8 +1249,8 @@ and handling errors and contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -1151,7 +1258,7 @@ and handling errors and contact selection.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Subscribes to the contact list, groups them by initial letter,
-and selects the current user’s contact if available.</p>
+and selects the current user&#39;s contact if available.</p>
 </div>
 
                         <div class="io-description">
@@ -1188,13 +1295,13 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:116</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:73</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description">- Manages contact data and selection.</div>
+                    <div class="io-description">- Service that manages contact data and selection state</div>
                 </td>
             </tr>
 
@@ -1225,10 +1332,16 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:102</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:54</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription to contact data changes from the service.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1256,7 +1369,7 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:100</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -1293,13 +1406,13 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:95</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:44</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>The email of the currently authenticated user.</p>
+                    <div class="io-description"><p>The email address of the currently authenticated user for highlighting.</p>
 </div>
                 </td>
             </tr>
@@ -1330,13 +1443,14 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:34</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Holds the contacts grouped by the first letter of their name.</p>
+                    <div class="io-description"><p>Holds the contacts grouped by the first letter of their name.
+Each key is a letter, each value is an array of contacts starting with that letter.</p>
 </div>
                 </td>
             </tr>
@@ -1361,13 +1475,14 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:181</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:209</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sorting helper for alphabetical keys.</p>
+                    <div class="io-description"><p>Sorting helper function for alphabetical ordering of grouped contact keys.
+Used with keyvalue pipe in template for consistent alphabetical display.</p>
 </div>
                 </td>
             </tr>
@@ -1398,13 +1513,13 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:90</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>The currently selected contact (if any).</p>
+                    <div class="io-description"><p>The currently selected contact for highlighting in the list.</p>
 </div>
                 </td>
             </tr>
@@ -1436,10 +1551,16 @@ and selects the current user’s contact if available.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:103</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription to contact selection changes from the service.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1454,6 +1575,7 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ContactService, Contact } from &#x27;../../services/contact.service&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
 import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { UploadService } from &#x27;../../services/upload.service&#x27;;
 
 @Component({
   selector: &#x27;app-contact-list&#x27;,
@@ -1466,10 +1588,58 @@ import { AuthService } from &#x27;../../services/auth.service&#x27;;
 export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
-  * Initializes the component by loading contacts,
-  * grouping them by initial, identifying the current user,
-  * and handling errors and contact selection.
-  */
+   * Holds the contacts grouped by the first letter of their name.
+   * Each key is a letter, each value is an array of contacts starting with that letter.
+   */
+  groupedContacts: { [key: string]: Contact[] } &#x3D; {};
+
+  /**
+   * The currently selected contact for highlighting in the list.
+   */
+  selectedContact: Contact | null &#x3D; null;
+
+  /**
+   * The email address of the currently authenticated user for highlighting.
+   */
+  currentUserEmail: string | null &#x3D; null;
+
+  /**
+   * The display name of the currently authenticated user.
+   */
+  currentUser: string | null &#x3D; null;
+
+  /**
+   * Subscription to contact data changes from the service.
+   */
+  private contactsSubscription: Subscription &#x3D; new Subscription();
+  
+  /**
+   * Subscription to contact selection changes from the service.
+   */
+  private selectionSubscription: Subscription &#x3D; new Subscription();
+
+  /**
+   * Event emitted when a contact is selected from the list.
+   */
+  @Output() contactSelected &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Constructor injecting required services for contact management and authentication.
+   * @param contactService - Service that manages contact data and selection state
+   * @param authService - Service that provides current user authentication info  
+   * @param uploadService - Service that manages image uploads and retrieval
+   */
+  constructor(
+    public contactService: ContactService,
+    private authService: AuthService,
+    private uploadService: UploadService
+  ) { }
+
+  /**
+   * Initializes the component by loading contacts,
+   * grouping them by initial, identifying the current user,
+   * and handling errors and contact selection.
+   */
   ngOnInit(): void {
     this.subscribeToContacts();
     this.getCurrentUser();
@@ -1477,7 +1647,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Subscribes to the contact list, groups them by initial letter,
-   * and selects the current user’s contact if available.
+   * and selects the current user&#x27;s contact if available.
    */
   private subscribeToContacts(): void {
     this.contactsSubscription &#x3D; this.contactService.getContacts().subscribe({
@@ -1490,7 +1660,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * Processes the loaded contacts by grouping them
    * and selecting the current user&#x27;s contact if present.
    * 
-   * @param contacts - The array of contact objects.
+   * @param contacts - The array of contact objects loaded from the service
    */
   private handleContactsLoaded(contacts: Contact[]): void {
     this.groupedContacts &#x3D; this.groupByInitial(contacts);
@@ -1504,15 +1674,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Handles an error that occurred while loading contacts.
+   * Logs the error to console for debugging purposes.
    * 
-   * @param error - The error object returned from the subscription.
+   * @param error - The error object returned from the subscription
    */
   private handleContactsError(error: any): void {
     console.error(&#x27;Error loading contacts:&#x27;, error);
   }
 
   /**
-   * Identifying the current user to directly select this user in the contact list.
+   * Identifies the current authenticated user to directly select them in the contact list.
+   * Also subscribes to contact selection changes to maintain selection state.
    */
   getCurrentUser() {
     const user &#x3D; this.authService.getCurrentUser();
@@ -1524,45 +1696,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Holds the contacts grouped by the first letter of their name.
-   */
-  groupedContacts: { [key: string]: Contact[] } &#x3D; {};
-
-  /**
-   * The currently selected contact (if any).
-   */
-  selectedContact: Contact | null &#x3D; null;
-
-  /**
-   * The email of the currently authenticated user.
-   */
-  currentUserEmail: string | null &#x3D; null;
-
-  /**
-   * The display name of the currently authenticated user.
-   */
-  currentUser: string | null &#x3D; null;
-
-  private contactsSubscription: Subscription &#x3D; new Subscription();
-  private selectionSubscription: Subscription &#x3D; new Subscription();
-
-  /**
-   * Emits an event when a contact is selected.
-   */
-  @Output() contactSelected &#x3D; new EventEmitter&lt;void&gt;();
-
-  /**
-   * Constructor injecting required services.
-   * @param contactService - Manages contact data and selection.
-   * @param authService - Provides the currently logged-in user&#x27;s info.
-   */
-  constructor(
-    public contactService: ContactService,
-    private authService: AuthService
-  ) { }
-
-  /**
-   * Unsubscribes from all subscriptions to avoid memory leaks.
+   * Unsubscribes from all active subscriptions to prevent memory leaks.
+   * Called automatically when the component is destroyed.
    */
   ngOnDestroy(): void {
     this.contactsSubscription.unsubscribe();
@@ -1570,17 +1705,21 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Checks if the given contact matches the current logged-in user.
-   * @param contact - The contact to compare with the current user.
-   * @returns True if the contact&#x27;s email matches the user&#x27;s email.
+   * Checks if the given contact matches the currently logged-in user.
+   * Used for highlighting the current user in the contact list.
+   * 
+   * @param contact - The contact to compare with the current user
+   * @returns True if the contact&#x27;s email matches the authenticated user&#x27;s email
    */
   isCurrentUser(contact: Contact): boolean {
     return typeof contact.email &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; contact.email &#x3D;&#x3D;&#x3D; this.currentUserEmail;
   }
 
   /**
-   * Handles selection of a contact.
-   * @param contact - The contact to select.
+   * Handles selection of a contact from the list.
+   * Updates the selection state and emits the selection event.
+   * 
+   * @param contact - The contact that was selected
    */
   onContactSelect(contact: Contact): void {
     this.contactService.selectContact(contact);
@@ -1588,9 +1727,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Determines if a contact is currently selected.
-   * @param contact - The contact to check.
-   * @returns True if the contact is selected.
+   * Determines if a contact is currently selected for highlighting.
+   * 
+   * @param contact - The contact to check selection status for
+   * @returns True if the contact is currently selected
    */
   isSelected(contact: Contact): boolean {
     return this.selectedContact?.id &#x3D;&#x3D;&#x3D; contact.id;
@@ -1598,6 +1738,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Triggers the display of the &quot;add contact&quot; form via the ContactService.
+   * Opens the contact creation overlay/modal.
    */
   onAddNewContact(): void {
     this.contactService.showAddForm();
@@ -1605,8 +1746,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   /**
    * Groups contacts alphabetically by the first character of their name.
-   * @param contacts - The list of contacts to group.
-   * @returns An object with initials as keys and arrays of contacts as values.
+   * Filters out invalid contacts and sorts contacts within each group.
+   * 
+   * @param contacts - The list of contacts to group by initial letter
+   * @returns An object with uppercase letters as keys and arrays of contacts as values
    */
   groupByInitial(contacts: Contact[]): { [key: string]: Contact[] } {
     const validContacts &#x3D; contacts.filter(contact &#x3D;&gt; contact &amp;&amp; contact.name);
@@ -1620,20 +1763,36 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Sorting helper for alphabetical keys.
+   * Sorting helper function for alphabetical ordering of grouped contact keys.
+   * Used with keyvalue pipe in template for consistent alphabetical display.
    */
   keyAsc &#x3D; (a: any, b: any) &#x3D;&gt; a.key.localeCompare(b.key);
 
   /**
-   * Returns the initials of the given name using ContactService.
-   * @param name - The full name of the contact.
-   * @returns Initials string.
+   * Returns the initials of the given name using ContactService utility.
+   * Falls back to service method for consistent initial generation logic.
+   * 
+   * @param name - The full name of the contact
+   * @returns String containing the person&#x27;s initials (e.g., &quot;JD&quot; for &quot;John Doe&quot;)
    */
   getInitials(name: string | undefined): string {
     return this.contactService.getInitials(name);
   }
-}
-</code></pre>
+
+  /**
+   * Gets the contact&#x27;s profile image from localStorage using their imageKey.
+   * Returns null if no image is associated with the contact.
+   * 
+   * @param contact - The contact object containing the imageKey
+   * @returns The base64 encoded image string or null if no image exists
+   */
+  getContactImage(contact: Contact): string | null {
+    if (contact.imageKey) {
+      return this.uploadService.getContactImage(contact.imageKey);
+    }
+    return null;
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -1654,7 +1813,15 @@ export class ContactListComponent implements OnInit, OnDestroy {
         class&#x3D;&quot;avatar&quot;
         [style.background-color]&#x3D;&quot;contactService.getContactColor(contact.name)&quot;
       &gt;
-        {{ contactService.getInitials(contact?.name) }}
+        &lt;img
+          *ngIf&#x3D;&quot;getContactImage(contact)&quot;
+          [src]&#x3D;&quot;getContactImage(contact)&quot;
+          [alt]&#x3D;&quot;contact.name&quot;
+          class&#x3D;&quot;contact-image&quot;
+        /&gt;
+        &lt;span *ngIf&#x3D;&quot;!getContactImage(contact)&quot; class&#x3D;&quot;contact-initials&quot;&gt;
+          {{ contactService.getInitials(contact?.name) }}
+        &lt;/span&gt;
       &lt;/div&gt;
       &lt;p *ngIf&#x3D;&quot;contact?.email &#x3D;&#x3D;&#x3D; currentUserEmail&quot; class&#x3D;&quot;active-user&quot;&gt;Me&lt;/p&gt;
       &lt;div class&#x3D;&quot;info&quot;&gt;
@@ -1671,8 +1838,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   &lt;button class&#x3D;&quot;fab&quot; (click)&#x3D;&quot;onAddNewContact()&quot;&gt;
     &lt;img src&#x3D;&quot;assets/img/svg/add-person.svg&quot; alt&#x3D;&quot;Add Contact&quot; /&gt;
   &lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -1690,7 +1856,18 @@ export class ContactListComponent implements OnInit, OnDestroy {
   margin-top: -9px;
   padding-bottom: 80px;
   background-color: var(--background-light);
+  scrollbar-width: thin;
   scrollbar-color: var(--background-default-dark) transparent;
+  &amp;::-webkit-scrollbar {
+    width: 4px;
+  }
+  &amp;::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &amp;::-webkit-scrollbar-thumb {
+    background-color: var(--background-default-dark);
+    border-radius: 4px;
+  }
 
   .add-button {
     @include btn;
@@ -1720,7 +1897,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     margin-top: clamp(8px, 2vw, 16px);
     font-family: &quot;Inter&quot;, sans-serif;
     font-weight: 400;
-    font-size: clamp(14px, 3vw, 20px);
+    font-size: clamp(16px, 3vw, 20px);
     color: #000000;
     padding: clamp(8px, 1.5vw, 17px) clamp(12px, 3vw, 36px);
     gap: 8px;
@@ -1758,7 +1935,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     }
 
     .active-user {
-      @include inter400-fs12;
+      @include inter400-fs16;
       position: absolute;
       top: 8px;
       right: 8px;
@@ -1770,8 +1947,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
     }
 
     .avatar {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 45px;
       background-color: #ccc;
       display: flex;
@@ -1780,20 +1957,36 @@ export class ContactListComponent implements OnInit, OnDestroy {
       margin-right: 10px;
       font-family: &quot;Inter&quot;, sans-serif;
       font-weight: 400;
-      font-size: 12px;
+      font-size: 16px;
       color: #ffffff;
       border: 2px solid transparent;
       transition: border 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .contact-initials {
+      font-family: &quot;Inter&quot;, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #ffffff;
     }
 
     .info {
       flex: 1;
       min-width: 0;
-      
+
       .name {
         font-family: &quot;Inter&quot;, sans-serif;
         font-weight: 400;
-        font-size: clamp(14px, 3vw, 20px);
+        font-size: clamp(16px, 3vw, 20px);
         color: #000000;
         white-space: nowrap;
         overflow: hidden;
@@ -1804,7 +1997,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
       .email {
         font-family: &quot;Inter&quot;, sans-serif;
         font-weight: 400;
-        font-size: clamp(12px, 2.5vw, 16px);
+        font-size: clamp(16px, 2.5vw, 16px);
         color: #007cee;
         white-space: nowrap;
         overflow: hidden;
@@ -1814,7 +2007,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 }
 
-@media(max-width: 1000px) {
+@media (max-width: 1000px) {
   .contact-list {
     height: calc(100dvh - 190px);
   }
@@ -1825,42 +2018,32 @@ export class ContactListComponent implements OnInit, OnDestroy {
     width: 100%;
     max-width: none;
     margin: 0;
-    &amp;::-webkit-scrollbar {
-      width: 4px;
-    }
-    &amp;::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    &amp;::-webkit-scrollbar-thumb {
-      background-color: --background-default-dark;
-      border-radius: 4px;
-    }
-    
+
     .add-button {
       display: none;
     }
-    
+
     h4 {
       max-width: none;
       width: 100%;
     }
-    
+
     .contact-entry {
       width: 100%;
       max-width: none;
     }
   }
-  
+
   .fab-container {
     display: block !important;
     bottom: 100px !important;
-    right: 20px !important;
+    right: 24px !important;
   }
-  
+
   .fab {
     width: 56px;
     height: 56px;
-    
+
     img {
       width: 30px;
       height: 21px;
@@ -1877,8 +2060,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
 }
 
 .fab {
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   border-radius: 46px;
   background-color: #2a3647;
   border: none;
@@ -1890,7 +2073,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   transition: all 0.3s ease;
 
   &amp;:hover {
-    background-color: #29ABE2;
+    background-color: #29abe2;
     border: none;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     transform: scale(1.1);
@@ -1905,8 +2088,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     height: 21px;
     filter: brightness(0) invert(1);
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="tree">
@@ -1934,8 +2116,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="contact-list">  <button class="add-button" (click)="onAddNewContact()">    Add new contact  </button>  <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">    <h4>{{ group.key }}</h4>    <div      *ngFor="let contact of group.value"      class="contact-entry"      [class.selected]="isSelected(contact)"      (click)="onContactSelect(contact)"    >      <div        class="avatar"        [style.background-color]="contactService.getContactColor(contact.name)"      >        {{ contactService.getInitials(contact?.name) }}      </div>      <p *ngIf="contact?.email === currentUserEmail" class="active-user">Me</p>      <div class="info">        <div class="name">          {{ contact?.name || "Unbekannt" }}        </div>        <div class="email">{{ contact?.email || "Keine E-Mail" }}</div>      </div>    </div>  </div></div><div class="fab-container">  <button class="fab" (click)="onAddNewContact()">    <img src="assets/img/svg/add-person.svg" alt="Add Contact" />  </button></div></div>'
-    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'}];
+        var COMPONENT_TEMPLATE = '<div><div class="contact-list">  <button class="add-button" (click)="onAddNewContact()">    Add new contact  </button>  <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">    <h4>{{ group.key }}</h4>    <div      *ngFor="let contact of group.value"      class="contact-entry"      [class.selected]="isSelected(contact)"      (click)="onContactSelect(contact)"    >      <div        class="avatar"        [style.background-color]="contactService.getContactColor(contact.name)"      >        <img          *ngIf="getContactImage(contact)"          [src]="getContactImage(contact)"          [alt]="contact.name"          class="contact-image"        />        <span *ngIf="!getContactImage(contact)" class="contact-initials">          {{ contactService.getInitials(contact?.name) }}        </span>      </div>      <p *ngIf="contact?.email === currentUserEmail" class="active-user">Me</p>      <div class="info">        <div class="name">          {{ contact?.name || "Unbekannt" }}        </div>        <div class="email">{{ contact?.email || "Keine E-Mail" }}</div>      </div>    </div>  </div></div><div class="fab-container">  <button class="fab" (click)="onAddNewContact()">    <img src="assets/img/svg/add-person.svg" alt="Add Contact" />  </button></div></div>'
+    var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactListComponent'};
 </script>

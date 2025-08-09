@@ -119,6 +119,20 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service for validating task form data and managing validation errors.
+Provides comprehensive validation logic for the AddTask component.
+Handles validation of required fields and provides helper methods for date validation.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Inject in component
+constructor(private formValidator: FormValidatorService) {}</code></pre></div><p>// Validate form
+if (this.formValidator.hasFormErrors(formData, categoryManager)) {
+  this.validationErrors = this.formValidator.validateForm(formData, categoryManager);
+}</p>
+
+            </p>
 
 
 
@@ -168,6 +182,30 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/add-task/form-validator.service.ts:44</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of FormValidatorService.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -194,21 +232,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:124</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Returns today&#39;s date in ISO format for date input validation.</p>
+                        <div class="io-description"><p>Returns today&#39;s date in ISO format for date input validation.
+Provides the minimum date that can be selected for task due dates.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Today&#39;s date in ISO format (YYYY-MM-DD)</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -233,15 +276,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if form has any validation errors.</p>
+                        <div class="io-description"><p>Checks if form has any validation errors.
+Performs validation and updates category manager error state.</p>
 </div>
 
                             <div class="io-description">
@@ -253,6 +297,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -267,6 +312,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form data object to validate</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>categoryManager</td>
@@ -279,6 +330,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager for category validation and error state</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -288,7 +345,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if any validation errors exist, false otherwise</p>
+
                             </div>
                 </td>
             </tr>
@@ -316,14 +374,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validates the task category selection.
+Checks if a category has been selected through the category manager.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -334,6 +395,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -348,6 +410,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The category manager to check for selection</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -357,7 +425,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if no category is selected, false if category is selected</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,14 +454,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:114</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validates the due date field.
+Checks if a due date has been provided.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -403,6 +475,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -417,6 +490,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The due date string to validate</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -426,7 +505,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if due date is empty, false if provided</p>
+
                             </div>
                 </td>
             </tr>
@@ -452,15 +532,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Validates all form fields and returns validation errors.</p>
+                        <div class="io-description"><p>Validates all form fields and returns validation errors.
+Performs comprehensive validation of title and due date fields.</p>
 </div>
 
                             <div class="io-description">
@@ -472,6 +553,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -486,6 +568,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form data object to validate</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>categoryManager</td>
@@ -498,6 +586,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager for category validation</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -507,7 +601,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Object containing validation error flags</p>
+
                             </div>
                 </td>
             </tr>
@@ -535,14 +630,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/add-task/form-validator.service.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validates the task title field.
+Checks if title is provided and not just whitespace.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -553,6 +651,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -567,6 +666,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The title string to validate</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -576,7 +681,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if title is invalid (empty or whitespace), false if valid</p>
+
                             </div>
                 </td>
             </tr>
@@ -591,17 +697,42 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { CategoryManager } from &#x27;./category-manager&#x27;;
 
+/**
+ * Interface representing form data for task creation/editing.
+ */
 export interface FormData {
+  /** Task title */
   title: string;
+  /** Task description */
   description: string;
+  /** Due date in string format */
   dueDate: string;
 }
 
+/**
+ * Interface representing validation error states.
+ */
 export interface ValidationErrors {
+  /** Whether to show title validation error */
   showTitleError: boolean;
+  /** Whether to show date validation error */
   showDateError: boolean;
 }
 
+/**
+ * Service for validating task form data and managing validation errors.
+ * Provides comprehensive validation logic for the AddTask component.
+ * Handles validation of required fields and provides helper methods for date validation.
+ * 
+ * @example
+ * // Inject in component
+ * constructor(private formValidator: FormValidatorService) {}
+ * 
+ * // Validate form
+ * if (this.formValidator.hasFormErrors(formData, categoryManager)) {
+ *   this.validationErrors &#x3D; this.formValidator.validateForm(formData, categoryManager);
+ * }
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -609,7 +740,17 @@ export interface ValidationErrors {
 export class FormValidatorService {
   
   /**
+   * Creates an instance of FormValidatorService.
+   */
+  constructor() { }
+
+  /**
    * Validates all form fields and returns validation errors.
+   * Performs comprehensive validation of title and due date fields.
+   * 
+   * @param formData - The form data object to validate
+   * @param categoryManager - Manager for category validation
+   * @returns Object containing validation error flags
    */
   validateForm(formData: FormData, categoryManager: CategoryManager): ValidationErrors {
     return {
@@ -620,37 +761,67 @@ export class FormValidatorService {
 
   /**
    * Checks if form has any validation errors.
+   * Performs validation and updates category manager error state.
+   * 
+   * @param formData - The form data object to validate
+   * @param categoryManager - Manager for category validation and error state
+   * @returns True if any validation errors exist, false otherwise
    */
   hasFormErrors(formData: FormData, categoryManager: CategoryManager): boolean {
     const titleError &#x3D; this.validateTitle(formData.title);
     const categoryError &#x3D; this.validateCategory(categoryManager);
     const dateError &#x3D; this.validateDueDate(formData.dueDate);
-    
     categoryManager.showCategoryError &#x3D; categoryError;
     return titleError || categoryError || dateError;
   }
 
+  /**
+   * Validates the task title field.
+   * Checks if title is provided and not just whitespace.
+   * 
+   * @param title - The title string to validate
+   * @returns True if title is invalid (empty or whitespace), false if valid
+   * @private
+   */
   private validateTitle(title: string): boolean {
     return !title.trim();
   }
 
+  /**
+   * Validates the task category selection.
+   * Checks if a category has been selected through the category manager.
+   * 
+   * @param categoryManager - The category manager to check for selection
+   * @returns True if no category is selected, false if category is selected
+   * @private
+   */
   private validateCategory(categoryManager: CategoryManager): boolean {
     return !categoryManager.hasSelectedCategory();
   }
 
+  /**
+   * Validates the due date field.
+   * Checks if a due date has been provided.
+   * 
+   * @param dueDate - The due date string to validate
+   * @returns True if due date is empty, false if provided
+   * @private
+   */
   private validateDueDate(dueDate: string): boolean {
     return !dueDate;
   }
 
   /**
    * Returns today&#x27;s date in ISO format for date input validation.
+   * Provides the minimum date that can be selected for task due dates.
+   * 
+   * @returns Today&#x27;s date in ISO format (YYYY-MM-DD)
    */
   getTodayDate(): string {
     const today &#x3D; new Date();
     return today.toISOString().split(&#x27;T&#x27;)[0];
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

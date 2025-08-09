@@ -119,6 +119,20 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service for managing task data operations and form population.
+Handles conversion between form data and task objects, manages date formatting,
+and coordinates with various manager services for complete task data handling.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Inject in component
+constructor(private taskDataService: TaskDataService) {}</code></pre></div><p>// Build task from form
+const task = this.taskDataService.buildTask(formData, status, managers...);</p>
+<p>// Populate form from task
+await this.taskDataService.populateFromTask(task, formData, managers...);</p>
+
+            </p>
 
 
 
@@ -170,6 +184,30 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/add-task/task-data.service.ts:42</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of TaskDataService.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -196,15 +234,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:91</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Builds a task object from current form and manager states.</p>
+                        <div class="io-description"><p>Builds a task object from current form and manager states.
+Creates a complete Task object with all necessary properties.</p>
 </div>
 
                             <div class="io-description">
@@ -216,6 +255,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -230,6 +270,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The current form data</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>status</td>
@@ -242,6 +288,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The task status</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>priorityManager</td>
@@ -254,6 +306,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager containing priority selection</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>contactManager</td>
@@ -266,6 +324,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager containing assigned contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>categoryManager</td>
@@ -278,6 +342,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager containing category selection</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>id</td>
@@ -290,6 +360,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Optional existing task ID for updates</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -299,7 +375,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Complete Task object ready for storage</p>
+
                             </div>
                 </td>
             </tr>
@@ -327,14 +404,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:166</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Gets unique contact IDs from the contact manager.
+Filters out undefined IDs and removes duplicates.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -345,6 +425,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -359,6 +440,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager containing selected contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -368,7 +455,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Array of unique contact ID strings</p>
+
                             </div>
                 </td>
             </tr>
@@ -396,8 +484,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -405,7 +493,7 @@
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Populates form and managers with data from an existing task.
-Returns the original task status.</p>
+Converts task data to form-compatible format and updates all managers.</p>
 </div>
 
                             <div class="io-description">
@@ -417,6 +505,7 @@ Returns the original task status.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -431,6 +520,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The task object to populate from</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>formData</td>
@@ -443,6 +538,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form data object to populate</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>priorityManager</td>
@@ -455,6 +556,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager for priority settings</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>contactManager</td>
@@ -467,6 +574,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager for assigned contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>subtaskManager</td>
@@ -479,6 +592,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager for subtasks</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>contacts</td>
@@ -491,6 +610,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Array of all available contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -500,7 +625,8 @@ Returns the original task status.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Promise resolving to the original task status</p>
+
                             </div>
                 </td>
             </tr>
@@ -528,14 +654,17 @@ Returns the original task status.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:88</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:150</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sets assigned contacts in the contact manager from task data.
+Filters and matches contact IDs with available contacts.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -546,6 +675,7 @@ Returns the original task status.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -560,6 +690,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Array of contact IDs assigned to task</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>contactManager</td>
@@ -572,6 +708,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Manager to update with selected contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>contacts</td>
@@ -584,6 +726,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Array of all available contacts</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -621,14 +769,17 @@ Returns the original task status.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:115</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sets basic form data fields from task object.
+Populates title and description from task data.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -639,6 +790,7 @@ Returns the original task status.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -653,6 +805,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The task object containing basic data</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>formData</td>
@@ -665,6 +823,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form data object to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -702,14 +866,17 @@ Returns the original task status.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/add-task/task-data.service.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/add-task/task-data.service.ts:128</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sets the due date in form data from various date formats.
+Handles Firestore Timestamp, Date objects, and string dates.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -720,6 +887,7 @@ Returns the original task status.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -734,6 +902,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The date in various possible formats</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>formData</td>
@@ -746,6 +920,12 @@ Returns the original task status.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form data object to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -775,12 +955,35 @@ import { CategoryManager } from &#x27;./category-manager&#x27;;
 import { PriorityManager } from &#x27;./priority-manager&#x27;;
 import { SubtaskManager } from &#x27;./subtask-manager&#x27;;
 
+/**
+ * Extended interface for form data including optional images array.
+ */
 export interface FormData {
+  /** Task title */
   title: string;
+  /** Task description */
   description: string;
+  /** Due date in string format */
   dueDate: string;
+  /** Optional array of image keys */
+  images?: string[];
 }
 
+/**
+ * Service for managing task data operations and form population.
+ * Handles conversion between form data and task objects, manages date formatting,
+ * and coordinates with various manager services for complete task data handling.
+ *
+ * @example
+ * // Inject in component
+ * constructor(private taskDataService: TaskDataService) {}
+ *
+ * // Build task from form
+ * const task &#x3D; this.taskDataService.buildTask(formData, status, managers...);
+ *
+ * // Populate form from task
+ * await this.taskDataService.populateFromTask(task, formData, managers...);
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -788,8 +991,21 @@ export interface FormData {
 export class TaskDataService {
 
   /**
+   * Creates an instance of TaskDataService.
+   */
+  constructor() { }
+
+  /**
    * Populates form and managers with data from an existing task.
-   * Returns the original task status.
+   * Converts task data to form-compatible format and updates all managers.
+   *
+   * @param task - The task object to populate from
+   * @param formData - The form data object to populate
+   * @param priorityManager - Manager for priority settings
+   * @param contactManager - Manager for assigned contacts
+   * @param subtaskManager - Manager for subtasks
+   * @param contacts - Array of all available contacts
+   * @returns Promise resolving to the original task status
    */
   async populateFromTask(
     task: any,
@@ -811,15 +1027,17 @@ export class TaskDataService {
 
   /**
    * Builds a task object from current form and manager states.
+   * Creates a complete Task object with all necessary properties.
+   *
+   * @param formData - The current form data
+   * @param status - The task status
+   * @param priorityManager - Manager containing priority selection
+   * @param contactManager - Manager containing assigned contacts
+   * @param categoryManager - Manager containing category selection
+   * @param id - Optional existing task ID for updates
+   * @returns Complete Task object ready for storage
    */
-  buildTask(
-    formData: FormData,
-    status: string,
-    priorityManager: PriorityManager,
-    contactManager: ContactManager,
-    categoryManager: CategoryManager,
-    id?: string
-  ): Task {
+  buildTask(formData: FormData, status: string, priorityManager: PriorityManager, contactManager: ContactManager, categoryManager: CategoryManager, id?: string): Task {
     const uniqueContactIds &#x3D; this.getUniqueAssignedContactIds(contactManager);
     const task: any &#x3D; {
       title: formData.title.trim(),
@@ -828,19 +1046,34 @@ export class TaskDataService {
       priority: priorityManager.selectedPriority as &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;urgent&#x27;,
       status,
       assignedTo: uniqueContactIds,
-      category: categoryManager.getSelectedCategory() as &#x27;technical&#x27; | &#x27;user story&#x27;
+      category: categoryManager.getSelectedCategory() as &#x27;technical&#x27; | &#x27;user story&#x27;,
+      imageKey: formData.images || [],
     };
-    if (id) {
-      task.id &#x3D; id;
-    }
+    if (id) {task.id &#x3D; id}
     return task as Task;
   }
 
+  /**
+   * Sets basic form data fields from task object.
+   * Populates title and description from task data.
+   *
+   * @param task - The task object containing basic data
+   * @param formData - The form data object to update
+   * @private
+   */
   private setBasicFormData(task: any, formData: FormData): void {
     formData.title &#x3D; task.title || &#x27;&#x27;;
     formData.description &#x3D; task.description || &#x27;&#x27;;
   }
 
+  /**
+   * Sets the due date in form data from various date formats.
+   * Handles Firestore Timestamp, Date objects, and string dates.
+   *
+   * @param date - The date in various possible formats
+   * @param formData - The form data object to update
+   * @private
+   */
   private setDueDate(date: any, formData: FormData): void {
     if (!date) return;
     let dateValue: Date;
@@ -854,6 +1087,15 @@ export class TaskDataService {
     formData.dueDate &#x3D; dateValue.toISOString().split(&#x27;T&#x27;)[0];
   }
 
+  /**
+   * Sets assigned contacts in the contact manager from task data.
+   * Filters and matches contact IDs with available contacts.
+   *
+   * @param assignedToIds - Array of contact IDs assigned to task
+   * @param contactManager - Manager to update with selected contacts
+   * @param contacts - Array of all available contacts
+   * @private
+   */
   private setAssignedContacts(assignedToIds: string[], contactManager: ContactManager, contacts: Contact[]): void {
     if (!assignedToIds || assignedToIds.length &#x3D;&#x3D;&#x3D; 0) return;
     const selectedContacts &#x3D; contacts
@@ -861,13 +1103,20 @@ export class TaskDataService {
       .filter(contact &#x3D;&gt; assignedToIds.includes(contact.id as string));
     contactManager.setSelectedContacts(selectedContacts);
   }
-  
+
+  /**
+   * Gets unique contact IDs from the contact manager.
+   * Filters out undefined IDs and removes duplicates.
+   *
+   * @param contactManager - Manager containing selected contacts
+   * @returns Array of unique contact ID strings
+   * @private
+   */
   private getUniqueAssignedContactIds(contactManager: ContactManager): string[] {
     const contacts &#x3D; contactManager.getSelectedContacts();
     return [...new Set(contacts.map(c &#x3D;&gt; c.id).filter(id &#x3D;&gt; id !&#x3D;&#x3D; undefined))] as string[];
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>
