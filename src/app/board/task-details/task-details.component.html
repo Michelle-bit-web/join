@@ -142,7 +142,7 @@
           <div class="image-overlay">
             <button
               class="btn-download"
-              (click)="downloadImage($event, i, image.imageKey)"
+              (click)="downloadImage($event, i, image.base64, image.filename)"
             >
               <svg
                 width="24"

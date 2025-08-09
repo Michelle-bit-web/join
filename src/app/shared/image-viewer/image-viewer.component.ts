@@ -162,7 +162,7 @@ export class ImageViewerComponent {
   downloadImage() {
     const link = document.createElement('a');
     link.href = this.currentImage;
-    link.download = `image_${this.currentIndex + 1}.jpg`;
+    link.download = `join_image_${this.getImageName() || this.currentImage + 1}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

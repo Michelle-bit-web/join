@@ -268,12 +268,12 @@ export class TaskDetailsComponent {
    * @param currentIndex The index of the current image.
    * @param currentImage The URL of the current image.
    */
-  downloadImage(event: Event, currentIndex: number, currentImage: string) {
+  downloadImage(event: Event, currentIndex: number, currentImage: string, filename?: string) {
     event.stopPropagation();
     event.preventDefault();
     const link = document.createElement('a');
     link.href = currentImage;
-    link.download = `image_${currentIndex + 1}.jpg`;
+    link.download = `join_image_${filename || currentIndex + 1}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
