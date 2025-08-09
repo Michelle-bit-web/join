@@ -293,6 +293,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       this.menuOpen = false;
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection();
+      if(this.contact.imageKey && this.contact.imageKey.length > 0) {
+        this.uploadService.deleteImage(this.contact.imageKey);
+      }
     }
   }
 

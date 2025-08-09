@@ -170,6 +170,9 @@ export class TaskDetailsComponent {
     if (this.task.id) {
       this.taskService.deleteTask(this.task.id);
       this.onClose();
+      if(this.task.imageKey && this.task.imageKey.length > 0) {
+        this.uploadService.deleteImages(this.task.imageKey);
+      }
     }
   }
 

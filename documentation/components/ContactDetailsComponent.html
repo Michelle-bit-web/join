@@ -693,8 +693,8 @@ Closes mobile menu when switching from mobile to desktop view.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="326"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:326</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="329"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:329</a></div>
                         </td>
                     </tr>
 
@@ -733,8 +733,8 @@ Sets visibility flag to trigger exit animations.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="317"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:317</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="320"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:320</a></div>
                         </td>
                     </tr>
 
@@ -811,8 +811,8 @@ Uses contact service to ensure consistent colors across components.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="345"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:345</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="348"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:348</a></div>
                         </td>
                     </tr>
 
@@ -889,8 +889,8 @@ Returns null if no image is associated with the contact.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:306</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="309"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:309</a></div>
                         </td>
                     </tr>
 
@@ -1126,8 +1126,8 @@ Subscribes to both selected contact and full contact list for data consistency.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="334"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:334</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="337"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:337</a></div>
                         </td>
                     </tr>
 
@@ -2337,6 +2337,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
       this.menuOpen &#x3D; false;
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection();
+      if(this.contact.imageKey &amp;&amp; this.contact.imageKey.length &gt; 0) {
+        this.uploadService.deleteImage(this.contact.imageKey);
+      }
     }
   }
 
