@@ -14,7 +14,7 @@ $small-mobile-breakpoint: 480px;
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: 90dvh;
+  height: 82dvh;
   overflow: hidden;
   @media (max-width: 1000px) {
     height: calc(100dvh - 180px);
