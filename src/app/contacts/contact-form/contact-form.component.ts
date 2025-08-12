@@ -271,6 +271,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.formSubmitted = true;
     const contact = this.formService.buildContactFromForm(this);
     await this.formService.processSubmission(this, contact);
+    
+    // Emit the contact with the proper ID (either updated contactToEdit or the original contact)
+    this.addedContact.emit(this.contactToEdit || contact);
+    
     this.finalizeSubmission();
     this.imageBase64 = null;
   }

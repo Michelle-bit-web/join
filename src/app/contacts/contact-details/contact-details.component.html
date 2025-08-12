@@ -27,11 +27,11 @@
             <img [src]="contact.image.base64" [alt]="contact.name" class="contact-image" />
           </ng-container>
 
-          <ng-template *ngIf="!contact.image">
+          <ng-container *ngIf="!contact.image">
             <p class="contact-initials">
               {{ getInitials(contact.name) }}
             </p>
-          </ng-template>
+          </ng-container>
         </div>
         <div class="user-name">
           <p>{{ contact.name || "Unbekannt" }}</p>

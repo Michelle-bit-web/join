@@ -246,12 +246,10 @@ export class ContactFormService {
      * @returns {Promise<void>} Promise that resolves when contact is added
      */
     private async addNewContact(component: any, contact: Contact): Promise<void> {
-        if (contact.id) {
-            if (contact.image) {
-               await this.contactService.addContact(contact, [component.imgData]);
-            } else {
-               await this.contactService.addContact(contact);
-            }
+        if (contact.image) {
+            await this.contactService.addContact(contact, [component.imgData]);
+        } else {
+            await this.contactService.addContact(contact);
         }
     }
 
