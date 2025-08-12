@@ -4,7 +4,7 @@ import { Task, TaskService } from '../services/task.service';
 import { UploadService } from '../services/upload.service';
 import { FormValidatorService } from './form-validator.service';
 import { TaskDataService } from './task-data.service';
-import { addDoc, getDocs, deleteDoc } from '@angular/fire/firestore';
+import { addDoc, getDocs, deleteDoc, Firestore } from '@angular/fire/firestore';
 import { collection } from 'firebase/firestore';
 
 /**
@@ -28,7 +28,8 @@ export class AddTaskService {
     private uploadService: UploadService,
     private formValidator: FormValidatorService,
     private taskDataService: TaskDataService,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore
   ) { }
 
   /**
@@ -255,7 +256,7 @@ export class AddTaskService {
    */
   private async updateTaskImages(taskId: string, component: any): Promise<void> {
     try {
-      let imagesRef = collection(component.firestore, `tasks/${taskId}/images`);
+      let imagesRef = collection(this.firestore, `tasks/${taskId}/images`);
       this.deletePreviousImage(imagesRef);
       if (component.uploadsComponent && component.uploadsComponent.images) {
         for (const img of component.uploadsComponent.images) {
