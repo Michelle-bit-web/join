@@ -207,17 +207,17 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Loads all images for the currently editing task.
    */
   async loadImages() {
-    if (this.editingTask && this.editingTask?.images) {
-      // this.taskImages = [...this.editingTask.images];
-      // this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
-      if (this.editingTask && this.editingTask.id && this.editingTask.images) {
-        this.subscriptions = this.uploadService.getImages('tasks', this.editingTask.id).subscribe(images => {
-          this.existingImages = images;
-          this.uploadedImages = [...images];
-        });
-      }
-    };
-    this.subscriptions?.unsubscribe();
+    if (this.editingTask?.id) {
+      this.subscriptions?.unsubscribe();
+      this.subscriptions = this.uploadService.getImages('tasks', this.editingTask.id).subscribe(images => {
+        this.existingImages = images;
+        if (this.uploadsComponent) {
+          // Set preloaded images in the uploads component
+          this.uploadsComponent.preloadedImages = [...images];
+          this.uploadsComponent.images = [...images];
+        }
+      });
+    }
   }
 
   /**
@@ -393,13 +393,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * @param contact - The contact object containing the imageKey
    * @returns Base64 encoded image string or null if no image exists
    */
-  getContactImage(contact: Contact): Observable<string | null> {
-    if (contact.id && contact.image) {
-      return this.uploadService.getImages('contacts', contact.id as string).pipe(
-        map(images => images.length > 0 ? images[0].base64 : null)
-      );
-    } else {
-      return new Observable(observer => observer.next(null));
-    }
-  };
+  // getContactImage(contact: Contact): Observable<string | null> {
+  //   if (contact.id && contact.image) {
+  //     return this.uploadService.getImages('contacts', contact.id as string).pipe(
+  //       map(images => images.length > 0 ? images[0].base64 : null)
+  //     );
+  //   } else {
+  //     return new Observable(observer => observer.next(null));
+  //   }
+  // };
 }

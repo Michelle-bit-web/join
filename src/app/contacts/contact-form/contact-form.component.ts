@@ -261,6 +261,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.formService.handleFormClose(this);
     this.contactService.hideForm();
     this.closeOverlay.emit('closed');
+    this.imageBase64 = null;
   }
 
   /**
@@ -274,6 +275,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     const contact = this.formService.buildContactFromForm(this);
     await this.formService.processSubmission(this, contact);
     this.finalizeSubmission();
+    this.imageBase64 = null;
   }
 
   /**
@@ -320,6 +322,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
 
   private emitImagesChanged() {
     // If you want to notify parent about image changes
-    // this.addedContact.emit(this.contactToEdit);
+    this.addedContact.emit(this.contactToEdit);
   }
 }

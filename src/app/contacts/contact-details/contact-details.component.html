@@ -27,9 +27,9 @@
             <img [src]="contact.image.base64" [alt]="contact.name" class="contact-image" />
           </ng-container>
 
-          <ng-template *ngIf="!contact.image && contact.id">
+          <ng-template >
             <p class="contact-initials">
-              {{ getInitials(contact.name) }}
+              {{ contactService.getInitials(contact.name) }}
             </p>
           </ng-template>
         </div>

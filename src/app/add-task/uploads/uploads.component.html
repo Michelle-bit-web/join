@@ -118,7 +118,7 @@
       </div> -->
       <div
         class="image-item"
-        *ngFor="let img of images; let i = index"
+        *ngFor="let img of selectedFiles; let i = index"
         (click)="openImageViewer(i)"
       >
         <img [src]="img.base64" [alt]="img.fileName" class="preview-image" />

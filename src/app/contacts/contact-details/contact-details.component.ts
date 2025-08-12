@@ -112,7 +112,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    * @param uploadService - Service for retrieving contact images
    */
   constructor(
-    private contactService: ContactService,
+   public contactService: ContactService,
     private elementRef: ElementRef,
     private uploadService: UploadService
   ) { }
@@ -300,16 +300,16 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Generates initials from a contact's name using the contact service.
-   * Provides consistent initial generation across the application.
-   *
-   * @param name - The contact's full name
-   * @returns String containing the person's initials
-   */
-  getInitials(name?: string): string {
-    return this.contactService.getInitials(name);
-  }
+  // /**
+  //  * Generates initials from a contact's name using the contact service.
+  //  * Provides consistent initial generation across the application.
+  //  *
+  //  * @param name - The contact's full name
+  //  * @returns String containing the person's initials
+  //  */
+  // getInitials(name?: string): string {
+  //   return this.contactService.getInitials(name);
+  // }
 
   /**
    * Gets the color associated with a contact's name for consistent theming.

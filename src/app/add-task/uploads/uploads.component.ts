@@ -25,7 +25,9 @@ export class UploadsComponent implements OnInit {
 
   /** Array of uploaded image objects */
   uploadedImages: UploadedImage[] = [];
-  images: UploadedImage[] = []; //NEU
+  
+  /** Array of images for display (combines uploaded and existing) */
+  images: UploadedImage[] = [];
 
   /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
@@ -101,6 +103,7 @@ export class UploadsComponent implements OnInit {
     if (!input.files) return;
     const files = Array.from(input.files);
     await this.processFiles(files);
+    console.log('Das ist das Bild', input.files);
   }
 
   /**
@@ -182,7 +185,7 @@ export class UploadsComponent implements OnInit {
         base64: compressedBase64
       };
       this.images.push(this.imgData!);
-      // this.uploadedUrls.push(compressedBase64);
+      this.uploadedImages.push(this.imgData!);
       this.emitImagesChanged();
     } catch {
       this.errorMessages.push(`Error processing file ${file.name}`);
@@ -265,26 +268,32 @@ export class UploadsComponent implements OnInit {
   }
 
   /**
-   * Removes an image from the uploaded or preloaded arrays.
+   * Removes an image from the arrays.
    * @param index - Index of image to remove
-   * @param source - Source array ('uploaded' or 'preloaded')
    */
   removeImage(index: number) {
-    // if (source === 'uploaded') {
-    //   this.uploadedImages.splice(index, 1);
-    // } else if (source === 'preloaded') {
-    //   this.preloadedImages.splice(index, 1);
-    // }
-    this.images.splice(index, 1);
-    this.emitImagesChanged();
+    if (index >= 0 && index < this.images.length) {
+      const removedImage = this.images[index];
+      this.images.splice(index, 1);
+      
+      // Also remove from uploadedImages if it exists there
+      const uploadedIndex = this.uploadedImages.findIndex(img => 
+        img.fileName === removedImage.fileName && img.base64 === removedImage.base64
+      );
+      if (uploadedIndex >= 0) {
+        this.uploadedImages.splice(uploadedIndex, 1);
+      }
+      
+      this.emitImagesChanged();
+    }
   }
 
   /**
-   * Removes all uploaded and preloaded images.
+   * Removes all uploaded images.
    */
   removeAllImages() {
     this.uploadedImages = [];
-    this.preloadedImages = [];
+    this.images = [...this.preloadedImages]; // Keep preloaded images
     this.emitImagesChanged();
   }
 
@@ -311,15 +320,10 @@ export class UploadsComponent implements OnInit {
 
   /**
    * Handles image deletion from the image viewer.
-   * @param event - Event containing index and imageKey for deletion
+   * @param event - Event containing index and imageId for deletion
    */
   onDeleteImage(event: { index: number, imageId?: string }) {
-    const image = this.images[event.index];
-    if (image?.id) {
-      // this.uploadService.deleteImage('tasks', /* parentId */, image.id);
-      this.images.splice(event.index, 1);
-      this.emitImagesChanged();
-    }
+    this.removeImage(event.index);
     this.closeImageViewer();
   }
 
@@ -374,10 +378,10 @@ export class UploadsComponent implements OnInit {
   }
 
   /**
-   * Gets all base64 strings from both uploaded and preloaded images.
+   * Gets all base64 strings from current images.
    * @returns Array of all base64 strings
    */
   getAllImageBase64(): string[] {
-    return this.allImages().map(img => img.base64);
+    return this.images.map(img => img.base64);
   }
 }

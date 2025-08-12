@@ -225,7 +225,7 @@ export class TaskDetailsComponent {
   }
 
   /**
-   * Loads task images from localStorage using the image keys stored in the task.
+   * Loads task images from Firestore using the task ID.
    */
   loadTaskImages() {
     // Clean up existing subscription
@@ -234,12 +234,11 @@ export class TaskDetailsComponent {
       this.imagesSubscription = undefined;
     }
     
-    if (this.task?.images && this.task.images.length > 0 && this.task.id) {
+    if (this.task?.id) {
       this.imagesSubscription = this.uploadService.getImages('tasks', this.task.id).subscribe(images => {
         this.taskImages = images;
         this.taskImageBase64 = images.map(img => img.base64);
       });
-      this.imagesSubscription.unsubscribe();
     } else {
       this.taskImages = [];
       this.taskImageBase64 = [];
@@ -305,15 +304,15 @@ export class TaskDetailsComponent {
   }
 
   /**
-   * Gets the contact's profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
+   * Gets the contact's profile image from Firestore using their ID.
+   * Returns base64 string or null if no image is associated with the contact.
    * 
    * @param contact - The contact object containing the imageKey
    * @returns Base64 encoded image string or null if no image exists
    */
   async getContactImage(contact: Contact): Promise<string | null> {
-    if (Array.isArray(contact.image) && contact.image.length > 0) {
-      const img = await this.uploadService.getFirstImage('contacts', contact.image[0]);
+    if (contact.id) {
+      const img = await this.uploadService.getFirstImage('contacts', contact.id);
       return img ? img.base64 : null;
     }
     return null;

@@ -111,13 +111,13 @@ export class ContactFormService {
             this.subscription.unsubscribe();
             this.subscription = undefined;
         }
-        
+
         const imageKey = contact.image;
         if (!imageKey) {
             component.imageBase64 = null;
             return;
         }
-        
+
         if (contact.id && contact.image) {
             this.subscription = this.uploadService.getImages('contacts', contact.id).subscribe(images => {
                 if (images && images.length > 0) {
@@ -242,9 +242,9 @@ export class ContactFormService {
         const contact: Contact = {
             name: name.trim(),
             email: email.trim(),
-            phone: phone.trim()
+            phone: phone.trim(),
+            image: component.imgData || component.contactToEdit?.image
         };
-        this.setContactImage(component, contact);
         if (component.contactToEdit?.id) {
             contact.id = component.contactToEdit.id;
         }
@@ -267,11 +267,11 @@ export class ContactFormService {
     //         contact.imageKey = component.contactToEdit.imageKey;
     //     }
     // }
-    setContactImage(component: any, contact: Contact): void {
-        if (component.imgData) {
-            contact.image = component.imgData;
-        }
-    }
+    // setContactImage(component: any, contact: Contact): void {
+    //     if (component.imgData) {
+    //         contact.image = component.imgData;
+    //     }
+    // }
 
     /**
      * Processes form submission based on edit mode.
@@ -328,10 +328,12 @@ export class ContactFormService {
      * @returns {void}
      */
     private processContactUpdate(contact: Contact): void {
-        if (!contact.image) {
-            this.contactService.deleteImageFromContact(contact);
-        } else if (contact.id) {
-            this.contactService.updateContact(contact.id, contact, [contact.image]);
+        if (contact.id) {
+            if (contact.image) {
+                this.contactService.updateContact(contact.id, contact, [contact.image]);
+            } else {
+                this.contactService.updateContact(contact.id, contact);
+            }
         }
     }
 
@@ -345,12 +347,19 @@ export class ContactFormService {
      * @returns {Promise<void>} Promise that resolves when contact is added
      */
     private async addNewContact(component: any, contact: Contact): Promise<void> {
-        if (component.imgData?.base64) {
-            const newContact = await this.contactService.addContact(contact, [component.imgData]);
-            if (newContact) {
-                contact.image = newContact.image;
+        if (contact.id) {
+            if (contact.image) {
+               await this.contactService.addContact(contact, [component.imgData]);
+            } else {
+               await this.contactService.addContact(contact);
             }
         }
+        // if (component.imgData?.base64) {
+        //     const newContact = await this.contactService.addContact(contact, [component.imgData]);
+        //     if (newContact) {
+        //         contact.image = newContact.image;
+        //     }
+        // }
         // const newContact = await this.contactService.addContact(contact);
         // if (newContact) {
         //     component.addedContact.emit(newContact);

@@ -211,14 +211,18 @@ export class AddTaskService {
    */
   private async addNewTask(component: any): Promise<void> {
     if (!component.defaultStatus) component.defaultStatus = 'to-do';
-    (component.formData as any).images = component.taskImages;
     const newTask: Task = this.buildNewTask(component);
     const savedTask = await this.taskService.addTask(newTask);
+    
     if (savedTask?.id) {
       // Save images to Firestore under the task
-      for (const img of component.uploadsComponent.uploadedImages) {
-        await this.uploadService.addImage('tasks', savedTask.id, img);
+      if (component.uploadsComponent && component.uploadsComponent.uploadedImages) {
+        for (const img of component.uploadsComponent.uploadedImages) {
+          await this.uploadService.addImage('tasks', savedTask.id, img);
+        }
       }
+      
+      // Save subtasks
       await component.subtaskManager.saveAllSubtasks(
         savedTask.id, component.subtaskManager.getSubtasks()
       );
@@ -244,29 +248,56 @@ export class AddTaskService {
    * @returns {Promise<void>} Promise that resolves when task is updated
    */
   async updateTask(component: any): Promise<void> {
-    // const previousImageKeys = component.editingTask?.imageKey ?? [];
-    // const currentImages = component.uploadsComponent.allImages();
-    // const currentImageKeys = currentImages.map((img: any) => img.imageKey);
-    // // await this.handleImageUpdates(previousImageKeys, currentImages, currentImageKeys);
-    this.uploadService.updateImage('tasks', component.editingTask?.id, component.editingTask?.images.id, component.editingTask?.images[0]);
-    // await this.updateTaskData(component, currentImageKeys);
-    await updateDoc(doc(component.firestore, 'tasks', component.taskId), component.taskData);
+    if (!component.editingTaskId || !component.editingTask) {
+      console.error('No task to update');
+      return;
+    }
 
-    // Hier alte Bilder löschen und neue speichern
-    const imagesRef = collection(component.firestore, `tasks/${component.taskId}/images`);
-    const snapshot = await getDocs(imagesRef);
-    for (const docSnap of snapshot.docs) {
-      await deleteDoc(docSnap.ref);
-    }
-    for (const img of component.taskImages) {
-      await addDoc(imagesRef, img);
-    }
+    // Update task data
+    const updatedTask = this.buildUpdatedTask(component);
+    await this.taskService.updateTask(component.editingTaskId, updatedTask);
+
+    // Handle images: delete old ones and add new ones
+    await this.updateTaskImages(component.editingTaskId, component);
+
+    // Update subtasks
+    await this.updateSubtasks(component);
+    
+    this.taskService.clearEditingTask();
   }
 
-  //   async updateImage(taskId: string, imageId: string, updatedImage: UploadedImage): Promise<void> {
-  //   const docRef = doc(this.firestore, `tasks/${taskId}/images/${imageId}`);
-  //   await updateDoc(docRef, this.getCleanJson(updatedImage)).catch(console.error);
-  // }
+  /**
+   * Updates task images by replacing old ones with new ones.
+   * @private
+   * @param taskId - The task ID
+   * @param component - The component instance
+   */
+  private async updateTaskImages(taskId: string, component: any): Promise<void> {
+    try {
+      // Get current images from Firestore
+      const imagesRef = collection(component.firestore, `tasks/${taskId}/images`);
+      const snapshot = await getDocs(imagesRef);
+      
+      // Delete all existing images
+      for (const docSnap of snapshot.docs) {
+        await deleteDoc(docSnap.ref);
+      }
+      
+      // Add new images
+      if (component.uploadsComponent && component.uploadsComponent.images) {
+        for (const img of component.uploadsComponent.images) {
+          await addDoc(imagesRef, {
+            fileName: img.fileName,
+            fileType: img.fileType,
+            fileSize: img.fileSize,
+            base64: img.base64
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error updating task images:', error);
+    }
+  }
 
   /**
    * Handles adding new images and removing deleted images.

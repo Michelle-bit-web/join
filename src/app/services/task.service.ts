@@ -38,8 +38,8 @@ export interface Task {
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
 
-  /** Optional array of imageKeys */
-  images: UploadedImage[];
+  /** Images are now stored in Firestore subcollection, not as array */
+  images?: UploadedImage[];
 }
 
 /**
@@ -163,7 +163,6 @@ export class TaskService {
     try {
       const tasksRef = this.getTasksRef();
       const docRef = await addDoc(tasksRef, this.getCleanJson(newTask));
-      console.log('task created', newTask);
       return { id: docRef.id, ...newTask };
     } catch (err) {
       console.error('Error adding task:', err);
@@ -182,7 +181,6 @@ export class TaskService {
     try {
       const subtasksRef = this.getSubtasksRef(ColId);
       const docRef = await addDoc(subtasksRef, subtask);
-      console.log('subtask created', subtask);
       return { id: docRef.id, ...subtask };
     } catch (error) {
       console.error('Error adding subtask:', error);
@@ -254,9 +252,7 @@ export class TaskService {
       status: updated.status, assignedTo: updated.assignedTo,
       category: updated.category
     };
-    if (updated.images && updated.images.length > 0) {
-      clean.images = updated.images;
-    }
+    // Remove images from task document - they're stored in subcollection
     return clean;
   }
 
@@ -265,26 +261,6 @@ export class TaskService {
       title: updated.title,
       isCompleted: updated.isCompleted
     };
-  }
-
-  /**
-   * Deletes the imageKey field from Firestore.
-   *
-   * @param task - The contact to delete the imageKey from.
-   */
-  deleteImageFromTask(task: Task): void {
-    if (!task.id) {
-      console.error('Task id is undefined. Cannot delete image.');
-      return;
-    }
-    const taskRef = this.getSingleTaskRef(task.id);
-    this.updateTaskImage(taskRef);
-  }
-
-  /** Updates the imageKey field in Firestore. */
-  private updateTaskImage(taskRef: any): void {
-    updateDoc(taskRef, { imageKey: deleteField() })
-      .catch(err => console.error('Failed to delete image from task:', err));
   }
 
   /** Deletes a task and its subcollections from Firestore. */

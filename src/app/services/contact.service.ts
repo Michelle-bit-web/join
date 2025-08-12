@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { deleteField, Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { deleteField, Firestore, addDoc, doc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { getFirestore, collection, onSnapshot, getDoc, getDocs, } from 'firebase/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { UploadedImage } from './upload.service';
@@ -152,15 +152,16 @@ export class ContactService {
    * @param newContact - The contact to add.
    * @returns The added contact with its generated ID or null if failed.
    */
-  async addContact(newContact: Contact, images: UploadedImage[]): Promise<Contact | null> {
+  async addContact(newContact: Contact, images?: UploadedImage[]): Promise<Contact | null> {
     try {
       const contactsRef = this.getContactsRef();
       const docRef = await addDoc(contactsRef, newContact);
       const fullContact: Contact = { id: docRef.id, ...newContact };
-      for (const image of images) {
-        await addDoc(collection(this.firestore, `contacts/${docRef.id}/images`), image);
+      if (images && images.length > 0) {
+        for (const image of images) {
+          await addDoc(collection(this.firestore, `contacts/${docRef.id}/images`), image);
+        }
       }
-      console.log('contact created', fullContact);
       return fullContact;
     } catch (err) {
       console.error(err);
@@ -174,15 +175,21 @@ export class ContactService {
    * @param docId - The Firestore document ID of the contact to update.
    * @param updatedContact - The updated contact data.
    */
-  async updateContact(docId: string, updatedContact: Contact, images: UploadedImage[]): Promise<void> {
+  async updateContact(docId: string, updatedContact: Contact, images?: UploadedImage[]): Promise<void> {
     let docRef = this.getSingleContactsRef(docId);
     await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
       console.error(err);
     });
-    for (const image of images) {
-      await addDoc(collection(this.firestore, `contacts/${docId}/images`), image);
+    if (images && images.length > 0) {
+      const imagesRef = collection(this.firestore, `contacts/${docId}/images`);
+      const oldImagesSnap = await getDocs(imagesRef);
+      for (const oldImg of oldImagesSnap.docs) {
+        await deleteDoc(oldImg.ref);
+        for (const image of images) {
+          await addDoc(collection(this.firestore, `contacts/${docId}/images`), image);
+        }
+      }
     }
-    console.log('contact updated', updatedContact);
   }
 
   /**
