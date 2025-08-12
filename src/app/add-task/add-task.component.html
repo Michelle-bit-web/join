@@ -281,12 +281,12 @@
                       "
                     >
                       <img
-                        *ngIf="getContactImage(contact) | async as imgSrc"
-                        [src]="imgSrc"
+                        *ngIf="contact.image"
+                        [src]="contact.image.base64"
                         [alt]="contact.name"
                         class="contact-image"
                       />
-                      <span *ngIf="!getContactImage(contact)">
+                      <span *ngIf="!contact.image && contact.id">
                         {{ contactManager.getContactInitials(contact) }}
                       </span>
                     </div>
@@ -321,13 +321,13 @@
                 [title]="contact.name"
               >
                 <img
-                  *ngIf="getContactImage(contact)"
-                  [src]="getContactImage(contact)"
+                  *ngIf="contact.image"
+                  [src]="contact.image.base64"
                   [alt]="contact.name"
                   class="contact-image-selected"
                 />
                 <div
-                  *ngIf="!getContactImage(contact)"
+                  *ngIf="!contact.image && contact.id"
                   class="contact-initials"
                   [style.background-color]="contactManager.getContactColor(contact)"
                 >
