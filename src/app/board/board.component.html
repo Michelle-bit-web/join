@@ -1,18 +1,27 @@
-<section #scrollSection (scroll)="onSectionScroll()" role="main" aria-label="Task board">
+<section
+  #scrollSection
+  (scroll)="onSectionScroll()"
+  role="main"
+  aria-label="Task board"
+>
   <div class="layout-container">
     <div class="board-header">
       <div class="header-headline">
         <h1>Board</h1>
-        <img
-          class="add-icon"
-          src="assets/img/icons/add-box-fill.png"
-          alt="Add new task"
+        <button
+          class="add-task-btn-mobile"
           (click)="openAddOrEditOverlay('open', 'to-do')"
           (click)="saveTaskStatus('to-do')"
           role="button"
           tabindex="0"
           aria-label="Add new task to To Do column"
-        />
+        >
+          <img
+            class="add-icon"
+            src="assets/img/svg/add-white.svg"
+            alt="Add new task"
+          />
+        </button>
       </div>
 
       <div class="header-controls" role="group" aria-label="Board controls">
@@ -102,7 +111,9 @@
           (cdkDropListDropped)="drop($event)"
           role="list"
           aria-label="To Do tasks"
-          [attr.aria-describedby]="getFilteredTasks('to-do').length === 0 ? 'todo-empty' : null"
+          [attr.aria-describedby]="
+            getFilteredTasks('to-do').length === 0 ? 'todo-empty' : null
+          "
         >
           @if (getFilteredTasks('to-do').length === 0) {
           <div class="empty-column" role="status" id="todo-empty">
@@ -303,7 +314,12 @@
     </div>
   </div>
 
-  <button class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop" aria-label="Scroll to top">
+  <button
+    class="back-to-top"
+    (click)="scrollToTop()"
+    *ngIf="showBackToTop"
+    aria-label="Scroll to top"
+  >
     <span class="arrow-up" aria-hidden="true">↑</span>
   </button>
 </section>

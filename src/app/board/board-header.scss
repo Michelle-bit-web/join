@@ -130,6 +130,22 @@
   }
 }
 
+.add-task-btn-mobile {
+  @include flex-center();
+  border: none;
+  border-radius: 8px;
+  background-color: var(--background-dark);
+  color: white;
+  @include inter700-fs21();
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--accent-primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.258);
+  }
+}
+
 @media (max-width: 830px) {
   .board-header {
     height: auto;
@@ -143,15 +159,12 @@
       gap: 8px;
 
       .add-icon {
+        cursor: pointer;
         display: unset;
         width: 38px;
         height: 38px;
         flex-shrink: 0;
       }
-    }
-
-    .add-icon {
-      display: unset;
     }
 
     .header-controls {
