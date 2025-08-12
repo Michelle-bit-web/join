@@ -120,7 +120,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   formSubmitted: boolean = false;
 
   /** Flag to track if image should be deleted on submit */
-  private pendingImageDeletion = false;
+  pendingImageDeletion = false;
 
   /**
    * Constructor injecting the form builder and contact service.
@@ -293,8 +293,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
     this.formSubmitted = true;
-    if (this.pendingImageDeletion && this.contactToEdit?.id && this.contactToEdit?.image?.id) {
-      await this.uploadService.deleteImage('contacts', this.contactToEdit.id, this.contactToEdit.image.id);
+    if (this.pendingImageDeletion && this.contactToEdit?.id && this.contactToEdit.image) {
+      await this.uploadService.deleteImageFromContact(this.contactToEdit.id);
     }
     const contact = this.formService.buildContactFromForm(this);
     await this.formService.processSubmission(this, contact);

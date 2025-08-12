@@ -257,8 +257,6 @@ export class UploadsComponent {
     if (index >= 0 && index < this.images.length) {
       const removedImage = this.images[index];
       this.images.splice(index, 1);
-
-      // Also remove from uploadedImages if it exists there
       const uploadedIndex = this.uploadedImages.findIndex(img =>
         img.fileName === removedImage.fileName && img.base64 === removedImage.base64
       );
