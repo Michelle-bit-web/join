@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, HostListener, OnChanges, SimpleChanges } from '@angular/core';
-import { UploadedImage, UploadService } from '../../services/upload.service';
+import { Component, ElementRef, EventEmitter, Output, Input, ViewChild, OnInit, HostListener } from '@angular/core';
+import { UploadedImage } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 
 /**
@@ -16,7 +16,7 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
   schemas: []
 })
 
-export class UploadsComponent implements OnInit {
+export class UploadsComponent {
   /** Array of selected files for upload */
   selectedFiles: UploadedImage[] = [];
 
@@ -25,9 +25,9 @@ export class UploadsComponent implements OnInit {
 
   /** Array of uploaded image objects */
   uploadedImages: UploadedImage[] = [];
-  
-  /** Array of images for display (combines uploaded and existing) */
-  @Input()images: UploadedImage[] = [];
+
+  /** Array of images for display */
+  @Input() images: UploadedImage[] = [];
 
   /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
@@ -70,16 +70,8 @@ export class UploadsComponent implements OnInit {
 
   /**
    * Creates an instance of UploadsComponent.
-   * @param uploadService - Service for handling image uploads and storage
    */
-  constructor(private uploadService: UploadService) { }
-
-  /**
-   * Angular lifecycle hook - component initialization.
-   */
-   ngOnInit(): void {
-    //  this.images = [...this.preloadedImages];
-   }
+  constructor() { }
 
   /**
    * Opens the file selection dialog.
@@ -97,7 +89,6 @@ export class UploadsComponent implements OnInit {
     if (!input.files) return;
     const files = Array.from(input.files);
     await this.processFiles(files);
-    console.log('Das ist das Bild', input.files);
   }
 
   /**
@@ -269,15 +260,15 @@ export class UploadsComponent implements OnInit {
     if (index >= 0 && index < this.images.length) {
       const removedImage = this.images[index];
       this.images.splice(index, 1);
-      
+
       // Also remove from uploadedImages if it exists there
-      const uploadedIndex = this.uploadedImages.findIndex(img => 
+      const uploadedIndex = this.uploadedImages.findIndex(img =>
         img.fileName === removedImage.fileName && img.base64 === removedImage.base64
       );
       if (uploadedIndex >= 0) {
         this.uploadedImages.splice(uploadedIndex, 1);
       }
-      
+
       this.emitImagesChanged();
     }
   }
@@ -364,19 +355,11 @@ export class UploadsComponent implements OnInit {
   }
 
   /**
-   * Gets all image keys from both uploaded and preloaded images.
-   * @returns Array of all image keys
-   */
-  getAllImageKeys(): string[] {
-    return this.allImages().map(img => img.id ?? '');
-  }
-
-  /**
    * Gets all base64 strings from current images.
    * @returns Array of all base64 strings
    */
   getAllImageBase64(): string[] {
-    return this.selectedFiles.map(img => img.base64);
+    return this.images.map(img => img.base64);
   }
 
   /**

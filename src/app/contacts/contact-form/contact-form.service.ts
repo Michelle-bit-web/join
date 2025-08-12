@@ -35,25 +35,6 @@ export class ContactFormService {
     ) { }
 
     /**
-     * Deletes any previously uploaded or assigned images from storage.
-     * Cleans up orphaned images to prevent storage bloat.
-     * 
-     * @param {string} [uploadedKey] - Key of uploaded image to delete
-     * @param {string} [contactKey] - Key of contact's existing image to delete
-     * @returns {Promise<void>} Promise that resolves when deletion is complete
-     */
-
-    //WÄRE UNNÖTIG UND STATTDESSEN NUR EIN UPDATE
-    // async deletePreviousImages(uploadedKey?: string, contactKey?: string): Promise<void> {
-    //     if (uploadedKey) {
-    //         this.uploadService.deleteImage(uploadedKey);
-    //     }
-    //     if (contactKey) {
-    //         this.uploadService.deleteImage(contactKey);
-    //     }
-    // }
-
-    /**
      * Sets the local image state and prepares it for saving.
      * Updates component's image-related properties with new image data.
      * 
@@ -63,14 +44,6 @@ export class ContactFormService {
      * @param {string} base64 - Base64 encoded image data
      * @returns {void}
      */
-    // setImageData(component: any, file: File, imageKey: string, base64: string): void {
-    //     component.uploadedImageKey = imageKey;
-    //     component.imageBase64 = base64;
-    //     component.imgData = {
-    //         imageKey, filename: file.name, fileType: file.type,
-    //         fileSize: file.size, base64, assignedTo: 'user'
-    //     };
-    // }
     setImageData(file: File, imageBase64: string): any {
         const imageData = {
             fileName: file.name,
@@ -106,18 +79,11 @@ export class ContactFormService {
      * @returns {void}
      */
     loadContactImage(component: any, contact: Contact): void {
-        // Clean up existing subscription
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-            this.subscription = undefined;
-        }
-
-        const imageKey = contact.image;
-        if (!imageKey) {
+        const image = contact.image;
+        if (!image) {
             component.imageBase64 = null;
             return;
         }
-
         if (contact.id && contact.image) {
             this.subscription = this.uploadService.getImages('contacts', contact.id).subscribe(images => {
                 if (images && images.length > 0) {
@@ -142,23 +108,6 @@ export class ContactFormService {
             this.subscription.unsubscribe();
         }
     }
-
-    /**
-     * Sets contact image data from storage into component state.
-     * Helper method for loading existing contact images.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @param {string} imageKey - The image key to retrieve from storage
-     * @returns {void}
-     */
-    // private setContactImageData(component: any, imageKey: string): void {
-    //     component.imageBase64 = this.uploadService.getContactImage(imageKey);
-    //     const existingImage = this.uploadService.getImageByKey(imageKey);
-    //     if (existingImage) {
-    //         this.uploadService.setImages([existingImage]);
-    //     }
-    // }
 
     /**
      * Resets contact image data to clear state.
@@ -209,26 +158,9 @@ export class ContactFormService {
      * @returns {void}
      */
     handleFormClose(component: any): void {
-        // if (this.shouldDeleteUnsavedImage(component)) {
-        //     this.uploadService.deleteImage(component.uploadedImageKey);
-        // }
         component.contactForm.reset();
         component.imageMarkedForDeletion = false;
     }
-
-    /**
-     * Determines if an unsaved image should be deleted on form close.
-     * Checks conditions for cleaning up temporary images.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @returns {boolean} True if image should be deleted, false otherwise
-     */
-    // private shouldDeleteUnsavedImage(component: any): boolean {
-    //     return component.uploadedImageKey &&
-    //         !component.contactToEdit &&
-    //         !component.formSubmitted;
-    // }
 
     /**
      * Builds a trimmed Contact object from form values.
@@ -252,28 +184,6 @@ export class ContactFormService {
     }
 
     /**
-     * Sets the appropriate image key on the contact object.
-     * Determines correct image key based on component state and edit mode.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @param {Contact} contact - The contact object to update with image key
-     * @returns {void}
-     */
-    // private setContactImageKey(component: any, contact: Contact): void {
-    //     if (component.uploadedImageKey) {
-    //         contact.imageKey = component.uploadedImageKey;
-    //     } else if (component.contactToEdit?.imageKey && !component.imageMarkedForDeletion) {
-    //         contact.imageKey = component.contactToEdit.imageKey;
-    //     }
-    // }
-    // setContactImage(component: any, contact: Contact): void {
-    //     if (component.imgData) {
-    //         contact.image = component.imgData;
-    //     }
-    // }
-
-    /**
      * Processes form submission based on edit mode.
      * Handles both new contact creation and existing contact updates.
      * 
@@ -281,17 +191,6 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object to process
      * @returns {Promise<void>} Promise that resolves when submission is complete
      */
-    // async processSubmission(component: any, contact: Contact): Promise<void> {
-    //     if (component.imageMarkedForDeletion && component.contactToEdit?.imageKey) {
-    //         await this.uploadService.deleteImage(component.contactToEdit.imageKey);
-    //         contact.imageKey = '';
-    //     }
-    //     if (component.isEditMode()) {
-    //         this.updateExistingContact(component, contact);
-    //     } else {
-    //         await this.addNewContact(component, contact);
-    //     }
-    // }
     async processSubmission(component: any, contact: Contact): Promise<void> {
         if (component.imageMarkedForDeletion && component.contactToEdit?.image) {
             await this.uploadService.deleteImage('contacts', component.contactToEdit.id, component.contactToEdit.image?.id);
@@ -354,16 +253,6 @@ export class ContactFormService {
                await this.contactService.addContact(contact);
             }
         }
-        // if (component.imgData?.base64) {
-        //     const newContact = await this.contactService.addContact(contact, [component.imgData]);
-        //     if (newContact) {
-        //         contact.image = newContact.image;
-        //     }
-        // }
-        // const newContact = await this.contactService.addContact(contact);
-        // if (newContact) {
-        //     component.addedContact.emit(newContact);
-        // }
     }
 
     /**

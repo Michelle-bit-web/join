@@ -17,7 +17,7 @@
  * - Angular Router for navigation
  */
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Task, TaskService } from '../../services/task.service';
 import { Subtask } from '../../services/task.service';
 import { Timestamp } from '@angular/fire/firestore';
@@ -27,7 +27,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UploadedImage, UploadService } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task-details',
@@ -106,6 +106,10 @@ export class TaskDetailsComponent {
    * The list of image subscriptions for cleanup.
    */
   private imagesSubscription: Subscription | undefined;
+
+  /**
+   * Subscription for managing active subscriptions
+   */
   private subscriptions: Subscription | undefined = undefined;
 
   /**
@@ -228,12 +232,10 @@ export class TaskDetailsComponent {
    * Loads task images from Firestore using the task ID.
    */
   loadTaskImages() {
-    // Clean up existing subscription
     if (this.imagesSubscription) {
       this.imagesSubscription.unsubscribe();
       this.imagesSubscription = undefined;
     }
-    
     if (this.task?.id) {
       this.imagesSubscription = this.uploadService.getImages('tasks', this.task.id).subscribe(images => {
         this.taskImages = images;
@@ -245,7 +247,9 @@ export class TaskDetailsComponent {
     }
   }
 
-  /** Unsubscribes from all active subscriptions to prevent memory leaks. */
+  /** 
+   * Unsubscribes from all active subscriptions to prevent memory leaks. 
+   */
   ngOnDestroy(): void {
     if (this.imagesSubscription) {
       this.imagesSubscription.unsubscribe();

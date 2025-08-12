@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { deleteField, Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { UploadedImage } from './upload.service';
 
@@ -245,6 +245,7 @@ export class TaskService {
     return {};
   }
 
+  /** Builds a Firestore-compatible JSON object for a Task. */
   private buildTaskJson(updated: Task): any {
     const clean: any = {
       title: updated.title, description: updated.description,
@@ -252,10 +253,10 @@ export class TaskService {
       status: updated.status, assignedTo: updated.assignedTo,
       category: updated.category
     };
-    // Remove images from task document - they're stored in subcollection
     return clean;
   }
 
+  /** Builds a Firestore-compatible JSON object for a Subtask. */
   private buildSubtaskJson(updated: Subtask): any {
     return {
       title: updated.title,
@@ -263,27 +264,33 @@ export class TaskService {
     };
   }
 
-  /** Deletes a task and its subcollections from Firestore. */
+  /** 
+   * Deletes a task and its subcollections from Firestore. 
+   * */
   async deleteTaskWithSubcollections(taskId: string) {
-    // 1. Subtasks löschen
+    this.deleteSubtasks(taskId);
+    this.deleteImages(taskId);
+    const taskDocRef = doc(this.firestore, `tasks/${taskId}`);
+    await deleteDoc(taskDocRef);
+  }
+
+  /** Deletes all subtasks of a given task. */
+  async deleteSubtasks(taskId: string): Promise<void> {
     const subtasksRef = collection(this.firestore, `tasks/${taskId}/subtasks`);
     const subtasksSnapshot = await getDocs(subtasksRef);
     for (const docSnap of subtasksSnapshot.docs) {
       await deleteDoc(docSnap.ref);
     }
+  }
 
-    // 2. Images löschen
+  /** Deletes all images of a given task. */
+  async deleteImages(taskId: string): Promise<void> {
     const imagesRef = collection(this.firestore, `tasks/${taskId}/images`);
     const imagesSnapshot = await getDocs(imagesRef);
     for (const docSnap of imagesSnapshot.docs) {
       await deleteDoc(docSnap.ref);
     }
-
-    // 3. Task-Dokument löschen
-    const taskDocRef = doc(this.firestore, `tasks/${taskId}`);
-    await deleteDoc(taskDocRef);
   }
-
 
   /**
    * Converts a Firestore Timestamp or Date object to a formatted string.

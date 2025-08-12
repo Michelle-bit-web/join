@@ -338,17 +338,4 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   onBackToList() {
     this.backToList.emit();
   }
-
-  /**
-   * Retrieves the contact's profile image from Firestore using their id.
-   * Returns base64 string or null if no image is associated with the contact.
-   *
-   * @param contact - The contact object
-   * @returns Base64 encoded image string or null if no image exists
-   */
-  getContactImage(contact: Contact): string | null {
-    // Firestore-based retrieval: this is async, so for display use async pipe in template
-    // Here, just return null; see template hint below.
-    return null;
-  }
 }

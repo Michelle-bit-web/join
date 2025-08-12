@@ -13,8 +13,8 @@ import { TaskDataService } from './task-data.service';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadedImage, UploadService } from '../services/upload.service';
 import { AddTaskService } from './add-task.service';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -111,8 +111,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Array of uploaded image objects with metadata.
    */
   uploadedImages: UploadedImage[] = [];
+
+  /**
+   * Array of existing images loaded from the database for the task.
+   */
   existingImages: UploadedImage[] = [];
 
+  /** Subscription for managing active subscriptions */
   subscriptions: Subscription | undefined;
 
   /**
@@ -201,7 +206,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   onImagesChanged(images: UploadedImage[]) {
     this.uploadedImages = images;
-    console.log('Uploaded images after choosing:', this.uploadedImages);
   }
 
   /**
@@ -212,11 +216,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.subscriptions?.unsubscribe();
       this.subscriptions = this.uploadService.getImages('tasks', this.editingTask.id).subscribe(images => {
         this.existingImages = images;
-        // if (this.uploadsComponent) {
-        //   // Set preloaded images in the uploads component
-        //   this.uploadsComponent.preloadedImages = [...images];
-        //   this.uploadsComponent.images = [...images];
-        // }
       });
     }
   }
@@ -237,7 +236,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   async loadEditingTask(): Promise<void> {
     const editingTask = this.taskService.getEditingTask();
     if (editingTask && editingTask.id) {
-      // await this.addTaskService.setupEditMode(this, editingTask);
       await this.loadTaskById(editingTask.id);
     } else {
       this.clearAllManagers();
@@ -382,25 +380,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Also clears form data to prevent state leaking.
    */
   closeOverlayMode() {
-    this.addTaskService.cleanupOnClose(this);
     this.clearForm();
     this.closeOverlay.emit();
   }
-
-  /**
-   * Gets the contact's profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
-   * 
-   * @param contact - The contact object containing the imageKey
-   * @returns Base64 encoded image string or null if no image exists
-   */
-  // getContactImage(contact: Contact): Observable<string | null> {
-  //   if (contact.id && contact.image) {
-  //     return this.uploadService.getImages('contacts', contact.id as string).pipe(
-  //       map(images => images.length > 0 ? images[0].base64 : null)
-  //     );
-  //   } else {
-  //     return new Observable(observer => observer.next(null));
-  //   }
-  // };
 }

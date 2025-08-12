@@ -155,7 +155,6 @@ export class ImageViewerComponent {
     event.preventDefault();
     this.animationState = 'out';
     this.backgroundVisible = false;
-    // Delay the actual close emission to allow animation to complete
       this.close.emit(event);
   }
 
@@ -165,7 +164,6 @@ export class ImageViewerComponent {
    */
   onAnimationDone(event: any) {
     if (event.toState === 'void' && event.fromState === 'in') {
-      // Animation completed, component can be destroyed
       this.isVisible = false;
     }
   }

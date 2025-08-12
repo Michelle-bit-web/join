@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ContactService } from './contact.service';
-import { deleteField, Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { Firestore, addDoc, doc, getDocs, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 /**
  * Interface representing an uploaded image with metadata.
@@ -43,30 +43,7 @@ export class UploadService {
    * Creates an instance of UploadService.
    * Initializes the service for managing image uploads and storage operations.
    */
-  constructor(private contactService: ContactService, private firestore: Firestore) { }
-
-  /**
-   * Saves a single image to localStorage.
-   * @param {UploadedImage} image - Image to save
-   * @returns {void}
-   */
-  saveImage(image: UploadedImage) {
-    // const current = this.getImages();
-    // current.push(image);
-    // localStorage.setItem(this.storageKey, JSON.stringify(current));
-  }
-
-  /**
-   * Saves multiple images to localStorage, avoiding duplicates.
-   * @param {UploadedImage[]} images - Array of images to save
-   * @returns {void}
-   */
-  saveImages(images: UploadedImage[]): void {
-    // const existing = this.getImages();
-    // const filtered = existing.filter(img => !images.some(newImg => newImg.imageKey === img.imageKey));
-    // const merged = [...filtered, ...images];
-    // localStorage.setItem(this.storageKey, JSON.stringify(merged));
-  }
+  constructor(private firestore: Firestore) { }
 
   /**
    * Sets the in-memory images array.
@@ -76,16 +53,6 @@ export class UploadService {
   setImages(images: UploadedImage[]) {
     this.images = images;
   }
-
-  /**
-   * Retrieves all images from localStorage.
-   * @returns {UploadedImage[]} Array of all stored images
-   */
-  //Unten eine Methode per Firebase
-  // getImages(): UploadedImage[] {
-  //   const data = localStorage.getItem(this.storageKey);
-  //   return data ? JSON.parse(data) : [];
-  // }
 
   /**
     * Returns a reference to the 'images' subcollection for a given task or contact.
@@ -186,39 +153,6 @@ export class UploadService {
     };
   }
 
-
-  /**
-   * Retrieves images by their keys.
-   * @param {string[]} imageKeys - Array of image keys to retrieve
-   * @returns {UploadedImage[]} Array of matching images
-   */
-  // getImagesByKeys(imageKeys: string[]): UploadedImage[] {
-  //   const allImages = this.getImages();
-  //   return allImages.filter(img => imageKeys.includes(img.imageKey));
-  // }
-
-  /**
-   * Retrieves a single image by its key.
-   * @param {string} imageKey - Key of the image to retrieve
-   * @returns {UploadedImage | undefined} Image object or undefined if not found
-   */
-  getImageByKey(imageKey: string): void {
-    // const allImages = this.getImages();
-    const allImages = localStorage.getItem(imageKey);
-    //   return data ? JSON.parse(data) : [];
-    // return allImages.find(img => img.imageKey === imageKey);
-  }
-
-  /**
-   * Retrieves base64 data for an image by its key.
-   * @param {string} imageKey - Key of the image
-   * @returns {string | null} Base64 string or null if image not found
-   */
-  // getBase64ByKey(imageKey: string): string | null {
-  //   const image = this.getImageByKey(imageKey);
-  //   return image ? image.base64 : null;
-  // }
-
   /**
   * Deletes a subtask from a task's subcollection.
   * 
@@ -234,27 +168,6 @@ export class UploadService {
       console.error('deleteImage error', err);
     }
   }
-  /**
-   * Deletes a single image by its key.
-   * @param {string} imageKey - Key of the image to delete
-   * @returns {void}
-   */
-  // deleteImage(imageKey: string) {
-  //   const current = this.getImages();
-  //   const updated = current.filter(img => img.imageKey !== imageKey);
-  //   localStorage.setItem(this.storageKey, JSON.stringify(updated));
-  // }
-
-  /**
-   * Deletes multiple images by their keys.
-   * @param {string[]} imageKeys - Array of image keys to delete
-   * @returns {void}
-   */
-  // deleteImages(imageKeys: string[]) {
-  //   const current = this.getImages();
-  //   const updated = current.filter(img => !imageKeys.includes(img.imageKey));
-  //   localStorage.setItem(this.storageKey, JSON.stringify(updated));
-  // }
 
   /**
    * Clears all images from localStorage.
@@ -263,24 +176,4 @@ export class UploadService {
   clearImages() {
     this.images = [];
   }
-
-  /**
-   * Retrieves base64 data for task-related images.
-   * @param {string[]} taskImageKeys - Array of task image keys
-   * @returns {string[]} Array of base64 strings for existing images
-   */
-  // getTaskImages(taskImageKeys: string[]): string[] {
-  //   return taskImageKeys
-  //     .map(key => this.getBase64ByKey(key))
-  //     .filter(base64 => base64 !== null) as string[];
-  // }
-
-  /**
-   * Retrieves base64 data for a contact image.
-   * @param {string} contactImageKey - Key of the contact image
-   * @returns {string | null} Base64 string or null if image not found
-   */
-  // getContactImage(contactImageKey: string): string | null {
-  //   return this.getBase64ByKey(contactImageKey);
-  // }
 }

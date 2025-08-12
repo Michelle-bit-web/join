@@ -4,9 +4,8 @@ import { Task, TaskService } from '../services/task.service';
 import { UploadService } from '../services/upload.service';
 import { FormValidatorService } from './form-validator.service';
 import { TaskDataService } from './task-data.service';
-import { UploadedImage } from '../services/upload.service';
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
-
+import { addDoc, getDocs, deleteDoc } from '@angular/fire/firestore';
+import { collection } from 'firebase/firestore';
 
 /**
  * Service for handling complex AddTask component operations.
@@ -158,13 +157,6 @@ export class AddTaskService {
   async processTaskCreation(component: any): Promise<void> {
     component.isCreatingTask = true;
     try {
-      // Only save images to Firestore on submit
-      // const savedImages: UploadedImage[] = [];
-      // for (const img of component.uploadsComponent.uploadedImages) {
-      //   const saved = await this.uploadService.addImage(/* parentId */, img);
-      //   if (saved) savedImages.push(saved);
-      // }
-      // component.taskImages = savedImages.map(img => img.id);
       await this.saveTaskWithSuccessFeedback(component);
     } catch (error) {
       console.error('Error while creating/updating task:', error);
@@ -213,16 +205,12 @@ export class AddTaskService {
     if (!component.defaultStatus) component.defaultStatus = 'to-do';
     const newTask: Task = this.buildNewTask(component);
     const savedTask = await this.taskService.addTask(newTask);
-    
     if (savedTask?.id) {
-      // Save images to Firestore under the task
       if (component.uploadsComponent && component.uploadsComponent.uploadedImages) {
         for (const img of component.uploadsComponent.uploadedImages) {
           await this.uploadService.addImage('tasks', savedTask.id, img);
         }
       }
-      
-      // Save subtasks
       await component.subtaskManager.saveAllSubtasks(
         savedTask.id, component.subtaskManager.getSubtasks()
       );
@@ -252,17 +240,10 @@ export class AddTaskService {
       console.error('No task to update');
       return;
     }
-
-    // Update task data
     const updatedTask = this.buildUpdatedTask(component);
     await this.taskService.updateTask(component.editingTaskId, updatedTask);
-
-    // Handle images: delete old ones and add new ones
     await this.updateTaskImages(component.editingTaskId, component);
-
-    // Update subtasks
     await this.updateSubtasks(component);
-    
     this.taskService.clearEditingTask();
   }
 
@@ -274,16 +255,8 @@ export class AddTaskService {
    */
   private async updateTaskImages(taskId: string, component: any): Promise<void> {
     try {
-      // Get current images from Firestore
-      const imagesRef = collection(component.firestore, `tasks/${taskId}/images`);
-      const snapshot = await getDocs(imagesRef);
-      
-      // Delete all existing images
-      for (const docSnap of snapshot.docs) {
-        await deleteDoc(docSnap.ref);
-      }
-      
-      // Add new images
+      let imagesRef = collection(component.firestore, `tasks/${taskId}/images`);
+      this.deletePreviousImage(imagesRef);
       if (component.uploadsComponent && component.uploadsComponent.images) {
         for (const img of component.uploadsComponent.images) {
           await addDoc(imagesRef, {
@@ -299,36 +272,12 @@ export class AddTaskService {
     }
   }
 
-  /**
-   * Handles adding new images and removing deleted images.
-   * @private
-   * @param {string[]} previousKeys - Array of previous image keys
-   * @param {any[]} currentImages - Array of current image objects
-   * @param {string[]} currentKeys - Array of current image keys
-   * @returns {Promise<void>} Promise that resolves when image updates are complete
-   */
-  private async handleImageUpdates(previousKeys: string[], currentImages: any[], currentKeys: string[]): Promise<void> {
-    const removedKeys = previousKeys.filter(key => !currentKeys.includes(key));
-    // if (removedKeys.length > 0) {
-    //   this.uploadService.deleteImages(removedKeys);
-    // }
-    // this.uploadService.saveImages(currentImages);
-  }
-
-  /**
-   * Updates task data with new information and image keys.
-   * @private
-   * @param {any} component - The AddTask component instance
-   * @param {string[]} currentImageKeys - Array of current image keys
-   * @returns {Promise<void>} Promise that resolves when task data is updated
-   */
-  private async updateTaskData(component: any, currentImageKeys: string[]): Promise<void> {
-    (component.formData as any).images = currentImageKeys;
-    component.taskImages = currentImageKeys;
-    const updatedTask = this.buildUpdatedTask(component);
-    await this.taskService.updateTask(component.editingTask!.id!, updatedTask);
-    await this.updateSubtasks(component);
-    this.taskService.clearEditingTask();
+  /** Deletes the previous image for a user */
+  async deletePreviousImage(imagesRef: import('firebase/firestore').CollectionReference): Promise<void> {
+      const snapshot = await getDocs(imagesRef);
+      for (const docSnap of snapshot.docs) {
+        await deleteDoc(docSnap.ref);
+      }
   }
 
   /**
@@ -355,18 +304,5 @@ export class AddTaskService {
     const deleted = component.subtaskManager.getDeletedSubtasks(currentSubtasks);
     await component.subtaskManager.deleteSubtasks(component.editingTaskId!, deleted);
     await component.subtaskManager.syncSubtasks(component.editingTaskId!, currentSubtasks);
-  }
-
-  /**
-   * Cleans up resources when closing overlay.
-   * @param {any} component - The AddTask component instance
-   * @returns {void}
-   */
-  cleanupOnClose(component: any): void {
-    // if (component.uploadsComponent) {
-    //   component.uploadsComponent.uploadedImages.forEach((image: any) => {
-    //     this.uploadService.deleteImage(image.imageKey);
-    //   });
-    // }
   }
 }

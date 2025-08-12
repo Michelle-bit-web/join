@@ -196,10 +196,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @returns {Promise<void>} Promise that resolves when image processing is complete
    */
   private async processValidImage(file: File): Promise<void> {
-    // await this.formService.deletePreviousImages(this.uploadedImageKey, this.contactToEdit?.imageKey);
-    // const imageKey = `${Date.now()}_${file.name}`;
     this.imageBase64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
-    // this.formService.setImageData(this, file, imageKey, base64);
     this.imgData = this.formService.setImageData(file, this.imageBase64);
     this.errorMessage = '';
   }
@@ -321,7 +318,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   }
 
   private emitImagesChanged() {
-    // If you want to notify parent about image changes
     this.addedContact.emit(this.contactToEdit);
   }
 }
