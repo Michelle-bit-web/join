@@ -41,8 +41,8 @@ export class ImageViewerComponent {
   /** Starting index for image display */
   @Input() startIndex: number = 0;
 
-  /** Array of image objects (with id, fileName, etc.) */
-  @Input() imageObjects: any[] = []; // <-- Add this input for full image objects
+  /** Array of image objects containing metadata (id, fileName, fileType, fileSize, etc.) */
+  @Input() imageObjects: any[] = [];
 
   /** Whether delete functionality is enabled */
   @Input() allowDelete: boolean = false;
@@ -53,22 +53,22 @@ export class ImageViewerComponent {
   /** Event emitted when viewer should be closed */
   @Output() close = new EventEmitter<Event>();
 
-  /** Emits index and imageId for deletion */
+  /** Event emitted when an image should be deleted, contains index and optional imageId */
   @Output() deleteImage = new EventEmitter<{ index: number, imageId?: string }>();
 
-  /** Current index of displayed image */
+  /** Current index of the displayed image in the images array */
   currentIndex: number = 0;
 
-  /** Flag indicating if device supports touch */
+  /** Flag indicating if the current device supports touch input */
   isTouchDevice: boolean = false;
 
-  /** Animation state for controlling slide transitions */
+  /** Animation state for controlling slide-in/out transitions */
   animationState: 'in' | 'out' = 'in';
 
-  /** Flag to control background visibility during animation */
+  /** Flag to control background overlay visibility during animations */
   backgroundVisible: boolean = false;
 
-  /** Flag to control component visibility */
+  /** Flag to control overall component visibility */
   isVisible: boolean = true;
 
   /**
@@ -122,7 +122,8 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Downloads the currently displayed image.
+   * Downloads the currently displayed image to the user's device.
+   * Creates a temporary download link with a generated filename.
    */
   downloadImage() {
     const link = document.createElement('a');
@@ -134,7 +135,9 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Handles image deletion if delete is allowed.
+   * Handles deletion of the currently displayed image.
+   * Emits delete event with current index and image ID if available.
+   * Closes viewer if it was the last image.
    */
   onDeleteImage() {
     if (this.allowDelete && this.imageObjects?.length > 0) {
@@ -151,7 +154,8 @@ export class ImageViewerComponent {
 
   /**
    * Handles closing the image viewer with slide-out animation.
-   * @param event - Close event
+   * Prevents event bubbling and sets animation states.
+   * @param event - The close event that triggered the action
    */
   onClose(event: Event) {
     event.stopPropagation();
@@ -162,8 +166,9 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Handles animation completion events.
-   * @param event - Animation event
+   * Handles animation completion events for slide transitions.
+   * Updates visibility state when slide-out animation completes.
+   * @param event - The animation event containing transition state information
    */
   onAnimationDone(event: any) {
     if (event.toState === 'void' && event.fromState === 'in') {
@@ -171,16 +176,28 @@ export class ImageViewerComponent {
     }
   }
 
+  /**
+   * Gets the filename of the currently displayed image.
+   * @returns The filename of the current image, or undefined if not available
+   */
   getImageName(): string | undefined {
     const img = this.imageObjects?.[this.currentIndex];
     return img?.fileName;
   }
 
+  /**
+   * Gets the file type (MIME type) of the currently displayed image.
+   * @returns The file type of the current image, or undefined if not available
+   */
   getImageType(): string | undefined {
     const img = this.imageObjects?.[this.currentIndex];
     return img?.fileType;
   }
 
+  /**
+   * Gets the formatted file size of the currently displayed image.
+   * @returns The file size in KB as a formatted string, or empty string if not available
+   */
   getImageSize(): string {
     const img = this.imageObjects?.[this.currentIndex];
     if (img?.fileSize) {

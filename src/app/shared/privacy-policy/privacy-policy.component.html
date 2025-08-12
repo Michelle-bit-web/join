@@ -294,18 +294,13 @@
         </li>
         <li role="listitem">
           <strong>Firestore Database:</strong> To store user-generated data such
-          as tasks, contact details, and project-related information.
+          as tasks, contact details, images and project-related information.
         </li>
         <li role="listitem">
           <strong>Firestore Analytics:</strong> Anonymized usage statistics and
           understand how users interact with the Service. This might include
           Device identifiers, App usage data like session duration and Events like
           task creation.
-        </li>
-        <li role="listitem">
-          <strong>Cloud Functions:</strong> These functions process relevant data
-          (e.g. task updates, database triggers) in real time to perform backend
-          operations and therfore provide dynamic app features.
         </li>
       </ul>
       <p>
@@ -331,13 +326,8 @@
       <p>
         <strong>Image Upload and Processing</strong><br />
         When using the image upload feature, selected
-        image files are processed and temporarily stored locally in your browser
-        using client-side storage (e.g. localStorage). Images are not uploaded to
-        any server or third-party cloud storage. Only non-image metadata (such as
-        an internal image key, file name, and file type) may be saved in our
-        database to link the image to your task or contact. We do not collect or
-        transmit any image content. Please avoid uploading sensitive or personally
-        identifiable information.
+        image files are processed, uploaded and stored in Firebase, a service provided by Google LLC, to link the image to your task or contact. 
+        Please avoid uploading sensitive or personally identifiable information.
       </p>
     </section>
 

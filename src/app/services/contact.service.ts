@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { deleteField, Firestore, addDoc, doc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
-import { getFirestore, collection, onSnapshot, getDoc, getDocs, } from 'firebase/firestore';
+import { deleteField, Firestore, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { collection, onSnapshot, getDoc } from 'firebase/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { UploadedImage } from './upload.service';
@@ -131,9 +131,7 @@ export class ContactService {
   getContacts(): Observable<Contact[]> {
     return new Observable((observer) => {
       const contactsRef = this.getContactsRef();
-      const unsubscribe = onSnapshot(
-        contactsRef,
-        (snapshot) => {
+      const unsubscribe = onSnapshot(contactsRef, (snapshot) => {
           const contacts: Contact[] = [];
           snapshot.forEach((doc) => {
             contacts.push({ id: doc.id, ...doc.data() } as Contact);

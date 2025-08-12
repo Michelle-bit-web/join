@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ContactService } from './contact.service';
 import { Firestore, addDoc, doc, getDocs, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { collection, onSnapshot, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 /**
  * Interface representing an uploaded image with metadata.
@@ -57,22 +56,22 @@ export class UploadService {
   /**
     * Returns a reference to the 'images' subcollection for a given task or contact.
     *
-    * @param parentCollection - The collection type ('contacts' or 'tasks').
+    * @param parentCollection - The collection type ('tasks').
     * @param parentId - The document ID of the parent contact.
     */
-  private getImagesRef(parentCollection: 'contacts' | 'tasks', parentId: string) {
+  private getImagesRef(parentCollection: 'tasks', parentId: string) {
     return collection(this.firestore, parentCollection, parentId, 'images');
   }
 
   /**
      * Adds a subtask to a specific task's subcollection.
      * 
-     * @param parentCollection - The collection type ('contacts' or 'tasks').
-     * @param parentId - The ID of the parent task or contact.
+     * @param parentCollection - The collection type ('tasks').
+     * @param parentId - The ID of the parent task.
      * @param subtask - The subtask to add.
      * @returns The created subtask with ID, or null on failure.
      */
-  async addImage(parentCollection: 'contacts' | 'tasks', parentId: string, image: UploadedImage): Promise<UploadedImage | null> {
+  async addImage(parentCollection: 'tasks', parentId: string, image: UploadedImage): Promise<UploadedImage | null> {
     try {
       const imagesRef = this.getImagesRef(parentCollection, parentId);
       const docRef = await addDoc(imagesRef, image);
@@ -84,12 +83,12 @@ export class UploadService {
   }
 
   /**
-   * Retrieves the first image for a given task or contact.
+   * Retrieves the first image for a given task.
    *
-   * @param parentCollection - The collection type ('contacts' or 'tasks').
-   * @param parentId - The ID of the parent task or contact.
+   * @param parentCollection - The collection type ('tasks').
+   * @param parentId - The ID of the parent task.
    */
-  async getFirstImage(parentCollection: 'contacts' | 'tasks', parentId: string): Promise<UploadedImage | null> {
+  async getFirstImage(parentCollection: 'tasks', parentId: string): Promise<UploadedImage | null> {
     try {
       const qSnap = await getDocs(this.getImagesRef(parentCollection, parentId));
       if (qSnap.empty) return null;
@@ -102,12 +101,12 @@ export class UploadService {
   }
 
   /**
-   * Observes the images of a given task or contact in real-time.
+   * Observes the images of a given task in real-time.
    *
-   * @param parentCollection - The collection type ('contacts' or 'tasks').
-   * @param parentId - The ID of the parent task or contact.
+   * @param parentCollection - The collection type ('tasks').
+   * @param parentId - The ID of the parent task.
    */
-  getImages(parentCollection: 'contacts' | 'tasks', parentId: string): Observable<UploadedImage[]> {
+  getImages(parentCollection: 'tasks', parentId: string): Observable<UploadedImage[]> {
     return new Observable(observer => {
       const unsubscribe = onSnapshot(this.getImagesRef(parentCollection, parentId), snapshot => {
         const images: UploadedImage[] = [];
@@ -124,12 +123,12 @@ export class UploadService {
   /**
    * Updates a subtask document in Firestore.
    * 
-   * @param parentCollection - The collection type ('contacts' or 'tasks').
+   * @param parentCollection - The collection type ('tasks').
    * @param parentId - The parent task ID.
    * @param imageId - The subtask document ID.
    * @param updatedImage - The updated subtask data.
    */
-  async updateImage(parentCollection: 'contacts' | 'tasks', parentId: string, imageId: string, updatedImage: Partial<UploadedImage>): Promise<void> {
+  async updateImage(parentCollection: 'tasks', parentId: string, imageId: string, updatedImage: Partial<UploadedImage>): Promise<void> {
     try {
       const docRef = doc(this.firestore, parentCollection, parentId, 'images', imageId);
       await updateDoc(docRef, updatedImage as any);
@@ -156,11 +155,11 @@ export class UploadService {
   /**
   * Deletes a subtask from a task's subcollection.
   * 
-  * @param parentCollection - The collection type ('contacts' or 'tasks').
+  * @param parentCollection - The collection type ('tasks').
   * @param parentId - The parent ID.
   * @param ImageId - The Image ID to delete.
   */
-  async deleteImage(parentCollection: 'contacts' | 'tasks', parentId: string, imageId: string): Promise<void> {
+  async deleteImage(parentCollection: 'tasks', parentId: string, imageId: string): Promise<void> {
     try {
       const docRef = doc(this.firestore, parentCollection, parentId, 'images', imageId);
       await deleteDoc(docRef);
@@ -188,24 +187,6 @@ export class UploadService {
       console.error('Error adding image to contact:', error);
     }
   }
-
-  /**
-   * Loads the image from the contact document.
-   */
-  // async getImageFromContact(contactId: string): Promise<UploadedImage | null> {
-  //   try {
-  //     const contactRef = doc(this.firestore, 'contacts', contactId);
-  //     const snap = await getDoc(contactRef);
-  //     if (snap.exists()) {
-  //       const data = snap.data();
-  //       return data['image'] || null;
-  //     }
-  //     return null;
-  //   } catch (err) {
-  //     console.error('Error getting image from contact:', err);
-  //     return null;
-  //   }
-  // }
 
   /**
    * Löscht das Bild im Kontakt-Dokument.
