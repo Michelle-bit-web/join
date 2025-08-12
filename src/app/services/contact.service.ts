@@ -157,11 +157,6 @@ export class ContactService {
       const contactsRef = this.getContactsRef();
       const docRef = await addDoc(contactsRef, newContact);
       const fullContact: Contact = { id: docRef.id, ...newContact };
-      if (images && images.length > 0) {
-        for (const image of images) {
-          await addDoc(collection(this.firestore, `contacts/${docRef.id}/images`), image);
-        }
-      }
       return fullContact;
     } catch (err) {
       console.error(err);
@@ -180,16 +175,6 @@ export class ContactService {
     await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
       console.error(err);
     });
-    if (images && images.length > 0) {
-      const imagesRef = collection(this.firestore, `contacts/${docId}/images`);
-      const oldImagesSnap = await getDocs(imagesRef);
-      for (const oldImg of oldImagesSnap.docs) {
-        await deleteDoc(oldImg.ref);
-        for (const image of images) {
-          await addDoc(collection(this.firestore, `contacts/${docId}/images`), image);
-        }
-      }
-    }
   }
 
   /**

@@ -279,12 +279,27 @@ export class TaskDetailsComponent {
   /**
    * Handles image deletion from the image viewer.
    */
-  onDeleteImage(event: { index: number, imageId?: string }) {
+  async onDeleteImage(event: { index: number, imageId?: string }) {
     const imageObj = this.taskImages[event.index];
     if (imageObj?.id && this.task.id) {
-      this.uploadService.deleteImage('tasks', this.task.id, imageObj.id);
-      this.taskImages.splice(event.index, 1);
-      this.taskImageBase64 = this.taskImages.map(img => img.base64);
+      // this.uploadService.deleteImage('tasks', this.task.id, imageObj.id);
+      // this.taskImages.splice(event.index, 1);
+      // this.taskImageBase64 = this.taskImages.map(img => img.base64);
+      try {
+        // Immediately delete from Firestore
+        await this.uploadService.deleteImage('tasks', this.task.id, imageObj.id);
+
+        // Remove from local arrays
+        this.taskImages.splice(event.index, 1);
+        this.taskImageBase64 = this.taskImages.map(img => img.base64);
+
+        // Close viewer if no images left
+        if (this.taskImages.length === 0) {
+          this.closeImageViewer();
+        }
+      } catch (error) {
+        console.error('Error deleting image:', error);
+      }
     }
     this.closeImageViewer();
   }

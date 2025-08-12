@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ContactService } from './contact.service';
 import { Firestore, addDoc, doc, getDocs, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, getDoc } from 'firebase/firestore';
 
 /**
  * Interface representing an uploaded image with metadata.
@@ -175,5 +175,47 @@ export class UploadService {
    */
   clearImages() {
     this.images = [];
+  }
+
+    /**
+   * Fügt ein Bild direkt in das Kontakt-Dokument ein.
+   */
+  async addImageToContact(contactId: string, image: UploadedImage): Promise<void> {
+    try {
+      const contactRef = doc(this.firestore, 'contacts', contactId);
+      await updateDoc(contactRef, { image });
+    } catch (error) {
+      console.error('Error adding image to contact:', error);
+    }
+  }
+
+  /**
+   * Loads the image from the contact document.
+   */
+  // async getImageFromContact(contactId: string): Promise<UploadedImage | null> {
+  //   try {
+  //     const contactRef = doc(this.firestore, 'contacts', contactId);
+  //     const snap = await getDoc(contactRef);
+  //     if (snap.exists()) {
+  //       const data = snap.data();
+  //       return data['image'] || null;
+  //     }
+  //     return null;
+  //   } catch (err) {
+  //     console.error('Error getting image from contact:', err);
+  //     return null;
+  //   }
+  // }
+
+  /**
+   * Löscht das Bild im Kontakt-Dokument.
+   */
+  async deleteImageFromContact(contactId: string): Promise<void> {
+    try {
+      const contactRef = doc(this.firestore, 'contacts', contactId);
+      await updateDoc(contactRef, { image: null });
+    } catch (err) {
+      console.error('Error deleting image from contact:', err);
+    }
   }
 }

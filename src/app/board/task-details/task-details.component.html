@@ -1,4 +1,10 @@
-<div class="content-wrapper" *ngIf="showContent" role="dialog" aria-modal="true" [attr.aria-label]="'Task details for: ' + task.title">
+<div
+  class="content-wrapper"
+  *ngIf="showContent"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="'Task details for: ' + task.title"
+>
   <div class="wrapper-top">
     <p
       class="category-flag"
@@ -10,7 +16,11 @@
     >
       {{ taskService.capitalize(task.category) }}
     </p>
-    <button class="btn-close" (click)="onClose()" aria-label="Close task details">
+    <button
+      class="btn-close"
+      (click)="onClose()"
+      aria-label="Close task details"
+    >
       <svg
         width="24"
         height="24"
@@ -39,7 +49,9 @@
     </button>
   </div>
   <div class="task-content">
-    <h1 role="heading" aria-level="2">{{ taskService.capitalize(task.title) }}</h1>
+    <h1 role="heading" aria-level="2">
+      {{ taskService.capitalize(task.title) }}
+    </h1>
     <p class="description">{{ taskService.capitalize(task.description) }}</p>
     <div class="date-row" role="group" aria-label="Task due date">
       <span class="row-title">Due date:</span>
@@ -68,7 +80,10 @@
     </div>
     <div class="assigned-to-row">
       <span class="row-title">Assigned To:</span>
-      <span *ngIf="contactList.length <= 0" class="info-no-selection" role="status"
+      <span
+        *ngIf="contactList.length <= 0"
+        class="info-no-selection"
+        role="status"
         >No contact selected</span
       >
       <div class="contact-list" role="list" aria-label="Assigned team members">
@@ -87,10 +102,7 @@
                 [alt]="contact.name"
                 class="contact-image"
               />
-              <p
-                *ngIf="!contact.image && contact.id"
-                class="contact-initials"
-              >
+              <p *ngIf="!contact.image && contact.id" class="contact-initials">
                 {{ contactService.getInitials(contact.name) }}
               </p>
             </div>
@@ -114,7 +126,12 @@
             type="checkbox"
             (change)="onSubtaskToggle(subtask)"
             [(ngModel)]="subtask.isCompleted"
-            [attr.aria-label]="'Mark subtask as ' + (subtask.isCompleted ? 'incomplete' : 'complete') + ': ' + subtask.title"
+            [attr.aria-label]="
+              'Mark subtask as ' +
+              (subtask.isCompleted ? 'incomplete' : 'complete') +
+              ': ' +
+              subtask.title
+            "
           />
           <label class="checkbox-label" [for]="'subtask-cb' + $index"></label>
           <span>{{ subtask.title }}</span>
@@ -131,7 +148,14 @@
           (click)="openImageViewer(i)"
           role="gridcell"
           tabindex="0"
-          [attr.aria-label]="'Image ' + (i + 1) + ' of ' + taskImages.length + ': ' + image.fileName"
+          [attr.aria-label]="
+            'Image ' +
+            (i + 1) +
+            ' of ' +
+            taskImages.length +
+            ': ' +
+            image.fileName
+          "
         >
           <img
             [src]="image.base64"
@@ -178,7 +202,11 @@
       </div>
     </div>
     <div class="btn-wrapper" role="group" aria-label="Task actions">
-      <button class="btn-delete" (click)="deleteTask($event)" aria-label="Delete this task">
+      <button
+        class="btn-delete"
+        (click)="deleteTask($event)"
+        aria-label="Delete this task"
+      >
         <svg
           width="25"
           height="24"
@@ -207,7 +235,11 @@
         Delete
       </button>
       <div class="separator" aria-hidden="true"></div>
-      <button class="btn-edit" (click)="openEditTask($event)" aria-label="Edit this task">
+      <button
+        class="btn-edit"
+        (click)="openEditTask($event)"
+        aria-label="Edit this task"
+      >
         <svg
           width="33"
           height="33"
@@ -246,8 +278,10 @@
   <app-image-viewer
     *ngIf="showImageViewer"
     [images]="taskImageBase64"
+    [imageObjects]="taskImages"
     [startIndex]="currentImageIndex"
     [allowDelete]="true"
+    [immediateDelete]="true"
     (close)="closeImageViewer()"
     (deleteImage)="onDeleteImage($event)"
   >

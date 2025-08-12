@@ -17,9 +17,6 @@ import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.com
 })
 
 export class UploadsComponent {
-  /** Array of selected files for upload */
-  selectedFiles: UploadedImage[] = [];
-
   /** Array of uploaded image URLs */
   uploadedUrls: string[] = [];
 
@@ -367,6 +364,6 @@ export class UploadsComponent {
    * @returns Array of current image objects with metadata
    */
   getCurrentImageObjects(): UploadedImage[] {
-    return [...this.selectedFiles];
+    return [...this.images];  
   }
 }

@@ -71,35 +71,6 @@ export class ContactFormService {
     }
 
     /**
-     * Loads the contact image into the upload preview.
-     * Retrieves and displays existing contact image if available.
-     * 
-     * @param {any} component - The contact form component instance
-     * @param {Contact} contact - The contact object with potential imageKey
-     * @returns {void}
-     */
-    loadContactImage(component: any, contact: Contact): void {
-        const image = contact.image;
-        if (!image) {
-            component.imageBase64 = null;
-            return;
-        }
-        if (contact.id && contact.image) {
-            this.subscription = this.uploadService.getImages('contacts', contact.id).subscribe(images => {
-                if (images && images.length > 0) {
-                    component.imageBase64 = images[0].base64;
-                    this.uploadService.setImages([images[0]]);
-                } else {
-                    component.imageBase64 = null;
-                }
-            });
-            this.subscription.unsubscribe();
-        } else {
-            component.imageBase64 = null;
-        }
-    }
-
-    /**
      * Cleanup method called when the component is destroyed.
      * Unsubscribes from all active subscriptions to prevent memory leaks.
      */
@@ -175,7 +146,7 @@ export class ContactFormService {
             name: name.trim(),
             email: email.trim(),
             phone: phone.trim(),
-            image: component.imgData || component.contactToEdit?.image
+            image: component.imgData
         };
         if (component.contactToEdit?.id) {
             contact.id = component.contactToEdit.id;
@@ -193,7 +164,7 @@ export class ContactFormService {
      */
     async processSubmission(component: any, contact: Contact): Promise<void> {
         if (component.imageMarkedForDeletion && component.contactToEdit?.image) {
-            await this.uploadService.deleteImage('contacts', component.contactToEdit.id, component.contactToEdit.image?.id);
+            await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
         }
         if (component.isEditMode()) {
             this.updateExistingContact(component, contact);
@@ -210,12 +181,11 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object with updated data
      * @returns {void}
      */
-    updateExistingContact(component: any, contact: Contact): void {
-        component.contactToEdit = contact;
+    async updateExistingContact(component: any, contact: Contact): Promise<void> {
         if (component.imgData && component.imgData?.base64 && contact.id) {
-            this.uploadService.addImage('contacts', contact.id, component.imgData);
+            this.uploadService.addImageToContact(contact.id, component.imgData);
         }
-        this.processContactUpdate(contact);
+        await this.processContactUpdate(contact);
     }
 
     /**
@@ -226,13 +196,9 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object to update
      * @returns {void}
      */
-    private processContactUpdate(contact: Contact): void {
+    private async processContactUpdate(contact: Contact): Promise<void>{
         if (contact.id) {
-            if (contact.image) {
-                this.contactService.updateContact(contact.id, contact, [contact.image]);
-            } else {
-                this.contactService.updateContact(contact.id, contact);
-            }
+            this.contactService.updateContact(contact.id, contact);
         }
     }
 

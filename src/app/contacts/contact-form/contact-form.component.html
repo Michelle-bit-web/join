@@ -314,6 +314,8 @@
     [images]="contactImages"
     [imageKeys]="contactImageKeys"
     [allowDelete]="true"
+    [immediateDelete]="false"
+    [imageObjects]="getCurrentContactImageObjects()"
     (close)="closeImageViewer()"
     (deleteImage)="onDeleteImage($event)"
   >

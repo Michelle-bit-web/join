@@ -47,13 +47,13 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @type {UploadedImage | undefined}
    */
   imgData?: UploadedImage;
-  
+
   /**
    * Unique key identifier for the uploaded image.
    * @type {string | undefined}
    */
   uploadedImageKey?: string;
-  
+
   /**
    * Base64 encoded string representation of the image for display.
    * @type {string | null}
@@ -64,60 +64,63 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Subscription to receive the contact data to be edited via the ContactService.
    */
   private editContactSubscription?: Subscription;
-  
+
   /**
    * Array of uploaded image URLs for display purposes.
    * @type {string[]}
    */
   uploadedUrls: string[] = [];
-  
+
   /**
    * Array of uploaded image objects with metadata.
    * @type {UploadedImage[]}
    */
   uploadedImages: UploadedImage[] = [];
-  
+
   /**
    * Reference to the file input element for image selection.
    * @type {ElementRef<HTMLInputElement>}
    */
   @ViewChild('filepicker') filepickerRef!: ElementRef<HTMLInputElement>;
-  
+
   /**
    * Controls the visibility of the image viewer modal.
    * @type {boolean}
    */
   showImageViewer = false;
-  
+
   /**
    * Array of contact image URLs for display.
    * @type {string[]}
    */
   contactImages: string[] = [];
-  
+
   /**
    * Array of contact image keys for backend reference.
    * @type {string[]}
    */
   contactImageKeys: string[] = [];
-  
+
   /**
    * Error message to display for validation or upload errors.
    * @type {string}
    */
   errorMessage: string = '';
-  
+
   /**
    * Flag indicating if the current image is marked for deletion.
    * @type {boolean}
    */
   imageMarkedForDeletion: boolean = false;
-  
+
   /**
    * Flag indicating if the form has been submitted to show validation errors.
    * @type {boolean}
    */
   formSubmitted: boolean = false;
+
+  /** Flag to track if image should be deleted on submit */
+  private pendingImageDeletion = false;
 
   /**
    * Constructor injecting the form builder and contact service.
@@ -209,7 +212,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactToEdit = contact || undefined;
     if (!this.contactToEdit) return;
     this.formService.fillContactForm(this.contactForm, this.contactToEdit);
-    this.formService.loadContactImage(this, this.contactToEdit);
+    if(this.contactToEdit.image) {
+      this.imgData = this.contactToEdit.image;
+      this.imageBase64 = this.contactToEdit.image.base64;
+    }
   }
 
   /**
@@ -217,8 +223,28 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   openContactImageViewer(): void {
     if (!this.imgData) return;
-    this.contactImages = [this.imgData.base64];
-    this.showImageViewer = true;
+    this.setupImageArraysForViewer();
+    if (this.contactImages.length > 0 || this.getCurrentContactImageObjects().length > 0) {
+      this.showImageViewer = true;
+    }
+  }
+
+  /**
+ * Sets up the image arrays for the image viewer based on current state.
+ */
+  private setupImageArraysForViewer(): void {
+    this.contactImages = [];
+    if (this.imageBase64 && !this.contactToEdit) {
+      this.contactImages = [this.imageBase64];
+    }
+    else if (this.contactToEdit) {
+      if (this.imageBase64) {
+        this.contactImages = [this.imageBase64];
+      }
+      else if (this.contactToEdit.image?.base64) {
+        this.contactImages = [this.contactToEdit.image.base64];
+      }
+    }
   }
 
   /**
@@ -232,12 +258,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Handles image deletion from the image viewer.
    */
   onDeleteImage(event: { index: number, imageId?: string }) {
-    if (event.imageId && this.contactToEdit?.id) {
-      this.uploadService.deleteImage('contacts', this.contactToEdit.id, event.imageId);
-      this.imgData = undefined;
-      this.imageBase64 = null;
-      this.emitImagesChanged();
-    }
+    this.pendingImageDeletion = true;
+    this.imgData = undefined;
+    this.imageBase64 = null;
+    this.contactImages = [];
     this.closeImageViewer();
   }
 
@@ -269,14 +293,15 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
     this.formSubmitted = true;
+    if (this.pendingImageDeletion && this.contactToEdit?.id && this.contactToEdit?.image?.id) {
+      await this.uploadService.deleteImage('contacts', this.contactToEdit.id, this.contactToEdit.image.id);
+    }
     const contact = this.formService.buildContactFromForm(this);
     await this.formService.processSubmission(this, contact);
-    
-    // Emit the contact with the proper ID (either updated contactToEdit or the original contact)
     this.addedContact.emit(this.contactToEdit || contact);
-    
     this.finalizeSubmission();
     this.imageBase64 = null;
+    this.pendingImageDeletion = false;
   }
 
   /**
@@ -309,7 +334,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @returns True if editing an existing contact, false if creating a new one.
    */
   public isEditMode(): boolean {
-    return !!this.contactToEdit?.id;
+   return !!(this.contactToEdit && this.contactToEdit.id);
   }
 
   /**
@@ -321,7 +346,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.formService.updateExistingContact(this, contact);
   }
 
-  private emitImagesChanged() {
-    this.addedContact.emit(this.contactToEdit);
+  /**
+   * Gets the current contact images for the image viewer
+   */
+  getCurrentContactImageObjects(): UploadedImage[] {
+    return this.imgData ? [this.imgData] : (this.contactToEdit?.image ? [this.contactToEdit.image] : []);
   }
 }

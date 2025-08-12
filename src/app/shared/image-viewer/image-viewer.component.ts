@@ -37,25 +37,28 @@ export class ImageViewerComponent {
 
   /** Array of image URLs to display */
   @Input() images: string[] = [];
-  
+
   /** Starting index for image display */
   @Input() startIndex: number = 0;
-  
+
   /** Array of image objects (with id, fileName, etc.) */
   @Input() imageObjects: any[] = []; // <-- Add this input for full image objects
-  
+
   /** Whether delete functionality is enabled */
   @Input() allowDelete: boolean = false;
-  
+
+  /** Whether deletions should be immediate (true) or pending (false) */
+  @Input() immediateDelete: boolean = false;
+
   /** Event emitted when viewer should be closed */
   @Output() close = new EventEmitter<Event>();
-  
+
   /** Emits index and imageId for deletion */
   @Output() deleteImage = new EventEmitter<{ index: number, imageId?: string }>();
 
   /** Current index of displayed image */
   currentIndex: number = 0;
-  
+
   /** Flag indicating if device supports touch */
   isTouchDevice: boolean = false;
 
@@ -155,7 +158,7 @@ export class ImageViewerComponent {
     event.preventDefault();
     this.animationState = 'out';
     this.backgroundVisible = false;
-      this.close.emit(event);
+    this.close.emit(event);
   }
 
   /**
