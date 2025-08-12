@@ -27,7 +27,7 @@ export class UploadsComponent implements OnInit {
   uploadedImages: UploadedImage[] = [];
   
   /** Array of images for display (combines uploaded and existing) */
-  images: UploadedImage[] = [];
+  @Input()images: UploadedImage[] = [];
 
   /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
@@ -65,14 +65,11 @@ export class UploadsComponent implements OnInit {
   /** Event emitter for when images change */
   @Output() imagesChanged = new EventEmitter<UploadedImage[]>();
 
-  /** Assignment target for uploaded images */
-  @Input() assignedTo: 'user' | 'task' = 'task';
-
   /** Flag indicating if component is in editing mode */
   @Input() isEditingMode: boolean = false;
 
   /** Array of preloaded images for editing mode */
-  @Input() preloadedImages: UploadedImage[] = [];
+  @Input() preloadedImages: UploadedImage[] = []; //Wäre überflüssog, wenn mit images klappt
 
   /**
    * Creates an instance of UploadsComponent.
@@ -382,6 +379,14 @@ export class UploadsComponent implements OnInit {
    * @returns Array of all base64 strings
    */
   getAllImageBase64(): string[] {
-    return this.images.map(img => img.base64);
+    return this.selectedFiles.map(img => img.base64);
+  }
+
+  /**
+   * Gets the current image objects for the image viewer
+   * @returns Array of current image objects with metadata
+   */
+  getCurrentImageObjects(): UploadedImage[] {
+    return [...this.selectedFiles];
   }
 }

@@ -201,6 +201,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   onImagesChanged(images: UploadedImage[]) {
     this.uploadedImages = images;
+    console.log('Uploaded images after choosing:', this.uploadedImages);
   }
 
   /**

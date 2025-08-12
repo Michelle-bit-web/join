@@ -317,4 +317,12 @@ export class TaskDetailsComponent {
     }
     return null;
   }
+
+  /**
+   * Gets the current task images for the image viewer
+   * @returns Array of current task image objects with metadata
+   */
+  getCurrentTaskImageObjects(): UploadedImage[] {
+    return [...this.taskImages];
+  }
 }
