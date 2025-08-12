@@ -68,9 +68,6 @@ export class UploadsComponent implements OnInit {
   /** Flag indicating if component is in editing mode */
   @Input() isEditingMode: boolean = false;
 
-  /** Array of preloaded images for editing mode */
-  @Input() preloadedImages: UploadedImage[] = []; //Wäre überflüssog, wenn mit images klappt
-
   /**
    * Creates an instance of UploadsComponent.
    * @param uploadService - Service for handling image uploads and storage
@@ -81,7 +78,7 @@ export class UploadsComponent implements OnInit {
    * Angular lifecycle hook - component initialization.
    */
    ngOnInit(): void {
-     this.images = [...this.preloadedImages];
+    //  this.images = [...this.preloadedImages];
    }
 
   /**
@@ -290,7 +287,7 @@ export class UploadsComponent implements OnInit {
    */
   removeAllImages() {
     this.uploadedImages = [];
-    this.images = [...this.preloadedImages]; // Keep preloaded images
+    this.images = [];
     this.emitImagesChanged();
   }
 
@@ -363,7 +360,7 @@ export class UploadsComponent implements OnInit {
    * @returns Combined array of all images
    */
   allImages(): UploadedImage[] {
-    return [...this.uploadedImages, ...this.preloadedImages];
+    return this.images;
   }
 
   /**

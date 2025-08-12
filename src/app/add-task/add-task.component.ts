@@ -212,11 +212,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.subscriptions?.unsubscribe();
       this.subscriptions = this.uploadService.getImages('tasks', this.editingTask.id).subscribe(images => {
         this.existingImages = images;
-        if (this.uploadsComponent) {
-          // Set preloaded images in the uploads component
-          this.uploadsComponent.preloadedImages = [...images];
-          this.uploadsComponent.images = [...images];
-        }
+        // if (this.uploadsComponent) {
+        //   // Set preloaded images in the uploads component
+        //   this.uploadsComponent.preloadedImages = [...images];
+        //   this.uploadsComponent.images = [...images];
+        // }
       });
     }
   }
