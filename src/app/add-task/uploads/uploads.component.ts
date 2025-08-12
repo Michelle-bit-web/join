@@ -25,6 +25,7 @@ export class UploadsComponent implements OnInit {
 
   /** Array of uploaded image objects */
   uploadedImages: UploadedImage[] = [];
+  images: UploadedImage[] = []; //NEU
 
   /** Flag indicating if a task has been created */
   taskCreated: boolean = false;
@@ -80,7 +81,9 @@ export class UploadsComponent implements OnInit {
   /**
    * Angular lifecycle hook - component initialization.
    */
-  ngOnInit(): void { }
+   ngOnInit(): void {
+     this.images = [...this.preloadedImages];
+   }
 
   /**
    * Opens the file selection dialog.
@@ -172,13 +175,14 @@ export class UploadsComponent implements OnInit {
   private async processSingleFile(file: File) {
     try {
       const compressedBase64 = await this.compressImage(file, 800, 800, 0.7);
-      const imageKey = `${Date.now()}_${file.name}`;
       this.imgData = {
-        imageKey, filename: file.name, fileType: file.type,
-        fileSize: file.size, base64: compressedBase64, assignedTo: 'task'
+        fileName: file.name,
+        fileType: file.type,
+        fileSize: file.size,
+        base64: compressedBase64
       };
-      this.uploadedImages.push(this.imgData!);
-      this.uploadedUrls.push(compressedBase64);
+      this.images.push(this.imgData!);
+      // this.uploadedUrls.push(compressedBase64);
       this.emitImagesChanged();
     } catch {
       this.errorMessages.push(`Error processing file ${file.name}`);
@@ -256,7 +260,8 @@ export class UploadsComponent implements OnInit {
    * @returns Tracking identifier
    */
   trackByFilename(index: number, item: UploadedImage) {
-    return item.filename;
+    // return item.filename;
+    return ''
   }
 
   /**
@@ -264,17 +269,13 @@ export class UploadsComponent implements OnInit {
    * @param index - Index of image to remove
    * @param source - Source array ('uploaded' or 'preloaded')
    */
-  removeImage(index: number, source: 'uploaded' | 'preloaded') {
-    if (source === 'uploaded') {
-      this.uploadedImages.splice(index, 1);
-    } else if (source === 'preloaded') {
-      this.preloadedImages.splice(index, 1);
-    }
-    if (!this.isEditingMode) {
-      const allImages = this.uploadService.getImages();
-      const updatedImages = allImages.filter(img => img.imageKey !== this.selectedFiles[0]?.imageKey);
-      localStorage.setItem('allImages', JSON.stringify(updatedImages));
-    }
+  removeImage(index: number) {
+    // if (source === 'uploaded') {
+    //   this.uploadedImages.splice(index, 1);
+    // } else if (source === 'preloaded') {
+    //   this.preloadedImages.splice(index, 1);
+    // }
+    this.images.splice(index, 1);
     this.emitImagesChanged();
   }
 
@@ -284,10 +285,6 @@ export class UploadsComponent implements OnInit {
   removeAllImages() {
     this.uploadedImages = [];
     this.preloadedImages = [];
-    if (!this.isEditingMode) {
-      const allImages = this.uploadService.getImages();
-      localStorage.setItem('allImages', JSON.stringify(allImages));
-    }
     this.emitImagesChanged();
   }
 
@@ -316,11 +313,12 @@ export class UploadsComponent implements OnInit {
    * Handles image deletion from the image viewer.
    * @param event - Event containing index and imageKey for deletion
    */
-  onDeleteImage(event: { index: number, imageKey?: string }) {
-    if (this.isEditingMode && event.imageKey) {
-      this.removeImage(event.index, 'preloaded');
-    } else if (!this.isEditingMode && event.imageKey) {
-      this.uploadService.deleteImage(event.imageKey);
+  onDeleteImage(event: { index: number, imageId?: string }) {
+    const image = this.images[event.index];
+    if (image?.id) {
+      // this.uploadService.deleteImage('tasks', /* parentId */, image.id);
+      this.images.splice(event.index, 1);
+      this.emitImagesChanged();
     }
     this.closeImageViewer();
   }
@@ -330,7 +328,7 @@ export class UploadsComponent implements OnInit {
    * @private
    */
   private emitImagesChanged() {
-    this.imagesChanged.emit([...this.uploadedImages]);
+    this.imagesChanged.emit([...this.images]);
   }
 
   /**
@@ -347,7 +345,8 @@ export class UploadsComponent implements OnInit {
    * @returns Array of image keys
    */
   getImageKeys(): string[] {
-    return this.uploadedImages.map(img => img.imageKey);
+    // No imageKey, so use Firestore IDs if needed after saving
+    return this.uploadedImages.map(img => img.id ?? '');
   }
 
   /**
@@ -371,7 +370,7 @@ export class UploadsComponent implements OnInit {
    * @returns Array of all image keys
    */
   getAllImageKeys(): string[] {
-    return this.allImages().map(img => img.imageKey);
+    return this.allImages().map(img => img.id ?? '');
   }
 
   /**

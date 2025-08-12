@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { deleteField, Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { UploadedImage } from './upload.service';
 
 /**
  * Represents a task in the system.
@@ -37,7 +39,7 @@ export interface Task {
   subtask?: Subtask[];
 
   /** Optional array of imageKeys */
-  imageKey?: string[];
+  images: UploadedImage[];
 }
 
 /**
@@ -161,6 +163,7 @@ export class TaskService {
     try {
       const tasksRef = this.getTasksRef();
       const docRef = await addDoc(tasksRef, this.getCleanJson(newTask));
+      console.log('task created', newTask);
       return { id: docRef.id, ...newTask };
     } catch (err) {
       console.error('Error adding task:', err);
@@ -179,6 +182,7 @@ export class TaskService {
     try {
       const subtasksRef = this.getSubtasksRef(ColId);
       const docRef = await addDoc(subtasksRef, subtask);
+      console.log('subtask created', subtask);
       return { id: docRef.id, ...subtask };
     } catch (error) {
       console.error('Error adding subtask:', error);
@@ -250,8 +254,8 @@ export class TaskService {
       status: updated.status, assignedTo: updated.assignedTo,
       category: updated.category
     };
-    if (Array.isArray(updated.imageKey)) {
-      clean.imageKey = updated.imageKey;
+    if (updated.images && updated.images.length > 0) {
+      clean.images = updated.images;
     }
     return clean;
   }
@@ -268,7 +272,6 @@ export class TaskService {
    *
    * @param task - The contact to delete the imageKey from.
    */
-
   deleteImageFromTask(task: Task): void {
     if (!task.id) {
       console.error('Task id is undefined. Cannot delete image.');
@@ -278,10 +281,33 @@ export class TaskService {
     this.updateTaskImage(taskRef);
   }
 
+  /** Updates the imageKey field in Firestore. */
   private updateTaskImage(taskRef: any): void {
     updateDoc(taskRef, { imageKey: deleteField() })
       .catch(err => console.error('Failed to delete image from task:', err));
   }
+
+  /** Deletes a task and its subcollections from Firestore. */
+  async deleteTaskWithSubcollections(taskId: string) {
+    // 1. Subtasks löschen
+    const subtasksRef = collection(this.firestore, `tasks/${taskId}/subtasks`);
+    const subtasksSnapshot = await getDocs(subtasksRef);
+    for (const docSnap of subtasksSnapshot.docs) {
+      await deleteDoc(docSnap.ref);
+    }
+
+    // 2. Images löschen
+    const imagesRef = collection(this.firestore, `tasks/${taskId}/images`);
+    const imagesSnapshot = await getDocs(imagesRef);
+    for (const docSnap of imagesSnapshot.docs) {
+      await deleteDoc(docSnap.ref);
+    }
+
+    // 3. Task-Dokument löschen
+    const taskDocRef = doc(this.firestore, `tasks/${taskId}`);
+    await deleteDoc(taskDocRef);
+  }
+
 
   /**
    * Converts a Firestore Timestamp or Date object to a formatted string.

@@ -103,7 +103,7 @@ export class TaskComponent {
   constructor(
     public taskService: TaskService,
     public contactService: ContactService,
-    private uploadService: UploadService
+    public uploadService: UploadService
   ) { }
 
   /**
@@ -266,15 +266,17 @@ export class TaskComponent {
   }
 
   /**
-   * Gets the contact's profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
+   * Gets the contact's profile image from Firestore using their ID.
+   * For display, use async pipe in template.
    * 
-   * @param contact - The contact object containing the imageKey
-   * @returns Base64 encoded image string or null if no image exists
+   * @param contact - The contact object
+   * @returns Observable of the contact image URL
    */
   getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+    // Remove imageKey logic, use Firestore-based retrieval
+    if (contact.id) {
+      // For display, use async pipe in template
+      return null;
     }
     return null;
   }

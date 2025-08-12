@@ -1,17 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  deleteField,
-  Firestore,
-  collection,
-  onSnapshot,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-  getDoc
-} from '@angular/fire/firestore';
+import { deleteField, Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from '@angular/fire/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { UploadedImage } from './upload.service';
 
 /**
  * Interface representing a contact.
@@ -26,7 +18,7 @@ export interface Contact {
   /** Optional phone number of the contact */
   phone?: string;
   /** Optional avatar base64 for the contact */
-  imageKey?: string;
+  image?: UploadedImage;
 }
 
 /**
@@ -58,42 +50,42 @@ export class ContactService {
    * @type {BehaviorSubject<Contact | null>}
    */
   private selectedContactSubject = new BehaviorSubject<Contact | null>(null);
-  
+
   /**
    * Observable stream of the currently selected contact.
    * @public
    * @type {Observable<Contact | null>}
    */
   public selectedContact$ = this.selectedContactSubject.asObservable();
-  
+
   /**
    * BehaviorSubject controlling the visibility of the contact form.
    * @private
    * @type {BehaviorSubject<boolean>}
    */
   private showFormSubject = new BehaviorSubject<boolean>(false);
-  
+
   /**
    * Observable stream for contact form visibility state.
    * @public
    * @type {Observable<boolean>}
    */
   public showForm$ = this.showFormSubject.asObservable();
-  
+
   /**
    * BehaviorSubject holding the contact currently being edited.
    * @private
    * @type {BehaviorSubject<Contact | null>}
    */
   private editContactSubject = new BehaviorSubject<Contact | null>(null);
-  
+
   /**
    * Observable stream for the contact being edited.
    * @public
    * @type {Observable<Contact | null>}
    */
   public editContact$ = this.editContactSubject.asObservable();
-  
+
   /**
    * Predefined array of hexadecimal colors used for contact avatar backgrounds.
    * Colors are selected based on contact name hash for consistency.
@@ -160,11 +152,15 @@ export class ContactService {
    * @param newContact - The contact to add.
    * @returns The added contact with its generated ID or null if failed.
    */
-  async addContact(newContact: Contact): Promise<Contact | null> {
+  async addContact(newContact: Contact, images: UploadedImage[]): Promise<Contact | null> {
     try {
       const contactsRef = this.getContactsRef();
       const docRef = await addDoc(contactsRef, newContact);
       const fullContact: Contact = { id: docRef.id, ...newContact };
+      for (const image of images) {
+        await addDoc(collection(this.firestore, `contacts/${docRef.id}/images`), image);
+      }
+      console.log('contact created', fullContact);
       return fullContact;
     } catch (err) {
       console.error(err);
@@ -178,11 +174,15 @@ export class ContactService {
    * @param docId - The Firestore document ID of the contact to update.
    * @param updatedContact - The updated contact data.
    */
-  async updateContact(docId: string, updatedContact: Contact): Promise<void> {
+  async updateContact(docId: string, updatedContact: Contact, images: UploadedImage[]): Promise<void> {
     let docRef = this.getSingleContactsRef(docId);
     await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
       console.error(err);
     });
+    for (const image of images) {
+      await addDoc(collection(this.firestore, `contacts/${docId}/images`), image);
+    }
+    console.log('contact updated', updatedContact);
   }
 
   /**
@@ -197,8 +197,8 @@ export class ContactService {
       email: updatedContact.email,
       phone: updatedContact.phone
     };
-    if (updatedContact.imageKey) {
-      contact.imageKey = updatedContact.imageKey;
+    if (updatedContact.image) {
+      contact.image = updatedContact.image;
     }
     return contact;
   }

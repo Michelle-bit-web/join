@@ -240,7 +240,7 @@
             <app-uploads
               (imagesChanged)="onImagesChanged($event)"
               [isEditingMode]="isEditingMode"
-              [preloadedImages]="uploadedImages"
+              [preloadedImages]="existingImages"
             >
             </app-uploads>
           </div>
@@ -281,8 +281,8 @@
                       "
                     >
                       <img
-                        *ngIf="getContactImage(contact)"
-                        [src]="getContactImage(contact)"
+                        *ngIf="getContactImage(contact) | async as imgSrc"
+                        [src]="imgSrc"
                         [alt]="contact.name"
                         class="contact-image"
                       />

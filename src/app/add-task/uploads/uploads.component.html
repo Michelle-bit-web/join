@@ -71,7 +71,7 @@
       </button>
     </div>
     <div class="image-grid">
-      <div
+      <!-- <div
         class="image-item"
         *ngFor="let image of uploadedImages; let i = index"
         (click)="openImageViewer(i)"
@@ -115,19 +115,19 @@
             </svg>
           </button>
         </div>
-      </div>
+      </div> -->
       <div
         class="image-item"
-        *ngFor="let img of preloadedImages; let i = index"
+        *ngFor="let img of images; let i = index"
         (click)="openImageViewer(i)"
       >
-        <img [src]="img.base64" [alt]="img.filename" class="preview-image" />
-        <p class="image-filename">{{ img.filename }}</p>
+        <img [src]="img.base64" [alt]="img.fileName" class="preview-image" />
+        <p class="image-filename">{{ img.fileName }}</p>
         <div class="image-overlay">
           <button
             type="button"
             class="remove-btn"
-            (click)="removeImage(i, 'preloaded'); $event.stopPropagation()"
+            (click)="removeImage(i); $event.stopPropagation()"
           >
             <svg
               width="25"
@@ -170,7 +170,6 @@
 <app-image-viewer
   *ngIf="showImageViewer"
   [images]="getAllImageBase64()"
-  [imageKeys]="getAllImageKeys()"
   [startIndex]="currentImageIndex"
   [allowDelete]="true"
   (close)="closeImageViewer($event)"

@@ -72,7 +72,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   constructor(
     public contactService: ContactService,
     private authService: AuthService,
-    private uploadService: UploadService
+    public uploadService: UploadService
   ) { }
 
   /**
@@ -220,15 +220,19 @@ export class ContactListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Gets the contact's profile image from localStorage using their imageKey.
+   * Gets the contact's profile image from Firestore using their ID.
    * Returns null if no image is associated with the contact.
    * 
-   * @param contact - The contact object containing the imageKey
+   * @param contact - The contact object
    * @returns The base64 encoded image string or null if no image exists
    */
   getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+    // Remove imageKey logic, use Firestore-based retrieval
+    if (contact.id) {
+      // This is a synchronous method, but Firestore is async.
+      // For display, you should use an async pipe in the template.
+      // Here, just return null; see template hint below.
+      return null;
     }
     return null;
   }

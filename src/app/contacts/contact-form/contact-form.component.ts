@@ -10,6 +10,7 @@ import { UploadedImage } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 import { ImageManager } from './image-manager';
 import { ContactFormService } from './contact-form.service';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -129,7 +130,8 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     private form: FormBuilder,
     public contactService: ContactService,
     public imageManager: ImageManager,
-    private formService: ContactFormService
+    private formService: ContactFormService,
+    private uploadService: UploadService
   ) { }
 
   /**
@@ -194,10 +196,11 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @returns {Promise<void>} Promise that resolves when image processing is complete
    */
   private async processValidImage(file: File): Promise<void> {
-    await this.formService.deletePreviousImages(this.uploadedImageKey, this.contactToEdit?.imageKey);
-    const imageKey = `${Date.now()}_${file.name}`;
-    const base64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
-    this.formService.setImageState(this, file, imageKey, base64);
+    // await this.formService.deletePreviousImages(this.uploadedImageKey, this.contactToEdit?.imageKey);
+    // const imageKey = `${Date.now()}_${file.name}`;
+    this.imageBase64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
+    // this.formService.setImageData(this, file, imageKey, base64);
+    this.imgData = this.formService.setImageData(file, this.imageBase64);
     this.errorMessage = '';
   }
 
@@ -216,8 +219,9 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Opens the image viewer for the contact image.
    */
   openContactImageViewer(): void {
-    if (!this.imageBase64) return;
-    this.formService.setupImageViewer(this);
+    if (!this.imgData) return;
+    this.contactImages = [this.imgData.base64];
+    this.showImageViewer = true;
   }
 
   /**
@@ -230,11 +234,13 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   /**
    * Handles image deletion from the image viewer.
    */
-  onDeleteImage(event: { imageKey?: string }): void {
-    if (event.imageKey) {
-      this.imageMarkedForDeletion = true;
+  onDeleteImage(event: { index: number, imageId?: string }) {
+    if (event.imageId && this.contactToEdit?.id) {
+      this.uploadService.deleteImage('contacts', this.contactToEdit.id, event.imageId);
+      this.imgData = undefined;
+      this.imageBase64 = null;
+      this.emitImagesChanged();
     }
-    this.formService.resetImageState(this);
     this.closeImageViewer();
   }
 
@@ -242,7 +248,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * Cleans up the subscription on component destruction to prevent memory leaks.
    */
   ngOnDestroy(): void {
-    this.editContactSubscription?.unsubscribe();
+    if (this.editContactSubscription) {
+      this.editContactSubscription.unsubscribe();
+    }
+    this.formService.ngOnDestroy();
   }
 
   /**
@@ -307,5 +316,10 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    */
   public updateContact(contact: Contact): void {
     this.formService.updateExistingContact(this, contact);
+  }
+
+  private emitImagesChanged() {
+    // If you want to notify parent about image changes
+    // this.addedContact.emit(this.contactToEdit);
   }
 }

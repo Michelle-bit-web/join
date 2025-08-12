@@ -291,8 +291,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact?.id) {
       this.isDeleting = true;
       this.menuOpen = false;
-      if(this.contact.imageKey && this.contact.imageKey.length > 0) {
-        this.uploadService.deleteImage(this.contact.imageKey);
+      // Delete image from Firestore if it exists
+      if (this.contact.image && this.contact.image.id) {
+        this.uploadService.deleteImage('contacts', this.contact.id, this.contact.image.id);
       }
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection();
@@ -339,16 +340,15 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Retrieves the contact's profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
+   * Retrieves the contact's profile image from Firestore using their id.
+   * Returns base64 string or null if no image is associated with the contact.
    *
-   * @param contact - The contact object containing the imageKey
+   * @param contact - The contact object
    * @returns Base64 encoded image string or null if no image exists
    */
   getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
-    }
+    // Firestore-based retrieval: this is async, so for display use async pipe in template
+    // Here, just return null; see template hint below.
     return null;
   }
 }

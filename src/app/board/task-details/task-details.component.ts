@@ -27,6 +27,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UploadedImage, UploadService } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task-details',
@@ -102,6 +103,12 @@ export class TaskDetailsComponent {
   currentImageIndex = 0;
 
   /**
+   * The list of image subscriptions for cleanup.
+   */
+  private imagesSubscription: Subscription | undefined;
+  private subscriptions: Subscription | undefined = undefined;
+
+  /**
    * Constructor injects task and contact services, and the Angular Router.
    * 
    * @param taskService Service for handling tasks and subtasks.
@@ -162,17 +169,14 @@ export class TaskDetailsComponent {
    * 
    * @param event Optional event to stop propagation and prevent default behavior.
    */
-  deleteTask(event?: Event) {
+  async deleteTask(event?: Event) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
     }
     if (this.task.id) {
-      this.taskService.deleteTask(this.task.id);
+      await this.taskService.deleteTaskWithSubcollections(this.task.id);
       this.onClose();
-      if(this.task.imageKey && this.task.imageKey.length > 0) {
-        this.uploadService.deleteImages(this.task.imageKey);
-      }
     }
   }
 
@@ -198,7 +202,7 @@ export class TaskDetailsComponent {
    */
   loadSubtasks() {
     if (this.task?.id) {
-      this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) => {
+      this.subscriptions = this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) => {
         this.subtasks = subtasks;
       });
     }
@@ -224,14 +228,31 @@ export class TaskDetailsComponent {
    * Loads task images from localStorage using the image keys stored in the task.
    */
   loadTaskImages() {
-    if (this.task?.imageKey && this.task.imageKey.length > 0) {
-      this.taskImages = this.uploadService.getImagesByKeys(this.task.imageKey);
-      this.taskImageKeys = this.task.imageKey;
-      this.taskImageBase64 = this.taskImages.map(img => img.base64);
+    // Clean up existing subscription
+    if (this.imagesSubscription) {
+      this.imagesSubscription.unsubscribe();
+      this.imagesSubscription = undefined;
+    }
+    
+    if (this.task?.images && this.task.images.length > 0 && this.task.id) {
+      this.imagesSubscription = this.uploadService.getImages('tasks', this.task.id).subscribe(images => {
+        this.taskImages = images;
+        this.taskImageBase64 = images.map(img => img.base64);
+      });
+      this.imagesSubscription.unsubscribe();
     } else {
       this.taskImages = [];
-      this.taskImageKeys = [];
       this.taskImageBase64 = [];
+    }
+  }
+
+  /** Unsubscribes from all active subscriptions to prevent memory leaks. */
+  ngOnDestroy(): void {
+    if (this.imagesSubscription) {
+      this.imagesSubscription.unsubscribe();
+    }
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
     }
   }
 
@@ -255,14 +276,13 @@ export class TaskDetailsComponent {
   /**
    * Handles image deletion from the image viewer.
    */
-  onDeleteImage(event: { index: number, imageKey?: string }) {
-    if (event.imageKey && this.task.id) {
-      this.uploadService.deleteImage(event.imageKey);
-      const updatedImages = this.task.imageKey?.filter(key => key !== event.imageKey) || [];
-      this.task.imageKey = updatedImages;
-      this.taskService.updateTask(this.task.id, this.task);
-      this.loadTaskImages();
-    };
+  onDeleteImage(event: { index: number, imageId?: string }) {
+    const imageObj = this.taskImages[event.index];
+    if (imageObj?.id && this.task.id) {
+      this.uploadService.deleteImage('tasks', this.task.id, imageObj.id);
+      this.taskImages.splice(event.index, 1);
+      this.taskImageBase64 = this.taskImages.map(img => img.base64);
+    }
     this.closeImageViewer();
   }
 
@@ -273,12 +293,12 @@ export class TaskDetailsComponent {
    * @param currentIndex The index of the current image.
    * @param currentImage The URL of the current image.
    */
-  downloadImage(event: Event, currentIndex: number, currentImage: string, filename?: string) {
+  downloadImage(event: Event, currentIndex: number, currentImage: string, fileName?: string) {
     event.stopPropagation();
     event.preventDefault();
     const link = document.createElement('a');
     link.href = currentImage;
-    link.download = `join_image_${filename || currentIndex + 1}.jpg`;
+    link.download = `join_image_${fileName || currentIndex + 1}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -291,9 +311,10 @@ export class TaskDetailsComponent {
    * @param contact - The contact object containing the imageKey
    * @returns Base64 encoded image string or null if no image exists
    */
-  getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+  async getContactImage(contact: Contact): Promise<string | null> {
+    if (Array.isArray(contact.image) && contact.image.length > 0) {
+      const img = await this.uploadService.getFirstImage('contacts', contact.image[0]);
+      return img ? img.base64 : null;
     }
     return null;
   }

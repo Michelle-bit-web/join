@@ -23,11 +23,11 @@
           class="user-logo"
           [style.background-color]="getContactColor(contact.name)"
         >
-          <ng-container *ngIf="getContactImage(contact) as image; else initials">
-            <img [src]="image" [alt]="contact.name" class="contact-image" />
+          <ng-container *ngIf="contact.image">
+            <img [src]="contact.image.base64" [alt]="contact.name" class="contact-image" />
           </ng-container>
 
-          <ng-template #initials>
+          <ng-template *ngIf="!contact.image && contact.id">
             <p class="contact-initials">
               {{ getInitials(contact.name) }}
             </p>

@@ -41,8 +41,8 @@ export class ImageViewerComponent {
   /** Starting index for image display */
   @Input() startIndex: number = 0;
   
-  /** Array of image keys corresponding to images */
-  @Input() imageKeys: string[] = [];
+  /** Array of image objects (with id, fileName, etc.) */
+  @Input() imageObjects: any[] = []; // <-- Add this input for full image objects
   
   /** Whether delete functionality is enabled */
   @Input() allowDelete: boolean = false;
@@ -50,8 +50,8 @@ export class ImageViewerComponent {
   /** Event emitted when viewer should be closed */
   @Output() close = new EventEmitter<Event>();
   
-  /** Event emitted when image should be deleted */
-  @Output() deleteImage = new EventEmitter<{ index: number, imageKey?: string }>();
+  /** Emits index and imageId for deletion */
+  @Output() deleteImage = new EventEmitter<{ index: number, imageId?: string }>();
 
   /** Current index of displayed image */
   currentIndex: number = 0;
@@ -94,14 +94,6 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Gets the key of the currently displayed image.
-   * @returns Current image key or undefined
-   */
-  get currentImageKey(): string | undefined {
-    return this.imageKeys[this.currentIndex];
-  }
-
-  /**
    * Checks if the current device supports touch input.
    */
   checkIfTouchDevice() {
@@ -127,36 +119,6 @@ export class ImageViewerComponent {
   }
 
   /**
-   * Gets the filename of the current image.
-   * @returns Filename or undefined if not available
-   */
-  getImageName(): string | undefined {
-    let imageName = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
-    return imageName?.filename;
-  }
-
-  /**
-   * Gets the file type of the current image.
-   * @returns File type or undefined if not available
-   */
-  getImageType(): string | undefined {
-    let imageType = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
-    return imageType?.fileType;
-  }
-
-  /**
-   * Gets the formatted file size of the current image.
-   * @returns Formatted file size string in KB or empty string
-   */
-  getImageSize(): string {
-    let imageSize = this.uploadService.getImageByKey(this.imageKeys[this.currentIndex]);
-    if (imageSize) {
-      return Math.round(imageSize.fileSize / 1000) + ' KB';
-    }
-    return '';
-  }
-
-  /**
    * Downloads the currently displayed image.
    */
   downloadImage() {
@@ -172,12 +134,13 @@ export class ImageViewerComponent {
    * Handles image deletion if delete is allowed.
    */
   onDeleteImage() {
-    if (this.allowDelete) {
+    if (this.allowDelete && this.imageObjects?.length > 0) {
+      const imageObj = this.imageObjects[this.currentIndex];
       this.deleteImage.emit({
         index: this.currentIndex,
-        imageKey: this.currentImageKey,
+        imageId: imageObj?.id
       });
-      if (this.imageKeys.length <= 0) {
+      if (this.imageObjects.length <= 1) {
         this.onClose(new Event('close'));
       }
     }
@@ -205,5 +168,23 @@ export class ImageViewerComponent {
       // Animation completed, component can be destroyed
       this.isVisible = false;
     }
+  }
+
+  getImageName(): string | undefined {
+    const img = this.imageObjects?.[this.currentIndex];
+    return img?.fileName;
+  }
+
+  getImageType(): string | undefined {
+    const img = this.imageObjects?.[this.currentIndex];
+    return img?.fileType;
+  }
+
+  getImageSize(): string {
+    const img = this.imageObjects?.[this.currentIndex];
+    if (img?.fileSize) {
+      return Math.round(img.fileSize / 1000) + ' KB';
+    }
+    return '';
   }
 }

@@ -170,7 +170,7 @@ export class SignupComponent implements OnInit {
       name: newName,
       email: newEmail,
     };
-    this.contactService.addContact(newContact);
+    this.contactService.addContact(newContact, []);
     this.contactService.selectContact(newContact);
   }
 

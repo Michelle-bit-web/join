@@ -91,15 +91,12 @@
             [attr.aria-label]="'Team member: ' + contact.name"
           >
             <img
-              *ngIf="getContactImage(contact)"
-              [src]="getContactImage(contact)"
+              *ngIf="contact.image"
+              [src]="contact.image.base64"
               [alt]="contact.name"
               class="contact-image"
             />
-            <p
-              *ngIf="!getContactImage(contact)"
-              class="contact-initials"
-            >
+            <p *ngIf="!contact.image && contact.id" class="contact-initials">
               {{ contactService.getInitials(contact.name) }}
             </p>
           </div>

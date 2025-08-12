@@ -6,7 +6,6 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { CDK_DRAG_CONFIG } from '@angular/cdk/drag-drop';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideStorage, getStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +34,5 @@ export const appConfig: ApplicationConfig = {
         scrollProximity: 100,
       },
     },
-    provideStorage(() => getStorage()),
   ],
 };

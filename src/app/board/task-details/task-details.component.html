@@ -82,13 +82,13 @@
               "
             >
               <img
-                *ngIf="getContactImage(contact)"
-                [src]="getContactImage(contact)"
+                *ngIf="contact.image"
+                [src]="contact.image.base64"
                 [alt]="contact.name"
                 class="contact-image"
               />
               <p
-                *ngIf="!getContactImage(contact)"
+                *ngIf="!contact.image && contact.id"
                 class="contact-initials"
               >
                 {{ contactService.getInitials(contact.name) }}
@@ -131,18 +131,18 @@
           (click)="openImageViewer(i)"
           role="gridcell"
           tabindex="0"
-          [attr.aria-label]="'Image ' + (i + 1) + ' of ' + taskImages.length + ': ' + image.filename"
+          [attr.aria-label]="'Image ' + (i + 1) + ' of ' + taskImages.length + ': ' + image.fileName"
         >
           <img
             [src]="image.base64"
-            [alt]="image.filename + ' (' + (i + 1) + ')'"
+            [alt]="image.fileName + ' (' + (i + 1) + ')'"
             class="task-image"
           />
-          <p class="image-filename">{{ image.filename }} test</p>
+          <p class="image-fileName">{{ image.fileName }} test</p>
           <div class="image-overlay">
             <button
               class="btn-download"
-              (click)="downloadImage($event, i, image.base64, image.filename)"
+              (click)="downloadImage($event, i, image.base64, image.fileName)"
             >
               <svg
                 width="24"
@@ -246,7 +246,6 @@
   <app-image-viewer
     *ngIf="showImageViewer"
     [images]="taskImageBase64"
-    [imageKeys]="taskImageKeys"
     [startIndex]="currentImageIndex"
     [allowDelete]="true"
     (close)="closeImageViewer()"

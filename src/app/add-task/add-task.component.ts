@@ -13,6 +13,8 @@ import { TaskDataService } from './task-data.service';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadedImage, UploadService } from '../services/upload.service';
 import { AddTaskService } from './add-task.service';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * AddTaskComponent provides a comprehensive form for creating and editing tasks.
@@ -109,6 +111,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Array of uploaded image objects with metadata.
    */
   uploadedImages: UploadedImage[] = [];
+  existingImages: UploadedImage[] = [];
+
+  subscriptions: Subscription | undefined;
 
   /**
    * Object containing validation error flags for the form.
@@ -156,6 +161,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     this.loadStatus();
     await this.loadContacts();
     await this.loadEditingTask();
+    await this.loadImages();
   }
 
   /**
@@ -164,6 +170,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.clearForm();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
   }
 
   /**
@@ -191,17 +200,24 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * Handles changes to the uploaded images.
    */
   onImagesChanged(images: UploadedImage[]) {
-    this.taskImages = images.map(img => img.imageKey);
+    this.uploadedImages = images;
   }
 
   /**
    * Loads all images for the currently editing task.
    */
   async loadImages() {
-    if (this.editingTask && this.editingTask.imageKey) {
-      this.taskImages = [...this.editingTask.imageKey];
-      this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
-    }
+    if (this.editingTask && this.editingTask?.images) {
+      // this.taskImages = [...this.editingTask.images];
+      // this.uploadedImages = this.uploadService.getImagesByKeys(this.taskImages);
+      if (this.editingTask && this.editingTask.id && this.editingTask.images) {
+        this.subscriptions = this.uploadService.getImages('tasks', this.editingTask.id).subscribe(images => {
+          this.existingImages = images;
+          this.uploadedImages = [...images];
+        });
+      }
+    };
+    this.subscriptions?.unsubscribe();
   }
 
   /**
@@ -377,10 +393,13 @@ export class AddTaskComponent implements OnInit, OnDestroy {
    * @param contact - The contact object containing the imageKey
    * @returns Base64 encoded image string or null if no image exists
    */
-  getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+  getContactImage(contact: Contact): Observable<string | null> {
+    if (contact.id && contact.image) {
+      return this.uploadService.getImages('contacts', contact.id as string).pipe(
+        map(images => images.length > 0 ? images[0].base64 : null)
+      );
+    } else {
+      return new Observable(observer => observer.next(null));
     }
-    return null;
-  }
+  };
 }

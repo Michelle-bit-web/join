@@ -49,18 +49,18 @@
       >
         <img
           class="contact-image"
-          [src]="imageBase64"
+          [src]="contactToEdit.image.base64"
           alt="User Image"
-          *ngIf="imageBase64"
+          *ngIf="contactToEdit && contactToEdit.image"
           (click)="openContactImageViewer()"
         />
         <img
           class="img-user"
           src="assets/img/svg/person.svg"
           alt="User Image"
-          *ngIf="!imageBase64 && !contactToEdit"
+          *ngIf="!contactToEdit || (contactToEdit && !contactToEdit.image)"
         />
-        <p class="contact-initials" *ngIf="!imageBase64 && contactToEdit">
+        <p class="contact-initials" *ngIf="contactToEdit && !contactToEdit.image">
           {{ contactService.getInitials(contactToEdit.name) }}
         </p>
         <input

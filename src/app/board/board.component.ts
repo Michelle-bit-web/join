@@ -217,6 +217,13 @@ export class BoardComponent {
     });
   }
 
+  /** Unsubscribes from all active subscriptions to prevent memory leaks. */
+  ngOnDestroy(): void {
+    this.unsubTask?.unsubscribe();
+    this.unsubSubtask?.unsubscribe();
+    this.unsubContact?.unsubscribe();
+  }
+
   /**
    * Placeholder for handling user input in the search field.
    */
@@ -266,7 +273,7 @@ export class BoardComponent {
   onOverlayAnimationDone(event: AnimationEvent) {
     this.overlayManager.onOverlayAnimationDone(event);
   }
-  
+
   /**
    * Returns the delay for starting a drag action based on screen width.
    * Prevents accidental drags on small screens.
