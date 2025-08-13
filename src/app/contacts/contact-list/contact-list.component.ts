@@ -52,7 +52,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * Subscription to contact data changes from the service.
    */
   private contactsSubscription: Subscription = new Subscription();
-  
+
   /**
    * Subscription to contact selection changes from the service.
    */
@@ -81,8 +81,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * and handling errors and contact selection.
    */
   ngOnInit(): void {
+    this.getCurrentUser(); // Move this before subscribeToContacts
     this.subscribeToContacts();
-    this.getCurrentUser();
+    this.subscribeToSelectedContact();
   }
 
   /**
@@ -94,6 +95,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
       next: (contacts) => this.handleContactsLoaded(contacts),
       error: (error) => this.handleContactsError(error),
     });
+  }
+
+  /**
+   * Subscribes to selected contacts of the contact list.
+   */
+  private subscribeToSelectedContact(): void {
+    this.selectionSubscription = this.contactService.selectedContact$.subscribe(
+      contact => {
+        this.selectedContact = contact;
+      }
+    );
   }
 
   /**
