@@ -2073,34 +2073,34 @@ import { UploadService } from &#x27;../../services/upload.service&#x27;;
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   /** Flag to control contact visibility with animations */
   contactVisible &#x3D; false;
-  
+
   /** The currently displayed contact object */
   contact?: Contact;
-  
+
   /** Animation state counter for triggering enter animations */
   animationState &#x3D; 0;
-  
+
   /** Flag indicating if contact is being deleted */
   isDeleting &#x3D; false;
-  
+
   /** Flag indicating if contact is being edited */
   isEditing &#x3D; false;
-  
+
   /** Flag for mobile menu visibility */
   menuOpen &#x3D; false;
-  
+
   /** Flag for mobile layout detection */
   isMobile &#x3D; window.innerWidth &lt; 768;
-  
+
   /** Subscription to contact changes */
   private subscription?: Subscription;
-  
+
   /** Flag to track first load for animation purposes */
   firstLoad &#x3D; true;
 
   /** Event emitted when user wants to return to contact list */
   @Output() backToList &#x3D; new EventEmitter&lt;void&gt;();
-  
+
   /** Event emitted when no contact is visible */
   @Output() noContactVisible &#x3D; new EventEmitter&lt;void&gt;();
 
@@ -2111,7 +2111,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    * @param uploadService - Service for retrieving contact images
    */
   constructor(
-   public contactService: ContactService,
+    public contactService: ContactService,
     private elementRef: ElementRef,
     private uploadService: UploadService
   ) { }
@@ -2290,12 +2290,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact?.id) {
       this.isDeleting &#x3D; true;
       this.menuOpen &#x3D; false;
-      // Delete image from Firestore if it exists
       if (this.contact.image &amp;&amp; this.contact.image.id) {
         this.uploadService.deleteImage(&#x27;contacts&#x27;, this.contact.id, this.contact.image.id);
       }
       this.contactService.deleteContact(this.contact.id);
-      this.contactService.clearSelection();
+    } else {
+      console.error(&#x27;Cannot delete contact: No ID found&#x27;, this.contact);
     }
   }
 

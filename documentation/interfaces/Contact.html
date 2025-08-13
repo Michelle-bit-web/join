@@ -540,12 +540,12 @@ export class ContactService {
     return new Observable((observer) &#x3D;&gt; {
       const contactsRef &#x3D; this.getContactsRef();
       const unsubscribe &#x3D; onSnapshot(contactsRef, (snapshot) &#x3D;&gt; {
-          const contacts: Contact[] &#x3D; [];
-          snapshot.forEach((doc) &#x3D;&gt; {
-            contacts.push({ id: doc.id, ...doc.data() } as Contact);
-          });
-          observer.next(contacts);
-        },
+        const contacts: Contact[] &#x3D; [];
+        snapshot.forEach((doc) &#x3D;&gt; {
+          contacts.push({ id: doc.id, ...doc.data() } as Contact);
+        });
+        observer.next(contacts);
+      },
         (error) &#x3D;&gt; { observer.error(error); }
       );
       return () &#x3D;&gt; unsubscribe();
@@ -563,6 +563,7 @@ export class ContactService {
       const contactsRef &#x3D; this.getContactsRef();
       const docRef &#x3D; await addDoc(contactsRef, newContact);
       const fullContact: Contact &#x3D; { id: docRef.id, ...newContact };
+      this.selectContact(fullContact);
       return fullContact;
     } catch (err) {
       console.error(err);
@@ -595,7 +596,7 @@ export class ContactService {
       email: updatedContact.email,
       phone: updatedContact.phone
     };
-    if(removeImage) {
+    if (removeImage) {
       contact.image &#x3D; deleteField() as any;
     } else if (updatedContact.image) {
       contact.image &#x3D; updatedContact.image;
@@ -672,9 +673,14 @@ export class ContactService {
    * @returns {Promise&lt;void&gt;} Promise that resolves when contact is deleted
    */
   async deleteContact(docId: string): Promise&lt;void&gt; {
+    const currentSelected &#x3D; this.selectedContactSubject.value;
+    const isDeletingSelected &#x3D; currentSelected?.id &#x3D;&#x3D;&#x3D; docId;
     await deleteDoc(this.getSingleContactsRef(docId)).catch((err) &#x3D;&gt; {
       console.error(&#x27;Failed to delete contact:&#x27;, err);
     });
+    if (isDeletingSelected) {
+      this.clearSelection();
+    }
   }
 
   /**

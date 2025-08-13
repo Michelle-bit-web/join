@@ -132,12 +132,12 @@ export class ContactService {
     return new Observable((observer) => {
       const contactsRef = this.getContactsRef();
       const unsubscribe = onSnapshot(contactsRef, (snapshot) => {
-          const contacts: Contact[] = [];
-          snapshot.forEach((doc) => {
-            contacts.push({ id: doc.id, ...doc.data() } as Contact);
-          });
-          observer.next(contacts);
-        },
+        const contacts: Contact[] = [];
+        snapshot.forEach((doc) => {
+          contacts.push({ id: doc.id, ...doc.data() } as Contact);
+        });
+        observer.next(contacts);
+      },
         (error) => { observer.error(error); }
       );
       return () => unsubscribe();
@@ -155,6 +155,7 @@ export class ContactService {
       const contactsRef = this.getContactsRef();
       const docRef = await addDoc(contactsRef, newContact);
       const fullContact: Contact = { id: docRef.id, ...newContact };
+      this.selectContact(fullContact);
       return fullContact;
     } catch (err) {
       console.error(err);
@@ -187,7 +188,7 @@ export class ContactService {
       email: updatedContact.email,
       phone: updatedContact.phone
     };
-    if(removeImage) {
+    if (removeImage) {
       contact.image = deleteField() as any;
     } else if (updatedContact.image) {
       contact.image = updatedContact.image;
@@ -264,9 +265,14 @@ export class ContactService {
    * @returns {Promise<void>} Promise that resolves when contact is deleted
    */
   async deleteContact(docId: string): Promise<void> {
+    const currentSelected = this.selectedContactSubject.value;
+    const isDeletingSelected = currentSelected?.id === docId;
     await deleteDoc(this.getSingleContactsRef(docId)).catch((err) => {
       console.error('Failed to delete contact:', err);
     });
+    if (isDeletingSelected) {
+      this.clearSelection();
+    }
   }
 
   /**

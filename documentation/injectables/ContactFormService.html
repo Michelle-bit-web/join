@@ -673,8 +673,8 @@ Returns appropriate image keys for editing vs. new contact scenarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="231"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:231</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:236</a></div>
                         </td>
                     </tr>
 
@@ -1614,8 +1614,8 @@ export class ContactFormService {
      */
     async updateExistingContact(component: any, contact: Contact): Promise&lt;void&gt; {
         if (component.pendingImageDeletion &amp;&amp; component.contactToEdit?.image) {
-                await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
-            }
+            await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+        }
         if (component.imgData &amp;&amp; component.imgData?.base64 &amp;&amp; contact.id) {
             this.uploadService.addImageToContact(contact.id, component.imgData);
         }
@@ -1646,10 +1646,15 @@ export class ContactFormService {
      * @returns {Promise&lt;void&gt;} Promise that resolves when contact is added
      */
     private async addNewContact(component: any, contact: Contact): Promise&lt;void&gt; {
-        if (contact.image) {
-            await this.contactService.addContact(contact, [component.imgData]);
-        } else {
-            await this.contactService.addContact(contact);
+        if (component.imgData &amp;&amp; component.imgData.base64) {
+            contact.image &#x3D; component.imgData;
+        }
+        const addedContact &#x3D; await this.contactService.addContact(contact);
+        if (addedContact) {
+            component.contactToEdit &#x3D; addedContact;
+            if (component.imgData &amp;&amp; component.imgData.base64 &amp;&amp; addedContact.id) {
+                await this.uploadService.addImageToContact(addedContact.id, component.imgData);
+            }
         }
     }
 

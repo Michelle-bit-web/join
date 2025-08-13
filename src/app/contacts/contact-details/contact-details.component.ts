@@ -74,34 +74,34 @@ import { UploadService } from '../../services/upload.service';
 export class ContactDetailsComponent implements OnInit, OnDestroy {
   /** Flag to control contact visibility with animations */
   contactVisible = false;
-  
+
   /** The currently displayed contact object */
   contact?: Contact;
-  
+
   /** Animation state counter for triggering enter animations */
   animationState = 0;
-  
+
   /** Flag indicating if contact is being deleted */
   isDeleting = false;
-  
+
   /** Flag indicating if contact is being edited */
   isEditing = false;
-  
+
   /** Flag for mobile menu visibility */
   menuOpen = false;
-  
+
   /** Flag for mobile layout detection */
   isMobile = window.innerWidth < 768;
-  
+
   /** Subscription to contact changes */
   private subscription?: Subscription;
-  
+
   /** Flag to track first load for animation purposes */
   firstLoad = true;
 
   /** Event emitted when user wants to return to contact list */
   @Output() backToList = new EventEmitter<void>();
-  
+
   /** Event emitted when no contact is visible */
   @Output() noContactVisible = new EventEmitter<void>();
 
@@ -112,7 +112,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    * @param uploadService - Service for retrieving contact images
    */
   constructor(
-   public contactService: ContactService,
+    public contactService: ContactService,
     private elementRef: ElementRef,
     private uploadService: UploadService
   ) { }
@@ -291,12 +291,12 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact?.id) {
       this.isDeleting = true;
       this.menuOpen = false;
-      // Delete image from Firestore if it exists
       if (this.contact.image && this.contact.image.id) {
         this.uploadService.deleteImage('contacts', this.contact.id, this.contact.image.id);
       }
       this.contactService.deleteContact(this.contact.id);
-      this.contactService.clearSelection();
+    } else {
+      console.error('Cannot delete contact: No ID found', this.contact);
     }
   }
 
