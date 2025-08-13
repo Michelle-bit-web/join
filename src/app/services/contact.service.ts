@@ -168,9 +168,9 @@ export class ContactService {
    * @param docId - The Firestore document ID of the contact to update.
    * @param updatedContact - The updated contact data.
    */
-  async updateContact(docId: string, updatedContact: Contact, images?: UploadedImage[]): Promise<void> {
+  async updateContact(docId: string, updatedContact: Contact, images?: UploadedImage[], removeImage: boolean = false): Promise<void> {
     let docRef = this.getSingleContactsRef(docId);
-    await updateDoc(docRef, this.getCleanJson(updatedContact)).catch((err) => {
+    await updateDoc(docRef, this.getCleanJson(updatedContact, removeImage)).catch((err) => {
       console.error(err);
     });
   }
@@ -181,13 +181,15 @@ export class ContactService {
    * @param {Contact} updatedContact - The contact object to sanitize
    * @returns {Partial<Contact>} A JSON object containing only valid contact fields
    */
-  getCleanJson(updatedContact: Contact): Partial<Contact> {
+  getCleanJson(updatedContact: Contact, removeImage: boolean): Partial<Contact> {
     const contact: Contact = {
       name: updatedContact.name,
       email: updatedContact.email,
       phone: updatedContact.phone
     };
-    if (updatedContact.image) {
+    if(removeImage) {
+      contact.image = deleteField() as any;
+    } else if (updatedContact.image) {
       contact.image = updatedContact.image;
     }
     return contact;

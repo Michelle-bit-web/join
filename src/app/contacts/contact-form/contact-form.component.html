@@ -60,8 +60,8 @@
           alt="User Image"
           *ngIf="!contactToEdit && !imageBase64"
         />
-        <p class="contact-initials" *ngIf="contactToEdit && !imageBase64 && !contactToEdit?.image?.base64">
-          {{ contactService.getInitials(contactToEdit?.name) }}
+        <p class="contact-initials" *ngIf="contactToEdit && !imageBase64 && !contactToEdit.image?.base64">
+          {{ contactService.getInitials(contactToEdit.name) }}
         </p>
         <input
           class="file-picker"

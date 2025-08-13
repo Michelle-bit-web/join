@@ -293,9 +293,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   async onSubmit(): Promise<void> {
     if (!this.contactForm.valid) return;
     this.formSubmitted = true;
-    if (this.pendingImageDeletion && this.contactToEdit?.id && this.contactToEdit.image) {
-      await this.uploadService.deleteImageFromContact(this.contactToEdit.id);
-    }
     const contact = this.formService.buildContactFromForm(this);
     await this.formService.processSubmission(this, contact);
     this.addedContact.emit(this.contactToEdit || contact);

@@ -169,10 +169,7 @@ export class ContactFormService {
         const isEdit = !!(component.contactToEdit && component.contactToEdit.id);
         if (isEdit) {
             contact.id = component.contactToEdit.id;
-            if (component.pendingImageDeletion && component.contactToEdit?.image) {
-                await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
-            }
-            this.updateExistingContact(component, contact);
+            await this.updateExistingContact(component, contact);
         } else {
             await this.addNewContact(component, contact);
         }
@@ -187,10 +184,13 @@ export class ContactFormService {
      * @returns {void}
      */
     async updateExistingContact(component: any, contact: Contact): Promise<void> {
+        if (component.pendingImageDeletion && component.contactToEdit?.image) {
+                await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+            }
         if (component.imgData && component.imgData?.base64 && contact.id) {
             this.uploadService.addImageToContact(contact.id, component.imgData);
         }
-        await this.processContactUpdate(contact);
+        await this.processContactUpdate(contact, component.pendingImageDeletion);
     }
 
     /**
@@ -201,9 +201,9 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object to update
      * @returns {void}
      */
-    private async processContactUpdate(contact: Contact): Promise<void> {
+    private async processContactUpdate(contact: Contact, removeImage: boolean = false): Promise<void> {
         if (contact.id) {
-            this.contactService.updateContact(contact.id, contact);
+            this.contactService.updateContact(contact.id, contact, undefined, removeImage);
         }
     }
 
