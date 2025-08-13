@@ -1389,7 +1389,7 @@ export class SignupComponent implements OnInit {
       name: newName,
       email: newEmail,
     };
-    this.contactService.addContact(newContact);
+    this.contactService.addContact(newContact, []);
     this.contactService.selectContact(newContact);
   }
 
@@ -1991,10 +1991,12 @@ form {
 
 .success-message {
   @include inter400-fs16;
-  color: var(--text-color-success);
+  color: var(--text-color-light);
   display: block;
   margin-top: 16px;
   text-align: center;
+  background-color: var(--background-dark);
+  border-radius: 10px;
 }
 
 .login-link {

@@ -148,21 +148,15 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#assignedTo" 
->
-                                            assignedTo
-                                        </a>
-                                </li>
-                                <li>
                                         <a href="#base64" 
 >
                                             base64
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#filename" 
+                                        <a href="#fileName" 
 >
-                                            filename
+                                            fileName
                                         </a>
                                 </li>
                                 <li>
@@ -178,9 +172,10 @@
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#imageKey" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#id" 
 >
-                                            imageKey
+                                            id
                                         </a>
                                 </li>
                             </ul>
@@ -194,45 +189,6 @@
 
             <section data-compodoc="block-properties">
                 <h3 id="inputs">Properties</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="assignedTo"></a>
-                                        <span class="name "><b>assignedTo</b>
-                                            <a href="#assignedTo">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>assignedTo:     <code>&quot;user&quot; | &quot;task&quot;</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;user&quot; | &quot;task&quot;</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Assignment target for the image</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -276,9 +232,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="filename"></a>
-                                        <span class="name "><b>filename</b>
-                                            <a href="#filename">
+                                        <a name="fileName"></a>
+                                        <span class="name "><b>fileName</b>
+                                            <a href="#fileName">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -286,7 +242,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>filename:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>fileName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -305,7 +261,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Original filename of the uploaded image</p>
+                                    <div class="io-description"><p>Original fileName of the uploaded image</p>
 </div>
                                 </td>
                             </tr>
@@ -393,9 +349,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="imageKey"></a>
-                                        <span class="name "><b>imageKey</b>
-                                            <a href="#imageKey">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -403,7 +359,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>imageKey:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -416,13 +372,18 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Unique identifier for the image</p>
+                                    <div class="io-description"><p>Optional Firestore document ID for the image</p>
 </div>
                                 </td>
                             </tr>
@@ -434,16 +395,19 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Firestore, addDoc, doc, getDocs, updateDoc, deleteDoc } from &#x27;@angular/fire/firestore&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { collection, onSnapshot } from &#x27;firebase/firestore&#x27;;
 
 /**
  * Interface representing an uploaded image with metadata.
  */
 export interface UploadedImage {
-  /** Unique identifier for the image */
-  imageKey: string;
+  /** Optional Firestore document ID for the image */
+  id?: string;
 
-  /** Original filename of the uploaded image */
-  filename: string;
+  /** Original fileName of the uploaded image */
+  fileName: string;
 
   /** Type of the file */
   fileType: string;
@@ -453,9 +417,6 @@ export interface UploadedImage {
 
   /** Base64 encoded image data */
   base64: string;
-  
-  /** Assignment target for the image */
-  assignedTo: &#x27;user&#x27; | &#x27;task&#x27;;
 }
 
 /**
@@ -468,13 +429,6 @@ export interface UploadedImage {
 
 export class UploadService {
   /**
-   * Key used for localStorage storage to persist images across sessions.
-   * @private
-   * @type {string}
-   */
-  private storageKey &#x3D; &#x27;allImages&#x27;;
-  
-  /**
    * In-memory array of uploaded images for quick access during application runtime.
    * @type {UploadedImage[]}
    */
@@ -484,30 +438,7 @@ export class UploadService {
    * Creates an instance of UploadService.
    * Initializes the service for managing image uploads and storage operations.
    */
-  constructor() { }
-
-  /**
-   * Saves a single image to localStorage.
-   * @param {UploadedImage} image - Image to save
-   * @returns {void}
-   */
-  saveImage(image: UploadedImage) {
-    const current &#x3D; this.getImages();
-    current.push(image);
-    localStorage.setItem(this.storageKey, JSON.stringify(current));
-  }
-
-  /**
-   * Saves multiple images to localStorage, avoiding duplicates.
-   * @param {UploadedImage[]} images - Array of images to save
-   * @returns {void}
-   */
-  saveImages(images: UploadedImage[]): void {
-    const existing &#x3D; this.getImages();
-    const filtered &#x3D; existing.filter(img &#x3D;&gt; !images.some(newImg &#x3D;&gt; newImg.imageKey &#x3D;&#x3D;&#x3D; img.imageKey));
-    const merged &#x3D; [...filtered, ...images];
-    localStorage.setItem(this.storageKey, JSON.stringify(merged));
-  }
+  constructor(private firestore: Firestore) { }
 
   /**
    * Sets the in-memory images array.
@@ -519,64 +450,118 @@ export class UploadService {
   }
 
   /**
-   * Retrieves all images from localStorage.
-   * @returns {UploadedImage[]} Array of all stored images
-   */
-  getImages(): UploadedImage[] {
-    const data &#x3D; localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+    * Returns a reference to the &#x27;images&#x27; subcollection for a given task or contact.
+    *
+    * @param parentCollection - The collection type (&#x27;tasks&#x27; or &#x27;contacts).
+    * @param parentId - The document ID of the parent task or contact.
+    */
+  private getImagesRef(parentCollection: &#x27;contacts&#x27; |&#x27;tasks&#x27;, parentId: string) {
+    return collection(this.firestore, parentCollection, parentId, &#x27;images&#x27;);
   }
 
   /**
-   * Retrieves images by their keys.
-   * @param {string[]} imageKeys - Array of image keys to retrieve
-   * @returns {UploadedImage[]} Array of matching images
-   */
-  getImagesByKeys(imageKeys: string[]): UploadedImage[] {
-    const allImages &#x3D; this.getImages();
-    return allImages.filter(img &#x3D;&gt; imageKeys.includes(img.imageKey));
+     * Adds a subtask to a specific task&#x27;s subcollection.
+     * 
+     * @param parentCollection - The collection type (&#x27;tasks&#x27;).
+     * @param parentId - The ID of the parent task.
+     * @param subtask - The subtask to add.
+     * @returns The created subtask with ID, or null on failure.
+     */
+  async addImage(parentCollection: &#x27;tasks&#x27;, parentId: string, image: UploadedImage): Promise&lt;UploadedImage | null&gt; {
+    try {
+      const imagesRef &#x3D; this.getImagesRef(parentCollection, parentId);
+      const docRef &#x3D; await addDoc(imagesRef, image);
+      return { id: docRef.id, ...image };
+    } catch (error) {
+      console.error(&#x27;Error adding image:&#x27;, error);
+      return null;
+    }
   }
 
   /**
-   * Retrieves a single image by its key.
-   * @param {string} imageKey - Key of the image to retrieve
-   * @returns {UploadedImage | undefined} Image object or undefined if not found
+   * Retrieves the first image for a given task.
+   *
+   * @param parentCollection - The collection type (&#x27;tasks&#x27; or &#x27;contacts&#x27;).
+   * @param parentId - The ID of the parent task or contact.
    */
-  getImageByKey(imageKey: string): UploadedImage | undefined {
-    const allImages &#x3D; this.getImages();
-    return allImages.find(img &#x3D;&gt; img.imageKey &#x3D;&#x3D;&#x3D; imageKey);
+  async getFirstImage(parentCollection: &#x27;contacts&#x27; | &#x27;tasks&#x27;, parentId: string): Promise&lt;UploadedImage | null&gt; {
+    try {
+      const qSnap &#x3D; await getDocs(this.getImagesRef(parentCollection, parentId));
+      if (qSnap.empty) return null;
+      const d &#x3D; qSnap.docs[0];
+      return { id: d.id, ...(d.data() as any) } as UploadedImage;
+    } catch (err) {
+      console.error(&#x27;getFirstImage error&#x27;, err);
+      return null;
+    }
   }
 
   /**
-   * Retrieves base64 data for an image by its key.
-   * @param {string} imageKey - Key of the image
-   * @returns {string | null} Base64 string or null if image not found
+   * Observes the images of a given task in real-time.
+   *
+   * @param parentCollection - The collection type (&#x27;tasks&#x27; or &#x27;contacts&#x27;).
+   * @param parentId - The ID of the parent task or contact.
    */
-  getBase64ByKey(imageKey: string): string | null {
-    const image &#x3D; this.getImageByKey(imageKey);
-    return image ? image.base64 : null;
+  getImages(parentCollection: &#x27;contacts&#x27; |&#x27;tasks&#x27;, parentId: string): Observable&lt;UploadedImage[]&gt; {
+    return new Observable(observer &#x3D;&gt; {
+      const unsubscribe &#x3D; onSnapshot(this.getImagesRef(parentCollection, parentId), snapshot &#x3D;&gt; {
+        const images: UploadedImage[] &#x3D; [];
+        snapshot.forEach(doc &#x3D;&gt; {
+          images.push({ id: doc.id, ...doc.data() } as UploadedImage);
+        });
+        observer.next(images);
+      }, error &#x3D;&gt; observer.error(error));
+      
+      return () &#x3D;&gt; unsubscribe();
+    });
   }
 
   /**
-   * Deletes a single image by its key.
-   * @param {string} imageKey - Key of the image to delete
-   * @returns {void}
+   * Updates a subtask document in Firestore.
+   * 
+   * @param parentCollection - The collection type (&#x27;tasks&#x27;).
+   * @param parentId - The parent task ID.
+   * @param imageId - The subtask document ID.
+   * @param updatedImage - The updated subtask data.
    */
-  deleteImage(imageKey: string) {
-    const current &#x3D; this.getImages();
-    const updated &#x3D; current.filter(img &#x3D;&gt; img.imageKey !&#x3D;&#x3D; imageKey);
-    localStorage.setItem(this.storageKey, JSON.stringify(updated));
+  async updateImage(parentCollection: &#x27;tasks&#x27;, parentId: string, imageId: string, updatedImage: Partial&lt;UploadedImage&gt;): Promise&lt;void&gt; {
+    try {
+      const docRef &#x3D; doc(this.firestore, parentCollection, parentId, &#x27;images&#x27;, imageId);
+      await updateDoc(docRef, updatedImage as any);
+    } catch (err) {
+      console.error(&#x27;updateImage error&#x27;, err);
+    }
   }
 
   /**
-   * Deletes multiple images by their keys.
-   * @param {string[]} imageKeys - Array of image keys to delete
-   * @returns {void}
+   * Returns a plain JSON object with only the allowed contact fields.
+   * This is used to avoid including undefined or extra properties when updating Firestore.
+   * @param {Contact} updatedContact - The contact object to sanitize
+   * @returns {Partial&lt;Contact&gt;} A JSON object containing only valid contact fields
    */
-  deleteImages(imageKeys: string[]) {
-    const current &#x3D; this.getImages();
-    const updated &#x3D; current.filter(img &#x3D;&gt; !imageKeys.includes(img.imageKey));
-    localStorage.setItem(this.storageKey, JSON.stringify(updated));
+  getCleanJson(updated: UploadedImage): Partial&lt;UploadedImage&gt; {
+    return {
+      fileName: updated.fileName,
+      fileSize: updated.fileSize,
+      fileType: updated.fileType,
+      base64: updated.base64
+    };
+  }
+
+  /**
+  * Deletes a subtask from a task&#x27;s subcollection.
+  * 
+  * @param parentCollection - The collection type (&#x27;tasks&#x27; or &#x27;contacts&#x27;).
+  * @param parentId - The parent ID.
+  * @param ImageId - The Image ID to delete.
+  */
+  async deleteImage(parentCollection: &#x27;contacts&#x27; |&#x27;tasks&#x27;, parentId: string, imageId: string): Promise&lt;void&gt; {
+    try {
+      const docRef &#x3D; doc(this.firestore, parentCollection, parentId, &#x27;images&#x27;, imageId);
+      await deleteDoc(docRef);
+    } catch (err) {
+      console.error(&#x27;deleteImage error&#x27;, err);
+    }
   }
 
   /**
@@ -584,27 +569,31 @@ export class UploadService {
    * @returns {void}
    */
   clearImages() {
-    localStorage.removeItem(this.storageKey);
+    this.images &#x3D; [];
+  }
+
+    /**
+   * Fügt ein Bild direkt in das Kontakt-Dokument ein.
+   */
+  async addImageToContact(contactId: string, image: UploadedImage): Promise&lt;void&gt; {
+    try {
+      const contactRef &#x3D; doc(this.firestore, &#x27;contacts&#x27;, contactId);
+      await updateDoc(contactRef, { image });
+    } catch (error) {
+      console.error(&#x27;Error adding image to contact:&#x27;, error);
+    }
   }
 
   /**
-   * Retrieves base64 data for task-related images.
-   * @param {string[]} taskImageKeys - Array of task image keys
-   * @returns {string[]} Array of base64 strings for existing images
+   * Löscht das Bild im Kontakt-Dokument.
    */
-  getTaskImages(taskImageKeys: string[]): string[] {
-    return taskImageKeys
-      .map(key &#x3D;&gt; this.getBase64ByKey(key))
-      .filter(base64 &#x3D;&gt; base64 !&#x3D;&#x3D; null) as string[];
-  }
-
-  /**
-   * Retrieves base64 data for a contact image.
-   * @param {string} contactImageKey - Key of the contact image
-   * @returns {string | null} Base64 string or null if image not found
-   */
-  getContactImage(contactImageKey: string): string | null {
-    return this.getBase64ByKey(contactImageKey);
+  async deleteImageFromContact(contactId: string): Promise&lt;void&gt; {
+    try {
+      const contactRef &#x3D; doc(this.firestore, &#x27;contacts&#x27;, contactId);
+      await updateDoc(contactRef, { image: null });
+    } catch (err) {
+      console.error(&#x27;Error deleting image from contact:&#x27;, err);
+    }
   }
 }</code></pre>
     </div>

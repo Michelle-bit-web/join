@@ -203,6 +203,10 @@
                                     <span class="modifier">Public</span>
                                 <a href="#taskService" >taskService</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#uploadService" >uploadService</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -970,8 +974,8 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets the contact&#39;s profile image from localStorage using their imageKey.
-Returns null if no image is associated with the contact.</p>
+                        <div class="io-description"><p>Gets the contact&#39;s profile image from Firestore using their ID.
+For display, use async pipe in template.</p>
 </div>
 
                             <div class="io-description">
@@ -1000,7 +1004,7 @@ Returns null if no image is associated with the contact.</p>
 
                                             <td>
                                                     <ul>
-<li>The contact object containing the imageKey</li>
+<li>The contact object</li>
 </ul>
 
                                             </td>
@@ -1013,7 +1017,7 @@ Returns null if no image is associated with the contact.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>Base64 encoded image string or null if no image exists</p>
+                                <p>Observable of the contact image URL</p>
 
                             </div>
                 </td>
@@ -1705,6 +1709,38 @@ and if so, resets and reloads the contact list based on the updated task data.</
 
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>uploadService</b></span>
+                        <a href="#uploadService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/board/task/task.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for retrieving contact images.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </section>
 
     <section data-compodoc="block-accessors">
@@ -1835,7 +1871,7 @@ export class TaskComponent {
   constructor(
     public taskService: TaskService,
     public contactService: ContactService,
-    private uploadService: UploadService
+    public uploadService: UploadService
   ) { }
 
   /**
@@ -1998,15 +2034,17 @@ export class TaskComponent {
   }
 
   /**
-   * Gets the contact&#x27;s profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
+   * Gets the contact&#x27;s profile image from Firestore using their ID.
+   * For display, use async pipe in template.
    * 
-   * @param contact - The contact object containing the imageKey
-   * @returns Base64 encoded image string or null if no image exists
+   * @param contact - The contact object
+   * @returns Observable of the contact image URL
    */
   getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+    // Remove imageKey logic, use Firestore-based retrieval
+    if (contact.id) {
+      // For display, use async pipe in template
+      return null;
     }
     return null;
   }
@@ -2107,15 +2145,12 @@ export class TaskComponent {
             [attr.aria-label]&#x3D;&quot;&#x27;Team member: &#x27; + contact.name&quot;
           &gt;
             &lt;img
-              *ngIf&#x3D;&quot;getContactImage(contact)&quot;
-              [src]&#x3D;&quot;getContactImage(contact)&quot;
+              *ngIf&#x3D;&quot;contact.image&quot;
+              [src]&#x3D;&quot;contact.image.base64&quot;
               [alt]&#x3D;&quot;contact.name&quot;
               class&#x3D;&quot;contact-image&quot;
             /&gt;
-            &lt;p
-              *ngIf&#x3D;&quot;!getContactImage(contact)&quot;
-              class&#x3D;&quot;contact-initials&quot;
-            &gt;
+            &lt;p *ngIf&#x3D;&quot;!contact.image &amp;&amp; contact.id&quot; class&#x3D;&quot;contact-initials&quot;&gt;
               {{ contactService.getInitials(contact.name) }}
             &lt;/p&gt;
           &lt;/div&gt;
@@ -2186,7 +2221,7 @@ export class TaskComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card-layout" (click)="openTaskDetails(task)" role="button" tabindex="0" [attr.aria-label]="\'Open task: \' + task.title">  <div class="wrapper-top">    <p      class="category-flag-card"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "      role="badge"      [attr.aria-label]="\'Category: \' + taskService.capitalize(task.category)"    >      {{ taskService.capitalize(task.category) }}    </p>    <button      class="dots-menu-btn"      type="button"      (click)="openDotsMenuHandler($event)"      aria-label="Task options menu"      [attr.aria-expanded]="isDotsMenuOpen"      aria-haspopup="true"    >      <span class="dot" aria-hidden="true"></span>      <span class="dot" aria-hidden="true"></span>      <span class="dot" aria-hidden="true"></span>    </button>    <div      class="dots-menu-overlay"      *ngIf="isDotsMenuOpen"      (click)="$event.stopPropagation()"      role="menu"      aria-label="Task status options"    >      <a *ngIf="task.status !== \'to-do\'" (click)="changeStatus(\'to-do\', $event)" role="menuitem" tabindex="0"        >To Do</a      >      <a        *ngIf="task.status !== \'in-progress\'"        (click)="changeStatus(\'in-progress\', $event)"        role="menuitem" tabindex="0"        >In Progress</a      >      <a        *ngIf="task.status !== \'await-feedback\'"        (click)="changeStatus(\'await-feedback\', $event)"        role="menuitem" tabindex="0"        >Awaiting Feedback</a      >      <a *ngIf="task.status !== \'done\'" (click)="changeStatus(\'done\', $event)" role="menuitem" tabindex="0"        >Done</a      >    </div>  </div>  <div class="task-card">    <h1 class="see-more" role="heading" aria-level="3">{{ taskService.capitalize(task.title) }}</h1>    <p class="task-description truncated" [attr.aria-label]="\'Description: \' + taskService.capitalize(task.description)">      {{ taskService.capitalize(task.description) }}      <span class="see-more" aria-hidden="true">…</span>    </p>    <div      class="subtask-wrapper"      [style.visibility]="        subtaskList && subtaskList.length > 0 ? \'visible\' : \'hidden\'      "      role="progressbar"      [attr.aria-valuenow]="getCompletedSubtasksCount(subtaskList)"      [attr.aria-valuemax]="subtaskList.length || 0"      [attr.aria-label]="getCompletedSubtasksCount(subtaskList) + \' of \' + (subtaskList.length || 0) + \' subtasks completed\'"    >      <div class="subtask-bar-default">        <div          class="subtask-bar-fill"          [ngStyle]="{ width: percentageCompleted(subtaskList) + \'%\' }"        ></div>      </div>      <span>        {{ getCompletedSubtasksCount(subtaskList) }} /        {{ subtaskList.length }} Subtasks      </span>    </div>    <div class="card-bottom-wrapper">      <div class="collaborators-wrapper" role="group" aria-label="Assigned team members">        <div class="img-user-wrapper">          @for (contact of getUniqueContacts(); track contact.id) {          <div            class="img-user"            [style.background-color]="              contactService.getContactColor(contact.name)            "            role="img"            [attr.aria-label]="\'Team member: \' + contact.name"          >            <img              *ngIf="getContactImage(contact)"              [src]="getContactImage(contact)"              [alt]="contact.name"              class="contact-image"            />            <p              *ngIf="!getContactImage(contact)"              class="contact-initials"            >              {{ contactService.getInitials(contact.name) }}            </p>          </div>          }          <div            class="img-user more-count"            *ngIf="getAllUniqueContacts().length > 3"            [title]="getRemainingContactNames()"            role="img"            [attr.aria-label]="\'Plus \' + (getAllUniqueContacts().length - 3) + \' more team members\'"          >            +{{ getAllUniqueContacts().length - 3 }}          </div>        </div>      </div>      <img        src="assets/img/icons/prio-high.png"        alt="High priority"        class="card-priority"        *ngIf="task.priority === \'urgent\'"        role="img"        aria-label="Priority: High"      />      <img        src="assets/img/icons/prio-medium.png"        alt="Medium priority"        class="card-priority"        *ngIf="task.priority === \'medium\'"        role="img"        aria-label="Priority: Medium"      />      <img        src="assets/img/icons/prio-low.png"        alt="Low priority"        class="card-priority"        *ngIf="task.priority === \'low\'"        role="img"        aria-label="Priority: Low"      />    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="card-layout" (click)="openTaskDetails(task)" role="button" tabindex="0" [attr.aria-label]="\'Open task: \' + task.title">  <div class="wrapper-top">    <p      class="category-flag-card"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "      role="badge"      [attr.aria-label]="\'Category: \' + taskService.capitalize(task.category)"    >      {{ taskService.capitalize(task.category) }}    </p>    <button      class="dots-menu-btn"      type="button"      (click)="openDotsMenuHandler($event)"      aria-label="Task options menu"      [attr.aria-expanded]="isDotsMenuOpen"      aria-haspopup="true"    >      <span class="dot" aria-hidden="true"></span>      <span class="dot" aria-hidden="true"></span>      <span class="dot" aria-hidden="true"></span>    </button>    <div      class="dots-menu-overlay"      *ngIf="isDotsMenuOpen"      (click)="$event.stopPropagation()"      role="menu"      aria-label="Task status options"    >      <a *ngIf="task.status !== \'to-do\'" (click)="changeStatus(\'to-do\', $event)" role="menuitem" tabindex="0"        >To Do</a      >      <a        *ngIf="task.status !== \'in-progress\'"        (click)="changeStatus(\'in-progress\', $event)"        role="menuitem" tabindex="0"        >In Progress</a      >      <a        *ngIf="task.status !== \'await-feedback\'"        (click)="changeStatus(\'await-feedback\', $event)"        role="menuitem" tabindex="0"        >Awaiting Feedback</a      >      <a *ngIf="task.status !== \'done\'" (click)="changeStatus(\'done\', $event)" role="menuitem" tabindex="0"        >Done</a      >    </div>  </div>  <div class="task-card">    <h1 class="see-more" role="heading" aria-level="3">{{ taskService.capitalize(task.title) }}</h1>    <p class="task-description truncated" [attr.aria-label]="\'Description: \' + taskService.capitalize(task.description)">      {{ taskService.capitalize(task.description) }}      <span class="see-more" aria-hidden="true">…</span>    </p>    <div      class="subtask-wrapper"      [style.visibility]="        subtaskList && subtaskList.length > 0 ? \'visible\' : \'hidden\'      "      role="progressbar"      [attr.aria-valuenow]="getCompletedSubtasksCount(subtaskList)"      [attr.aria-valuemax]="subtaskList.length || 0"      [attr.aria-label]="getCompletedSubtasksCount(subtaskList) + \' of \' + (subtaskList.length || 0) + \' subtasks completed\'"    >      <div class="subtask-bar-default">        <div          class="subtask-bar-fill"          [ngStyle]="{ width: percentageCompleted(subtaskList) + \'%\' }"        ></div>      </div>      <span>        {{ getCompletedSubtasksCount(subtaskList) }} /        {{ subtaskList.length }} Subtasks      </span>    </div>    <div class="card-bottom-wrapper">      <div class="collaborators-wrapper" role="group" aria-label="Assigned team members">        <div class="img-user-wrapper">          @for (contact of getUniqueContacts(); track contact.id) {          <div            class="img-user"            [style.background-color]="              contactService.getContactColor(contact.name)            "            role="img"            [attr.aria-label]="\'Team member: \' + contact.name"          >            <img              *ngIf="contact.image"              [src]="contact.image.base64"              [alt]="contact.name"              class="contact-image"            />            <p *ngIf="!contact.image && contact.id" class="contact-initials">              {{ contactService.getInitials(contact.name) }}            </p>          </div>          }          <div            class="img-user more-count"            *ngIf="getAllUniqueContacts().length > 3"            [title]="getRemainingContactNames()"            role="img"            [attr.aria-label]="\'Plus \' + (getAllUniqueContacts().length - 3) + \' more team members\'"          >            +{{ getAllUniqueContacts().length - 3 }}          </div>        </div>      </div>      <img        src="assets/img/icons/prio-high.png"        alt="High priority"        class="card-priority"        *ngIf="task.priority === \'urgent\'"        role="img"        aria-label="Priority: High"      />      <img        src="assets/img/icons/prio-medium.png"        alt="Medium priority"        class="card-priority"        *ngIf="task.priority === \'medium\'"        role="img"        aria-label="Priority: Medium"      />      <img        src="assets/img/icons/prio-low.png"        alt="Low priority"        class="card-priority"        *ngIf="task.priority === \'low\'"        role="img"        aria-label="Priority: Low"      />    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TaskComponent'};

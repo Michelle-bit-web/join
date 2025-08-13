@@ -219,6 +219,10 @@ Features slide-in animations, mobile menu support, and contact image display.</p
                                 <a href="#contact" >contact</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#contactService" >contactService</a>
+                            </li>
+                            <li>
                                 <a href="#contactVisible" >contactVisible</a>
                             </li>
                             <li>
@@ -258,9 +262,6 @@ Features slide-in animations, mobile menu support, and contact image display.</p
                             </li>
                             <li>
                                 <a href="#getContactColor" >getContactColor</a>
-                            </li>
-                            <li>
-                                <a href="#getContactImage" >getContactImage</a>
                             </li>
                             <li>
                                 <a href="#getInitials" >getInitials</a>
@@ -693,8 +694,8 @@ Closes mobile menu when switching from mobile to desktop view.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="329"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:329</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="330"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:330</a></div>
                         </td>
                     </tr>
 
@@ -733,8 +734,8 @@ Sets visibility flag to trigger exit animations.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="320"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:320</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="321"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:321</a></div>
                         </td>
                     </tr>
 
@@ -795,84 +796,6 @@ Uses contact service to ensure consistent colors across components.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getContactImage"></a>
-                    <span class="name">
-                        <span ><b>getContactImage</b></span>
-                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="348"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:348</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Retrieves the contact&#39;s profile image from localStorage using their imageKey.
-Returns null if no image is associated with the contact.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact object containing the imageKey</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>string | null</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Base64 encoded image string or null if no image exists</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getInitials"></a>
                     <span class="name">
                         <span ><b>getInitials</b></span>
@@ -889,8 +812,8 @@ Returns null if no image is associated with the contact.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="309"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:309</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="310"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:310</a></div>
                         </td>
                     </tr>
 
@@ -1126,8 +1049,8 @@ Subscribes to both selected contact and full contact list for data consistency.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="337"
-                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:337</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="338"
+                                    class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:338</a></div>
                         </td>
                     </tr>
 
@@ -1779,6 +1702,38 @@ Only functions in mobile view to prevent desktop interference.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="contactService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>contactService</b></span>
+                        <a href="#contactService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ContactService.html" target="_self" >ContactService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/contacts/contact-details/contact-details.component.ts:115</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Service for managing contact data and operations</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="contactVisible"></a>
                     <span class="name">
                         <span ><b>contactVisible</b></span>
@@ -2156,7 +2111,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
    * @param uploadService - Service for retrieving contact images
    */
   constructor(
-    private contactService: ContactService,
+   public contactService: ContactService,
     private elementRef: ElementRef,
     private uploadService: UploadService
   ) { }
@@ -2335,8 +2290,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     if (this.contact?.id) {
       this.isDeleting &#x3D; true;
       this.menuOpen &#x3D; false;
-      if(this.contact.imageKey &amp;&amp; this.contact.imageKey.length &gt; 0) {
-        this.uploadService.deleteImage(this.contact.imageKey);
+      // Delete image from Firestore if it exists
+      if (this.contact.image &amp;&amp; this.contact.image.id) {
+        this.uploadService.deleteImage(&#x27;contacts&#x27;, this.contact.id, this.contact.image.id);
       }
       this.contactService.deleteContact(this.contact.id);
       this.contactService.clearSelection();
@@ -2381,20 +2337,6 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   onBackToList() {
     this.backToList.emit();
   }
-
-  /**
-   * Retrieves the contact&#x27;s profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
-   *
-   * @param contact - The contact object containing the imageKey
-   * @returns Base64 encoded image string or null if no image exists
-   */
-  getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
-    }
-    return null;
-  }
 }</code></pre>
     </div>
 
@@ -2424,15 +2366,15 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
           class&#x3D;&quot;user-logo&quot;
           [style.background-color]&#x3D;&quot;getContactColor(contact.name)&quot;
         &gt;
-          &lt;ng-container *ngIf&#x3D;&quot;getContactImage(contact) as image; else initials&quot;&gt;
-            &lt;img [src]&#x3D;&quot;image&quot; [alt]&#x3D;&quot;contact.name&quot; class&#x3D;&quot;contact-image&quot; /&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;contact.image&quot;&gt;
+            &lt;img [src]&#x3D;&quot;contact.image.base64&quot; [alt]&#x3D;&quot;contact.name&quot; class&#x3D;&quot;contact-image&quot; /&gt;
           &lt;/ng-container&gt;
 
-          &lt;ng-template #initials&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;!contact.image&quot;&gt;
             &lt;p class&#x3D;&quot;contact-initials&quot;&gt;
               {{ getInitials(contact.name) }}
             &lt;/p&gt;
-          &lt;/ng-template&gt;
+          &lt;/ng-container&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;user-name&quot;&gt;
           &lt;p&gt;{{ contact.name || &quot;Unbekannt&quot; }}&lt;/p&gt;
@@ -2562,7 +2504,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="contact-detail-section">  <div class="contact-detail-content">    <div class="contact-header">      <h1>Contacts</h1>      <div class="header-divider"></div>      <p>Better with a team</p>      <div class="mobile-back-btn" (click)="onBackToList()">        <img          src="assets/img/icons/arrow-left-line.png"          alt="Zurück zur Kontaktliste"        />      </div>    </div>    <div      class="contact-content"      *ngIf="contact && contactVisible"      [@slideInFromRight]="animationState"      [@.disabled]="isAnimationDisabled"    >      <div class="contact-container">        <div          class="user-logo"          [style.background-color]="getContactColor(contact.name)"        >          <ng-container *ngIf="getContactImage(contact) as image; else initials">            <img [src]="image" [alt]="contact.name" class="contact-image" />          </ng-container>          <ng-template #initials>            <p class="contact-initials">              {{ getInitials(contact.name) }}            </p>          </ng-template>        </div>        <div class="user-name">          <p>{{ contact.name || "Unbekannt" }}</p>          <div class="user-options">            <div class="option-item" (click)="onEditContact()">              <img                class="default-icon"                src="assets/img/icons/edit-single2.png"                alt="Kontakt bearbeiten Icon"              />              <img                class="hover-icon"                src="assets/img/icons/edit-single-hover.png"                alt="Kontakt bearbeiten Icon (Hover)"              />              <p>Edit</p>            </div>            <div class="option-item" (click)="onDeleteContact()">              <img                class="default-icon"                src="assets/img/icons/delete.png"                alt="Kontakt löschen Icon"              />              <img                class="hover-icon"                src="assets/img/icons/delete-hover.png"                alt="Kontakt löschen Icon (Hover)"              />              <p>Delete</p>            </div>          </div>        </div>      </div>      <div class="contact-info">        <h3>Contact Information</h3>        <div class="contact-item email-item">          <p class="contact-label">Email</p>          <p class="contact-value">{{ contact.email || "Keine E-Mail" }}</p>        </div>        <div class="contact-item">          <p class="contact-label">Phone</p>          <p class="contact-value">            {{ contact.phone || "Keine Telefonnummer" }}          </p>        </div>      </div>    </div>    <div      class="mobile-options-btn"      *ngIf="contact && contactVisible"      (click)="toggleMobileMenu()"    >      <img        class="default-icon"        src="assets/img/icons/contact-detail-menubtn.png"        alt="Kontaktoptionen öffnen"      />      <img        class="hover-icon"        src="assets/img/icons/contact-detail-menubtn-light.png"        alt="Kontaktoptionen öffnen (Hover)"      />    </div>    <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>      <div class="mobile-option-item" (click)="onEditContact()">        <img          class="default-icon"          src="assets/img/icons/edit-single2.png"          alt="Kontakt bearbeiten Icon"        />        <img          class="hover-icon"          src="assets/img/icons/edit-single-hover.png"          alt="Kontakt bearbeiten Icon (Hover)"        />        <p>Edit</p>      </div>      <div class="mobile-option-item" (click)="onDeleteContact()">        <img          class="default-icon"          src="assets/img/icons/delete.png"          alt="Kontakt löschen Icon"        />        <img          class="hover-icon"          src="assets/img/icons/delete-hover.png"          alt="Kontakt löschen Icon (Hover)"        />        <p>Delete</p>      </div>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="contact-detail-section">  <div class="contact-detail-content">    <div class="contact-header">      <h1>Contacts</h1>      <div class="header-divider"></div>      <p>Better with a team</p>      <div class="mobile-back-btn" (click)="onBackToList()">        <img          src="assets/img/icons/arrow-left-line.png"          alt="Zurück zur Kontaktliste"        />      </div>    </div>    <div      class="contact-content"      *ngIf="contact && contactVisible"      [@slideInFromRight]="animationState"      [@.disabled]="isAnimationDisabled"    >      <div class="contact-container">        <div          class="user-logo"          [style.background-color]="getContactColor(contact.name)"        >          <ng-container *ngIf="contact.image">            <img [src]="contact.image.base64" [alt]="contact.name" class="contact-image" />          </ng-container>          <ng-container *ngIf="!contact.image">            <p class="contact-initials">              {{ getInitials(contact.name) }}            </p>          </ng-container>        </div>        <div class="user-name">          <p>{{ contact.name || "Unbekannt" }}</p>          <div class="user-options">            <div class="option-item" (click)="onEditContact()">              <img                class="default-icon"                src="assets/img/icons/edit-single2.png"                alt="Kontakt bearbeiten Icon"              />              <img                class="hover-icon"                src="assets/img/icons/edit-single-hover.png"                alt="Kontakt bearbeiten Icon (Hover)"              />              <p>Edit</p>            </div>            <div class="option-item" (click)="onDeleteContact()">              <img                class="default-icon"                src="assets/img/icons/delete.png"                alt="Kontakt löschen Icon"              />              <img                class="hover-icon"                src="assets/img/icons/delete-hover.png"                alt="Kontakt löschen Icon (Hover)"              />              <p>Delete</p>            </div>          </div>        </div>      </div>      <div class="contact-info">        <h3>Contact Information</h3>        <div class="contact-item email-item">          <p class="contact-label">Email</p>          <p class="contact-value">{{ contact.email || "Keine E-Mail" }}</p>        </div>        <div class="contact-item">          <p class="contact-label">Phone</p>          <p class="contact-value">            {{ contact.phone || "Keine Telefonnummer" }}          </p>        </div>      </div>    </div>    <div      class="mobile-options-btn"      *ngIf="contact && contactVisible"      (click)="toggleMobileMenu()"    >      <img        class="default-icon"        src="assets/img/icons/contact-detail-menubtn.png"        alt="Kontaktoptionen öffnen"      />      <img        class="hover-icon"        src="assets/img/icons/contact-detail-menubtn-light.png"        alt="Kontaktoptionen öffnen (Hover)"      />    </div>    <div class="mobile-menu" *ngIf="menuOpen && contact" @slideInOut>      <div class="mobile-option-item" (click)="onEditContact()">        <img          class="default-icon"          src="assets/img/icons/edit-single2.png"          alt="Kontakt bearbeiten Icon"        />        <img          class="hover-icon"          src="assets/img/icons/edit-single-hover.png"          alt="Kontakt bearbeiten Icon (Hover)"        />        <p>Edit</p>      </div>      <div class="mobile-option-item" (click)="onDeleteContact()">        <img          class="default-icon"          src="assets/img/icons/delete.png"          alt="Kontakt löschen Icon"        />        <img          class="hover-icon"          src="assets/img/icons/delete-hover.png"          alt="Kontakt löschen Icon (Hover)"        />        <p>Delete</p>      </div>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactDetailsComponent'};

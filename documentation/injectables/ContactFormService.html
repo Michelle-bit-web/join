@@ -139,6 +139,20 @@ await this.formService.processSubmission(this, contact);</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -157,10 +171,6 @@ await this.formService.processSubmission(this, contact);</p>
                                 <a href="#buildContactFromForm" >buildContactFromForm</a>
                             </li>
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#deletePreviousImages" >deletePreviousImages</a>
-                            </li>
-                            <li>
                                 <a href="#fillContactForm" >fillContactForm</a>
                             </li>
                             <li>
@@ -174,10 +184,11 @@ await this.formService.processSubmission(this, contact);</p>
                                 <a href="#handleFormClose" >handleFormClose</a>
                             </li>
                             <li>
-                                <a href="#loadContactImage" >loadContactImage</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#processContactUpdate" >processContactUpdate</a>
                             </li>
                             <li>
@@ -188,24 +199,13 @@ await this.formService.processSubmission(this, contact);</p>
                                 <a href="#resetImageState" >resetImageState</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#setContactImageData" >setContactImageData</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#setContactImageKey" >setContactImageKey</a>
-                            </li>
-                            <li>
-                                <a href="#setImageState" >setImageState</a>
+                                <a href="#setImageData" >setImageData</a>
                             </li>
                             <li>
                                 <a href="#setupImageViewer" >setupImageViewer</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#shouldDeleteUnsavedImage" >shouldDeleteUnsavedImage</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#updateExistingContact" >updateExistingContact</a>
                             </li>
                         </ul>
@@ -231,7 +231,7 @@ await this.formService.processSubmission(this, contact);</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -324,8 +324,8 @@ await this.formService.processSubmission(this, contact);</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="291"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:291</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -420,8 +420,8 @@ Handles new contact creation workflow with image saving.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="199"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:199</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -482,104 +482,6 @@ Creates contact object with cleaned form data and appropriate image key.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deletePreviousImages"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>deletePreviousImages</b></span>
-                        <a href="#deletePreviousImages"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deletePreviousImages(uploadedKey?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, contactKey?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:44</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Deletes any previously uploaded or assigned images from storage.
-Cleans up orphaned images to prevent storage bloat.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>uploadedKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    Yes
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Key of uploaded image to delete</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>contactKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    Yes
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Key of contact&#39;s existing image to delete</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Promise that resolves when deletion is complete</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="fillContactForm"></a>
                     <span class="name">
                         <span ><b>fillContactForm</b></span>
@@ -596,8 +498,8 @@ Cleans up orphaned images to prevent storage bloat.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -693,8 +595,8 @@ Populates form controls with existing contact information for editing.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -771,8 +673,8 @@ Returns appropriate image keys for editing vs. new contact scenarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="308"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:308</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:234</a></div>
                         </td>
                     </tr>
 
@@ -848,8 +750,8 @@ Removes contact from storage and cleans up associated images.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -909,93 +811,38 @@ Performs necessary cleanup when form is closed without saving.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loadContactImage"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <span ><b>loadContactImage</b></span>
-                        <a href="#loadContactImage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>loadContactImage(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:77</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Loads the contact image into the upload preview.
-Retrieves and displays existing contact image if available.</p>
+                        <div class="io-description"><p>Cleanup method called when the component is destroyed.
+Unsubscribes from all active subscriptions to prevent memory leaks.</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact form component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact object with potential imageKey</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1007,6 +854,7 @@ Retrieves and displays existing contact image if available.</p>
                     <a name="processContactUpdate"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
                         <span ><b>processContactUpdate</b></span>
                         <a href="#processContactUpdate"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -1015,15 +863,15 @@ Retrieves and displays existing contact image if available.</p>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>processContactUpdate(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                    <code>processContactUpdate(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>, removeImage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="274"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:274</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:204</a></div>
                         </td>
                     </tr>
 
@@ -1043,6 +891,7 @@ Handles image deletion or contact update based on imageKey status.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Default value</td>
                                                 <td>Description</td>
                                         </tr>
                                     </thead>
@@ -1057,6 +906,8 @@ Handles image deletion or contact update based on imageKey status.</p>
                                                     No
                                             </td>
 
+                                            <td>
+                                            </td>
 
                                             <td>
                                                     <ul>
@@ -1065,11 +916,28 @@ Handles image deletion or contact update based on imageKey status.</p>
 
                                             </td>
                                         </tr>
+                                        <tr>
+                                                <td>removeImage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -1101,8 +969,8 @@ Handles image deletion or contact update based on imageKey status.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="238"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:238</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:165</a></div>
                         </td>
                     </tr>
 
@@ -1197,8 +1065,8 @@ Handles both new contact creation and existing contact updates.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -1258,218 +1126,24 @@ Clears all image-related properties in the component.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="setContactImageData"></a>
+                    <a name="setImageData"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>setContactImageData</b></span>
-                        <a href="#setContactImageData"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>setImageData</b></span>
+                        <a href="#setImageData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setContactImageData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>setImageData(file: File, imageBase64: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:114</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Sets contact image data from storage into component state.
-Helper method for loading existing contact images.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact form component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>imageKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The image key to retrieve from storage</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setContactImageKey"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>setContactImageKey</b></span>
-                        <a href="#setContactImageKey"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setContactImageKey(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="222"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:222</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Sets the appropriate image key on the contact object.
-Determines correct image key based on component state and edit mode.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact form component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact object to update with image key</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setImageState"></a>
-                    <span class="name">
-                        <span ><b>setImageState</b></span>
-                        <a href="#setImageState"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setImageState(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, file: File, imageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, base64: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1494,24 +1168,6 @@ Updates component&#39;s image-related properties with new image data.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact form component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
                                                 <td>file</td>
                                             <td>
                                                         <code>File</code>
@@ -1530,7 +1186,7 @@ Updates component&#39;s image-related properties with new image data.</p>
                                             </td>
                                         </tr>
                                         <tr>
-                                                <td>imageKey</td>
+                                                <td>imageBase64</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -1541,35 +1197,13 @@ Updates component&#39;s image-related properties with new image data.</p>
 
 
                                             <td>
-                                                    <ul>
-<li>Generated unique key for the image</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>base64</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Base64 encoded image data</li>
-</ul>
-
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -1599,8 +1233,8 @@ Updates component&#39;s image-related properties with new image data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -1660,18 +1294,18 @@ Configures image viewer component with current contact image data.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="shouldDeleteUnsavedImage"></a>
+                    <a name="updateExistingContact"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>shouldDeleteUnsavedImage</b></span>
-                        <a href="#shouldDeleteUnsavedImage"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateExistingContact</b></span>
+                        <a href="#updateExistingContact"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>shouldDeleteUnsavedImage(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    <code>updateExistingContact(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
                 </td>
             </tr>
 
@@ -1680,84 +1314,6 @@ Configures image viewer component with current contact image data.</p>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="186"
                                     class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:186</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Determines if an unsaved image should be deleted on form close.
-Checks conditions for cleaning up temporary images.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact form component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>True if image should be deleted, false otherwise</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateExistingContact"></a>
-                    <span class="name">
-                        <span ><b>updateExistingContact</b></span>
-                        <a href="#updateExistingContact"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateExistingContact(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="258"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:258</a></div>
                         </td>
                     </tr>
 
@@ -1821,7 +1377,7 @@ Handles contact update workflow including image management.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -1829,6 +1385,43 @@ Handles contact update workflow including image management.</p>
                             </div>
                 </td>
             </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
         </tbody>
     </table>
 </section>
@@ -1841,6 +1434,7 @@ Handles contact update workflow including image management.</p>
 import { FormGroup } from &#x27;@angular/forms&#x27;;
 import { Contact, ContactService } from &#x27;../../services/contact.service&#x27;;
 import { UploadService } from &#x27;../../services/upload.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 
 /**
  * Service for handling contact form operations and business logic.
@@ -1861,7 +1455,7 @@ import { UploadService } from &#x27;../../services/upload.service&#x27;;
 })
 
 export class ContactFormService {
-
+    subscription: Subscription | undefined &#x3D; undefined;
     /**
      * Creates an instance of ContactFormService.
      * @param {ContactService} contactService - Service for contact CRUD operations
@@ -1873,23 +1467,6 @@ export class ContactFormService {
     ) { }
 
     /**
-     * Deletes any previously uploaded or assigned images from storage.
-     * Cleans up orphaned images to prevent storage bloat.
-     * 
-     * @param {string} [uploadedKey] - Key of uploaded image to delete
-     * @param {string} [contactKey] - Key of contact&#x27;s existing image to delete
-     * @returns {Promise&lt;void&gt;} Promise that resolves when deletion is complete
-     */
-    async deletePreviousImages(uploadedKey?: string, contactKey?: string): Promise&lt;void&gt; {
-        if (uploadedKey) {
-            this.uploadService.deleteImage(uploadedKey);
-        }
-        if (contactKey) {
-            this.uploadService.deleteImage(contactKey);
-        }
-    }
-
-    /**
      * Sets the local image state and prepares it for saving.
      * Updates component&#x27;s image-related properties with new image data.
      * 
@@ -1899,13 +1476,14 @@ export class ContactFormService {
      * @param {string} base64 - Base64 encoded image data
      * @returns {void}
      */
-    setImageState(component: any, file: File, imageKey: string, base64: string): void {
-        component.uploadedImageKey &#x3D; imageKey;
-        component.imageBase64 &#x3D; base64;
-        component.imgData &#x3D; {
-            imageKey, filename: file.name, fileType: file.type,
-            fileSize: file.size, base64, assignedTo: &#x27;user&#x27;
+    setImageData(file: File, imageBase64: string): any {
+        const imageData &#x3D; {
+            fileName: file.name,
+            fileType: file.type,
+            fileSize: file.size,
+            base64: imageBase64
         };
+        return imageData;
     }
 
     /**
@@ -1925,36 +1503,12 @@ export class ContactFormService {
     }
 
     /**
-     * Loads the contact image into the upload preview.
-     * Retrieves and displays existing contact image if available.
-     * 
-     * @param {any} component - The contact form component instance
-     * @param {Contact} contact - The contact object with potential imageKey
-     * @returns {void}
+     * Cleanup method called when the component is destroyed.
+     * Unsubscribes from all active subscriptions to prevent memory leaks.
      */
-    loadContactImage(component: any, contact: Contact): void {
-        const imageKey &#x3D; contact.imageKey;
-        if (!imageKey) {
-            component.imageBase64 &#x3D; null;
-            return;
-        }
-        this.setContactImageData(component, imageKey);
-    }
-
-    /**
-     * Sets contact image data from storage into component state.
-     * Helper method for loading existing contact images.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @param {string} imageKey - The image key to retrieve from storage
-     * @returns {void}
-     */
-    private setContactImageData(component: any, imageKey: string): void {
-        component.imageBase64 &#x3D; this.uploadService.getContactImage(imageKey);
-        const existingImage &#x3D; this.uploadService.getImageByKey(imageKey);
-        if (existingImage) {
-            this.uploadService.setImages([existingImage]);
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 
@@ -2007,25 +1561,8 @@ export class ContactFormService {
      * @returns {void}
      */
     handleFormClose(component: any): void {
-        if (this.shouldDeleteUnsavedImage(component)) {
-            this.uploadService.deleteImage(component.uploadedImageKey);
-        }
         component.contactForm.reset();
-        component.imageMarkedForDeletion &#x3D; false;
-    }
-
-    /**
-     * Determines if an unsaved image should be deleted on form close.
-     * Checks conditions for cleaning up temporary images.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @returns {boolean} True if image should be deleted, false otherwise
-     */
-    private shouldDeleteUnsavedImage(component: any): boolean {
-        return component.uploadedImageKey &amp;&amp;
-            !component.contactToEdit &amp;&amp;
-            !component.formSubmitted;
+        component.pendingImageDeletion &#x3D; false;
     }
 
     /**
@@ -2040,30 +1577,13 @@ export class ContactFormService {
         const contact: Contact &#x3D; {
             name: name.trim(),
             email: email.trim(),
-            phone: phone.trim()
+            phone: phone.trim(),
+            image: component.imgData
         };
-        this.setContactImageKey(component, contact);
         if (component.contactToEdit?.id) {
             contact.id &#x3D; component.contactToEdit.id;
         }
         return contact;
-    }
-
-    /**
-     * Sets the appropriate image key on the contact object.
-     * Determines correct image key based on component state and edit mode.
-     * 
-     * @private
-     * @param {any} component - The contact form component instance
-     * @param {Contact} contact - The contact object to update with image key
-     * @returns {void}
-     */
-    private setContactImageKey(component: any, contact: Contact): void {
-        if (component.uploadedImageKey) {
-            contact.imageKey &#x3D; component.uploadedImageKey;
-        } else if (component.contactToEdit?.imageKey &amp;&amp; !component.imageMarkedForDeletion) {
-            contact.imageKey &#x3D; component.contactToEdit.imageKey;
-        }
     }
 
     /**
@@ -2075,12 +1595,13 @@ export class ContactFormService {
      * @returns {Promise&lt;void&gt;} Promise that resolves when submission is complete
      */
     async processSubmission(component: any, contact: Contact): Promise&lt;void&gt; {
-        if (component.imageMarkedForDeletion &amp;&amp; component.contactToEdit?.imageKey) {
-            await this.uploadService.deleteImage(component.contactToEdit.imageKey);
-            contact.imageKey &#x3D; &#x27;&#x27;;
-        }
-        if (component.isEditMode()) {
-            this.updateExistingContact(component, contact);
+        // if (component.pendingImageDeletion &amp;&amp; component.contactToEdit?.image) {
+        //     await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+        // }
+        const isEdit &#x3D; !!(component.contactToEdit &amp;&amp; component.contactToEdit.id);
+        if (isEdit) {
+            contact.id &#x3D; component.contactToEdit.id;
+            await this.updateExistingContact(component, contact);
         } else {
             await this.addNewContact(component, contact);
         }
@@ -2094,12 +1615,14 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object with updated data
      * @returns {void}
      */
-    updateExistingContact(component: any, contact: Contact): void {
-        component.contactToEdit &#x3D; contact;
-        if (component.imgData?.imageKey &amp;&amp; component.imgData?.base64) {
-            this.uploadService.saveImage(component.imgData);
+    async updateExistingContact(component: any, contact: Contact): Promise&lt;void&gt; {
+        if (component.pendingImageDeletion &amp;&amp; component.contactToEdit?.image) {
+                await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+            }
+        if (component.imgData &amp;&amp; component.imgData?.base64 &amp;&amp; contact.id) {
+            this.uploadService.addImageToContact(contact.id, component.imgData);
         }
-        this.processContactUpdate(contact);
+        await this.processContactUpdate(contact, component.pendingImageDeletion);
     }
 
     /**
@@ -2110,11 +1633,9 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object to update
      * @returns {void}
      */
-    private processContactUpdate(contact: Contact): void {
-        if (contact.imageKey &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
-            this.contactService.deleteImageFromContact(contact);
-        } else if (contact.id) {
-            this.contactService.updateContact(contact.id, contact);
+    private async processContactUpdate(contact: Contact, removeImage: boolean &#x3D; false): Promise&lt;void&gt; {
+        if (contact.id) {
+            this.contactService.updateContact(contact.id, contact, undefined, removeImage);
         }
     }
 
@@ -2128,12 +1649,10 @@ export class ContactFormService {
      * @returns {Promise&lt;void&gt;} Promise that resolves when contact is added
      */
     private async addNewContact(component: any, contact: Contact): Promise&lt;void&gt; {
-        if (component.imgData?.imageKey &amp;&amp; component.imgData?.base64) {
-            this.uploadService.saveImage(component.imgData);
-        }
-        const newContact &#x3D; await this.contactService.addContact(contact);
-        if (newContact) {
-            component.addedContact.emit(newContact);
+        if (contact.image) {
+            await this.contactService.addContact(contact, [component.imgData]);
+        } else {
+            await this.contactService.addContact(contact);
         }
     }
 
@@ -2147,8 +1666,8 @@ export class ContactFormService {
     handleContactDeletion(contact: Contact): void {
         if (contact.id) {
             this.contactService.deleteContact(contact.id);
-            if (contact.imageKey) {
-                localStorage.removeItem(contact.imageKey);
+            if (contact.image &amp;&amp; contact.image.id) {
+                this.uploadService.deleteImage(&#x27;contacts&#x27;, contact.id, contact.image.id);
             }
         }
     }

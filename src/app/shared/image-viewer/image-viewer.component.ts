@@ -182,6 +182,7 @@ export class ImageViewerComponent {
    */
   getImageName(): string | undefined {
     const img = this.imageObjects?.[this.currentIndex];
+    if(img?.name) {}
     return img?.fileName;
   }
 

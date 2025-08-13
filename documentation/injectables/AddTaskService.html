@@ -156,19 +156,15 @@
                                 <a href="#buildUpdatedTask" >buildUpdatedTask</a>
                             </li>
                             <li>
-                                <a href="#cleanupOnClose" >cleanupOnClose</a>
+                                <a href="#clearUploadedImages" >clearUploadedImages</a>
                             </li>
                             <li>
-                                <a href="#clearUploadedImages" >clearUploadedImages</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#deletePreviousImage" >deletePreviousImage</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#enterEditMode" >enterEditMode</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#handleImageUpdates" >handleImageUpdates</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -203,11 +199,6 @@
                                 <a href="#saveTaskWithSuccessFeedback" >saveTaskWithSuccessFeedback</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#saveUploadedImages" >saveUploadedImages</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Async</span>
                                 <a href="#setupEditMode" >setupEditMode</a>
                             </li>
@@ -223,7 +214,7 @@
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#updateTaskData" >updateTaskData</a>
+                                <a href="#updateTaskImages" >updateTaskImages</a>
                             </li>
                             <li>
                                 <a href="#validateForm" >validateForm</a>
@@ -246,12 +237,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>, formValidator: <a href="../injectables/FormValidatorService.html" target="_self">FormValidatorService</a>, taskDataService: <a href="../injectables/TaskDataService.html" target="_self">TaskDataService</a>, router: Router)</code>
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, uploadService: <a href="../injectables/UploadService.html" target="_self">UploadService</a>, formValidator: <a href="../injectables/FormValidatorService.html" target="_self">FormValidatorService</a>, taskDataService: <a href="../injectables/TaskDataService.html" target="_self">TaskDataService</a>, router: Router, firestore: Firestore)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/add-task/add-task.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/add-task/add-task.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -361,6 +352,20 @@
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>firestore</td>
+                                                  
+                                                        <td>
+                                                                    <code>Firestore</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -398,8 +403,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="203"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:203</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:205</a></div>
                         </td>
                     </tr>
 
@@ -477,8 +482,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:227</a></div>
                         </td>
                     </tr>
 
@@ -556,8 +561,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="293"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:293</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:290</a></div>
                         </td>
                     </tr>
 
@@ -617,82 +622,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="cleanupOnClose"></a>
-                    <span class="name">
-                        <span ><b>cleanupOnClose</b></span>
-                        <a href="#cleanupOnClose"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cleanupOnClose(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:318</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Cleans up resources when closing overlay.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The AddTask component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="clearUploadedImages"></a>
                     <span class="name">
                         <span ><b>clearUploadedImages</b></span>
@@ -709,8 +638,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="128"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:128</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -769,6 +698,73 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deletePreviousImage"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deletePreviousImage</b></span>
+                        <a href="#deletePreviousImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deletePreviousImage(imagesRef)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:277</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes the previous image for a user</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imagesRef</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="enterEditMode"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -787,8 +783,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -865,122 +861,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleImageUpdates"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>handleImageUpdates</b></span>
-                        <a href="#handleImageUpdates"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleImageUpdates(previousKeys: string[], currentImages: any[], currentKeys: string[])</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="263"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:263</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Handles adding new images and removing deleted images.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>previousKeys</td>
-                                            <td>
-                                                        <code>string[]</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Array of previous image keys</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>currentImages</td>
-                                            <td>
-                                                        <code>any[]</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Array of current image objects</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>currentKeys</td>
-                                            <td>
-                                                        <code>string[]</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Array of current image keys</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Promise that resolves when image updates are complete</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="loadImagesIfAvailable"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -999,8 +879,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -1096,8 +976,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -1193,8 +1073,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -1270,8 +1150,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -1346,8 +1226,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -1422,8 +1302,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -1501,8 +1381,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="189"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:189</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:191</a></div>
                         </td>
                     </tr>
 
@@ -1581,8 +1461,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="173"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:173</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:175</a></div>
                         </td>
                     </tr>
 
@@ -1642,86 +1522,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="saveUploadedImages"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>saveUploadedImages</b></span>
-                        <a href="#saveUploadedImages"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>saveUploadedImages(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="222"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:222</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Saves all uploaded images to the upload service.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>component</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The AddTask component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Promise that resolves when all images are saved</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="setupEditMode"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -1740,8 +1540,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -1838,8 +1638,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:306</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="303"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:303</a></div>
                         </td>
                     </tr>
 
@@ -1917,8 +1717,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="247"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:247</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:239</a></div>
                         </td>
                     </tr>
 
@@ -1978,34 +1778,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateTaskData"></a>
+                    <a name="updateTaskImages"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Async</span>
-                        <span ><b>updateTaskData</b></span>
-                        <a href="#updateTaskData"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>updateTaskImages</b></span>
+                        <a href="#updateTaskImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTaskData(component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, currentImageKeys: string[])</code>
+                    <code>updateTaskImages(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, component: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="278"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:278</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:257</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates task data with new information and image keys.</p>
+                        <div class="io-description"><p>Updates task images by replacing old ones with new ones.</p>
 </div>
 
                             <div class="io-description">
@@ -2022,6 +1822,24 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                                <td>taskId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The task ID</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
                                                 <td>component</td>
                                             <td>
                                                             <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -2034,25 +1852,7 @@
 
                                             <td>
                                                     <ul>
-<li>The AddTask component instance</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>currentImageKeys</td>
-                                            <td>
-                                                        <code>string[]</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Array of current image keys</li>
+<li>The component instance</li>
 </ul>
 
                                             </td>
@@ -2065,8 +1865,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Promise that resolves when task data is updated</p>
-
+                                
                             </div>
                 </td>
             </tr>
@@ -2092,8 +1891,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="140"
-                                    class="link-to-prism">src/app/add-task/add-task.service.ts:140</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/add-task/add-task.service.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -2161,6 +1960,8 @@ import { Task, TaskService } from &#x27;../services/task.service&#x27;;
 import { UploadService } from &#x27;../services/upload.service&#x27;;
 import { FormValidatorService } from &#x27;./form-validator.service&#x27;;
 import { TaskDataService } from &#x27;./task-data.service&#x27;;
+import { addDoc, getDocs, deleteDoc, Firestore } from &#x27;@angular/fire/firestore&#x27;;
+import { collection } from &#x27;firebase/firestore&#x27;;
 
 /**
  * Service for handling complex AddTask component operations.
@@ -2183,7 +1984,8 @@ export class AddTaskService {
     private uploadService: UploadService,
     private formValidator: FormValidatorService,
     private taskDataService: TaskDataService,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore
   ) { }
 
   /**
@@ -2237,7 +2039,7 @@ export class AddTaskService {
    * @returns {void}
    */
   private loadImagesIfAvailable(component: any, task: Task): void {
-    if (task.imageKey &amp;&amp; task.imageKey.length &gt; 0) {
+    if (task.images &amp;&amp; task.images.length &gt; 0) {
       component.loadImages();
     }
   }
@@ -2312,7 +2114,6 @@ export class AddTaskService {
   async processTaskCreation(component: any): Promise&lt;void&gt; {
     component.isCreatingTask &#x3D; true;
     try {
-      component.taskImages &#x3D; component.uploadsComponent.getImageKeys();
       await this.saveTaskWithSuccessFeedback(component);
     } catch (error) {
       console.error(&#x27;Error while creating/updating task:&#x27;, error);
@@ -2359,28 +2160,18 @@ export class AddTaskService {
    */
   private async addNewTask(component: any): Promise&lt;void&gt; {
     if (!component.defaultStatus) component.defaultStatus &#x3D; &#x27;to-do&#x27;;
-    (component.formData as any).images &#x3D; component.taskImages;
-    await this.saveUploadedImages(component);
     const newTask: Task &#x3D; this.buildNewTask(component);
     const savedTask &#x3D; await this.taskService.addTask(newTask);
     if (savedTask?.id) {
+      if (component.uploadsComponent &amp;&amp; component.uploadsComponent.uploadedImages) {
+        for (const img of component.uploadsComponent.uploadedImages) {
+          await this.uploadService.addImage(&#x27;tasks&#x27;, savedTask.id, img);
+        }
+      }
       await component.subtaskManager.saveAllSubtasks(
         savedTask.id, component.subtaskManager.getSubtasks()
       );
     }
-  }
-
-  /**
-   * Saves all uploaded images to the upload service.
-   * @private
-   * @param {any} component - The AddTask component instance
-   * @returns {Promise&lt;void&gt;} Promise that resolves when all images are saved
-   */
-  private async saveUploadedImages(component: any): Promise&lt;void&gt; {
-    for (const img of component.uploadsComponent.uploadedImages) {
-      await this.uploadService.saveImage(img);
-    }
-    component.uploadsComponent.uploadedImages &#x3D; [];
   }
 
   /**
@@ -2402,43 +2193,48 @@ export class AddTaskService {
    * @returns {Promise&lt;void&gt;} Promise that resolves when task is updated
    */
   async updateTask(component: any): Promise&lt;void&gt; {
-    const previousImageKeys &#x3D; component.editingTask?.imageKey ?? [];
-    const currentImages &#x3D; component.uploadsComponent.allImages();
-    const currentImageKeys &#x3D; currentImages.map((img: any) &#x3D;&gt; img.imageKey);
-    await this.handleImageUpdates(previousImageKeys, currentImages, currentImageKeys);
-    await this.updateTaskData(component, currentImageKeys);
-  }
-
-  /**
-   * Handles adding new images and removing deleted images.
-   * @private
-   * @param {string[]} previousKeys - Array of previous image keys
-   * @param {any[]} currentImages - Array of current image objects
-   * @param {string[]} currentKeys - Array of current image keys
-   * @returns {Promise&lt;void&gt;} Promise that resolves when image updates are complete
-   */
-  private async handleImageUpdates(previousKeys: string[], currentImages: any[], currentKeys: string[]): Promise&lt;void&gt; {
-    const removedKeys &#x3D; previousKeys.filter(key &#x3D;&gt; !currentKeys.includes(key));
-    if (removedKeys.length &gt; 0) {
-      this.uploadService.deleteImages(removedKeys);
+    if (!component.editingTaskId || !component.editingTask) {
+      console.error(&#x27;No task to update&#x27;);
+      return;
     }
-    this.uploadService.saveImages(currentImages);
-  }
-
-  /**
-   * Updates task data with new information and image keys.
-   * @private
-   * @param {any} component - The AddTask component instance
-   * @param {string[]} currentImageKeys - Array of current image keys
-   * @returns {Promise&lt;void&gt;} Promise that resolves when task data is updated
-   */
-  private async updateTaskData(component: any, currentImageKeys: string[]): Promise&lt;void&gt; {
-    (component.formData as any).images &#x3D; currentImageKeys;
-    component.taskImages &#x3D; currentImageKeys;
     const updatedTask &#x3D; this.buildUpdatedTask(component);
-    await this.taskService.updateTask(component.editingTask!.id!, updatedTask);
+    await this.taskService.updateTask(component.editingTaskId, updatedTask);
+    await this.updateTaskImages(component.editingTaskId, component);
     await this.updateSubtasks(component);
     this.taskService.clearEditingTask();
+  }
+
+  /**
+   * Updates task images by replacing old ones with new ones.
+   * @private
+   * @param taskId - The task ID
+   * @param component - The component instance
+   */
+  private async updateTaskImages(taskId: string, component: any): Promise&lt;void&gt; {
+    try {
+      let imagesRef &#x3D; collection(this.firestore, &#x60;tasks/${taskId}/images&#x60;);
+      this.deletePreviousImage(imagesRef);
+      if (component.uploadsComponent &amp;&amp; component.uploadsComponent.images) {
+        for (const img of component.uploadsComponent.images) {
+          await addDoc(imagesRef, {
+            fileName: img.fileName,
+            fileType: img.fileType,
+            fileSize: img.fileSize,
+            base64: img.base64
+          });
+        }
+      }
+    } catch (error) {
+      console.error(&#x27;Error updating task images:&#x27;, error);
+    }
+  }
+
+  /** Deletes the previous image for a user */
+  async deletePreviousImage(imagesRef: import(&#x27;firebase/firestore&#x27;).CollectionReference): Promise&lt;void&gt; {
+      const snapshot &#x3D; await getDocs(imagesRef);
+      for (const docSnap of snapshot.docs) {
+        await deleteDoc(docSnap.ref);
+      }
   }
 
   /**
@@ -2465,19 +2261,6 @@ export class AddTaskService {
     const deleted &#x3D; component.subtaskManager.getDeletedSubtasks(currentSubtasks);
     await component.subtaskManager.deleteSubtasks(component.editingTaskId!, deleted);
     await component.subtaskManager.syncSubtasks(component.editingTaskId!, currentSubtasks);
-  }
-
-  /**
-   * Cleans up resources when closing overlay.
-   * @param {any} component - The AddTask component instance
-   * @returns {void}
-   */
-  cleanupOnClose(component: any): void {
-    if (component.uploadsComponent) {
-      component.uploadsComponent.uploadedImages.forEach((image: any) &#x3D;&gt; {
-        this.uploadService.deleteImage(image.imageKey);
-      });
-    }
   }
 }</code></pre>
     </div>

@@ -230,6 +230,10 @@
                                     <span class="modifier">Private</span>
                                 <a href="#selectionSubscription" >selectionSubscription</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#uploadService" >uploadService</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -242,9 +246,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                <a href="#getContactImage" >getContactImage</a>
-                            </li>
                             <li>
                                 <a href="#getCurrentUser" >getCurrentUser</a>
                             </li>
@@ -283,6 +284,10 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#subscribeToContacts" >subscribeToContacts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToSelectedContact" >subscribeToSelectedContact</a>
                             </li>
                         </ul>
                     </td>
@@ -446,84 +451,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getContactImage"></a>
-                    <span class="name">
-                        <span ><b>getContactImage</b></span>
-                        <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="229"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:229</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Gets the contact&#39;s profile image from localStorage using their imageKey.
-Returns null if no image is associated with the contact.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>contact</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Contact.html" target="_self" >Contact</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The contact object containing the imageKey</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>string | null</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The base64 encoded image string or null if no image exists</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getCurrentUser"></a>
                     <span class="name">
                         <span ><b>getCurrentUser</b></span>
@@ -540,8 +467,8 @@ Returns null if no image is associated with the contact.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:141</a></div>
                         </td>
                     </tr>
 
@@ -580,8 +507,8 @@ Also subscribes to contact selection changes to maintain selection state.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:230</a></div>
                         </td>
                     </tr>
 
@@ -658,8 +585,8 @@ Falls back to service method for consistent initial generation logic.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="194"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:194</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:206</a></div>
                         </td>
                     </tr>
 
@@ -738,8 +665,8 @@ Filters out invalid contacts and sorts contacts within each group.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -817,8 +744,8 @@ Logs the error to console for debugging purposes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -894,8 +821,8 @@ and selecting the current user&#39;s contact if present.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:166</a></div>
                         </td>
                     </tr>
 
@@ -972,8 +899,8 @@ Used for highlighting the current user in the contact list.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="175"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:175</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:187</a></div>
                         </td>
                     </tr>
 
@@ -1049,8 +976,8 @@ Used for highlighting the current user in the contact list.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:154</a></div>
                         </td>
                     </tr>
 
@@ -1130,8 +1057,8 @@ and handling errors and contact selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="183"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:183</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -1170,8 +1097,8 @@ Opens the contact creation overlay/modal.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="164"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:164</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:176</a></div>
                         </td>
                     </tr>
 
@@ -1249,8 +1176,8 @@ Updates the selection state and emits the selection event.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -1259,6 +1186,47 @@ Updates the selection state and emits the selection event.</p>
                 <td class="col-md-4">
                         <div class="io-description"><p>Subscribes to the contact list, groups them by initial letter,
 and selects the current user&#39;s contact if available.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToSelectedContact"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscribeToSelectedContact</b></span>
+                        <a href="#subscribeToSelectedContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToSelectedContact()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Subscribes to selected contacts of the contact list.</p>
 </div>
 
                         <div class="io-description">
@@ -1475,7 +1443,7 @@ Each key is a letter, each value is an array of contacts starting with that lett
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:209</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:221</a></div>
                         </td>
                     </tr>
 
@@ -1564,6 +1532,38 @@ Used with keyvalue pipe in template for consistent alphabetical display.</p>
 
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>uploadService</b></span>
+                        <a href="#uploadService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UploadService.html" target="_self" >UploadService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/contacts/contact-list/contact-list.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Service that manages image uploads and retrieval</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </section>
 
 </div>
@@ -1612,7 +1612,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * Subscription to contact data changes from the service.
    */
   private contactsSubscription: Subscription &#x3D; new Subscription();
-  
+
   /**
    * Subscription to contact selection changes from the service.
    */
@@ -1632,7 +1632,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   constructor(
     public contactService: ContactService,
     private authService: AuthService,
-    private uploadService: UploadService
+    public uploadService: UploadService
   ) { }
 
   /**
@@ -1641,8 +1641,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
    * and handling errors and contact selection.
    */
   ngOnInit(): void {
+    this.getCurrentUser(); // Move this before subscribeToContacts
     this.subscribeToContacts();
-    this.getCurrentUser();
+    this.subscribeToSelectedContact();
   }
 
   /**
@@ -1654,6 +1655,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
       next: (contacts) &#x3D;&gt; this.handleContactsLoaded(contacts),
       error: (error) &#x3D;&gt; this.handleContactsError(error),
     });
+  }
+
+  /**
+   * Subscribes to selected contacts of the contact list.
+   */
+  private subscribeToSelectedContact(): void {
+    this.selectionSubscription &#x3D; this.contactService.selectedContact$.subscribe(
+      contact &#x3D;&gt; {
+        this.selectedContact &#x3D; contact;
+      }
+    );
   }
 
   /**
@@ -1778,20 +1790,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
   getInitials(name: string | undefined): string {
     return this.contactService.getInitials(name);
   }
-
-  /**
-   * Gets the contact&#x27;s profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
-   * 
-   * @param contact - The contact object containing the imageKey
-   * @returns The base64 encoded image string or null if no image exists
-   */
-  getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
-    }
-    return null;
-  }
 }</code></pre>
     </div>
 
@@ -1814,12 +1812,12 @@ export class ContactListComponent implements OnInit, OnDestroy {
         [style.background-color]&#x3D;&quot;contactService.getContactColor(contact.name)&quot;
       &gt;
         &lt;img
-          *ngIf&#x3D;&quot;getContactImage(contact)&quot;
-          [src]&#x3D;&quot;getContactImage(contact)&quot;
+          *ngIf&#x3D;&quot;contact.image&quot;
+          [src]&#x3D;&quot;contact.image.base64&quot;
           [alt]&#x3D;&quot;contact.name&quot;
           class&#x3D;&quot;contact-image&quot;
         /&gt;
-        &lt;span *ngIf&#x3D;&quot;!getContactImage(contact)&quot; class&#x3D;&quot;contact-initials&quot;&gt;
+        &lt;span *ngIf&#x3D;&quot;!contact.image &amp;&amp; contact.id&quot; class&#x3D;&quot;contact-initials&quot;&gt;
           {{ contactService.getInitials(contact?.name) }}
         &lt;/span&gt;
       &lt;/div&gt;
@@ -2116,7 +2114,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="contact-list">  <button class="add-button" (click)="onAddNewContact()">    Add new contact  </button>  <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">    <h4>{{ group.key }}</h4>    <div      *ngFor="let contact of group.value"      class="contact-entry"      [class.selected]="isSelected(contact)"      (click)="onContactSelect(contact)"    >      <div        class="avatar"        [style.background-color]="contactService.getContactColor(contact.name)"      >        <img          *ngIf="getContactImage(contact)"          [src]="getContactImage(contact)"          [alt]="contact.name"          class="contact-image"        />        <span *ngIf="!getContactImage(contact)" class="contact-initials">          {{ contactService.getInitials(contact?.name) }}        </span>      </div>      <p *ngIf="contact?.email === currentUserEmail" class="active-user">Me</p>      <div class="info">        <div class="name">          {{ contact?.name || "Unbekannt" }}        </div>        <div class="email">{{ contact?.email || "Keine E-Mail" }}</div>      </div>    </div>  </div></div><div class="fab-container">  <button class="fab" (click)="onAddNewContact()">    <img src="assets/img/svg/add-person.svg" alt="Add Contact" />  </button></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="contact-list">  <button class="add-button" (click)="onAddNewContact()">    Add new contact  </button>  <div *ngFor="let group of groupedContacts | keyvalue : keyAsc">    <h4>{{ group.key }}</h4>    <div      *ngFor="let contact of group.value"      class="contact-entry"      [class.selected]="isSelected(contact)"      (click)="onContactSelect(contact)"    >      <div        class="avatar"        [style.background-color]="contactService.getContactColor(contact.name)"      >        <img          *ngIf="contact.image"          [src]="contact.image.base64"          [alt]="contact.name"          class="contact-image"        />        <span *ngIf="!contact.image && contact.id" class="contact-initials">          {{ contactService.getInitials(contact?.name) }}        </span>      </div>      <p *ngIf="contact?.email === currentUserEmail" class="active-user">Me</p>      <div class="info">        <div class="name">          {{ contact?.name || "Unbekannt" }}        </div>        <div class="email">{{ contact?.email || "Keine E-Mail" }}</div>      </div>    </div>  </div></div><div class="fab-container">  <button class="fab" (click)="onAddNewContact()">    <img src="assets/img/svg/add-person.svg" alt="Add Contact" />  </button></div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ContactListComponent'};

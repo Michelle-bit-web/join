@@ -201,10 +201,18 @@
                                 <a href="#currentImageIndex" >currentImageIndex</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#imagesSubscription" >imagesSubscription</a>
+                            </li>
+                            <li>
                                 <a href="#showContent" >showContent</a>
                             </li>
                             <li>
                                 <a href="#showImageViewer" >showImageViewer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscriptions" >subscriptions</a>
                             </li>
                             <li>
                                 <a href="#subtasks" >subtasks</a>
@@ -241,13 +249,18 @@
                                 <a href="#convertDate" >convertDate</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#deleteTask" >deleteTask</a>
                             </li>
                             <li>
                                 <a href="#downloadImage" >downloadImage</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getContactImage" >getContactImage</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentTaskImageObjects" >getCurrentTaskImageObjects</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -260,12 +273,16 @@
                                 <a href="#loadTaskImages" >loadTaskImages</a>
                             </li>
                             <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#onClose" >onClose</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#onDeleteImage" >onDeleteImage</a>
                             </li>
                             <li>
@@ -334,7 +351,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/board/task-details/task-details.component.ts:102</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/board/task-details/task-details.component.ts:113</a></div>
                             </td>
                         </tr>
 
@@ -445,7 +462,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/board/task-details/task-details.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/board/task-details/task-details.component.ts:63</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -475,7 +492,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/board/task-details/task-details.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/board/task-details/task-details.component.ts:48</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -502,7 +519,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/board/task-details/task-details.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/board/task-details/task-details.component.ts:53</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -529,7 +546,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/board/task-details/task-details.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/board/task-details/task-details.component.ts:58</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -568,8 +585,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="251"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:251</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:275</a></div>
                         </td>
                     </tr>
 
@@ -607,8 +624,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -668,6 +685,7 @@
                 <td class="col-md-4">
                     <a name="deleteTask"></a>
                     <span class="name">
+                            <span class="modifier">Async</span>
                         <span ><b>deleteTask</b></span>
                         <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -675,15 +693,16 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>deleteTask(event?: Event)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteTask(event?: Event)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:176</a></div>
                         </td>
                     </tr>
 
@@ -726,7 +745,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -749,15 +768,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>downloadImage(event: Event, currentIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, currentImage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filename?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>downloadImage(event: Event, currentIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, currentImage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileName?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="276"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:276</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="314"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:314</a></div>
                         </td>
                     </tr>
 
@@ -829,7 +848,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                                <td>filename</td>
+                                                <td>fileName</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -862,6 +881,7 @@
                 <td class="col-md-4">
                     <a name="getContactImage"></a>
                     <span class="name">
+                            <span class="modifier">Async</span>
                         <span ><b>getContactImage</b></span>
                         <a href="#getContactImage"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -869,23 +889,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getContactImage(contact: <a href="../interfaces/Contact.html" target="_self">Contact</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="294"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:294</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="332"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:332</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Gets the contact&#39;s profile image from localStorage using their imageKey.
-Returns null if no image is associated with the contact.</p>
+                        <div class="io-description"><p>Gets the contact&#39;s profile image from Firestore using their ID.
+Returns base64 string or null if no image is associated with the contact.</p>
 </div>
 
                             <div class="io-description">
@@ -923,11 +944,54 @@ Returns null if no image is associated with the contact.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>string | null</code>
+                            <b>Returns : </b>    <code>Promise&lt;string | null&gt;</code>
 
                         </div>
                             <div class="io-description">
                                 <p>Base64 encoded image string or null if no image exists</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentTaskImageObjects"></a>
+                    <span class="name">
+                        <span ><b>getCurrentTaskImageObjects</b></span>
+                        <a href="#getCurrentTaskImageObjects"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentTaskImageObjects()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="344"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the current task images for the image viewer</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/UploadedImage.html" target="_self" >UploadedImage[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of current task image objects with metadata</p>
 
                             </div>
                 </td>
@@ -956,8 +1020,8 @@ Returns null if no image is associated with the contact.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -996,8 +1060,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="199"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:199</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:207</a></div>
                         </td>
                     </tr>
 
@@ -1035,15 +1099,54 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="226"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:226</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:234</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Loads task images from localStorage using the image keys stored in the task.</p>
+                        <div class="io-description"><p>Loads task images from Firestore using the task ID.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="253"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:253</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Unsubscribes from all active subscriptions to prevent memory leaks.</p>
 </div>
 
                         <div class="io-description">
@@ -1074,8 +1177,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -1113,8 +1216,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:142</a></div>
                         </td>
                     </tr>
 
@@ -1138,6 +1241,7 @@ and updates the contactList accordingly.</p>
                 <td class="col-md-4">
                     <a name="onDeleteImage"></a>
                     <span class="name">
+                            <span class="modifier">Async</span>
                         <span ><b>onDeleteImage</b></span>
                         <a href="#onDeleteImage"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -1145,15 +1249,16 @@ and updates the contactList accordingly.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>onDeleteImage(event: literal type)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDeleteImage(event: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="258"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:258</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:282</a></div>
                         </td>
                     </tr>
 
@@ -1191,7 +1296,7 @@ and updates the contactList accordingly.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -1221,8 +1326,8 @@ and updates the contactList accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -1296,8 +1401,8 @@ Emits the updated list of subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:151</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -1370,8 +1475,8 @@ Emits the updated list of subtasks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="243"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:243</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:267</a></div>
                         </td>
                     </tr>
 
@@ -1454,7 +1559,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/board/task-details/task-details.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/board/task-details/task-details.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -1487,7 +1592,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/board/task-details/task-details.component.ts:114</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/board/task-details/task-details.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -1523,13 +1628,46 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/board/task-details/task-details.component.ts:102</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/board/task-details/task-details.component.ts:103</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>The index of the currently viewed image.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagesSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>imagesSubscription</b></span>
+                        <a href="#imagesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/board/task-details/task-details.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The list of image subscriptions for cleanup.</p>
 </div>
                 </td>
             </tr>
@@ -1554,7 +1692,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/board/task-details/task-details.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/board/task-details/task-details.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -1585,13 +1723,51 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/board/task-details/task-details.component.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/board/task-details/task-details.component.ts:98</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Controls whether the image viewer is shown.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscriptions"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscriptions</b></span>
+                        <a href="#subscriptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/board/task-details/task-details.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription for managing active subscriptions</p>
 </div>
                 </td>
             </tr>
@@ -1622,7 +1798,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/board/task-details/task-details.component.ts:77</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/board/task-details/task-details.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -1659,7 +1835,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/board/task-details/task-details.component.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/board/task-details/task-details.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -1696,7 +1872,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/board/task-details/task-details.component.ts:87</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/board/task-details/task-details.component.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -1733,7 +1909,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/board/task-details/task-details.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/board/task-details/task-details.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -1766,7 +1942,7 @@ Emits the updated list of subtasks.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/board/task-details/task-details.component.ts:113</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/board/task-details/task-details.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -1785,7 +1961,7 @@ Emits the updated list of subtasks.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { Component, EventEmitter, Output, Input } from &#x27;@angular/core&#x27;;
 import { Task, TaskService } from &#x27;../../services/task.service&#x27;;
 import { Subtask } from &#x27;../../services/task.service&#x27;;
 import { Timestamp } from &#x27;@angular/fire/firestore&#x27;;
@@ -1795,6 +1971,7 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { UploadedImage, UploadService } from &#x27;../../services/upload.service&#x27;;
 import { ImageViewerComponent } from &#x27;../../shared/image-viewer/image-viewer.component&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
 
 @Component({
   selector: &#x27;app-task-details&#x27;,
@@ -1870,6 +2047,16 @@ export class TaskDetailsComponent {
   currentImageIndex &#x3D; 0;
 
   /**
+   * The list of image subscriptions for cleanup.
+   */
+  private imagesSubscription: Subscription | undefined;
+
+  /**
+   * Subscription for managing active subscriptions
+   */
+  private subscriptions: Subscription | undefined &#x3D; undefined;
+
+  /**
    * Constructor injects task and contact services, and the Angular Router.
    * 
    * @param taskService Service for handling tasks and subtasks.
@@ -1930,17 +2117,14 @@ export class TaskDetailsComponent {
    * 
    * @param event Optional event to stop propagation and prevent default behavior.
    */
-  deleteTask(event?: Event) {
+  async deleteTask(event?: Event) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
     }
     if (this.task.id) {
-      this.taskService.deleteTask(this.task.id);
+      await this.taskService.deleteTaskWithSubcollections(this.task.id);
       this.onClose();
-      if(this.task.imageKey &amp;&amp; this.task.imageKey.length &gt; 0) {
-        this.uploadService.deleteImages(this.task.imageKey);
-      }
     }
   }
 
@@ -1966,7 +2150,7 @@ export class TaskDetailsComponent {
    */
   loadSubtasks() {
     if (this.task?.id) {
-      this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) &#x3D;&gt; {
+      this.subscriptions &#x3D; this.taskService.getSubtasks(this.task.id).subscribe((subtasks: Subtask[]) &#x3D;&gt; {
         this.subtasks &#x3D; subtasks;
       });
     }
@@ -1989,17 +2173,33 @@ export class TaskDetailsComponent {
   }
 
   /**
-   * Loads task images from localStorage using the image keys stored in the task.
+   * Loads task images from Firestore using the task ID.
    */
   loadTaskImages() {
-    if (this.task?.imageKey &amp;&amp; this.task.imageKey.length &gt; 0) {
-      this.taskImages &#x3D; this.uploadService.getImagesByKeys(this.task.imageKey);
-      this.taskImageKeys &#x3D; this.task.imageKey;
-      this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
+    if (this.imagesSubscription) {
+      this.imagesSubscription.unsubscribe();
+      this.imagesSubscription &#x3D; undefined;
+    }
+    if (this.task?.id) {
+      this.imagesSubscription &#x3D; this.uploadService.getImages(&#x27;tasks&#x27;, this.task.id).subscribe(images &#x3D;&gt; {
+        this.taskImages &#x3D; images;
+        this.taskImageBase64 &#x3D; images.map(img &#x3D;&gt; img.base64);
+      });
     } else {
       this.taskImages &#x3D; [];
-      this.taskImageKeys &#x3D; [];
       this.taskImageBase64 &#x3D; [];
+    }
+  }
+
+  /** 
+   * Unsubscribes from all active subscriptions to prevent memory leaks. 
+   */
+  ngOnDestroy(): void {
+    if (this.imagesSubscription) {
+      this.imagesSubscription.unsubscribe();
+    }
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
     }
   }
 
@@ -2023,14 +2223,28 @@ export class TaskDetailsComponent {
   /**
    * Handles image deletion from the image viewer.
    */
-  onDeleteImage(event: { index: number, imageKey?: string }) {
-    if (event.imageKey &amp;&amp; this.task.id) {
-      this.uploadService.deleteImage(event.imageKey);
-      const updatedImages &#x3D; this.task.imageKey?.filter(key &#x3D;&gt; key !&#x3D;&#x3D; event.imageKey) || [];
-      this.task.imageKey &#x3D; updatedImages;
-      this.taskService.updateTask(this.task.id, this.task);
-      this.loadTaskImages();
-    };
+  async onDeleteImage(event: { index: number, imageId?: string }) {
+    const imageObj &#x3D; this.taskImages[event.index];
+    if (imageObj?.id &amp;&amp; this.task.id) {
+      // this.uploadService.deleteImage(&#x27;tasks&#x27;, this.task.id, imageObj.id);
+      // this.taskImages.splice(event.index, 1);
+      // this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
+      try {
+        // Immediately delete from Firestore
+        await this.uploadService.deleteImage(&#x27;tasks&#x27;, this.task.id, imageObj.id);
+
+        // Remove from local arrays
+        this.taskImages.splice(event.index, 1);
+        this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
+
+        // Close viewer if no images left
+        if (this.taskImages.length &#x3D;&#x3D;&#x3D; 0) {
+          this.closeImageViewer();
+        }
+      } catch (error) {
+        console.error(&#x27;Error deleting image:&#x27;, error);
+      }
+    }
     this.closeImageViewer();
   }
 
@@ -2041,35 +2255,50 @@ export class TaskDetailsComponent {
    * @param currentIndex The index of the current image.
    * @param currentImage The URL of the current image.
    */
-  downloadImage(event: Event, currentIndex: number, currentImage: string, filename?: string) {
+  downloadImage(event: Event, currentIndex: number, currentImage: string, fileName?: string) {
     event.stopPropagation();
     event.preventDefault();
     const link &#x3D; document.createElement(&#x27;a&#x27;);
     link.href &#x3D; currentImage;
-    link.download &#x3D; &#x60;join_image_${filename || currentIndex + 1}.jpg&#x60;;
+    link.download &#x3D; &#x60;join_image_${fileName || currentIndex + 1}.jpg&#x60;;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
 
   /**
-   * Gets the contact&#x27;s profile image from localStorage using their imageKey.
-   * Returns null if no image is associated with the contact.
+   * Gets the contact&#x27;s profile image from Firestore using their ID.
+   * Returns base64 string or null if no image is associated with the contact.
    * 
    * @param contact - The contact object containing the imageKey
    * @returns Base64 encoded image string or null if no image exists
    */
-  getContactImage(contact: Contact): string | null {
-    if (contact.imageKey) {
-      return this.uploadService.getContactImage(contact.imageKey);
+  async getContactImage(contact: Contact): Promise&lt;string | null&gt; {
+    if (contact.id) {
+      const img &#x3D; await this.uploadService.getFirstImage(&#x27;contacts&#x27;, contact.id);
+      return img ? img.base64 : null;
     }
     return null;
+  }
+
+  /**
+   * Gets the current task images for the image viewer
+   * @returns Array of current task image objects with metadata
+   */
+  getCurrentTaskImageObjects(): UploadedImage[] {
+    return [...this.taskImages];
   }
 }</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content-wrapper&quot; *ngIf&#x3D;&quot;showContent&quot; role&#x3D;&quot;dialog&quot; aria-modal&#x3D;&quot;true&quot; [attr.aria-label]&#x3D;&quot;&#x27;Task details for: &#x27; + task.title&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;content-wrapper&quot;
+  *ngIf&#x3D;&quot;showContent&quot;
+  role&#x3D;&quot;dialog&quot;
+  aria-modal&#x3D;&quot;true&quot;
+  [attr.aria-label]&#x3D;&quot;&#x27;Task details for: &#x27; + task.title&quot;
+&gt;
   &lt;div class&#x3D;&quot;wrapper-top&quot;&gt;
     &lt;p
       class&#x3D;&quot;category-flag&quot;
@@ -2081,7 +2310,11 @@ export class TaskDetailsComponent {
     &gt;
       {{ taskService.capitalize(task.category) }}
     &lt;/p&gt;
-    &lt;button class&#x3D;&quot;btn-close&quot; (click)&#x3D;&quot;onClose()&quot; aria-label&#x3D;&quot;Close task details&quot;&gt;
+    &lt;button
+      class&#x3D;&quot;btn-close&quot;
+      (click)&#x3D;&quot;onClose()&quot;
+      aria-label&#x3D;&quot;Close task details&quot;
+    &gt;
       &lt;svg
         width&#x3D;&quot;24&quot;
         height&#x3D;&quot;24&quot;
@@ -2110,7 +2343,9 @@ export class TaskDetailsComponent {
     &lt;/button&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;task-content&quot;&gt;
-    &lt;h1 role&#x3D;&quot;heading&quot; aria-level&#x3D;&quot;2&quot;&gt;{{ taskService.capitalize(task.title) }}&lt;/h1&gt;
+    &lt;h1 role&#x3D;&quot;heading&quot; aria-level&#x3D;&quot;2&quot;&gt;
+      {{ taskService.capitalize(task.title) }}
+    &lt;/h1&gt;
     &lt;p class&#x3D;&quot;description&quot;&gt;{{ taskService.capitalize(task.description) }}&lt;/p&gt;
     &lt;div class&#x3D;&quot;date-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Task due date&quot;&gt;
       &lt;span class&#x3D;&quot;row-title&quot;&gt;Due date:&lt;/span&gt;
@@ -2139,7 +2374,10 @@ export class TaskDetailsComponent {
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;assigned-to-row&quot;&gt;
       &lt;span class&#x3D;&quot;row-title&quot;&gt;Assigned To:&lt;/span&gt;
-      &lt;span *ngIf&#x3D;&quot;contactList.length &lt;&#x3D; 0&quot; class&#x3D;&quot;info-no-selection&quot; role&#x3D;&quot;status&quot;
+      &lt;span
+        *ngIf&#x3D;&quot;contactList.length &lt;&#x3D; 0&quot;
+        class&#x3D;&quot;info-no-selection&quot;
+        role&#x3D;&quot;status&quot;
         &gt;No contact selected&lt;/span
       &gt;
       &lt;div class&#x3D;&quot;contact-list&quot; role&#x3D;&quot;list&quot; aria-label&#x3D;&quot;Assigned team members&quot;&gt;
@@ -2153,15 +2391,12 @@ export class TaskDetailsComponent {
               &quot;
             &gt;
               &lt;img
-                *ngIf&#x3D;&quot;getContactImage(contact)&quot;
-                [src]&#x3D;&quot;getContactImage(contact)&quot;
+                *ngIf&#x3D;&quot;contact.image&quot;
+                [src]&#x3D;&quot;contact.image.base64&quot;
                 [alt]&#x3D;&quot;contact.name&quot;
                 class&#x3D;&quot;contact-image&quot;
               /&gt;
-              &lt;p
-                *ngIf&#x3D;&quot;!getContactImage(contact)&quot;
-                class&#x3D;&quot;contact-initials&quot;
-              &gt;
+              &lt;p *ngIf&#x3D;&quot;!contact.image &amp;&amp; contact.id&quot; class&#x3D;&quot;contact-initials&quot;&gt;
                 {{ contactService.getInitials(contact.name) }}
               &lt;/p&gt;
             &lt;/div&gt;
@@ -2185,7 +2420,12 @@ export class TaskDetailsComponent {
             type&#x3D;&quot;checkbox&quot;
             (change)&#x3D;&quot;onSubtaskToggle(subtask)&quot;
             [(ngModel)]&#x3D;&quot;subtask.isCompleted&quot;
-            [attr.aria-label]&#x3D;&quot;&#x27;Mark subtask as &#x27; + (subtask.isCompleted ? &#x27;incomplete&#x27; : &#x27;complete&#x27;) + &#x27;: &#x27; + subtask.title&quot;
+            [attr.aria-label]&#x3D;&quot;
+              &#x27;Mark subtask as &#x27; +
+              (subtask.isCompleted ? &#x27;incomplete&#x27; : &#x27;complete&#x27;) +
+              &#x27;: &#x27; +
+              subtask.title
+            &quot;
           /&gt;
           &lt;label class&#x3D;&quot;checkbox-label&quot; [for]&#x3D;&quot;&#x27;subtask-cb&#x27; + $index&quot;&gt;&lt;/label&gt;
           &lt;span&gt;{{ subtask.title }}&lt;/span&gt;
@@ -2202,18 +2442,25 @@ export class TaskDetailsComponent {
           (click)&#x3D;&quot;openImageViewer(i)&quot;
           role&#x3D;&quot;gridcell&quot;
           tabindex&#x3D;&quot;0&quot;
-          [attr.aria-label]&#x3D;&quot;&#x27;Image &#x27; + (i + 1) + &#x27; of &#x27; + taskImages.length + &#x27;: &#x27; + image.filename&quot;
+          [attr.aria-label]&#x3D;&quot;
+            &#x27;Image &#x27; +
+            (i + 1) +
+            &#x27; of &#x27; +
+            taskImages.length +
+            &#x27;: &#x27; +
+            image.fileName
+          &quot;
         &gt;
           &lt;img
             [src]&#x3D;&quot;image.base64&quot;
-            [alt]&#x3D;&quot;image.filename + &#x27; (&#x27; + (i + 1) + &#x27;)&#x27;&quot;
+            [alt]&#x3D;&quot;image.fileName + &#x27; (&#x27; + (i + 1) + &#x27;)&#x27;&quot;
             class&#x3D;&quot;task-image&quot;
           /&gt;
-          &lt;p class&#x3D;&quot;image-filename&quot;&gt;{{ image.filename }} test&lt;/p&gt;
+          &lt;p class&#x3D;&quot;image-fileName&quot;&gt;{{ image.fileName }} test&lt;/p&gt;
           &lt;div class&#x3D;&quot;image-overlay&quot;&gt;
             &lt;button
               class&#x3D;&quot;btn-download&quot;
-              (click)&#x3D;&quot;downloadImage($event, i, image.base64, image.filename)&quot;
+              (click)&#x3D;&quot;downloadImage($event, i, image.base64, image.fileName)&quot;
             &gt;
               &lt;svg
                 width&#x3D;&quot;24&quot;
@@ -2249,7 +2496,11 @@ export class TaskDetailsComponent {
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;btn-wrapper&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Task actions&quot;&gt;
-      &lt;button class&#x3D;&quot;btn-delete&quot; (click)&#x3D;&quot;deleteTask($event)&quot; aria-label&#x3D;&quot;Delete this task&quot;&gt;
+      &lt;button
+        class&#x3D;&quot;btn-delete&quot;
+        (click)&#x3D;&quot;deleteTask($event)&quot;
+        aria-label&#x3D;&quot;Delete this task&quot;
+      &gt;
         &lt;svg
           width&#x3D;&quot;25&quot;
           height&#x3D;&quot;24&quot;
@@ -2278,7 +2529,11 @@ export class TaskDetailsComponent {
         Delete
       &lt;/button&gt;
       &lt;div class&#x3D;&quot;separator&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/div&gt;
-      &lt;button class&#x3D;&quot;btn-edit&quot; (click)&#x3D;&quot;openEditTask($event)&quot; aria-label&#x3D;&quot;Edit this task&quot;&gt;
+      &lt;button
+        class&#x3D;&quot;btn-edit&quot;
+        (click)&#x3D;&quot;openEditTask($event)&quot;
+        aria-label&#x3D;&quot;Edit this task&quot;
+      &gt;
         &lt;svg
           width&#x3D;&quot;33&quot;
           height&#x3D;&quot;33&quot;
@@ -2317,14 +2572,16 @@ export class TaskDetailsComponent {
   &lt;app-image-viewer
     *ngIf&#x3D;&quot;showImageViewer&quot;
     [images]&#x3D;&quot;taskImageBase64&quot;
-    [imageKeys]&#x3D;&quot;taskImageKeys&quot;
+    [imageObjects]&#x3D;&quot;taskImages&quot;
     [startIndex]&#x3D;&quot;currentImageIndex&quot;
     [allowDelete]&#x3D;&quot;true&quot;
+    [immediateDelete]&#x3D;&quot;true&quot;
     (close)&#x3D;&quot;closeImageViewer()&quot;
     (deleteImage)&#x3D;&quot;onDeleteImage($event)&quot;
   &gt;
   &lt;/app-image-viewer&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
     </div>
 
 
@@ -2353,7 +2610,7 @@ export class TaskDetailsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="content-wrapper" *ngIf="showContent" role="dialog" aria-modal="true" [attr.aria-label]="\'Task details for: \' + task.title">  <div class="wrapper-top">    <p      class="category-flag"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "      role="badge"      [attr.aria-label]="\'Category: \' + taskService.capitalize(task.category)"    >      {{ taskService.capitalize(task.category) }}    </p>    <button class="btn-close" (click)="onClose()" aria-label="Close task details">      <svg        width="24"        height="24"        viewBox="0 0 24 24"        fill="none"        xmlns="http://www.w3.org/2000/svg"      >        <mask          id="mask0_331509_883"          style="mask-type: alpha"          maskUnits="userSpaceOnUse"          x="0"          y="0"          width="24"          height="24"        >          <rect width="24" height="24" fill="#D9D9D9" />        </mask>        <g mask="url(#mask0_331509_883)">          <path            d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"            fill="#2A3647"          />        </g>      </svg>    </button>  </div>  <div class="task-content">    <h1 role="heading" aria-level="2">{{ taskService.capitalize(task.title) }}</h1>    <p class="description">{{ taskService.capitalize(task.description) }}</p>    <div class="date-row" role="group" aria-label="Task due date">      <span class="row-title">Due date:</span>      <span>{{ convertDate(task.date) }}</span>    </div>    <div class="priority-row" role="group" aria-label="Task priority">      <span class="row-title">Priority:</span>      <span>{{ task.priority }}</span>      <div>        <img          src="assets/img/icons/prio-high.png"          alt="Priority High Icon"          *ngIf="task.priority === \'urgent\'"        />        <img          src="assets/img/icons/prio-medium.png"          alt="Priorit Medium Icon"          *ngIf="task.priority === \'medium\'"        />        <img          src="assets/img/icons/prio-low.png"          alt="Priority Low Icon"          *ngIf="task.priority === \'low\'"        />      </div>    </div>    <div class="assigned-to-row">      <span class="row-title">Assigned To:</span>      <span *ngIf="contactList.length <= 0" class="info-no-selection" role="status"        >No contact selected</span      >      <div class="contact-list" role="list" aria-label="Assigned team members">        @for (contact of contactList; track $index) {        <div class="contact-item" role="listitem">          <div class="img-user-wrapper">            <div              class="img-user"              [style.background-color]="                contactService.getContactColor(contact.name)              "            >              <img                *ngIf="getContactImage(contact)"                [src]="getContactImage(contact)"                [alt]="contact.name"                class="contact-image"              />              <p                *ngIf="!getContactImage(contact)"                class="contact-initials"              >                {{ contactService.getInitials(contact.name) }}              </p>            </div>            <p class="contact-name">{{ contact.name }}</p>          </div>        </div>        }      </div>    </div>    <div class="subtask-row">      <span class="row-title">Subtasks:</span>      <span *ngIf="subtasks.length <= 0" class="info-no-selection" role="status"        >No subtasks defined</span      >      <div class="subtask-list" role="list" aria-label="Task subtasks">        @for (subtask of subtasks; track $index) {        <div class="subtask-item" role="listitem">          <input            class="checkbox"            [id]="\'subtask-cb\' + $index"            type="checkbox"            (change)="onSubtaskToggle(subtask)"            [(ngModel)]="subtask.isCompleted"            [attr.aria-label]="\'Mark subtask as \' + (subtask.isCompleted ? \'incomplete\' : \'complete\') + \': \' + subtask.title"          />          <label class="checkbox-label" [for]="\'subtask-cb\' + $index"></label>          <span>{{ subtask.title }}</span>        </div>        }      </div>    </div>    <div class="task-images" *ngIf="taskImages.length > 0">      <span class="row-title">Images:</span>      <div class="image-grid" role="grid" aria-label="Task images">        <div          class="image-item"          *ngFor="let image of taskImages; let i = index"          (click)="openImageViewer(i)"          role="gridcell"          tabindex="0"          [attr.aria-label]="\'Image \' + (i + 1) + \' of \' + taskImages.length + \': \' + image.filename"        >          <img            [src]="image.base64"            [alt]="image.filename + \' (\' + (i + 1) + \')\'"            class="task-image"          />          <p class="image-filename">{{ image.filename }} test</p>          <div class="image-overlay">            <button              class="btn-download"              (click)="downloadImage($event, i, image.base64, image.filename)"            >              <svg                width="24"                height="24"                viewBox="0 0 24 24"                fill="none"                xmlns="http://www.w3.org/2000/svg"              >                <mask                  id="mask0_264018_1332"                  style="mask-type: alpha"                  maskUnits="userSpaceOnUse"                  x="-1"                  y="0"                  width="25"                  height="24"                >                  <rect x="-0.144531" width="24" height="24" fill="#D9D9D9" />                </mask>                <g mask="url(#mask0_264018_1332)">                  <path                    d="M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z"                    fill="white"                  />                </g>              </svg>            </button>            <span class="image-count" *ngIf="taskImages.length > 1"              >{{ i + 1 }}/{{ taskImages.length }}</span            >          </div>        </div>      </div>    </div>    <div class="btn-wrapper" role="group" aria-label="Task actions">      <button class="btn-delete" (click)="deleteTask($event)" aria-label="Delete this task">        <svg          width="25"          height="24"          viewBox="0 0 25 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_9951"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="25"            height="24"          >            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />          </mask>          <g mask="url(#mask0_75592_9951)">            <path              d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"              fill="#2A3647"            />          </g>        </svg>        Delete      </button>      <div class="separator" aria-hidden="true"></div>      <button class="btn-edit" (click)="openEditTask($event)" aria-label="Edit this task">        <svg          width="33"          height="33"          viewBox="0 0 33 33"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_8413"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="33"            height="33"          >            <rect              x="0.394531"              y="0.80835"              width="32"              height="32"              fill="#D9D9D9"            />          </mask>          <g mask="url(#mask0_75592_8413)">            <path              d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z"              fill="#2A3647"            />          </g>        </svg>        Edit      </button>    </div>  </div>  <app-image-viewer    *ngIf="showImageViewer"    [images]="taskImageBase64"    [imageKeys]="taskImageKeys"    [startIndex]="currentImageIndex"    [allowDelete]="true"    (close)="closeImageViewer()"    (deleteImage)="onDeleteImage($event)"  >  </app-image-viewer></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div  class="content-wrapper"  *ngIf="showContent"  role="dialog"  aria-modal="true"  [attr.aria-label]="\'Task details for: \' + task.title">  <div class="wrapper-top">    <p      class="category-flag"      [style.background-color]="        task.category == \'user story\' ? \'#0038ff\' : \'#1fd7c1\'      "      role="badge"      [attr.aria-label]="\'Category: \' + taskService.capitalize(task.category)"    >      {{ taskService.capitalize(task.category) }}    </p>    <button      class="btn-close"      (click)="onClose()"      aria-label="Close task details"    >      <svg        width="24"        height="24"        viewBox="0 0 24 24"        fill="none"        xmlns="http://www.w3.org/2000/svg"      >        <mask          id="mask0_331509_883"          style="mask-type: alpha"          maskUnits="userSpaceOnUse"          x="0"          y="0"          width="24"          height="24"        >          <rect width="24" height="24" fill="#D9D9D9" />        </mask>        <g mask="url(#mask0_331509_883)">          <path            d="M12 13.4L7.10005 18.3C6.91672 18.4834 6.68338 18.575 6.40005 18.575C6.11672 18.575 5.88338 18.4834 5.70005 18.3C5.51672 18.1167 5.42505 17.8834 5.42505 17.6C5.42505 17.3167 5.51672 17.0834 5.70005 16.9L10.6 12L5.70005 7.10005C5.51672 6.91672 5.42505 6.68338 5.42505 6.40005C5.42505 6.11672 5.51672 5.88338 5.70005 5.70005C5.88338 5.51672 6.11672 5.42505 6.40005 5.42505C6.68338 5.42505 6.91672 5.51672 7.10005 5.70005L12 10.6L16.9 5.70005C17.0834 5.51672 17.3167 5.42505 17.6 5.42505C17.8834 5.42505 18.1167 5.51672 18.3 5.70005C18.4834 5.88338 18.575 6.11672 18.575 6.40005C18.575 6.68338 18.4834 6.91672 18.3 7.10005L13.4 12L18.3 16.9C18.4834 17.0834 18.575 17.3167 18.575 17.6C18.575 17.8834 18.4834 18.1167 18.3 18.3C18.1167 18.4834 17.8834 18.575 17.6 18.575C17.3167 18.575 17.0834 18.4834 16.9 18.3L12 13.4Z"            fill="#2A3647"          />        </g>      </svg>    </button>  </div>  <div class="task-content">    <h1 role="heading" aria-level="2">      {{ taskService.capitalize(task.title) }}    </h1>    <p class="description">{{ taskService.capitalize(task.description) }}</p>    <div class="date-row" role="group" aria-label="Task due date">      <span class="row-title">Due date:</span>      <span>{{ convertDate(task.date) }}</span>    </div>    <div class="priority-row" role="group" aria-label="Task priority">      <span class="row-title">Priority:</span>      <span>{{ task.priority }}</span>      <div>        <img          src="assets/img/icons/prio-high.png"          alt="Priority High Icon"          *ngIf="task.priority === \'urgent\'"        />        <img          src="assets/img/icons/prio-medium.png"          alt="Priorit Medium Icon"          *ngIf="task.priority === \'medium\'"        />        <img          src="assets/img/icons/prio-low.png"          alt="Priority Low Icon"          *ngIf="task.priority === \'low\'"        />      </div>    </div>    <div class="assigned-to-row">      <span class="row-title">Assigned To:</span>      <span        *ngIf="contactList.length <= 0"        class="info-no-selection"        role="status"        >No contact selected</span      >      <div class="contact-list" role="list" aria-label="Assigned team members">        @for (contact of contactList; track $index) {        <div class="contact-item" role="listitem">          <div class="img-user-wrapper">            <div              class="img-user"              [style.background-color]="                contactService.getContactColor(contact.name)              "            >              <img                *ngIf="contact.image"                [src]="contact.image.base64"                [alt]="contact.name"                class="contact-image"              />              <p *ngIf="!contact.image && contact.id" class="contact-initials">                {{ contactService.getInitials(contact.name) }}              </p>            </div>            <p class="contact-name">{{ contact.name }}</p>          </div>        </div>        }      </div>    </div>    <div class="subtask-row">      <span class="row-title">Subtasks:</span>      <span *ngIf="subtasks.length <= 0" class="info-no-selection" role="status"        >No subtasks defined</span      >      <div class="subtask-list" role="list" aria-label="Task subtasks">        @for (subtask of subtasks; track $index) {        <div class="subtask-item" role="listitem">          <input            class="checkbox"            [id]="\'subtask-cb\' + $index"            type="checkbox"            (change)="onSubtaskToggle(subtask)"            [(ngModel)]="subtask.isCompleted"            [attr.aria-label]="              \'Mark subtask as \' +              (subtask.isCompleted ? \'incomplete\' : \'complete\') +              \': \' +              subtask.title            "          />          <label class="checkbox-label" [for]="\'subtask-cb\' + $index"></label>          <span>{{ subtask.title }}</span>        </div>        }      </div>    </div>    <div class="task-images" *ngIf="taskImages.length > 0">      <span class="row-title">Images:</span>      <div class="image-grid" role="grid" aria-label="Task images">        <div          class="image-item"          *ngFor="let image of taskImages; let i = index"          (click)="openImageViewer(i)"          role="gridcell"          tabindex="0"          [attr.aria-label]="            \'Image \' +            (i + 1) +            \' of \' +            taskImages.length +            \': \' +            image.fileName          "        >          <img            [src]="image.base64"            [alt]="image.fileName + \' (\' + (i + 1) + \')\'"            class="task-image"          />          <p class="image-fileName">{{ image.fileName }} test</p>          <div class="image-overlay">            <button              class="btn-download"              (click)="downloadImage($event, i, image.base64, image.fileName)"            >              <svg                width="24"                height="24"                viewBox="0 0 24 24"                fill="none"                xmlns="http://www.w3.org/2000/svg"              >                <mask                  id="mask0_264018_1332"                  style="mask-type: alpha"                  maskUnits="userSpaceOnUse"                  x="-1"                  y="0"                  width="25"                  height="24"                >                  <rect x="-0.144531" width="24" height="24" fill="#D9D9D9" />                </mask>                <g mask="url(#mask0_264018_1332)">                  <path                    d="M10.8555 12.1501V6.1001C9.5888 6.33343 8.60547 6.94593 7.90547 7.9376C7.20547 8.92926 6.85547 9.9501 6.85547 11.0001H6.35547C5.3888 11.0001 4.5638 11.3418 3.88047 12.0251C3.19714 12.7084 2.85547 13.5334 2.85547 14.5001C2.85547 15.4668 3.19714 16.2918 3.88047 16.9751C4.5638 17.6584 5.3888 18.0001 6.35547 18.0001H18.3555C19.0555 18.0001 19.6471 17.7584 20.1305 17.2751C20.6138 16.7918 20.8555 16.2001 20.8555 15.5001C20.8555 14.8001 20.6138 14.2084 20.1305 13.7251C19.6471 13.2418 19.0555 13.0001 18.3555 13.0001H16.8555V11.0001C16.8555 10.2001 16.6721 9.45426 16.3055 8.7626C15.9388 8.07093 15.4555 7.48343 14.8555 7.0001V4.6751C16.0888 5.25843 17.0638 6.12093 17.7805 7.2626C18.4971 8.40426 18.8555 9.6501 18.8555 11.0001C20.0055 11.1334 20.9596 11.6293 21.718 12.4876C22.4763 13.3459 22.8555 14.3501 22.8555 15.5001C22.8555 16.7501 22.418 17.8126 21.543 18.6876C20.668 19.5626 19.6055 20.0001 18.3555 20.0001H6.35547C4.8388 20.0001 3.54297 19.4751 2.46797 18.4251C1.39297 17.3751 0.855469 16.0918 0.855469 14.5751C0.855469 13.2751 1.24714 12.1168 2.03047 11.1001C2.8138 10.0834 3.8388 9.43343 5.10547 9.1501C5.3888 7.9501 6.09714 6.80843 7.23047 5.7251C8.3638 4.64176 9.57214 4.1001 10.8555 4.1001C11.4055 4.1001 11.8763 4.29593 12.268 4.6876C12.6596 5.07926 12.8555 5.5501 12.8555 6.1001V12.1501L13.7555 11.2751C13.9388 11.0918 14.168 11.0001 14.443 11.0001C14.718 11.0001 14.9555 11.1001 15.1555 11.3001C15.3388 11.4834 15.4305 11.7168 15.4305 12.0001C15.4305 12.2834 15.3388 12.5168 15.1555 12.7001L12.5555 15.3001C12.3555 15.5001 12.1221 15.6001 11.8555 15.6001C11.5888 15.6001 11.3555 15.5001 11.1555 15.3001L8.55547 12.7001C8.37214 12.5168 8.2763 12.2876 8.26797 12.0126C8.25964 11.7376 8.35547 11.5001 8.55547 11.3001C8.7388 11.1168 8.96797 11.0209 9.24297 11.0126C9.51797 11.0043 9.75547 11.0918 9.95547 11.2751L10.8555 12.1501Z"                    fill="white"                  />                </g>              </svg>            </button>            <span class="image-count" *ngIf="taskImages.length > 1"              >{{ i + 1 }}/{{ taskImages.length }}</span            >          </div>        </div>      </div>    </div>    <div class="btn-wrapper" role="group" aria-label="Task actions">      <button        class="btn-delete"        (click)="deleteTask($event)"        aria-label="Delete this task"      >        <svg          width="25"          height="24"          viewBox="0 0 25 24"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_9951"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="25"            height="24"          >            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />          </mask>          <g mask="url(#mask0_75592_9951)">            <path              d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"              fill="#2A3647"            />          </g>        </svg>        Delete      </button>      <div class="separator" aria-hidden="true"></div>      <button        class="btn-edit"        (click)="openEditTask($event)"        aria-label="Edit this task"      >        <svg          width="33"          height="33"          viewBox="0 0 33 33"          fill="none"          xmlns="http://www.w3.org/2000/svg"        >          <mask            id="mask0_75592_8413"            style="mask-type: alpha"            maskUnits="userSpaceOnUse"            x="0"            y="0"            width="33"            height="33"          >            <rect              x="0.394531"              y="0.80835"              width="32"              height="32"              fill="#D9D9D9"            />          </mask>          <g mask="url(#mask0_75592_8413)">            <path              d="M7.0612 26.1418H8.92787L20.4279 14.6418L18.5612 12.7751L7.0612 24.2751V26.1418ZM26.1279 12.7084L20.4612 7.10843L22.3279 5.24176C22.839 4.73065 23.4668 4.4751 24.2112 4.4751C24.9556 4.4751 25.5834 4.73065 26.0945 5.24176L27.9612 7.10843C28.4723 7.61954 28.739 8.23621 28.7612 8.95843C28.7834 9.68065 28.539 10.2973 28.0279 10.8084L26.1279 12.7084ZM24.1945 14.6751L10.0612 28.8084H4.39453V23.1418L18.5279 9.00843L24.1945 14.6751Z"              fill="#2A3647"            />          </g>        </svg>        Edit      </button>    </div>  </div>  <app-image-viewer    *ngIf="showImageViewer"    [images]="taskImageBase64"    [imageObjects]="taskImages"    [startIndex]="currentImageIndex"    [allowDelete]="true"    [immediateDelete]="true"    (close)="closeImageViewer()"    (deleteImage)="onDeleteImage($event)"  >  </app-image-viewer></div></div>'
     var COMPONENTS = [{'name': 'AddTaskComponent', 'selector': 'app-add-task'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BoardComponent', 'selector': 'app-board'},{'name': 'ContactDetailsComponent', 'selector': 'app-contact-details'},{'name': 'ContactFormComponent', 'selector': 'app-contact-form'},{'name': 'ContactListComponent', 'selector': 'app-contact-list'},{'name': 'ContactsComponent', 'selector': 'app-contacts'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'ImageViewerComponent', 'selector': 'app-image-viewer'},{'name': 'LegalNoticeComponent', 'selector': 'app-legal-notice'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginHeaderComponent', 'selector': 'app-login-header'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SummaryComponent', 'selector': 'app-summary'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TaskDetailsComponent', 'selector': 'app-task-details'},{'name': 'UploadsComponent', 'selector': 'app-uploads'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TaskDetailsComponent'};

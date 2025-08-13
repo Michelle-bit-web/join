@@ -184,7 +184,8 @@ stored in Firestore.</p>
                                 <a href="#convertDate" >convertDate</a>
                             </li>
                             <li>
-                                <a href="#deleteImageFromTask" >deleteImageFromTask</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteImages" >deleteImages</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -192,7 +193,15 @@ stored in Firestore.</p>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#deleteSubtasks" >deleteSubtasks</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#deleteTask" >deleteTask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteTaskWithSubcollections" >deleteTaskWithSubcollections</a>
                             </li>
                             <li>
                                 <a href="#formatDate" >formatDate</a>
@@ -233,10 +242,6 @@ stored in Firestore.</p>
                                     <span class="modifier">Async</span>
                                 <a href="#updateTask" >updateTask</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#updateTaskImage" >updateTaskImage</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -260,7 +265,7 @@ stored in Firestore.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/services/task.service.ts:70</a></div>
                             </td>
                         </tr>
 
@@ -325,8 +330,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/services/task.service.ts:178</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/services/task.service.ts:180</a></div>
                         </td>
                     </tr>
 
@@ -422,8 +427,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/services/task.service.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/services/task.service.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -501,14 +506,16 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="259"
-                                    class="link-to-prism">src/app/services/task.service.ts:259</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="260"
+                                    class="link-to-prism">src/app/services/task.service.ts:260</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Builds a Firestore-compatible JSON object for a Subtask.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -570,14 +577,16 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="246"
-                                    class="link-to-prism">src/app/services/task.service.ts:246</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="249"
+                                    class="link-to-prism">src/app/services/task.service.ts:249</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Builds a Firestore-compatible JSON object for a Task.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -637,8 +646,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="342"
-                                    class="link-to-prism">src/app/services/task.service.ts:342</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="351"
+                                    class="link-to-prism">src/app/services/task.service.ts:351</a></div>
                         </td>
                     </tr>
 
@@ -714,8 +723,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="332"
-                                    class="link-to-prism">src/app/services/task.service.ts:332</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="341"
+                                    class="link-to-prism">src/app/services/task.service.ts:341</a></div>
                         </td>
                     </tr>
 
@@ -753,8 +762,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="292"
-                                    class="link-to-prism">src/app/services/task.service.ts:292</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/services/task.service.ts:301</a></div>
                         </td>
                     </tr>
 
@@ -814,31 +823,33 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteImageFromTask"></a>
+                    <a name="deleteImages"></a>
                     <span class="name">
-                        <span ><b>deleteImageFromTask</b></span>
-                        <a href="#deleteImageFromTask"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteImages</b></span>
+                        <a href="#deleteImages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>deleteImageFromTask(task: <a href="../interfaces/Task.html" target="_self">Task</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteImages(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/services/task.service.ts:272</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="287"
+                                    class="link-to-prism">src/app/services/task.service.ts:287</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deletes the imageKey field from Firestore.</p>
+                        <div class="io-description"><p>Deletes all images of a given task.</p>
 </div>
 
                             <div class="io-description">
@@ -850,14 +861,13 @@ stored in Firestore.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>task</td>
+                                                <td>taskId</td>
                                             <td>
-                                                            <code><a href="../interfaces/Task.html" target="_self" >Task</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -865,18 +875,12 @@ stored in Firestore.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The contact to delete the imageKey from.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -908,8 +912,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/services/task.service.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/services/task.service.ts:220</a></div>
                         </td>
                     </tr>
 
@@ -986,6 +990,77 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deleteSubtasks"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteSubtasks</b></span>
+                        <a href="#deleteSubtasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteSubtasks(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/services/task.service.ts:278</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes all subtasks of a given task.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>taskId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="deleteTask"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -1004,8 +1079,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/services/task.service.ts:228</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/services/task.service.ts:230</a></div>
                         </td>
                     </tr>
 
@@ -1064,6 +1139,77 @@ stored in Firestore.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deleteTaskWithSubcollections"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteTaskWithSubcollections</b></span>
+                        <a href="#deleteTaskWithSubcollections"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteTaskWithSubcollections(taskId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/services/task.service.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a task and its subcollections from Firestore.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>taskId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="formatDate"></a>
                     <span class="name">
                         <span ><b>formatDate</b></span>
@@ -1080,8 +1226,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="306"
-                                    class="link-to-prism">src/app/services/task.service.ts:306</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="315"
+                                    class="link-to-prism">src/app/services/task.service.ts:315</a></div>
                         </td>
                     </tr>
 
@@ -1156,8 +1302,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="237"
-                                    class="link-to-prism">src/app/services/task.service.ts:237</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/services/task.service.ts:239</a></div>
                         </td>
                     </tr>
 
@@ -1232,8 +1378,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="325"
-                                    class="link-to-prism">src/app/services/task.service.ts:325</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="334"
+                                    class="link-to-prism">src/app/services/task.service.ts:334</a></div>
                         </td>
                     </tr>
 
@@ -1271,8 +1417,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/services/task.service.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/services/task.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -1347,8 +1493,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/services/task.service.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/services/task.service.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -1423,8 +1569,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/services/task.service.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/services/task.service.ts:86</a></div>
                         </td>
                     </tr>
 
@@ -1501,8 +1647,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/services/task.service.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/services/task.service.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -1578,8 +1724,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/services/task.service.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/services/task.service.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -1617,8 +1763,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/services/task.service.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/services/task.service.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -1656,8 +1802,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/services/task.service.ts:318</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="327"
+                                    class="link-to-prism">src/app/services/task.service.ts:327</a></div>
                         </td>
                     </tr>
 
@@ -1734,8 +1880,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/services/task.service.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="209"
+                                    class="link-to-prism">src/app/services/task.service.ts:209</a></div>
                         </td>
                     </tr>
 
@@ -1848,8 +1994,8 @@ stored in Firestore.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/services/task.service.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/services/task.service.ts:197</a></div>
                         </td>
                     </tr>
 
@@ -1922,75 +2068,6 @@ stored in Firestore.</p>
             </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateTaskImage"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateTaskImage</b></span>
-                        <a href="#updateTaskImage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateTaskImage(taskRef: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="281"
-                                    class="link-to-prism">src/app/services/task.service.ts:281</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>taskRef</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </section>
             <section data-compodoc="block-properties">
     
@@ -2022,7 +2099,7 @@ stored in Firestore.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/services/task.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/services/task.service.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -2042,8 +2119,10 @@ stored in Firestore.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { deleteField, Firestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, Timestamp } from &#x27;@angular/fire/firestore&#x27;;
+import { Firestore, addDoc, doc, getDoc, getDocs, updateDoc, deleteDoc, Timestamp } from &#x27;@angular/fire/firestore&#x27;;
+import { collection, onSnapshot } from &#x27;firebase/firestore&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
+import { UploadedImage } from &#x27;./upload.service&#x27;;
 
 /**
  * Represents a task in the system.
@@ -2079,8 +2158,8 @@ export interface Task {
   /** Optional array of subtasks (retrieved separately as subcollection) */
   subtask?: Subtask[];
 
-  /** Optional array of imageKeys */
-  imageKey?: string[];
+  /** Images are now stored in Firestore subcollection, not as array */
+  images?: UploadedImage[];
 }
 
 /**
@@ -2286,6 +2365,7 @@ export class TaskService {
     return {};
   }
 
+  /** Builds a Firestore-compatible JSON object for a Task. */
   private buildTaskJson(updated: Task): any {
     const clean: any &#x3D; {
       title: updated.title, description: updated.description,
@@ -2293,12 +2373,10 @@ export class TaskService {
       status: updated.status, assignedTo: updated.assignedTo,
       category: updated.category
     };
-    if (Array.isArray(updated.imageKey)) {
-      clean.imageKey &#x3D; updated.imageKey;
-    }
     return clean;
   }
 
+  /** Builds a Firestore-compatible JSON object for a Subtask. */
   private buildSubtaskJson(updated: Subtask): any {
     return {
       title: updated.title,
@@ -2306,24 +2384,32 @@ export class TaskService {
     };
   }
 
-  /**
-   * Deletes the imageKey field from Firestore.
-   *
-   * @param task - The contact to delete the imageKey from.
-   */
-
-  deleteImageFromTask(task: Task): void {
-    if (!task.id) {
-      console.error(&#x27;Task id is undefined. Cannot delete image.&#x27;);
-      return;
-    }
-    const taskRef &#x3D; this.getSingleTaskRef(task.id);
-    this.updateTaskImage(taskRef);
+  /** 
+   * Deletes a task and its subcollections from Firestore. 
+   * */
+  async deleteTaskWithSubcollections(taskId: string) {
+    this.deleteSubtasks(taskId);
+    this.deleteImages(taskId);
+    const taskDocRef &#x3D; doc(this.firestore, &#x60;tasks/${taskId}&#x60;);
+    await deleteDoc(taskDocRef);
   }
 
-  private updateTaskImage(taskRef: any): void {
-    updateDoc(taskRef, { imageKey: deleteField() })
-      .catch(err &#x3D;&gt; console.error(&#x27;Failed to delete image from task:&#x27;, err));
+  /** Deletes all subtasks of a given task. */
+  async deleteSubtasks(taskId: string): Promise&lt;void&gt; {
+    const subtasksRef &#x3D; collection(this.firestore, &#x60;tasks/${taskId}/subtasks&#x60;);
+    const subtasksSnapshot &#x3D; await getDocs(subtasksRef);
+    for (const docSnap of subtasksSnapshot.docs) {
+      await deleteDoc(docSnap.ref);
+    }
+  }
+
+  /** Deletes all images of a given task. */
+  async deleteImages(taskId: string): Promise&lt;void&gt; {
+    const imagesRef &#x3D; collection(this.firestore, &#x60;tasks/${taskId}/images&#x60;);
+    const imagesSnapshot &#x3D; await getDocs(imagesRef);
+    for (const docSnap of imagesSnapshot.docs) {
+      await deleteDoc(docSnap.ref);
+    }
   }
 
   /**
