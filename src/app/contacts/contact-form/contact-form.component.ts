@@ -108,12 +108,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
 
   /**
-   * Flag indicating if the current image is marked for deletion.
-   * @type {boolean}
-   */
-  imageMarkedForDeletion: boolean = false;
-
-  /**
    * Flag indicating if the form has been submitted to show validation errors.
    * @type {boolean}
    */
@@ -201,6 +195,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
   private async processValidImage(file: File): Promise<void> {
     this.imageBase64 = await this.imageManager.compressImage(file, 800, 800, 0.7);
     this.imgData = this.formService.setImageData(file, this.imageBase64);
+    this.contactImages = [this.imageBase64];
     this.errorMessage = '';
   }
 
@@ -212,7 +207,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactToEdit = contact || undefined;
     if (!this.contactToEdit) return;
     this.formService.fillContactForm(this.contactForm, this.contactToEdit);
-    if(this.contactToEdit.image) {
+    if (this.contactToEdit.image) {
       this.imgData = this.contactToEdit.image;
       this.imageBase64 = this.contactToEdit.image.base64;
     }
@@ -261,8 +256,13 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.pendingImageDeletion = true;
     this.imgData = undefined;
     this.imageBase64 = null;
+    if (this.contactToEdit) {
+      this.contactToEdit.image = undefined;
+    }
     this.contactImages = [];
     this.closeImageViewer();
+    this.showImageViewer = false;
+    // this.pendingImageDeletion = false;
   }
 
   /**
@@ -334,7 +334,7 @@ export class ContactFormComponent implements OnInit, OnDestroy {
    * @returns True if editing an existing contact, false if creating a new one.
    */
   public isEditMode(): boolean {
-   return !!(this.contactToEdit && this.contactToEdit.id);
+    return !!(this.contactToEdit && this.contactToEdit.id);
   }
 
   /**

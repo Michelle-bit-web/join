@@ -130,7 +130,7 @@ export class ContactFormService {
      */
     handleFormClose(component: any): void {
         component.contactForm.reset();
-        component.imageMarkedForDeletion = false;
+        component.pendingImageDeletion = false;
     }
 
     /**
@@ -163,10 +163,15 @@ export class ContactFormService {
      * @returns {Promise<void>} Promise that resolves when submission is complete
      */
     async processSubmission(component: any, contact: Contact): Promise<void> {
-        if (component.imageMarkedForDeletion && component.contactToEdit?.image) {
-            await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
-        }
-        if (component.isEditMode()) {
+        // if (component.pendingImageDeletion && component.contactToEdit?.image) {
+        //     await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+        // }
+        const isEdit = !!(component.contactToEdit && component.contactToEdit.id);
+        if (isEdit) {
+            contact.id = component.contactToEdit.id;
+            if (component.pendingImageDeletion && component.contactToEdit?.image) {
+                await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
+            }
             this.updateExistingContact(component, contact);
         } else {
             await this.addNewContact(component, contact);
@@ -196,7 +201,7 @@ export class ContactFormService {
      * @param {Contact} contact - The contact object to update
      * @returns {void}
      */
-    private async processContactUpdate(contact: Contact): Promise<void>{
+    private async processContactUpdate(contact: Contact): Promise<void> {
         if (contact.id) {
             this.contactService.updateContact(contact.id, contact);
         }
