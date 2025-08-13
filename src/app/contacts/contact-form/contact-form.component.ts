@@ -10,7 +10,6 @@ import { UploadedImage } from '../../services/upload.service';
 import { ImageViewerComponent } from '../../shared/image-viewer/image-viewer.component';
 import { ImageManager } from './image-manager';
 import { ContactFormService } from './contact-form.service';
-import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -128,7 +127,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     public contactService: ContactService,
     public imageManager: ImageManager,
     private formService: ContactFormService,
-    private uploadService: UploadService
   ) { }
 
   /**
@@ -262,7 +260,6 @@ export class ContactFormComponent implements OnInit, OnDestroy {
     this.contactImages = [];
     this.closeImageViewer();
     this.showImageViewer = false;
-    // this.pendingImageDeletion = false;
   }
 
   /**

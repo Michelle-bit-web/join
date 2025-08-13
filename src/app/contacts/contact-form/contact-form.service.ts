@@ -163,9 +163,6 @@ export class ContactFormService {
      * @returns {Promise<void>} Promise that resolves when submission is complete
      */
     async processSubmission(component: any, contact: Contact): Promise<void> {
-        // if (component.pendingImageDeletion && component.contactToEdit?.image) {
-        //     await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
-        // }
         const isEdit = !!(component.contactToEdit && component.contactToEdit.id);
         if (isEdit) {
             contact.id = component.contactToEdit.id;

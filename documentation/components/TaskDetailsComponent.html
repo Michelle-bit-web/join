@@ -775,8 +775,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="314"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:314</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="306"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:306</a></div>
                         </td>
                     </tr>
 
@@ -897,8 +897,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="332"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:332</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="324"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:324</a></div>
                         </td>
                     </tr>
 
@@ -975,8 +975,8 @@ Returns base64 string or null if no image is associated with the contact.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="344"
-                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:344</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="336"
+                                    class="link-to-prism">src/app/board/task-details/task-details.component.ts:336</a></div>
                         </td>
                     </tr>
 
@@ -2226,18 +2226,10 @@ export class TaskDetailsComponent {
   async onDeleteImage(event: { index: number, imageId?: string }) {
     const imageObj &#x3D; this.taskImages[event.index];
     if (imageObj?.id &amp;&amp; this.task.id) {
-      // this.uploadService.deleteImage(&#x27;tasks&#x27;, this.task.id, imageObj.id);
-      // this.taskImages.splice(event.index, 1);
-      // this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
       try {
-        // Immediately delete from Firestore
         await this.uploadService.deleteImage(&#x27;tasks&#x27;, this.task.id, imageObj.id);
-
-        // Remove from local arrays
         this.taskImages.splice(event.index, 1);
         this.taskImageBase64 &#x3D; this.taskImages.map(img &#x3D;&gt; img.base64);
-
-        // Close viewer if no images left
         if (this.taskImages.length &#x3D;&#x3D;&#x3D; 0) {
           this.closeImageViewer();
         }

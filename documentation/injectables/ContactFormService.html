@@ -324,8 +324,8 @@ await this.formService.processSubmission(this, contact);</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="219"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:219</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:216</a></div>
                         </td>
                     </tr>
 
@@ -673,8 +673,8 @@ Returns appropriate image keys for editing vs. new contact scenarios.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="234"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:234</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:231</a></div>
                         </td>
                     </tr>
 
@@ -870,8 +870,8 @@ Unsubscribes from all active subscriptions to prevent memory leaks.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:201</a></div>
                         </td>
                     </tr>
 
@@ -1312,8 +1312,8 @@ Configures image viewer component with current contact image data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/contacts/contact-form/contact-form.service.ts:183</a></div>
                         </td>
                     </tr>
 
@@ -1595,9 +1595,6 @@ export class ContactFormService {
      * @returns {Promise&lt;void&gt;} Promise that resolves when submission is complete
      */
     async processSubmission(component: any, contact: Contact): Promise&lt;void&gt; {
-        // if (component.pendingImageDeletion &amp;&amp; component.contactToEdit?.image) {
-        //     await this.uploadService.deleteImageFromContact(component.contactToEdit.id);
-        // }
         const isEdit &#x3D; !!(component.contactToEdit &amp;&amp; component.contactToEdit.id);
         if (isEdit) {
             contact.id &#x3D; component.contactToEdit.id;
