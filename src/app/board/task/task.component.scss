@@ -15,6 +15,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   cursor: grab;
   @include inter400-fs16();
+
   h1 {
     @include inter700-fs16();
     font-size: 16px;
@@ -364,6 +365,8 @@ table {
 @media (max-width: 890px) {
   .card-layout {
     width: 180px;
+    padding: 12px 8px;
+    gap: 8px;
   }
   .task-card {
     .task-description.truncated {
@@ -371,7 +374,7 @@ table {
       overflow: hidden;
     }
     h1 {
-      max-height: 2lh;
+      height: 2lh;
       overflow: hidden;
       text-overflow: ellipsis;
     }
