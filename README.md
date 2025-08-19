@@ -2,7 +2,7 @@
 # Join
 
 This project is a web-based task manager and similar to the Kanban system. With Join you can create, organize, and track all tasks for your project.
-Join was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12. The Firebase CDKs for authentication and the firestore database were used to handle all upcoming data.
+Join was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12. The Firebase SDKs for authentication and the firestore database were used to handle all upcoming data.
 
 Live demo: [Try Join yourself!](https://michelle-bit-web.github.io/join)
 
@@ -15,6 +15,8 @@ Live demo: [Try Join yourself!](https://michelle-bit-web.github.io/join)
 📝 Summary board. The summary gives an overview about all current tasks and the next upcoming date.
 
 📒 Contact page. Here, you can add or edit contacts to collaborate on your projects.
+
+🖼️ Image upload by click or drag & drop. You can upload images for contacts and tasks. For tasks multiple images can be uploaded at once.
 
 🧭 Single-Page Routing for easy navigation.
 
@@ -83,8 +85,9 @@ For more information on using the Angular CLI, including detailed command refere
 
 ## 💡To-Dos / Ideas
 
-- [ ] 🖼️ Upload option for user profile or tasks
-
+- [X] 🖼️ Image upload option for contacts or tasks
+- [ ] 👤 Manage own user account (image upload, account deletion)
+- [ ] 🏓 Provide dummy data for guests to tests the application without affecting the database
    
 ## 🤓 Author
 
